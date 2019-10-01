@@ -1,0 +1,57 @@
+.avatar-img{
+    object-fit: cover;
+    object-position: 50% 0;
+    display: inline-block;
+  
+    width: 50px;
+    height: 50px;
+}
+
+.msg-img{
+    object-fit: cover;
+    object-position: 50% 0;
+    display: inline-block;
+  
+    width: 25px;
+    height: 25px;
+}
+
+.inbox-chat{
+    height: 500px; 
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.inbox-convo{
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.msg-time{
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.clear-left {
+    clear: left;
+}
+
+.clear-right{
+    clear: right;
+}
+
+.inbox-padding{
+    padding: 10px; 
+    border: 3px ;
+    border-radius: 20px;
+}
+
+.inbox-bg-incoming{
+    
+    background-color: #f1f0f0;
+}
+
+.yellow-brown{
+   color: #ccad6c;
+}
