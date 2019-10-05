@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title><?php echo $title; ?></title>
-	<!-- <link rel="stylesheet" href="../../assets/css/bootstrap.min.css"> -->
-	<link rel="stylesheet" href="../../assets/css/bootstrap-grid.min.css">
-	<link rel="stylesheet" href="../../assets/css/bootstrap-reboot.min.css">
-	<link rel="stylesheet" href="../../assets/css/custom.css">
-	<link rel="stylesheet" href="../../assets/css/bootstrap-flatly.css">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-reboot.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-flatly.css">
 	
-	<link rel="stylesheet" href="../../assets/api/css/fontawesome/all.css">
-	<script defer src="../../assets/api/fontawesome/js/all.js"></script>
-	<script defer src="../../assets/api/fontawesome/js/brands.js"></script>
-	<script defer src="../../assets/api/fontawesome/js/solid.js"></script>
-	<script defer src="../../assets/api/fontawesome/js/fontawesome.js"></script>
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/api/css/fontawesome/all.css">
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/all.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/brands.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/solid.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/fontawesome.js"></script>
 
-	<link href="../../assets/api/fontawesome/css/fontawesome.css" rel="stylesheet">
-	<link href="../../assets/api/fontawesome/css/brands.css" rel="stylesheet">
-	<link href="../../assets/api/fontawesome/css/solid.css" rel="stylesheet">
-	<!-- <link rel="stylesheet" href="../../assets/css/bootstrap-materia.css"> -->
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/fontawesome.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/brands.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/solid.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-materia.css"> -->
 </head>
 <body>
 		<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom">

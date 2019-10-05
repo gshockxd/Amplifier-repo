@@ -1,16 +1,16 @@
 
 	
 
-	<script type="text/javascript" charset="utf8" src="../../assets/js/jquery.js"></script>
-	<script type="text/javascript" charset="utf8" src="../../assets/js/popper.js"></script>
-	<script src="../../assets/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="../../assets/js/custom-flatly.js"></script>
-	<script src="../../assets/js/bootstrap.min.js"></script>
-	<script src="../../assets/api/ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" charset="utf8" src="../../assets/api/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="../../assets/api/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" charset="utf8" src="../../assets/api/DataTables/datatables.js"></script>
-	<script src="../../assets/js/custom.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/popper.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/custom-flatly.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/api/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/api/DataTables/datatables.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
 
 	<script>
 	    // Replace the <textarea id="editor1"> with a CKEditor

@@ -1,5 +1,5 @@
-<?php $title = 'Client Registration'; ?>
-<?php require '../inc/header-no-navbar.php'; ?>
+<?php// $title = 'Client Registration'; ?>
+<?php// require '../inc/header-no-navbar.php'; ?>
 	<div class="container py-3">
 		<p class="h2 text-muted">Client Registration</p>
 		<div class="row">
@@ -36,8 +36,8 @@
 		</div>
 		<div class="row">
 			<div class="col-sm d-flex justify-content-center">
-				<a href="profile.php" class="btn btn-outline-dark">SIGN UP</a>
+				<a href="profile" class="btn btn-outline-dark">SIGN UP</a>
 			</div>
 		</div>
 	</div>
-<?php require '../inc/footer.php'; ?>
+<?php// require '../inc/footer.php'; ?>
