@@ -62,7 +62,7 @@
 		        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			        <ul class="navbar-nav mr-auto">
 			            <li class="nav-item active">
-				            <a class="nav-link" href="profile.php">Profile <span class="sr-only">(current)</span></a>
+				            <a class="nav-link" href="profile">Profile <span class="sr-only">(current)</span></a>
 			            </li>
 			            <li class="nav-item">
 				            <a class="nav-link" href="#">Notifications</a>
@@ -71,19 +71,19 @@
 				            <a class="nav-link" href="#">Events</a>
 			            </li>
 			            <li class="nav-item">
-				            <a class="nav-link" href="history.php">History</a>
+				            <a class="nav-link" href="history">History</a>
 			            </li>
 			            <li class="nav-item">
-				            <a class="nav-link" href="booking.php">Book</a>
-			            </li>
-			            <!-- <li class="nav-item">
-				            <a class="nav-link" href="calendar.php">Calendar</a>
-			            </li> -->
-			            <li class="nav-item">
-				            <a class="nav-link" href="package.php">Package</a>
+				            <a class="nav-link" href="booking">Book</a>
 			            </li>
 			            <li class="nav-item">
-				            <a class="nav-link" href="chat.php">Chat</a>
+				            <a class="nav-link" href="calendar">Calendar</a>
+			            </li>
+			            <li class="nav-item">
+				            <a class="nav-link" href="package">Package</a>
+			            </li>
+			            <li class="nav-item">
+				            <a class="nav-link" href="chat">Chat</a>
 			            </li>
 			        </ul>
 			        <form class="form-inline my-2 my-lg-0" method="POST" action="#">

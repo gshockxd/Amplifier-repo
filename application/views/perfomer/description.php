@@ -2,7 +2,7 @@
 <?php// require '../inc/header-no-navbar.php'; ?>
 	<div class="container py-3">
 		<p class="h2">Registration Form (Description)</p>
-            <?php $this->load->view('performer/inc/merge-register-nav'); ?>
+            <?php $this->load->view('perfomer/inc/merge-register-nav'); ?>
 
 		<div class="row py-3 ">
 			<div class="col-sm">
@@ -14,7 +14,7 @@
         <div class="row py-3 d-flex justify-content-end">       
 	         <a href="portfolio" class="btn btn-outline-secondary ml-3">Previous</a>
 	         <a href="register" class="btn btn-outline-primary ml-3">Next</a>
-            <?php $this->load->view('performer/inc/merge-register-button'); ?>
+            <?php $this->load->view('perfomer/inc/merge-register-button'); ?>
 	    </div>
 	</div>
 

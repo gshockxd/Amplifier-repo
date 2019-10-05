@@ -1,10 +1,10 @@
-<?php $title="Service Profile: AMPLIFIER"; ?>
-<?php require '../inc/header.php'; ?>
+<?php// $title="Service Profile: AMPLIFIER"; ?>
+<?php// require '../inc/header.php'; ?>
 
 <div class="container">
 	<div class="row py-3">
 		<div class="col-sm-8">
-			<img src="../../assets/img/artist.png" height="100%" width="100%" alt="">	
+			<img src="<?php echo base_url(); ?>assets/img/artist.png" height="100%" width="100%" alt="">	
 		</div>
 		<div class="col-sm-4">
 			<p class="h1 yellow-brown">LASTIKO/BAND</p>
@@ -18,7 +18,7 @@
 			<p class="h3 d-flex justify-content-center">BAND NEEDED!</p>
 			<div class="row">
 				<div class="col-sm">
-					<img src="../../assets/img/artist.png" height="150" width="100%" alt="">
+					<img src="<?php echo base_url(); ?>assets/img/artist.png" height="150" width="100%" alt="">
 				</div>
 				<div class="col-sm">
 					<p class="text-muted">DYNACOM/CLIENT</p>
@@ -33,7 +33,7 @@
 			<p class="h3 d-flex justify-content-center">WE ARE LOOKING FOR BANDS</p>
 			<div class="row">
 				<div class="col-sm">
-					<img src="../../assets/img/artist.png" height="150" width="100%" alt="">
+					<img src="<?php echo base_url(); ?>assets/img/artist.png" height="150" width="100%" alt="">
 				</div>
 				<div class="col-sm">
 					<p class="text-muted">LOREM IPSUM DOLOR</p>
@@ -47,4 +47,4 @@
 	</div>
 </div>
 
-<?php require '../inc/footer.php'; ?>
+<?php// require '../inc/footer.php'; ?>

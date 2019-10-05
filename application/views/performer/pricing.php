@@ -1,5 +1,5 @@
-<?php $title="Service Price Rates: AMPLIFIER"; ?>
-<?php require '../inc/header.php'; ?>
+<?php// $title="Service Price Rates: AMPLIFIER"; ?>
+<?php// require '../inc/header.php'; ?>
 <div class="container">
 	<div class="py-3">
 		<p class="h2 yellow-brown text-center">ADD RATES AND PRICING PACKAGES</p>
@@ -24,4 +24,4 @@
 		</div>
 	</div>
 </div>
-<?php require '../inc/footer.php'; ?>
+<?php// require '../inc/footer.php'; ?>

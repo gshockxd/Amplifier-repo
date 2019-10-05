@@ -1,5 +1,5 @@
-<?php $title="Service Chat: AMPLIFIER";?>
-<?php include '../inc/header.php'; ?>
+<?php// $title="Service Chat: AMPLIFIER";?>
+<?php// include '../inc/header.php'; ?>
 
 <div class="container py-3">
     <div class="row"> 
@@ -24,7 +24,7 @@
                            <!--  {{-- lvl 1.2 --}} -->
                             <div class="col-sm-2">
                                 <!-- {{-- lvl 1.2.1 --}} -->
-                                <img src="../../assets/img/pp.png " alt="" class="avatar-img rounded-circle">
+                                <img src="<?php echo base_url(); ?>assets/img/pp.png " alt="" class="avatar-img rounded-circle">
                             </div>
                             <div class="col-sm-10">
                                <!--  {{-- lvl 1.2.2 --}} -->
@@ -55,7 +55,7 @@
                                <!--  {{-- lvl 1.2 --}} -->
                                 <div class="col-sm-2">
                                     <!-- {{-- lvl 1.2.1 --}} -->
-                                    <img src="../../assets/img/pp.png " alt="" class="avatar-img rounded-circle">
+                                    <img src="<?php echo base_url(); ?>assets/img/pp.png " alt="" class="avatar-img rounded-circle">
                                 </div>
                                 <div class="col-sm-10">
                                    <!--  {{-- lvl 1.2.2 --}} -->
@@ -91,7 +91,7 @@
             <div class="inbox-convo">
                 <div class="row">
                     <div class="col-sm-1">
-                        <img src="../../assets/img/okarin.png " class="msg-img rounded-circle" alt="">
+                        <img src="<?php echo base_url(); ?>assets/img/okarin.png " class="msg-img rounded-circle" alt="">
                     </div>
                     <div class="col-sm-6">
                         <p class="inbox-padding inbox-bg-incoming float-left">Test work directly with our designers and suppliers, and sell direct to you, which means quality, exclusiv </p>
@@ -112,7 +112,7 @@
                         <p class="d-flex msg-time text-muted justify-content-end clear-right">6:44 PM</p>
                     </div>
                     <div class="col-sm-1">
-                        <img src="../../assets/img/okarin.png" class="msg-img rounded-circle align-items-center" alt="">
+                        <img src="<?php echo base_url(); ?>assets/img/okarin.png" class="msg-img rounded-circle align-items-center" alt="">
                     </div>
                 </div>
                 <!-- {{-- end of outgoing msg --}} -->
@@ -121,7 +121,7 @@
                     <!-- {{-- Incoming Msg --}} -->
                         <div class="row">
                             <div class="col-sm-1">
-                                <img src="../../assets/img/okarin.png " class="msg-img rounded-circle" alt="">
+                                <img src="<?php echo base_url(); ?>assets/img/okarin.png " class="msg-img rounded-circle" alt="">
                             </div>
                             <div class="col-sm-6">
                                 <p class="inbox-padding inbox-bg-incoming float-left">Test work directly with our designers and suppliers, and sell direct to you, which means quality, exclusiv </p>
@@ -142,7 +142,7 @@
                                 <p class="d-flex msg-time text-muted justify-content-end clear-right">6:44 PM</p>
                             </div>
                             <div class="col-sm-1">
-                                <img src="../../assets/img/okarin.png  " class="msg-img rounded-circle align-items-center" alt="">
+                                <img src="<?php echo base_url(); ?>assets/img/okarin.png  " class="msg-img rounded-circle align-items-center" alt="">
                             </div>
                         </div>
                         <!-- {{-- end of outgoing msg --}} -->
@@ -162,4 +162,4 @@
     </div>
 </div>
 
-<?php include '../inc/footer.php'; ?>
+<?php// include '../inc/footer.php'; ?>

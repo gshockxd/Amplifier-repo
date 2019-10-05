@@ -30,29 +30,29 @@
 	<meta charset="UTF-8">
 	 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title><?php echo $title ?></title>
-	<!-- <link rel="stylesheet" href="<?php base_url(); ?>assets/css/bootstrap.min.css"> -->
-	<link rel="stylesheet" href="<?php base_url(); ?>assets/css/bootstrap-grid.min.css">
-	<link rel="stylesheet" href="<?php base_url(); ?>assets/css/bootstrap-reboot.min.css">
-	<link rel="stylesheet" href="<?php base_url(); ?>assets/css/custom.css">
-	<link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/api/DataTables/datatables.css">
-	<link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/api/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css">
-	<!-- <link rel="stylesheet" href="<?php base_url(); ?>assets/css/bootstrap-flatly.css"> -->
-	<link rel="stylesheet" href="<?php base_url(); ?>assets/css/bootstrap-<?php echo $theme == 'darkly' ? 'darkly' : 'flatly'; ?>.css">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-reboot.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/datatables.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-flatly.css"> -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-<?php echo $theme == 'darkly' ? 'darkly' : 'flatly'; ?>.css">
 
-	<link rel="stylesheet" href="<?php base_url(); ?>assets/api/css/fontawesome/all.css">
-	<script defer src="<?php base_url(); ?>assets/api/fontawesome/js/all.js"></script>
-	<script defer src="<?php base_url(); ?>assets/api/fontawesome/js/brands.js"></script>
-	<script defer src="<?php base_url(); ?>assets/api/fontawesome/js/solid.js"></script>
-	<script defer src="<?php base_url(); ?>assets/api/fontawesome/js/fontawesome.js"></script>
-	<link href="<?php base_url(); ?>assets/api/fontawesome/css/fontawesome.css" rel="stylesheet">
-	<link href="<?php base_url(); ?>assets/api/fontawesome/css/brands.css" rel="stylesheet">
-	<link href="<?php base_url(); ?>assets/api/fontawesome/css/solid.css" rel="stylesheet">
-	<!-- <link rel="stylesheet" href="<?php base_url(); ?>assets/css/bootstrap-materia.css"> -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/api/css/fontawesome/all.css">
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/all.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/brands.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/solid.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/fontawesome.js"></script>
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/fontawesome.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/brands.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/solid.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-materia.css"> -->
 </head>
 <body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-bottom">
 		    <div class="container">
-		        <a class="navbar-brand" href="../../index.php">AMPLIFIER</a>
+		        <a class="navbar-brand" href="profile">AMPLIFIER</a>
 		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		        <span class="navbar-toggler-icon"></span>
 		        </button>
@@ -60,7 +60,7 @@
 		        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			        <ul class="navbar-nav mr-auto">
 			            <li class="nav-item active">
-				            <a class="nav-link" href="profile.php">Profile <span class="sr-only">(current)</span></a>
+				            <a class="nav-link" href="profile">Profile <span class="sr-only">(current)</span></a>
 			            </li>
 			            <li class="nav-item">
 				            <a class="nav-link" href="#">Notifications</a>
@@ -68,17 +68,17 @@
 			            <li class="nav-item">
 				            <a class="nav-link" href="#">Bookings</a>
 			            </li>
-			            <!-- <li class="nav-item">
-				            <a class="nav-link" href="history.php">History</a>
-			            </li> -->
 			            <li class="nav-item">
-				            <a href="pricing.php" class="nav-link">Pricing</a>
+				            <a class="nav-link" href="history">History</a>
 			            </li>
 			            <li class="nav-item">
-				            <a href="package.php" class="nav-link">Packages</a>
+				            <a href="pricing" class="nav-link">Pricing</a>
 			            </li>
 			            <li class="nav-item">
-				            <a href="chat.php" class="nav-link">Chat</a>
+				            <a href="package" class="nav-link">Packages</a>
+			            </li>
+			            <li class="nav-item">
+				            <a href="chat" class="nav-link">Chat</a>
 
 			            </li>
 			        </ul>
@@ -100,5 +100,5 @@
 
 		    </div>
 		  </nav>
-		  <!-- <?php require '../../inc/user.php'; ?> -->
+		  <!-- <?php// require '../../inc/user.php'; ?> -->
 
