@@ -61,351 +61,44 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <?php 
+                            if($fetch_data_history->num_rows()>0)
+                            {
+                               foreach($fetch_data_history->result() as $row)
+                                { 
+                        ?>
                             <tr>
-                                <th scope="row">1</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
+                                <th scope="row"><?php echo $row->feedback_id; ?></th>
+                                <th><?php echo $row->venue_name; ?></th>
+                                <td><?php echo $row->name; ?></td>
+                                <td><?php echo $row->event_date; ?></td>
                                 <td>
+                                <?php
+                                for($i=0;$i<$row->rating; $i++)
+                                { 
+                                ?>
                                     <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
+                                <?php
+                                }
+                                ?>
                                 </td>
                                 <td>
+                                <?php
+                                for($i=0;$i<$row->rating; $i++)
+                                { 
+                                ?>
                                     <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
+                                <?php
+                                }
+                                ?>
                                 <td>
-                                    <a href="histview"><button class="btn btn-outline-info fa fa-eye"></button></a>
+                                    <a href="histview/<?php echo $row->feedback_id; ?>"><button class="btn btn-outline-info fa fa-eye"></button></a>
                                     <a href="#" data-toggle="modal" data-target="#delhist"><button class="btn btn-outline-danger fa fa-trash"></button></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">11</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">12</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">13</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">14</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">15</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </td>
-                                <td>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                <td>
-                                    <a href="#"><button class="btn btn-outline-info fa fa-eye"></a></button>
-                                    <a href="#"><button class="btn btn-outline-danger fa fa-trash"></a></button>
-                                </td>
-                            </tr>
+                        <?php
+                                }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -432,6 +125,11 @@
                     </div>
                 </div>
             </div>
+        <?php
+         
+        }
+      
+        ?>
       </div>
       <!-- End of Main Content -->
 

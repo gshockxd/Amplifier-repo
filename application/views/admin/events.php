@@ -59,20 +59,27 @@
                             <th scope="col">ID</th>
                             <th scope="col">VENUE</th>
                             <th scope="col">CLIENT NAME</th>
+                            <th scope="col">PERFORMER NAME</th>
                             <th scope="col">DATE</th>
                             <th scope="col">TIME</th>
-                            <th scope="col">PERFORMER NAME</th>
                             <th scope="col">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
+                        <?php 
+                            if($fetch_data_event->num_rows()>0)
+                            {
+                               foreach($fetch_data_event->result() as $row)
+                                { 
+                    
+                            ?>
+                                <tr>
+                                <td scope="row"> <?php echo $row->booking_id; ?></td>
+                                <td> <?php echo $row->venue_name; ?></td>
+                                <td> <?php echo $row->name; ?></td>
+                                <td> <?php echo $row->performer_id; ?></td>
+                                <td> <?php echo $row->event_date; ?></td>
+                                <td> <?php echo $row->event_time; ?>
                                 <td>
                                 <div class="dropdown no-arrow">
                                   <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,201 +93,18 @@
                                   </div>
                                 </div>
                                 </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <th>Cebu City</th>
-                                <td>Otto</td>
-                                <td>01-12-2019</td>
-                                <td>10 am</td>
-                                <td>ClientSample</td>
-                                <td>
-                                <div class="dropdown no-arrow">
-                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
-                                  </a>
-                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                  <div class="dropdown-header">Action:</div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp More Details</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#">&nbsp Delete</a>   
-                                  </div>
-                                </div>
-                                </td>
-                            </tr>
+                            </tr>       
                         </tbody>
+                        <?php
+                       }
+                        ?>
                     </table>
                 </div>
             </div>
+         
             </div>
+      
+            
             <div class="row mb-4">
                 <div class="col-sm-12 col-md-12 offset-5">
                     <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
@@ -303,6 +127,11 @@
                 </div>
             </div>
       </div>
+      <?php
+         
+        }
+      
+          ?>
        
       <!-- end -->
       

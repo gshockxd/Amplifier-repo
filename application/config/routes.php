@@ -55,7 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['index'] = 'welcome/index';
 $route['users'] = 'welcome/users';
-$route['profile'] = 'welcome/profile';
+$route['profile/(:num)'] = 'welcome/profile/$1';
 $route['events'] = 'welcome/events';
 $route['addevent'] = 'welcome/addevent';
 $route['eventview'] = 'welcome/eventview';
@@ -65,7 +65,8 @@ $route['histview'] = 'welcome/histview';
 $route['reports'] = 'welcome/reports';
 $route['notifications'] = 'welcome/notifications';
 $route['messages'] = 'welcome/messages';
-$route['editprofile'] = 'welcome/editprofile';
+$route['profile/editprofile/(:num)'] = 'welcome/editprofile/$1  ';
+$route['histview/(:num)'] = 'welcome/histview/$1';
 $route['services'] = 'welcome/services';
 $route['logout'] = 'welcome/logout';
 

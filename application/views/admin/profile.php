@@ -21,16 +21,21 @@
           <?php include('navbar.php'); ?>
 
         <!-- Begin Page Content -->
-       
+        <?php 
+        if($fetch_data_profile->num_rows()>0)
+        {
+          foreach($fetch_data_profile->result() as $row)
+          {
+        ?>
      <div class="container">
 		    <div class="card  w-100 mb-5 mx-auto">
-                <img src="<?php echo base_url(); ?>assets/img/1.jpg" class="mx-auto m-3 img-thumbnail rounded-circle" 
+                <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" class="mx-auto m-3 img-thumbnail rounded-circle" 
                     style="height:170px;width:200px" data-toggle="modal" data-target="#viewfull"/>
                     
 		        <div class="card-body">
 		            <div class="row">
 		                <div class="col-md-12">
-                    <h4>Profile &nbsp<a class="btn btn-success fas fa-pen success" href="editprofile"></a></h4>
+                    <h4>Profile &nbsp<a class="btn btn-success fas fa-pen success" href="editprofile/<?php echo $row->user_id; ?>"></a></h4>
 		                    <hr>
 		                </div>
 		            </div>
@@ -40,57 +45,50 @@
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">ID:</label> 
                                 <div class="col-8">
-                                  <p class="lead">1</p>
+                                  <p class="lead"><?php echo $row->user_id; ?></p>
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">Name:</label> 
                                 <div class="col-8">
-                                  <p class="lead">USername123</p>
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="form-group row">
-                                <label for="lastname" class="col-4 col-form-label">Artist Type:</label> 
-                                <div class="col-8">
-                                  <p class="lead">Rock</p>                                  
+                                  <p class="lead"><?php echo $row->name; ?></p>
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Username:</label> 
                                 <div class="col-8">
-                                <p class="lead">user</p>                                  
+                                <p class="lead"><?php echo $row->username; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Status:</label> 
                                 <div class="col-8">
-                                  <p class="lead">verified</p>                                  
+                                  <p class="lead"><?php echo $row->status; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Minimum Rate:</label> 
                                 <div class="col-8">
-                                  <p class="lead">$3000</p>                                  
+                                  <p class="lead"><?php echo $row->rate; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Address:</label> 
                                 <div class="col-8">
-                                  <p class="lead">Cebu City</p>                                  
+                                  <p class="lead"><?php echo $row->address; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Contact Numbers:</label> 
                                 <div class="col-8">
-                                  <p class="lead">09505607709</p>   
-                                  <p class="lead">09127055497</p>                               
+                                  <p class="lead"><?php echo $row->telephone_1; ?></p>   
+                                  <p class="lead"><?php echo $row->telephone_2; ?></p>                               
                                 </div>
                               </div>
                               <hr>
@@ -104,21 +102,14 @@
                               <div class="form-group row">
                                 <label for="email" class="col-4 col-form-label">Email:</label> 
                                 <div class="col-8">
-                                  <p class="lead">gshockxd0@gmail.com</p>    
+                                  <p class="lead"><?php echo $row->email; ?></p>    
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Date Registered:</label> 
                                 <div class="col-8">
-                                  <p class="lead">09-05-2019</p>                                 
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="form-group row">
-                                <label for="text" class="col-4 col-form-label">Last Updated:</label> 
-                                <div class="col-8">
-                                  <p class="lead">09-05-2019</p>                                 
+                                  <p class="lead"><?php echo $row->date_registered; ?></p>                                 
                                 </div>
                               </div>
                               <hr>
@@ -140,7 +131,16 @@
 		</div>
 	</div>
 </div>
-                    
+              <?php
+                         }
+                        }
+                        else
+                        {
+                        ?>
+                          <h1 align="center">No Data Found</h1>
+                        <?php
+                        }
+                        ?>              
              
       <!-- end -->
       
@@ -183,7 +183,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <img src="<?php echo base_url(); ?>assets/img/1.jpg" class="m-3 rounded" style="height:500px; width:735px" >
+      <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" class="m-3 rounded" style="height:500px; width:735px" >
 
       </div>
       <div class="modal-footer">
