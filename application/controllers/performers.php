@@ -9,6 +9,7 @@
 		}
 		public function portfolio(){
 			$templates['title'] = 'Performer Portfolio';
+			die('here');
 
 			$this->load->view('inc/header-no-navbar', $templates);
 			$this->load->view('performer/portfolio');

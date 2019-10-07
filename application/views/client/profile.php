@@ -1,5 +1,4 @@
-<?php//  $title = 'Client Profile: AMPLIFIER'; ?>
-<?php// require '../inc/header-client.php'; ?>
+<?php print_r( $this->session->userdata()) ; ?>
 <div class="container">
 	<div class="row py-3">
 		<div class="col-sm-8">

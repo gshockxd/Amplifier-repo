@@ -13,8 +13,6 @@
 			$theme = $_SESSION['theme'];
 		}
 	}
-	// unset($_SESSION['theme']);
-	// print_r($_SESSION);
 
 	$f = $theme == 'flatly' ? '1' : '0';
 
@@ -87,15 +85,21 @@
 			            </li>
 			        </ul>
 			        <form class="form-inline my-2 my-lg-0" method="POST" action="#">
-			            <ul class="navbar-nav mr-auto">
-				            <li class="nav-item mr-3">
-					            <a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope h4"></i></a>
+			            <ul class="navbar-nav">
+				            <li class="nav-item">
+					            <a href="<?php echo $page ?> " class="nav-link"  data-toggle="tooltip" data-placement="bottom" title="Dark Mode: <?php echo $theme == 'flatly' ? 'OFF' : 'ON' ?>"><i class="fas fa-toggle-<?php echo $theme == 'flatly' ? 'off' : 'on' ?> fa-lg"></i></a>
 				            </li>
 				            <li class="nav-item">
-					            <a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Search Something.."><i class="fas fa-search h4"></i></a>
+					            <a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
 				            </li>
 				            <li class="nav-item">
-					            <a href="<?php echo $page ?> " class="nav-link"  data-toggle="tooltip" data-placement="bottom" title="Dark Mode: <?php echo $theme == 'flatly' ? 'OFF' : 'ON' ?>"><i class="fas fa-toggle-<?php echo $theme == 'flatly' ? 'off' : 'on' ?> h4"></i></a>
+					            <a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope fa-lg"></i></a>
+				            </li>
+				            <li class="nav-item">
+					            <a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="fas fa-user-alt fa-lg"></i></a>
+				            </li>
+				            <li class="nav-item">
+					            <a href="logout" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
 				            </li>
 			        	</ul>
 			        </form>
@@ -104,5 +108,10 @@
 
 		    </div>
 		  </nav>
-		  <?php// require '../../inc/user.php'; ?>
+		  
+		  <?php if($this->session->flashdata('user_created')): ?>
+			<div class="alert alert-success" role="alert">
+				<p><?php echo $this->session->flashdata('user_created'); ?></p>
+			</div>
+		<?php endif;?>
 
