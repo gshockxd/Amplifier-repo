@@ -34,140 +34,67 @@
         <!-- end -->
     <div class="container"> 
         <div class="row">   
-        <div class="col-sm-0 md-10 m-3 pl-2">
-                <div class="card w-75"> 
-                    <img class="card-img-top" src="<?php echo base_url(); ?>assets/img/1.jpg" alt="Card image cap">
-                        <div class="card-block" style="margin:5px"> 
-                        <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                            <h4 class="card-title d-inline"> Complainant: User123</h4>
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Action:</div>
-                                    <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp View Profile</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                            <div>
-                        </div>
-                    </div> 
-                        <br>
-                        <hr>
-                        <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                        <h4 class="card-title d-inline"> Accused: User12233</h4>  
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Action:</div>
-                                    <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp View Profile</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                            <div>
-                        </div>
-                    </div> 
-                            <hr>
-                            <h6 class="card-subtitle mb-2 text-muted">Event ID: 1412441</h6> 
-                                <p class="card-text"> Some quick example complainants content. Some quick example complainants content. Some quick example complainants content. Some quick example complainants content. </p> 
-                                <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport"><span class="fa fa-trash"></span></a>
-                                </button></a>
-                        </div> 
-                </div>
-            </div> 
-
-            <div class="col-sm-0 md-10 m-3 pl-2">
-                <div class="card w-75"> 
-                    <img class="card-img-top" src="<?php echo base_url(); ?>assets/img/1.jpg" alt="Card image cap">
-                        <div class="card-block" style="margin:5px"> 
-                        <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                            <h4 class="card-title d-inline"> Complainant: User123</h4>
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Action:</div>
-                                    <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp View Profile</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                            <div>
-                        </div>
-                    </div> 
-                        <br>
-                        <hr>
-                        <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                        <h4 class="card-title d-inline"> Accused: User12233</h4>  
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Action:</div>
-                                    <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp View Profile</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                            <div>
-                        </div>
-                    </div> 
-                            <hr>
-                            <h6 class="card-subtitle mb-2 text-muted">Event ID: 1412441</h6> 
-                                <p class="card-text"> Some quick example complainants content. Some quick example complainants content. Some quick example complainants content. Some quick example complainants content. </p> 
-                                <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport"><span class="fa fa-trash"></span></a>
-                                </button></a>
-                        </div> 
-                </div>
-            </div> 
-            <div class="col-sm-0 md-10 m-3 pl-2">
-                <div class="card w-75"> 
-                    <img class="card-img-top" src="<?php echo base_url(); ?>assets/img/1.jpg" alt="Card image cap">
-                        <div class="card-block" style="margin:5px"> 
-                        <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                            <h4 class="card-title d-inline"> Complainant: User123</h4>
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Action:</div>
-                                    <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp View Profile</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                            <div>
-                        </div>
-                    </div> 
-                        <br>
-                        <hr>
-                        <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                        <h4 class="card-title d-inline"> Accused: User12233</h4>  
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Action:</div>
-                                    <a class="dropdown-item fas fa-eye fa-fw" href="profile">&nbsp View Profile</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
-                                <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                            <div>
-                        </div>
-                    </div> 
-                            <hr>
-                            <h6 class="card-subtitle mb-2 text-muted">Event ID: 1412441</h6> 
-                                <p class="card-text"> Some quick example complainants content. Some quick example complainants content. Some quick example complainants content. Some quick example complainants content. </p> 
-                                <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport"><span class="fa fa-trash"></span></a>
-                                </button></a>
-                        </div> 
-                </div>
-            </div> 
-
-    </div>
-    </div>
-    </div>
+                         <?php 
+                            if($fetch_data_report->num_rows()>0)
+                            {
+                               foreach($fetch_data_report->result() as $row)
+                                { 
+                        ?>
+                            <div class="col-sm-0 md-10 m-3 pl-2">
+                                    <div class="card w-75"> 
+                                        <img class="card-img-top" src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" alt="Card image cap">
+                                            <div class="card-block" style="margin:5px"> 
+                                            <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
+                                                <h4 class="card-title d-inline"> Report from: <?php echo $row->name; ?></h4>
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Action:</div>
+                                                        <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->report_from; ?>">&nbsp View Profile</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
+                                                <div>
+                                            </div>
+                                        </div> 
+                                            <br>
+                                            <hr>
+                                            <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
+                                            <h4 class="card-title d-inline"> Report to: <?php echo $row->report_to; ?></h4>  
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Action:</div>
+                                                        <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->report_to; ?>">&nbsp View Profile</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
+                                                <div>
+                                            </div>
+                                        </div> 
+                                                <hr>
+                                                <h6 class="card-subtitle mb-2 text-muted">Event ID: <?php echo $row->booking_id; ?></h6> 
+                                                    <p class="card-text"> <?php echo $row->report_details; ?></p> 
+                                                    <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport"><span class="fa fa-trash"></span></a>
+                                                    </button></a>
+                                            </div> 
+                                    </div>
+                                </div> 
+                                </div> 
+                       
+                        <?php
+                         }
+                        }
+                        else
+                        {
+                        ?>
+                          <h1 align="center">No Data Found</h1>
+                        <?php
+                        }
+                    ?>         
     
         
 
@@ -218,7 +145,7 @@
                                         <input type="text" class="form-control" id="reporter">
                                     </div>
                                     <div class="form-group">
-                                        <label for="ID">Event ID:(optional)</label>
+                                        <label for="ID">Event ID:</label>
                                         <input type="text" class="form-control" id="eventID">
                                     </div>
                                     <div class="form-group">

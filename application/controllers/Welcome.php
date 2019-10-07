@@ -6,22 +6,33 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('/admin/index');
 	}
+
 	public function users()
 	{
-		$this->load->view('/admin/users');
+		$this->load->model('model');
+		$data["fetch_data_user"] = $this->model->fetch_data_user();
+		$this->load->view('/admin/users', $data);
 	}
-	public function profile()
+
+	public function profile($id)
 	{
-		$this->load->view('/admin/profile');
+		$this->load->model('model');
+		$data["fetch_data_profile"] = $this->model->fetch_data_profile();
+		$this->load->view('/admin/profile',$data);
 	}
+
 	public function events()
 	{
-		$this->load->view('/admin/events');
+		$this->load->model('model');
+		$data["fetch_data_event"] = $this->model->fetch_data_event();
+		$this->load->view('/admin/events', $data);
 	}
+
 	public function addevent()
 	{
 		$this->load->view('/admin/addevent');
 	}
+
 	public function eventview()
 	{
 		$this->load->view('/admin/eventview');
@@ -32,19 +43,27 @@ class Welcome extends CI_Controller {
 	}
 	public function services()
 	{
-		$this->load->view('/admin/services');
+		$this->load->model('model');
+		$data["fetch_data_packages"] = $this->model->fetch_data_packages();
+		$this->load->view('/admin/services', $data);
 	}
 	public function history()
 	{
-		$this->load->view('/admin/history');
+		$this->load->model('model');
+		$data["fetch_data_history"] = $this->model->fetch_data_history();
+		$this->load->view('/admin/history',$data);
 	}
-	public function histview()
+	public function histview($id)
 	{
-		$this->load->view('/admin/histview');
+		$this->load->model('model');
+		$data["fetch_data_histview"] = $this->model->fetch_data_histview();
+		$this->load->view('/admin/histview',$data);
 	}
 	public function reports()
 	{
-		$this->load->view('/admin/reports');
+		$this->load->model('model');
+		$data["fetch_data_report"] = $this->model->fetch_data_report();
+		$this->load->view('/admin/reports',$data);
 	}
 	public function notifications()
 	{

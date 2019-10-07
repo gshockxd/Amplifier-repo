@@ -34,99 +34,116 @@
 		            </div>
 		            <div class="row">
 		                <div class="col-md-12">
-		                    
+                    <?php 
+                            if($fetch_data_histview->num_rows()>0)
+                            {
+                               foreach($fetch_data_histview->result() as $row)
+                                { 
+                    
+                      ?>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">EVENT ID:</label> 
                                 <div class="col-8">
-                                  <p class="lead">1</p>
+                                  <p class="lead"><?php echo $row->booking_id; ?></p>
                                 </div>      
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label"> Client Name:</label> 
                                 <div class="col-8">
-                                  <p class="lead"><img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp CLients</p>
+                                  <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp <?php echo $row->name; ?></p>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">Client Rating from Performer:</label> 
-                                <div class="col-8">
+                                <?php
+                                for($i=0;$i<$row->rating; $i++)
+                                { 
+                                ?>
                                     <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </div>
+                                <?php
+                                }
+                                ?>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">Performer Name:</label> 
                                 <div class="col-8">
-                                  <p class="lead"><img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" style="width:50px;height:50px; border-radius:30px"> &nbspPerforer name</p>
+                                <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp <?php echo $row->name; ?></p>
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="username" class="col-4 col-form-label"> Performer Rating from Client:</label> 
-                                <div class="col-8">
+                                <label for="username" class="col-4 col-form-label">Client Rating from Performer:</label> 
+                                <?php
+                                for($i=0;$i<$row->rating; $i++)
+                                { 
+                                ?>
                                     <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                    <div class="fa fa-star"></div>
-                                </div>
+                                <?php
+                                }
+                                ?>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Venue:</label> 
                                 <div class="col-8">
-                                <p class="lead">Cebu City</p>                                  
+                                <p class="lead"><?php echo $row->venue_name; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Payments Made:</label> 
                                 <div class="col-8">
-                                  <p class="lead">FULL</p>                                  
+                                  <p class="lead"><?php echo $row->payment_status; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Date held:</label> 
                                 <div class="col-8">
-                                  <p class="lead">05-09-2019</p>                                  
+                                  <p class="lead"><?php echo $row->event_date; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Duration:</label> 
                                 <div class="col-8">
-                                  <p class="lead">00:60:00</p>                                  
+                                  <p class="lead"><?php echo $row->event_time; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Client Feedback:</label> 
                                 <div class="col-8">
-                                  <p class="lead">Event feedback survey questions are survey questions asked after an event has concluded to the attendees to understand their opinions about the event. ... In your opinion, the event could have been better in certain aspects such as the facilities and material provided to the attendees.9</p>                                
+                                  <p class="lead"><?php echo $row->message; ?></p>                                
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Performer's Feedback:</label> 
                                     <div class="col-8">
-                                    <p class="lead">Event feedback survey questions are survey questions asked after an event has concluded to the attendees to understand their opinions about the event. ... In your opinion, the event could have been better in certain aspects such as the facilities and material provided to the attendees.9</p>                                
+                                    <p class="lead"><?php echo $row->message; ?></p>                                
                                     </div>
                             </div>
 		                </div>
 		            </div>
-		            
+              
 		        </div>
 		    </div>
 		</div>
 	</div>
 </div>
 </div>
-                    
+                    <?php
+                         }
+                        }
+                        else
+                        {
+                        ?>
+                          <h1 align="center">No Data Found</h1>
+                        <?php
+                        }
+                    ?>                  
              
       <!-- end -->
       
