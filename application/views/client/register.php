@@ -1,6 +1,7 @@
 <?php echo form_open_multipart('clients/user_register'); ?>
-	<div class="container col-lg-6 pt-3">
-		<p class="h2 text-center">Client Registration</p>
+	<div class="container py-3 col-lg-6 pt-3">
+		
+		<p class="h2 text-center"><img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" class="mr-5 mb-3" alt="" width="72" height="72">Client Registration</p>
 		<div class="row">
 			<div class="col-sm ">
 			<input value="client" class="sr-only" name="user_type">
@@ -82,7 +83,17 @@
 
 		<div class="row pb-3">
 			<div class="col-sm d-flex justify-content-center">
-				<button type="submit" class="btn btn-primary">Sign Up</button>
+				
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 d-flex justify-content-start">
+				<!-- <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anything in the form will be lost!">Back</button> -->
+				<a href="login" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anything in the form will be lost!">Cancel</a>
+			</div>
+			<div class="col-md-6 d-flex justify-content-end">
+				<button type="submit" class="btn btn-primary">Register</button>
 			</div>
 		</div>
 	</div>

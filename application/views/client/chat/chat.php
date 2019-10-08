@@ -1,10 +1,8 @@
-<?php// $title="Client Chat: AMPLIFIER";?>
-<?php// include '../inc/header-client.php'; ?>
-
 <div class="container py-3">
     <div class="row"> 
         <div class="col-sm-4"> <!-- {{-- START OF LVL 1--}} -->
-            <p class="font-weight-bold text-center red-brown h5">Messages</p>
+            <p class="font-weight-bold text-center red-brown h5">Messages <span><a href="chat_new" class="red-brown ml-5"><i class="fas fa-pen fa-lg"></i></a></span></p>
+            
             <hr>
             <!-- {{-- <div class="row">
                     {{-- lvl 1 
@@ -149,17 +147,15 @@
                     <?php } ?>
             </div>
             <div class="c-hr"></div>
-            <div class="row ">
-                <div class="col-sm-11">
+            <div class="row pr-3">
+                <div class="col-md-11 ">
                     <!-- <input type="text" placeholder="Type a message..." class="form-group form-control"> -->
                     <textarea name="" id="" class="form-group form-control" rows="1"></textarea>
                 </div>
-                <div class="col-sm-1">
-                    <a href="#">send icon</a>
+                <div class="col-md-1 ">
+                    <a href="#" class="red-brown"><i class="far fa-paper-plane fa-2x"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<?php// include '../inc/footer.php'; ?>

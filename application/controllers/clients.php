@@ -9,7 +9,7 @@
 			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required' => 'Please input Last Name', 'alpha'=>'Last Name not valid, letters only'));
 			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
 			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
-			// $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid'));
+			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid'));
 			$this->form_validation->set_rules('pass', 'Password', 'required', array('required' => 'Please input Password'));
 			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]', array('matches'=>'Password not matched'));
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check');
@@ -58,7 +58,7 @@
 				}
 
 				$this->client_model->create_user($client_image);
-				$session_user = $this->client_model->get_individual_user($this->input->post('email'));
+				$session_user = $this->client_model->get_user($this->input->post('email'));
 				$this->session_model->session_user($session_user);
 
 				$this->session->set_flashdata('user_created', 'User '.$this->input->post('username').'has beend added!');
@@ -83,11 +83,47 @@
 		}
 		public function logout (){
 			$this->session_model->unset_user();
+			redirect('clients/profile');
+		}
+		public function user_login(){
+			$templates['title'] = 'Client Login';
+
+			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email', array('required'=>'Email address is required', 'valid_email'=>'Email address not valid'));
+			$this->form_validation->set_rules('pass', 'Password', 'required', array('required'=>'Password is required'));
+			
+			$data['email'] = $this->input->post('email');
+			$data['pass'] = $this->input->post('pass');
+
+			if($this->form_validation->run() == FALSE){
+				$this->load->view('inc/header-no-navbar', $templates);
+				$this->load->view('client/login', $data);
+				$this->load->view('inc/footer');
+			}else{
+				$hash_pass = md5($data['pass']);
+				$query = $this->client_model->user_login($data['email'], $hash_pass);
+				
+				if(!$query){
+					$this->session->set_flashdata('user_logged_in', 'Welcome back '.$this->session->userdata('username').'.');
+					$this->session->set_flashdata('user_not_matched', 'Invalid Email addres or Password');
+					redirect('clients/login');
+				}else{
+					$this->session_model->session_user($query);
+					redirect ('clients/profile');
+					// print_r($this->session->userdata());
+				}
+			}
+		}
+		public function login(){
+			$templates['title'] = 'Client Login';
+			
+			$this->load->view('inc/header-no-navbar', $templates);
+			$this->load->view('client/login');
+			$this->load->view('inc/footer');
 		}
 		public function register (){
 			$templates['title'] = 'Client Registration';
 
-			$this->load->view('inc/header-client', $templates);
+			$this->load->view('inc/header-no-navbar', $templates);
 			$this->load->view('client/register');
 			$this->load->view('inc/footer');
 		}
@@ -99,6 +135,9 @@
 			$this->load->view('inc/footer');
 		}
 		public function history(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'Client History';
 
 			$this->load->view('inc/header-client', $templates);
@@ -106,6 +145,9 @@
 			$this->load->view('inc/footer');
 		}
 		public function booking(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'Client Booking';
 
 			$this->load->view('inc/header-client', $templates);
@@ -113,6 +155,9 @@
 			$this->load->view('inc/footer');
 		}
 		public function calendar(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'Client Calendar';
 
 			$this->load->view('inc/header-client', $templates);
@@ -120,6 +165,9 @@
 			$this->load->view('inc/footer');
 		}
 		public function package(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'Client Package';
 
 			$this->load->view('inc/header-client', $templates);
@@ -127,10 +175,27 @@
 			$this->load->view('inc/footer');
 		}
 		public function chat(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'Client Chat';
 
 			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/chat');
+			$this->load->view('client/chat/chat');
+			$this->load->view('inc/footer');
+		}
+		public function chat_new(){
+			$templates['title'] = 'New Message';
+
+			$users['users'] = $this->client_model->get_users();
+
+			// foreach($users as $u){
+			// 	echo $u['username'];
+			// 	echo '<br>';
+			// }
+			// die();
+			$this->load->view('inc/header-client', $templates);
+			$this->load->view('client/chat/chat_new', $users);
 			$this->load->view('inc/footer');
 		}
 	}

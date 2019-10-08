@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-reboot.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-flatly.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/floating-labels.css">
+
 	
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/api/css/fontawesome/all.css">
 	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/all.js"></script>

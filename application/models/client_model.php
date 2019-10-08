@@ -28,8 +28,17 @@
 
             return $this->db->insert('users', $data);
         }
-        public function get_individual_user($email){
+        public function get_user($email){
             $query = $this->db->get_where('users', array('email'=>$email));
             return $query->row_array();
+        }
+        public function user_login ($email, $pass){
+            $query = $this->db->get_where('users', array('email'=>$email, 'password' => $pass));
+            return $query->row_array();
+            // print_r($this->db->last_query());
+        }
+        public function get_users(){
+            $query= $this->db->get('users');
+            return $query->result_array();
         }
     }

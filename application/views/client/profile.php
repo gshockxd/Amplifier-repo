@@ -1,6 +1,12 @@
-<?php print_r( $this->session->userdata()) ; ?>
 <div class="container">
+	<?php if($this->session->flashdata('user_logged_in')): ?>
+		<div class="alert alert-success mt-3" role="alert">
+			<p><?php echo $this->session->flashdata('user_logged_in');?></p>
+		</div>
+	<?php endif; ?>
+	
 	<div class="row py-3">
+
 		<div class="col-sm-8">
 			<img src="<?php echo base_url(); ?>assets/img/client.png" height="100%" width="100%" alt="">	
 		</div>
