@@ -5,6 +5,7 @@
             $this->load->database();
         }
         public function create_user($client_image){
+            $date = date('Y-m-j H:i:s');
             $data = array(
                 'user_id' => null,
                 'user_type'=> $this->input->post('user_type'),
@@ -20,11 +21,14 @@
                 'photo'=> $client_image,
                 'telephone_1'=> $this->input->post('number1'),
                 'telephone_2'=> $this->input->post('number2'),
-                'date_registered' => null,
+                'date_registered' => $date,
+                'date_updated' => $date,
                 'offense' => null,
                 'report_count' => null,
                 'media_fk' => null
             );
+            // echo date('Y-m-j H:i:s');
+            // die;
 
             return $this->db->insert('users', $data);
         }

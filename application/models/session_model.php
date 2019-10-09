@@ -11,7 +11,11 @@
                 'address'=>$data['address'],
                 'photo' => $data['photo'],
                 'telephone_1' =>$data['telephone_1'],
-                'telephone_2' =>$data['telephone_2']
+                'telephone_2' =>$data['telephone_2'],
+                'offense' => $data['offense'],
+                'report_count' => $data['report_count'],
+                'date_registered' => $data['date_registered'],
+                'date_updated' => $data['date_updated']
             );
             return $this->session->set_userdata($newdata);            
         }

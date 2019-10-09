@@ -101,6 +101,8 @@
 			}else{
 				$hash_pass = md5($data['pass']);
 				$query = $this->client_model->user_login($data['email'], $hash_pass);
+				// print_r($query);
+				// die();
 				
 				if(!$query){
 					$this->session->set_flashdata('user_not_matched', 'Invalid Email address or Password');
