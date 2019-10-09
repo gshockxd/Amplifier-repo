@@ -41,4 +41,8 @@
             $query= $this->db->get('users');
             return $query->result_array();
         }
+        public function get_chats(){
+            $query= $this->db->get('chats');
+            return $query->result->array();
+        }
     }

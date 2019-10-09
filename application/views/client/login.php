@@ -13,7 +13,7 @@
     <?php endif; ?>
 
       <div class="form-label-group">
-        <input type="email" id="inputEmail" name="email" value="<?php echo isset($email) ? $email : '' ?>" class="form-control <?php echo form_error('email') ? 'is-invalid' : '' ?>" placeholder="Email address" autofocus>
+        <input type="email" id="inputEmail" value="<?php echo $this->session->flashdata('email') ? $this->session->flashdata('email') : '' ?>" name="email" value="<?php echo isset($email) ? $email : '' ?>" class="form-control <?php echo form_error('email') ? 'is-invalid' : '' ?>" placeholder="Email address" autofocus>
         <label for="inputEmail">Email address</label>
         <div class="invalid-feedback">
             <?php echo form_error('email'); ?>
@@ -21,7 +21,7 @@
       </div>
 
       <div class="form-label-group">
-        <input type="password" id="inputPassword" name="pass" class="form-control <?php echo form_error('pass') ? 'is-invalid' : '' ?>" placeholder="Password">
+        <input type="password" id="inputPassword" value="" name="pass" class="form-control <?php echo form_error('pass') ? 'is-invalid' : '' ?>" placeholder="Password">
         <label for="inputPassword">Password</label>
         <div class="invalid-feedback">
             <?php echo form_error('pass'); ?>

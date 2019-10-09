@@ -132,5 +132,11 @@
   border-color: #ccad6c;
 }
 
+.unstyled-button {
+    padding: 0px;
+    background: none;
+    border: none;
+}
+
 
 /**/

@@ -35,6 +35,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/datatables.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
 	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-flatly.css"> -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-<?php echo $theme == 'darkly' ? 'darkly' : 'flatly'; ?>.css">
 	<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/floating-labels.css"> -->
@@ -44,6 +45,7 @@
 	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/brands.js"></script>
 	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/solid.js"></script>
 	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/fontawesome.js"></script>
+
 
 	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/fontawesome.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/brands.css" rel="stylesheet">
@@ -60,10 +62,10 @@
 
 		        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			        <ul class="navbar-nav mr-auto">
-			            <li class="nav-item active">
-				            <a class="nav-link" href="profile">Dashboard <span class="sr-only">(current)</span></a>
-			            </li>
 						<?php if($this->session->userdata('user_id')): ?>
+							<li class="nav-item active">
+								<a class="nav-link" href="profile">Dashboard <span class="sr-only">(current)</span></a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#">Notifications</a>
 							</li>
@@ -89,9 +91,9 @@
 			        </ul>
 			        <form class="form-inline my-2 my-lg-0" method="POST" action="#">
 			            <ul class="navbar-nav">
-				            <li class="nav-item">
-					            <a href="<?php echo $page ?> " class="nav-link"  data-toggle="tooltip" data-placement="bottom" title="Dark Mode: <?php echo $theme == 'flatly' ? 'OFF' : 'ON' ?>"><i class="fas fa-toggle-<?php echo $theme == 'flatly' ? 'off' : 'on' ?> fa-lg"></i></a>
-				            </li>
+				            <!-- <li class="nav-item">
+					            <a href="<?php// echo $page ?> " class="nav-link"  data-toggle="tooltip" data-placement="bottom" title="Dark Mode: <?php// echo $theme == 'flatly' ? 'OFF' : 'ON' ?>"><i class="fas fa-toggle-<?php echo $theme == 'flatly' ? 'off' : 'on' ?> fa-lg"></i></a>
+				            </li> -->
 							<?php if(!$this->session->userdata('user_id')): ?>
 								<li class="nav-item">
 									<a href="login" class="nav-link">Login</a>
@@ -105,7 +107,7 @@
 									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope fa-lg"></i></a>
 								</li>
 								<li class="nav-item">
-									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Profile"><i class="fas fa-user-alt fa-lg"></i></a>
+									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Profile"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
 								</li>
 								<li class="nav-item">
 									<a href="logout" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>

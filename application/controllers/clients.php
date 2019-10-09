@@ -18,8 +18,8 @@
 			$data['uname'] = $this->input->post('uname');
 			$data['fname'] = $this->input->post('fname');
 			$data['lname'] = $this->input->post('lname');
-			$data['telephone1'] = $this->input->post('number1');
-			$data['telephone2'] = $this->input->post('number2');
+			$data['number1'] = $this->input->post('number1');
+			$data['number2'] = $this->input->post('number2');
 			$data['email'] = $this->input->post('email');
 			$data['userfile'] = $this->input->post('userfile');
 			$data['address'] = $this->input->post('address');
@@ -103,17 +103,21 @@
 				$query = $this->client_model->user_login($data['email'], $hash_pass);
 				
 				if(!$query){
-					$this->session->set_flashdata('user_logged_in', 'Welcome back '.$this->session->userdata('username').'.');
-					$this->session->set_flashdata('user_not_matched', 'Invalid Email addres or Password');
+					$this->session->set_flashdata('user_not_matched', 'Invalid Email address or Password');
+					$this->session->set_flashdata('email', $this->input->post('email'));
 					redirect('clients/login');
 				}else{
 					$this->session_model->session_user($query);
+					$this->session->set_flashdata('user_logged_in', 'Welcome back '.$this->session->userdata('username').'.');
+
 					redirect ('clients/profile');
-					// print_r($this->session->userdata());
 				}
 			}
 		}
 		public function login(){
+			if($this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'Client Login';
 			
 			$this->load->view('inc/header-no-navbar', $templates);
@@ -121,6 +125,9 @@
 			$this->load->view('inc/footer');
 		}
 		public function register (){
+			if($this->session->userdata('user_id')){
+				// redirect('clients/profile');
+			}
 			$templates['title'] = 'Client Registration';
 
 			$this->load->view('inc/header-no-navbar', $templates);
@@ -188,14 +195,42 @@
 			$templates['title'] = 'New Message';
 
 			$users['users'] = $this->client_model->get_users();
-
-			// foreach($users as $u){
-			// 	echo $u['username'];
-			// 	echo '<br>';
-			// }
-			// die();
+			// $users['users'] = json_encode([$temp]);
+			
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/chat/chat_new', $users);
+			$this->load->view('inc/footer');
+		}
+		public function chat_left(){
+			$templates['title'] = 'New Message';
+
+			$users['users'] =$this->client_model->get_chats();
+
+			$this->load->view('inc/header-client', $templates);
+			$this->load->view('client/chat/chat_new', $users);
+			$this->load->view('inc/footer');
+		}
+		public function chat_search(){
+			$this->form_validation->set_rules('userID', 'User ID', 'required', array('required'=> "User Not Found")); 
+			$this->form_validation->set_error_delimiters('', '');
+
+			if($this->form_validation->run() === FALSE){
+				$templates['title'] = 'New Message';
+
+				$users['users'] = $this->client_model->get_users();
+
+				$this->load->view('inc/header-client', $templates);
+				$this->load->view('client/chat/chat_new', $users);
+				$this->load->view('inc/footer');
+			}else{
+
+			}
+		}
+		public function profile_info(){
+			$templates['title'] = 'Profile Information';
+
+			$this->load->view('inc/header-client', $templates);
+			$this->load->view('client/profile_info');
 			$this->load->view('inc/footer');
 		}
 	}
