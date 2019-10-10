@@ -1,14 +1,27 @@
 <div class="container py-3">
     <div class="row">
         <div class="col-md-3">
+            <?php 
+                // echo '<pre>';
+                // print_r($this->session->userdata());
+                // echo '</pre>';
+            ?>
             <img src="<?php echo base_url(); echo $this->session->userdata('photo'); ?>" class="img-thumbnail" alt="">
         </div>
         <div class="col-md-9">
+            <?php if($this->session->flashdata('user_updated')): ?>
+                <div class="alert alert-success alert-block">
+                    <?php echo $this->session->flashdata('user_updated'); ?>
+                </div>
+            <?php endif; ?>
             <p class="h3"><?php echo $this->session->userdata('fname'); ?> <?php echo $this->session->userdata('lname'); ?></p>
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="header">User information</h5>
-                        <div class="px-2"><a href="profile_edit" data-toggle="tooltip" data-placement="top" title="Edit user <?php echo $this->session->userdata('username') ?>" class="btn btn-primary"><i class="fas fa-user-edit fa-lg"></i></a></div>
+                        <div class="px-2">
+                        <a href="profile_password_update_view" data-toggle="tooltip" data-placement="top" title="Update Password" class="btn btn-info"><i class="fas fa-cog fa-lg"></i></a>
+                        <a href="profile_edit" data-toggle="tooltip" data-placement="top" title="Edit user <?php echo $this->session->userdata('username') ?>" class="btn btn-primary"><i class="fas fa-user-edit fa-lg"></i></a>
+                    </div>
                     </div>                        
                         
                     <ul class="list-group list-group-flush">
@@ -51,13 +64,13 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Offense</div>
-                                <div class="col font-weight-bold"><?php echo $this->session->userdata('offense'); ?></div>
+                                <div class="col font-weight-bold"><?php echo $this->session->userdata('offense') ? $this->session->userdata('offense') : 'None' ; ?></div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Report Count</div>
-                                <div class="col font-weight-bold"><?php echo $this->session->userdata('report_count'); ?></div>
+                                <div class="col font-weight-bold"><?php echo $this->session->userdata('report_count') ? $this->session->userdata('report_count') : 'None' ; ?></div>
                             </div>
                         </li>
                     </ul>

@@ -15,7 +15,8 @@
                 'offense' => $data['offense'],
                 'report_count' => $data['report_count'],
                 'date_registered' => $data['date_registered'],
-                'date_updated' => $data['date_updated']
+                'date_updated' => $data['date_updated'],
+                'password' => $data['password']
             );
             return $this->session->set_userdata($newdata);            
         }
