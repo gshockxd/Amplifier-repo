@@ -22,6 +22,10 @@ SET time_zone = "+00:00";
 -- Database: `amplifier`
 --
 
+drop database amplifier;
+create database amplifier;
+use amplifier;
+
 -- --------------------------------------------------------
 
 --

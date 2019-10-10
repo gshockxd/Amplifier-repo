@@ -1,9 +1,14 @@
-<?php  $title = 'Client Profile: AMPLIFIER'; ?>
-<?php require '../inc/header-client.php'; ?>
 <div class="container">
+	<?php if($this->session->flashdata('user_logged_in')): ?>
+		<div class="alert alert-success mt-3" role="alert">
+			<p><?php echo $this->session->flashdata('user_logged_in');?></p>
+		</div>
+	<?php endif; ?>
+	
 	<div class="row py-3">
+
 		<div class="col-sm-8">
-			<img src="../../assets/img/client.png" height="100%" width="100%" alt="">	
+			<img src="<?php echo base_url(); ?>assets/img/client.png" height="100%" width="100%" alt="">	
 		</div>
 		<div class="col-sm-4">
 			<p class="h1 red-brown">Nike Marti Caballes</p>
@@ -17,7 +22,7 @@
 			<p class="h2 d-flex justify-content-center">BAND AVAILABLE!</p>
 			<div class="row">
 				<div class="col-sm">
-					<img src="../../assets/img/client.png" height="150" width="100%" alt="">
+					<img src="<?php echo base_url(); ?>assets/img/client.png" height="150" width="100%" alt="">
 				</div>
 				<div class="col-sm">
 					<p class="text-muted">LASTIKO/BAND</p>
@@ -32,7 +37,7 @@
 			<p class="h2 d-flex justify-content-center">PHOTOGRAPHER AVAILABLE</p>
 			<div class="row">
 				<div class="col-sm">
-					<img src="../../assets/img/client.png" height="150" width="100%" alt="">
+					<img src="<?php echo base_url(); ?>assets/img/client.png" height="150" width="100%" alt="">
 				</div>
 				<div class="col-sm">
 					<p class="text-muted">OPISINA PRODUCTIONS</p>
@@ -45,4 +50,4 @@
 		</div>
 	</div>
 </div>
-<?php require '../inc/footer.php'; ?>
+<?php// require '../inc/footer.php'; ?>

@@ -6,17 +6,17 @@
     </div> -->
     <div class="col-sm ">
         <div class="">
-            <a href="register.php" class="btn btn-outline-primary">Personal</a>
+            <a href="register" class="btn btn-outline-primary">Personal</a>
         </div>
     </div>
     <div class="col-sm ">
         <div class="">   
-            <a href="portfolio.php" class="btn btn-outline-success">Portfolio</a>
+            <a href="portfolio" class="btn btn-outline-success">Portfolio</a>
         </div>
     </div>
     <div class="col-sm ">
         <div class="">
-            <a href="description.php" class="btn btn-outline-secondary">Description</a>
+            <a href="description" class="btn btn-outline-secondary">Description</a>
         </div>
     </div>
 </div>

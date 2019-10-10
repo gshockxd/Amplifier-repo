@@ -1,5 +1,5 @@
-<?php $title="Client History: AMPLIFIER"; ?>
-<?php require '../inc/header-client.php'; ?>
+<?php //$title="Client History: AMPLIFIER"; ?>
+<?php// require '../inc/header-client.php'; ?>
 	<div class="container">
 		<p class="h1 red-brown py-3 text-center">EVENT HISTORY</p>
 		
@@ -20,14 +20,10 @@
 			
 	            <tr>
 	            	<td class="text-center">
-	            		<img src="../../assets/img/artist.png" class="rounded-circle" height="50" width="50" alt="">
+	            		<img src="<?php echo base_url(); ?>assets/img/artist.png" class="rounded-circle" height="50" width="50" alt="">
 	            	</td>
 	                <td class="">
-	                	<p>Nike Marti Caballes 
-	                		<span><br>
-	                			<small>Lorem Ipsum</small>
-	                		</span> 
-	                	</p>	                	
+	                	<p>Nike Marti Caballes </p>	                	
 	                </td>
 	                <td>
 	                	<p>03/28/2019
@@ -64,4 +60,4 @@
     </table>
 
 	</div>
-<?php require '../inc/footer.php'; ?>
+<?php// require '../inc/footer.php'; ?>

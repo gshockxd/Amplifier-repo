@@ -65,7 +65,10 @@ $route['reports'] = 'welcome/reports';
 $route['notifications'] = 'welcome/notifications';
 $route['messages'] = 'welcome/messages';
 $route['profile/editprofile/(:num)'] = 'welcome/editprofile/$1  ';
+$route['delete_user/(:num)'] = 'welcome/delete_user/$1  ';
 $route['eventview/(:num)'] = 'welcome/eventview/$1';
+$route['delete_event/(:num)'] = 'welcome/delete_event/$1';
+$route['delete_package/(:num)'] = 'welcome/delete_package/$1';
 $route['services'] = 'welcome/services';
 $route['logout'] = 'welcome/logout';
 
