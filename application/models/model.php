@@ -29,12 +29,48 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+    function fetch_delete_package()
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("*");
+       $this->db->from("packages");
+       $this->db->where("package_id",$id);
+       $this->db->delete("packages");
+    }
+    function fetch_delete_user()
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("*");
+       $this->db->from("users");
+       $this->db->where("user_id",$id);
+       $this->db->delete("users");
+    }
+    function fetch_delete_event()
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("*");
+       $this->db->from("bookings");
+       $this->db->where("booking_id",$id);
+       $this->db->delete("bookings");
+    }
     function fetch_data_event()
     {
        $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
        $this->db->from("bookings");
        $this->db->join("users",'bookings.client_id=users.user_id');
        $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+       $query = $this->db->get();
+       return $query;
+    }
+    function fetch_data_history_data()
+    {
+      $date = date();
+      $status = "approve";
+      $this->db->distinct();
+      $this->db->select('*');
+      $this->db->from('bookings');
+      $this->db->where('event_date <', $date); 
+      $this->db->where('status', $status); 
        $query = $this->db->get();
        return $query;
     }

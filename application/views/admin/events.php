@@ -91,12 +91,32 @@
                                   <div class="dropdown-divider"></div>
                                   <a class="dropdown-item fas fa-eye fa-fw" href="eventview/<?php echo $row->booking_id; ?>">&nbsp More Details</a> 
                                   <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal" data-target="#delevent">&nbsp Delete</a>   
+                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal" data-target="#delevent<?php echo $row->booking_id; ?>">&nbsp Delete</a>   
                                   </div>
                                 </div>
                                 </td>
                             </tr>       
                         </tbody>
+                        <!-- event delete modal -->
+                        <div class="modal fade" id="delevent<?php echo $row->booking_id; ?>" tabindex="-1" role="dialog" aria-labelledby="delevent" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                              DELETE EVENT
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                        <div class="modal-body">
+                                            <H5>Are you sure you want to delete event:<br> <?php echo $row->event_name; ?></H5>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <a href="delete_event/<?php echo $row->booking_id; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        <!-- end -->
                         <?php
                        }
                         ?>
@@ -181,26 +201,7 @@
         </div>
 </div>
 <!-- end -->
- <!-- event delete modal -->
- <div class="modal fade" id="delevent" tabindex="-1" role="dialog" aria-labelledby="delevent" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                      DELETE EVENT
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-                <div class="modal-body">
-                    <H5>Are you sure you want to delete Event?</H5>
-                </div>
-                <div class="modal-footer">
-                   <button type="button" class="btn btn-danger">YES</button>
-                   <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                </div>
-            </div>
-        </div>
-<!-- end -->
+ 
 
         
   </body>

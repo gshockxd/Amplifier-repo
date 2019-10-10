@@ -36,41 +36,66 @@
         <!-- End of header -->
         <!-- content Start -->
         <div class="container">
-        <div class="row mx-auto">
-       
-                <?php 
-                if($fetch_data_packages->num_rows()>0)
-                {
-                    foreach($fetch_data_packages->result() as $row)
+            <div class="row mx-auto">
+        
+                    <?php 
+                    if($fetch_data_packages->num_rows()>0)
                     {
-                ?>
-                <div class="col-sm-4 mb-3 col-md-4">
-                    <div class="card border-secondary">
-                        <div class="card-body ">
-                            <h3 class="card-title">                    
-                                <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">
-                                <a href="#" class="text-secondary"> <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></a>
-                            </h3>
-                        <hr>
-                        <p class="lead text-center">
-                                <b><?php echo $row->package_name; ?></b>
-                                <br><?php echo $row->price; ?><br><br>
-                        </p>              
-                            <p class="card-text text-center"><?php echo $row->details; ?><br></p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-center "> 
-                                <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delpack"><span class="fa fa-trash"></span></a>
+                        foreach($fetch_data_packages->result() as $row)
+                        {
+                    ?>
+                    <div class="col-sm-4 mb-3 col-md-4">
+                        <div class="card border-secondary">
+                            <div class="card-body ">
+                                <h3 class="card-title">                    
+                                    <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">
+                                    <a href="profile/<?php echo $row->user_id; ?>" class="text-secondary"> <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></a>
+                                </h3>
+                            <hr>
+                            <p class="lead text-center">
+                                    <b><?php echo $row->package_name; ?></b>
+                                    <br><?php echo $row->price; ?><br><br>
+                            </p>              
+                                <p class="card-text text-center"><?php echo $row->details; ?><br></p>
                             </div>
-                            <div class="text-center font-weight-light font-italic"><?php echo $row->date_created; ?><br></div>
+                            <div class="card-footer">
+                                <div class="text-center "> 
+                                    <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delpack<?php echo $row->package_id; ?>"><span class="fa fa-trash"></span></a>
+                                </div>
+                                <div class="text-center font-weight-light font-italic"><?php echo $row->date_created; ?><br></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php
-                }
-            ?>
+                     <!-- event delete modal -->
+                    <div class="modal fade" id="delpack<?php echo $row->package_id; ?>" tabindex="-1" role="dialog" aria-labelledby="delpack" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    DELETE PACKAGE
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <H5>Are you sure you want to delete package by?</H5>
+                                    <H4 class="text-center"> 
+                                        <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">
+                                        <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>
+                                    </H4>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="delete_package/<?php echo $row->package_id; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <?php
+                    }
+                ?>
             </div>
-            </div>
+        </div>
            
         <br>
 <!-- pagination Start -->
@@ -117,26 +142,7 @@
 
         </div>
   <!-- End of Page Wrapper -->
-  <!-- event delete modal -->
- <div class="modal fade" id="delpack" tabindex="-1" role="dialog" aria-labelledby="delpack" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                      DELETE PACKAGE
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-                <div class="modal-body">
-                    <H5>Are you sure you want to delete package?</H5>
-                </div>
-                <div class="modal-footer">
-                   <button type="button" class="btn btn-danger">YES</button>
-                   <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                </div>
-            </div>
-        </div>
-<!-- end -->
+ 
   <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>

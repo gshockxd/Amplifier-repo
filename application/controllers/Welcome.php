@@ -13,6 +13,24 @@ class Welcome extends CI_Controller {
 		$data["fetch_data_user"] = $this->model->fetch_data_user();
 		$this->load->view('/admin/users', $data);
 	}
+	public function delete_user($id)
+	{
+		$this->load->model('model');
+		$data["fetch_delete_user"] = $this->model->fetch_delete_user();
+		redirect(base_url() ."users");
+	}
+	public function delete_event($id)
+	{
+		$this->load->model('model');
+		$data["fetch_delete_event"] = $this->model->fetch_delete_event();
+		redirect(base_url() ."events");
+	}
+	public function delete_package($id)
+	{
+		$this->load->model('model');
+		$data["fetch_delete_package"] = $this->model->fetch_delete_package();
+		redirect(base_url() ."services");
+	}
 
 	public function profile($id)
 	{

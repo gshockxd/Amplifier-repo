@@ -99,7 +99,7 @@
                             <div class="dropdown-divider"></div>
                               <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
                             <div class="dropdown-divider"></div>
-                              <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal" data-target="#deluser">&nbsp Delete</a>
+                              <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal" data-target="#deluser<?php echo $row->user_id; ?>">&nbsp Delete</a>
                           </div>
                         </div>
                       </div>
@@ -134,7 +134,27 @@
                           </div>
                         </div>
             </div>
-      
+                        <!-- del user modal -->
+                        <div class="modal fade" id="deluser<?php echo $row->user_id; ?>" tabindex="-1" role="dialog" aria-labelledby="deluser" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                              DELETE USER 
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                        <div class="modal-body">
+                                            <H5>Are you sure you want to delete  <?php echo $row->user_id; ?>&nbsp<?php echo $row->lname; ?>?</H5>
+                                        </div>
+                                        <div class="modal-footer">
+                                         <a href="delete_user/<?php echo $row->user_id; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- end -->
           <?php
             }
             ?>
@@ -162,6 +182,8 @@
               </div>
 
               </div>
+
+          
           <?php
           }
           else
@@ -314,27 +336,7 @@
                         </div>
                     </div>
           <!-- end -->
-          <!-- del user modal -->
-          <div class="modal fade" id="deluser" tabindex="-1" role="dialog" aria-labelledby="deluser" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                              DELETE USER
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                        <div class="modal-body">
-                            <H5>Are you sure you want to Delete user?</H5>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger">YES</button>
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <!-- end -->
+        
         <!-- block user modal -->
         <div class="modal fade" id="blckuser" tabindex="-1" role="dialog" aria-labelledby="blckuser" aria-hidden="true">
                     <div class="modal-dialog" role="document">
