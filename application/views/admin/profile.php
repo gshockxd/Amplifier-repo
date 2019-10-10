@@ -52,7 +52,7 @@
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">Name:</label> 
                                 <div class="col-8">
-                                  <p class="lead"><?php echo $row->name; ?></p>
+                                  <p class="lead"><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></p>
                                 </div>
                               </div>
                               <hr>

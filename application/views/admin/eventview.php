@@ -34,84 +34,101 @@
 		            </div>
 		            <div class="row">
 		                <div class="col-md-12">
+                            <?php 
+                                    if($fetch_data_event_detail->num_rows()>0)
+                                    {
+                                      foreach($fetch_data_event_detail->result() as $row)
+                                        { 
+                            
+                                    ?>
 		                    
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">EVENT ID:</label> 
                                 <div class="col-8">
-                                  <p class="lead">1</p>
+                                  <p class="lead"><?php echo $row->booking_id; ?></p>
                                 </div>      
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label"> Client Name:</label> 
                                 <div class="col-8">
-                                  <p class="lead"><img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp CLients</p>
+                                  <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->client_photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp <?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?> </p>
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">Performer Name:</label> 
                                 <div class="col-8">
-                                  <p class="lead"><img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="none" style="width:50px;height:50px; border-radius:30px"> &nbspPerforer name</p>
+                                  <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->performer_photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px"> &nbsp<?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?></p>
+                                </div>
+                              </div>
+                              <hr>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Event Name:</label> 
+                                <div class="col-8">
+                                <p class="lead"><?php echo $row->event_name; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Venue:</label> 
                                 <div class="col-8">
-                                <p class="lead">Cebu City</p>                                  
+                                <p class="lead"><?php echo $row->venue_name; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Partial Payment:</label> 
                                 <div class="col-8">
-                                  <p class="lead">$1500</p>                                  
+                                  <p class="lead"><?php echo $row->down_payment; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Total Payment:</label> 
                                 <div class="col-8">
-                                  <p class="lead">$3000</p>                                  
+                                  <p class="lead"><?php echo $row->full_amount; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Payments Made:</label> 
                                 <div class="col-8">
-                                  <p class="lead">Partial</p>                                  
+                                  <p class="lead"><?php echo $row->payment_status; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Date</label> 
                                 <div class="col-8">
-                                  <p class="lead">05-09-2019</p>                                  
+                                  <p class="lead"><?php echo $row->event_date; ?></p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Duration:</label> 
                                 <div class="col-8">
-                                  <p class="lead">00:60:00</p>                                  
+                                  <p class="lead"><?php echo $row->event_time; ?>&nbsp (HH:MM:SS)</p>                                  
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Client Notes to performer:</label> 
                                 <div class="col-8">
-                                  <p class="lead">Event feedback survey questions are survey questions asked after an event has concluded to the attendees to understand their opinions about the event. ... In your opinion, the event could have been better in certain aspects such as the facilities and material provided to the attendees.9</p>                                
+                                  <p class="lead"><?php echo $row->notes; ?></p>                                
                                 </div>
                               </div>
                               <hr>
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Date Booked</label> 
                                 <div class="col-8">
-                                  <p class="lead">05-06-2019</p>                                  
+                                  <p class="lead"><?php echo $row->date_booked; ?></p>                                  
                                 </div>
                               </div>
-                              
+                              <?php
+                              }
+                          }
+                        ?>
     
 		                </div>
 		            </div>

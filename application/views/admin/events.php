@@ -57,6 +57,7 @@
                         <thead>
                             <tr>
                             <th scope="col">ID</th>
+                            <th scope="col">EVENT NAME</th>
                             <th scope="col">VENUE</th>
                             <th scope="col">CLIENT NAME</th>
                             <th scope="col">PERFORMER NAME</th>
@@ -73,13 +74,14 @@
                                 { 
                     
                             ?>
-                                <tr>
+                              <tr>
                                 <td scope="row"> <?php echo $row->booking_id; ?></td>
+                                <td> <?php echo $row->event_name; ?></td>
                                 <td> <?php echo $row->venue_name; ?></td>
-                                <td> <?php echo $row->name; ?></td>
-                                <td> <?php echo $row->performer_id; ?></td>
+                                <td> <?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?></td>
+                                <td>   <?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?></td>
                                 <td> <?php echo $row->event_date; ?></td>
-                                <td> <?php echo $row->event_time; ?>
+                                <td> <?php echo $row->event_time; ?></td>
                                 <td>
                                 <div class="dropdown no-arrow">
                                   <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,7 +89,7 @@
                                   </a>
                                 <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                   <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-eye fa-fw" href="eventview">&nbsp More Details</a> 
+                                  <a class="dropdown-item fas fa-eye fa-fw" href="eventview/<?php echo $row->booking_id; ?>">&nbsp More Details</a> 
                                   <div class="dropdown-divider"></div>
                                   <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal" data-target="#delevent">&nbsp Delete</a>   
                                   </div>

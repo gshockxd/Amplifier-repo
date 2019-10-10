@@ -40,50 +40,60 @@
                                foreach($fetch_data_report->result() as $row)
                                 { 
                         ?>
-                            <div class="col-sm-0 md-10 m-3 pl-2">
+                            <div class="col-sm md-10 m-3 pl-2">
                                     <div class="card w-75"> 
-                                        <img class="card-img-top" src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" alt="Card image cap">
-                                            <div class="card-block" style="margin:5px"> 
-                                            <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                                                <h4 class="card-title d-inline"> Report from: <?php echo $row->name; ?></h4>
-                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i></a>
-                                                <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                        <img class="card-img-top" src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" alt="Card image cap" style="width:800px; height:500px" >
+                                            <div class="card-body card-block" style="margin:5px"> 
+                                            <div class="dropdown">
+                                            <img src="<?php echo base_url(); ?><?php echo $row->report_from_photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
+                                                <h4 class="card-title d-inline"> Report from: <?php echo $row->report_from_fname; ?>&nbsp<?php echo $row->report_from_lname; ?></h4>
+                                            
+                                               
+                                                    <button class="btn fa fa-list-ul dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <div class="dropdown-header">Action:</div>
                                                         <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->report_from; ?>">&nbsp View Profile</a>
                                                     <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
                                                     <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                                                <div>
-                                            </div>
-                                        </div> 
+                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Blo1ck</a>
+                                                    </div>         
+                                                </div> 
                                             <br>
                                             <hr>
-                                            <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                                            <h4 class="card-title d-inline"> Report to: <?php echo $row->report_to; ?></h4>  
-                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400 d-inline"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right  shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown">
+                                            <img src="<?php echo base_url(); ?><?php echo $row->report_to_photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
+                                            <h4 class="card-title d-inline"> Report to: <?php echo $row->report_to_fname; ?>&nbsp<?php echo $row->report_to_lname; ?></h4>  
+
+                                           
+                                                    <button class="btn fa fa-list-ul dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                       
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <div class="dropdown-header">Action:</div>
                                                         <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->report_to; ?>">&nbsp View Profile</a>
                                                     <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
                                                     <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                                                <div>
-                                            </div>
+                                                    </div>
+                                                    
                                         </div> 
                                                 <hr>
-                                                <h6 class="card-subtitle mb-2 text-muted">Event ID: <?php echo $row->booking_id; ?></h6> 
-                                                    <p class="card-text"> <?php echo $row->report_details; ?></p> 
+                                                <h6 class="card-subtitle mb-2 text-muted">Report ID: <?php echo $row->report_id; ?></h6> 
+                                                <a href="eventview/<?php echo $row->booking_id; ?>"> Event ID: <?php echo $row->booking_id; ?></a>
+                                                <br>
+                                                <br>
+                                                <p class="card-text"> <b>REPORT DETAILS:</b></p> 
+                                                    <p class="card-text"> <?php echo $row->report_details; ?></p>  <br><br>
                                                     <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport"><span class="fa fa-trash"></span></a>
                                                     </button></a>
+                                                   
                                             </div> 
                                     </div>
                                 </div> 
-                                </div> 
+                             
                        
                         <?php
                          }
@@ -126,7 +136,7 @@
 
 <!-- add modal -->
 <div class="modal fade" id="addrep" tabindex="-1" role="dialog" aria-labelledby="addrep" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="viewd"><b>REPORT DETAILS<b></h4>
@@ -135,33 +145,79 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <label for="reporter">Reported By:</label>
-                                        <input type="text" class="form-control" id="reporter">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="reporter">Accused:</label>
-                                        <input type="text" class="form-control" id="reporter">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="ID">Event ID:</label>
-                                        <input type="text" class="form-control" id="eventID">
-                                    </div>
+                            <form method="post" action="<?php echo base_url()?>welcome/form_validation_report">
+                                    <div class="form-group row">
+                                        <label for="report_from" class="col-4 col-form-label">Reporter's Name:</label> 
+                                            <select id="report_from" name="report_from" class="form-control m-3">
+                                            <?php
+                                            if($fetch_data_user->num_rows()>0)
+                                            {
+                                            foreach($fetch_data_user->result() as $row)
+                                                { 
+                                            ?>
+                                            <option value="<?php echo $row->user_id; ?>"><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
+                                            <?php
+                                            }
+                                            }
+                                            ?>
+                                            </select>
+                                            <?php echo form_error("report_from"); ?>
+                                        </div>
+                                    
+                                        <div class="form-group row">
+                                        <label for="violator" class="col-4 col-form-label">Violator:</label> 
+                                            <select id="violator" name="violator" class="form-control m-3">
+                                            <?php
+                                            if($fetch_data_user->num_rows()>0)
+                                            {
+                                            foreach($fetch_data_user->result() as $row)
+                                                { 
+                                            ?>
+                                            <option value="<?php echo $row->user_id; ?>"><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
+                                            <?php
+                                            }
+                                            }
+                                            ?>
+                                            </select>
+                                            <?php echo form_error("report_to"); ?>
+                                        </div>
+                                    
+                                        <div class="form-group row">
+                                        <label for="booking_id" class="col-4 col-form-label">Event Name:</label> 
+                                            <select id="booking_id" name="booking_id" class="form-control m-3">
+                                            <?php
+                                            if($fetch_data_event->num_rows()>0)
+                                            {
+                                            foreach($fetch_data_event->result() as $row)
+                                                { 
+                                            ?>
+                                            <option value="<?php echo $row->booking_id; ?>"><?php echo $row->event_name; ?></option>
+                                            <?php
+                                            }
+                                            }
+                                            ?>
+                                            </select>
+                                            <?php echo form_error("booking_id"); ?>
+                                        </div>
                                     <div class="form-group">
                                         <label for="comment">Additional Info:</label>
-                                        <input type="text" class="form-control" id="comment" style="height:300px;width:460px">
+                                        <input type="text" name="report_info" class="form-control lg" id="comment"\>
                                     </div>
                                     <label for="comment">Attach evidence(Optional):</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                        </div>
+                                        <input type="file" name="evidence" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile"></label>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="custom-file">
+                                    <input type="submit" name="addreport" class="btn btn-success">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
+                                    </div>
                                     </form>
                         </div>
                                   <div class="modal-footer">
-                                <button type="button" class="btn btn-success">SUBMIT</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
+                               
                             </div>  
                         </div>                    
                     </div>

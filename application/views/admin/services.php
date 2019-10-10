@@ -49,7 +49,7 @@
                         <div class="card-body ">
                             <h3 class="card-title">                    
                                 <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">
-                                <a href="#" class="text-secondary"> <?php echo $row->name; ?><br></a>
+                                <a href="#" class="text-secondary"> <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></a>
                             </h3>
                         <hr>
                         <p class="lead text-center">

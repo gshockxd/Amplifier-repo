@@ -121,7 +121,7 @@
                                   </td>
 
                                     <td class="table-bordered">
-                                      <?php echo $row->name; ?><br>
+                                      <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br>
                                       <?php echo $row->username; ?> <br>
                                       <?php echo $row->user_type; ?>  <br>
                                       <?php echo $row->report_count; ?> <br>
@@ -208,46 +208,72 @@
                 </button>
               </div>
               <div class="modal-body">
-              <form action="#">
+              <form method="post" action="<?php echo base_url()?>welcome/form_validation">
               
                                     <div class="form-group">
                                         <label for="First Name">First Name:</label>
-                                        <input type="text" class="form-control" id="fname">
-                                  
+                                        <input type="text" name="fname" class="form-control" id="fname">
+                                        <span class="text-danger"><?php echo form_error("fname"); ?></span>
+                                    </div>
+                                    <div>
                                         <label for="Last Name">Last Name:</label>
-                                        <input type="text" class="form-control" id="lname">
+                                        <input type="text"  name="lname" class="form-control" id="lname">
+                                        <span class="text-danger"><?php echo form_error("lname"); ?></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="pwd">Password:</label>
-                                        <input type="password" class="form-control" id="Password">
+                                        <input type="password" name="password" class="form-control" id="Password">
+                                        <span class="text-danger"><?php echo form_error("password"); ?></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="username">Username:</label>
-                                        <input type="text" class="form-control" id="username">
+                                        <input type="text" name="username" class="form-control" id="username">
+                                        <span class="text-danger"><?php echo form_error("username"); ?></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Contact_number1">Contact Numer (1):</label>
+                                        <input type="number" name="contact_number" class="form-control" id="contact_number">
+                                        <span class="text-danger"><?php echo form_error("contact_number"); ?></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Contact_number1">Optional Contact Numer (2):</label>
+                                        <input type="number" name="contact_number1" class="form-control" id="contact_number1">
+                                        <span class="text-danger"><?php echo form_error("contact_number1"); ?></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Contact_number1">Address:</label>
+                                        <input type="text" name="address" class="form-control" id="address">
+                                        <span class="text-danger"><?php echo form_error("address"); ?></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email:</label>
-                                        <input type="email" class="form-control" id="email">
+                                        <input type="email" name="email" class="form-control" id="email">
+                                        <span class="text-danger"><?php echo form_error("email"); ?></span>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="Contact_number1">Profile Picture:</label><br>
+                                        <input type="file" name="pphoto" size="20" />
+                                        <span class="text-danger"><?php echo form_error("photo"); ?></span>
                                     </div>
                                     <div class="form-group">
                                             <label for="Usertype">Usertype:</label><br>
-                                        <select class="form-control" id="password" style="max-width:200px;">
+                                            <select class="form-control" name="usertype" id="usertype" style="max-width:200px;">
                                             <option value=""> </option>
-                                            <option value="1">Admin</option> 
-                                            <option value="2">Client</option>
-                                            <option value="3">Performer</option> 
+                                            <option value="admin">Admin</option> 
+                                            <option value="client">Client</option>
+                                            <option value="performer">Performer</option> 
                                         </select>   
+                                        <span class="text-danger"><?php echo form_error("usertype"); ?></span>
                                     </div>
-                
                                     <div class="custom-control custom-switch">
-                                      <input type="checkbox" class="custom-control-input" id="verify">
+                                      <input type="checkbox" name="verify" class="custom-control-input" id="verify">
                                       <label class="custom-control-label" for="verify">Verify</label>
                                     </div>
                         
                                 <div class="modal-footer">
-                                <button type="button" class="btn btn-success">SAVE</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                                </FORM>
+                                <input type="submit" name="adduser" class="btn btn-success"/>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
+                                </form>
                                 </div>
                               </div>
                             </div>
@@ -333,3 +359,6 @@
  
 
 </html>
+
+
+
