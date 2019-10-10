@@ -70,7 +70,7 @@
                             <tr>
                                 <th scope="row"><?php echo $row->feedback_id; ?></th>
                                 <th><?php echo $row->venue_name; ?></th>
-                                <td><?php echo $row->name; ?></td>
+                                <td><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></td>
                                 <td><?php echo $row->event_date; ?></td>
                                 <td>
                                 <?php

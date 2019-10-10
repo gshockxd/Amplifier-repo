@@ -51,7 +51,7 @@
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label"> Client Name:</label> 
                                 <div class="col-8">
-                                  <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp <?php echo $row->name; ?></p>
+                                  <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->client_photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp <?php echo $row->client_fname; ?>&nbsp <?php echo $row->client_lname; ?></p>
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -69,7 +69,7 @@
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">Performer Name:</label> 
                                 <div class="col-8">
-                                <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp <?php echo $row->name; ?></p>
+                                <p class="lead"><img src="<?php echo base_url(); ?><?php echo $row->performer_photo; ?>" alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp <?php echo $row->performer_fname; ?>&nbsp <?php echo $row->client_fname; ?></p>
                                 </div>
                               </div>
                               <div class="form-group row">

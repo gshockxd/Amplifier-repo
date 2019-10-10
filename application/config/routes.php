@@ -58,15 +58,14 @@ $route['users'] = 'welcome/users';
 $route['profile/(:num)'] = 'welcome/profile/$1';
 $route['events'] = 'welcome/events';
 $route['addevent'] = 'welcome/addevent';
-$route['eventview'] = 'welcome/eventview';
 $route['services'] = 'welcome/services';
 $route['history'] = 'welcome/history';
-$route['histview'] = 'welcome/histview';
+$route['histview/(:num)'] = 'welcome/histview/$1';
 $route['reports'] = 'welcome/reports';
 $route['notifications'] = 'welcome/notifications';
 $route['messages'] = 'welcome/messages';
 $route['profile/editprofile/(:num)'] = 'welcome/editprofile/$1  ';
-$route['histview/(:num)'] = 'welcome/histview/$1';
+$route['eventview/(:num)'] = 'welcome/eventview/$1';
 $route['services'] = 'welcome/services';
 $route['logout'] = 'welcome/logout';
 
