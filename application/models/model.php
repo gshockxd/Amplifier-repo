@@ -37,6 +37,22 @@ class model extends CI_Model
        $this->db->where("package_id",$id);
        $this->db->delete("packages");
     }
+    function fetch_delete_report()
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("*");
+       $this->db->from("reports");
+       $this->db->where("report_id",$id);
+       $this->db->delete("reports");
+    }
+    function fetch_delete_history()
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("*");
+       $this->db->from("feedbacks");
+       $this->db->where("feedback_id",$id);
+       $this->db->delete("feedbacks");
+    }
     function fetch_delete_user()
     {
        $id = $this->uri->segment(2);

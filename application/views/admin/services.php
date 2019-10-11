@@ -84,7 +84,9 @@
                                     </H4>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="delete_package/<?php echo $row->package_id; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                    <a href="delete_package/<?php echo $row->package_id; ?>" type="button" >
+                                     <button class="btn btn-danger">YES</button>
+                                    </a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                                 </div>
                             </div>
