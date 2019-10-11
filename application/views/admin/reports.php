@@ -84,17 +84,40 @@
                                                 <h6 class="card-subtitle mb-2 text-muted">Report ID: <?php echo $row->report_id; ?></h6> 
                                                 <a href="eventview/<?php echo $row->booking_id; ?>"> Event ID: <?php echo $row->booking_id; ?></a>
                                                 <br>
-                                                <br>
+                                                <hr>
                                                 <p class="card-text"> <b>REPORT DETAILS:</b></p> 
+                                                    <hr>
                                                     <p class="card-text"> <?php echo $row->report_details; ?></p>  <br><br>
-                                                    <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport"><span class="fa fa-trash"></span></a>
+                                                    <hr>
+                                                    <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport<?php echo $row->report_id; ?>"><span class="fa fa-trash"></span></a>
                                                     </button></a>
-                                                   
                                             </div> 
                                     </div>
                                 </div> 
                              
-                       
+                       <!-- delete modal -->
+                        <div class="modal fade" id="delreport<?php echo $row->report_id; ?>" tabindex="-1" role="dialog" aria-labelledby="delreport" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="deleteuser"><b>DELETE REPORT</b></h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <H5>Are you Sure you want to delete this Report No:<?php echo $row->report_id; ?></H5>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="delete_report/<?php echo $row->report_id; ?>" type="button" >
+                                            <button class="btn btn-danger">YES</button>
+                                        </a>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end -->
                         <?php
                          }
                         }
@@ -139,7 +162,7 @@
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="viewd"><b>REPORT DETAILS<b></h4>
+                            <h4 class="modal-title" id="viewd"><b>REPORT DETAILS</b></h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -223,27 +246,6 @@
                     </div>
                 </div>
             </div>
-<!-- end -->
-<!-- delete modal -->
-<div class="modal fade" id="delreport" tabindex="-1" role="dialog" aria-labelledby="delreport" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="deleteuser"><b>DELETE REPORT<b></h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <H5>Are you Sure you want to delete this Report?</H5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success">YES</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
-                        </div>
-                    </div>
-                </div>
-    </div>
 <!-- end -->
   <!-- Add Penalty Modal -->
   <div class="modal fade" id="addoff" aria-labelledby="addoff" aria-hidden="true" style="width:1000px">

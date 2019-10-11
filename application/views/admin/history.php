@@ -96,6 +96,30 @@
                                     <a href="#" data-toggle="modal" data-target="#delhist"><button class="btn btn-outline-danger fa fa-trash"></button></a>
                                 </td>
                             </tr>
+                            
+                        <!-- delete modal -->
+                            <div class="modal fade" id="delhist" tabindex="-1" role="dialog" aria-labelledby="delhist" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="deleteuser"><b>DELETE<b></h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <H5>Are you Sure you want to delete this history details</H5>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <a href="delete_history/<?php echo $row->feedback_id; ?>" type="button" >
+                                            <button class="btn btn-danger">YES</button>
+                                        </a>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end -->
                         <?php
                                 }
                         ?>
@@ -146,27 +170,6 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- delete modal -->
-<div class="modal fade" id="delhist" tabindex="-1" role="dialog" aria-labelledby="delhist" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="deleteuser"><b>DELETE<b></h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <H5>Are you Sure you want to delete this event history</H5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success">YES</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
-                        </div>
-                    </div>
-                </div>
-    </div>
-<!-- end -->
 
     <?php include('logout_modal.php'); ?>
       <?php include('footer-script.php'); ?>
