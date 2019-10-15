@@ -10,7 +10,7 @@
 
         </div>  <!-- {{-- END OF lvl 1--}} -->
 
-        <?php $this->load->view('client/chat/chat_compose_right_no_message'); ?>
+        <?php $this->load->view('client/chat/chat_compose_right'); ?>
 
     </div>
 </div>

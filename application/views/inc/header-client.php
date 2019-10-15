@@ -98,6 +98,9 @@
 								<li class="nav-item">
 									<a href="login" class="nav-link">Login</a>
 								</li>
+								<li class="nav-item">
+									<a href="register" class="nav-link">Register</a>
+								</li>
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
 								<li class="nav-item">
@@ -107,7 +110,7 @@
 									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope fa-lg"></i></a>
 								</li>
 								<li class="nav-item">
-									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Profile"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
+									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
 								</li>
 								<li class="nav-item">
 									<a href="logout" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>

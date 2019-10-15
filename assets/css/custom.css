@@ -138,5 +138,10 @@
     border: none;
 }
 
+.full-padding {
+    display: table !important; 
+    width:100% !important;
+}
+
 
 /**/

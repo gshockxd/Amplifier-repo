@@ -111,8 +111,8 @@
                         </li>
                     </ul>
                     <div class="card-footer">
-                        <small class="text-muted">Account Registered: <?php echo date('F d, Y', strtotime('date_registered')); ?> Time: <?php echo date('h:i:s A', strtotime($this->session->userdata('date_registered'))) ?></small><br>
-                        <small class="text-muted">Account Updated: <?php echo date('F d, Y', strtotime('date_updated')); ?> Time: <?php echo date('h:i:s A', strtotime($this->session->userdata('date_updated'))) ?></small>
+                        <small class="text-muted">Account Registered: <?php echo date('F d, Y', strtotime($this->session->userdata('created_at'))); ?> Time: <?php echo date('h:i:s A', strtotime($this->session->userdata('created_at'))) ?></small><br>
+                        <small class="text-muted">Account Updated: <?php echo date('F d, Y', strtotime($this->session->userdata('updated_at'))); ?> Time: <?php echo date('h:i:s A', strtotime($this->session->userdata('updated_at'))) ?></small>
                     </div>  
             </div>
         </div>

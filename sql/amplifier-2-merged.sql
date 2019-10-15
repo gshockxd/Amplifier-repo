@@ -22,6 +22,10 @@ SET time_zone = "+00:00";
 -- Database: `amplifier`
 --
 
+drop database amplifier;
+create database amplifier;
+use amplifier;
+
 -- --------------------------------------------------------
 
 --
@@ -301,9 +305,9 @@ CREATE TABLE `reports` (
   `booking_id` bigint(20) NOT NULL,
   `report_from` bigint(20) NOT NULL,
   `report_to` bigint(20) NOT NULL,
-  `report_photo` varchar(255) NOT NULL,
-  `report_details` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `report_photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `report_details` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `reports`
