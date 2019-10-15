@@ -72,6 +72,10 @@
             $query = $this->db->get_where('users', array('email'=>$email));
             return $query->row_array();
         }
+        public function get_user_using_id($id){
+            $query = $this->db->get_where('users', array('user_id'=>$id));
+            return $query->row_array();
+        }
         public function user_login ($email, $pass){
             $query = $this->db->get_where('users', array('email'=>$email, 'password' => $pass));
             return $query->row_array();
@@ -141,16 +145,15 @@
         }
         public function get_users_chats(){
             // chat_left_module
-            // die('asdf');
             $this->db->order_by('chats.created_at', 'DESC');
             $this->db->where('compose_from', $this->session->userdata('user_id'));
-            // $this->db->where('send_to', $this->session->userdata('user_id'));
+            $this->db->or_where('send_to', $this->session->userdata('user_id'));
             $this->db->group_by('send_to');
             $this->db->select('MAX(id) as id, users.*');
             $this->db->join('users', 'users.user_id = chats.send_to');
             $query = $this->db->get('chats');
             $data['user_data'] = $query->result_array();
-            // print_r($this->db->last_query());
+            // print_r($this->db->last_query()); echo '<br>';
 
             $i = 0;
             foreach($data['user_data'] as $d){
@@ -159,6 +162,9 @@
                 $query = $this->db->get('chats');
                 $temp = $query->row_array();
                 $data['temp'][] = $temp;
+                // print_r($this->db->last_query()); echo '<br>';
+
+
                 $i++;
             }
             
@@ -169,10 +175,11 @@
                     $query = $this->db->get('chats');
                     $temp = $query->row_array();
                     $data['user_message'][] = $temp;
-                    $i++;
+                    $data['incoming_message_user_data'][] =  $this->get_user_using_id($data['user_message'][$i]['compose_from']);
+                    echo $i++;
+                    // print_r($this->db->last_query()); echo '<br>';
                 }
             }
-            // die;
 
 
             return $data;
@@ -180,7 +187,49 @@
             // print_r($this->db->last_query());
             // echo '<pre>';
             // // print_r($data1);
-            // print_r($data['user_message']);
+            // print_r($data);
+            // echo '</pre>';
+            // die();
+        }
+        public function get_incoming_message(){
+            $this->db->where('send_to', $this->session->userdata('user_id'));
+            $this->db->group_by('compose_from');
+            $this->db->select('MAX(id) as id, users.*');
+            $this->db->join('users', 'users.user_id = chats.compose_from');
+            $query = $this->db->get('chats');
+            $data['user_data'] = $query->result_array();
+            // print_r($this->db->last_query());
+
+            if($data['user_data'] != NULL){
+                $i = 0;
+                foreach($data['user_data'] as $d){
+                    $this->db->select('MAX(id) as cid');
+                    $this->db->or_where(array('send_to'=>$this->session->userdata('user_id'), 'compose_from'=>$d['user_id']));
+                    $query = $this->db->get('chats');
+                    $temp = $query->row_array();
+                    $data['temp'][] = $temp;
+                    $i++;
+                    print_r($this->db->last_query());
+                }
+                
+                if(isset($data['temp'])){
+                    $i = 0;
+                    foreach($data['temp'] as $d){
+                        $this->db->where('id', $d['cid']);
+                        $query = $this->db->get('chats');
+                        $temp = $query->row_array();
+                        $data['user_message'][] = $temp;
+                        $i++;
+                    }
+                }
+                return $data;
+            }else{
+                return false;
+            }
+            // print_r($this->db->last_query());
+            // echo '<pre>';
+            // echo $data['user_data'] != NULL;
+            // print_r($data);
             // echo '</pre>';
             // die();
         }

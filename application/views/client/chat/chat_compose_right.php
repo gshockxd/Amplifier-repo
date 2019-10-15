@@ -24,7 +24,7 @@
                         </div>
                         <!-- {{-- end of outgoing msg --}} -->
                     
-                    <?php elseif($c['send_to'] == $this->session->userdata('user_id')):?>
+                    <?php elseif($c['compose_from'] == $this->session->userdata('user_id')): ?>
                     
                         <!-- {{-- Incoming Msg --}} -->
                         <div class="row">
