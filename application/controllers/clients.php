@@ -48,6 +48,7 @@
 			$this->profile_model->profile_password_update();
 		}
 		public function file_check(){
+			die('nice');
 			if(!$this->session->userdata('user_id')){
 				// redirect('clients/profile');
 			}

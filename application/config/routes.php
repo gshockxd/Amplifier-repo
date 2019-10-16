@@ -43,6 +43,13 @@ $route['login'] = 'clients/login';
 $route['login_attempt'] = 'clients/login_attempt';
 $route['client_logout'] = 'clients/logout';
 
+$route['chat'] = 'clients/chat';
+$route['chat_new'] = 'clients/chat_new';
+
+// 
+$route['p_register'] = 'performers/register';
+$route['p_register_attempt'] = 'performers/register_attempt';
+
 
 /*
 | -------------------------------------------------------------------------

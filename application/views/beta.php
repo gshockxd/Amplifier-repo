@@ -7,10 +7,10 @@
 				<a class="btn btn-outline-secondary" href="profile">Client</a>
 			</div>
 			<div class="col-sm">
-				<a class="btn btn-outline-primary" href="performers/register">Service/Performer</a>
+				<a class="btn btn-outline-primary" href="p_register">Service/Performer</a>
 			</div>
 			<div class="col-sm">
-				<a class="btn btn-outline-info" href="#">Admin <span class="text-danger">N/A</span> <i class="fas fa-beer"></i> </a>
+				<a class="btn btn-outline-info" href="index">Admin</a>
 			</div>
 		</div>
 	</div>
