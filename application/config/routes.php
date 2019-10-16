@@ -49,29 +49,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'welcome/users';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['index'] = 'welcome/index';
-$route['users'] = 'welcome/users';
-$route['profile/(:num)'] = 'welcome/profile/$1';
-$route['events'] = 'welcome/events';
-$route['addevent'] = 'welcome/addevent';
-$route['services'] = 'welcome/services';
-$route['history'] = 'welcome/history';
-$route['histview/(:num)'] = 'welcome/histview/$1';
-$route['reports'] = 'welcome/reports';
-$route['notifications'] = 'welcome/notifications';
-$route['messages'] = 'welcome/messages';
-$route['profile/editprofile/(:num)'] = 'welcome/editprofile/$1  ';
-$route['delete_user/(:num)'] = 'welcome/delete_user/$1  ';
-$route['eventview/(:num)'] = 'welcome/eventview/$1';
-$route['delete_history/(:num)'] = 'welcome/delete_history/$1';
-$route['delete_report/(:num)'] = 'welcome/delete_report/$1';
-$route['delete_event/(:num)'] = 'welcome/delete_event/$1';
-$route['delete_package/(:num)'] = 'welcome/delete_package/$1';
-$route['services'] = 'welcome/services';
-$route['logout'] = 'welcome/logout';
+$route['users']                         = 'welcome/users';
+$route['profile/(:num)']                = 'welcome/profile/$1';
+$route['events']                        = 'welcome/events';
+$route['addevent']                      = 'welcome/addevent';
+$route['services']                      = 'welcome/services';
+$route['history']                       = 'welcome/history';
+$route['reports']                       = 'welcome/reports';
+$route['notifications']                 = 'welcome/notifications';
+$route['messages']                      = 'chat';
+$route['profile/editprofile/(:num)']    = 'welcome/editprofile/$1  ';
+$route['delete_user/(:num)']            = 'welcome/delete_user/$1  ';
+$route['eventview/(:num)']              = 'welcome/eventview/$1';
+$route['delete_report/(:num)']          = 'welcome/delete_report/$1';
+$route['delete_event/(:num)']           = 'welcome/delete_event/$1';
+$route['delete_package/(:num)']         = 'welcome/delete_package/$1';
+$route['add_offense/(:num)']            = 'welcome/offense_count/$1';
+$route['services']                      = 'welcome/services';
+$route['logout']                        = 'welcome/logout';
+$route['ban/(:num)']                    = 'welcome/ban/$1';
+
 
 

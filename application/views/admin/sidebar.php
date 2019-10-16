@@ -1,22 +1,11 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index" >
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="users" >
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fa fa-compact-disc"></i>
         </div>
         <div class="sidebar-brand-text mx-3">AMPLIFIER</div>
       </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="index">
-          <i class="fa fa-columns"></i>
-          <span>Admin Dashboard</span></a>
-      </li>
-      
       <!-- Divider -->
       <hr class="sidebar-divider">
     

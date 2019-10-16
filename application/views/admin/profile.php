@@ -34,10 +34,6 @@
                     
 		        <div class="card-body">
 		            <div class="row">
-		                <div class="col-md-12">
-                    <h4>Profile &nbsp<a class="btn btn-success fas fa-pen success" href="editprofile/<?php echo $row->user_id; ?>"></a></h4>
-		                    <hr>
-		                </div>
 		            </div>
 		            <div class="row">
 		                <div class="col-md-12">
