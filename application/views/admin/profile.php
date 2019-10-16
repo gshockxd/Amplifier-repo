@@ -38,13 +38,13 @@
 		            <div class="row">
 		                <div class="col-md-12">
 		                    
-                              <div class="form-group row">
+                              <!-- <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">ID:</label> 
                                 <div class="col-8">
                                   <p class="lead"><?php echo $row->user_id; ?></p>
                                 </div>
                               </div>
-                              <hr>
+                              <hr> -->
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">Name:</label> 
                                 <div class="col-8">
@@ -105,7 +105,14 @@
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Date Registered:</label> 
                                 <div class="col-8">
-                                  <p class="lead"><?php echo $row->date_registered; ?></p>                                 
+                                  <p class="lead"><?php echo  date('F d, Y', strtotime($row->created_at)); ?></p>                                 
+                                </div>
+                              </div>
+                              <hr>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Last Updated:</label> 
+                                <div class="col-8">
+                                  <p class="lead"><?php echo  date('F d, Y', strtotime($row->updated_at)); ?></p>                                 
                                 </div>
                               </div>
                               <hr>
