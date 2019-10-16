@@ -141,7 +141,8 @@
 				$this->session_model->session_user($session_user);
 				$this->session->set_flashdata('user_updated', 'User '.$this->session->userdata('username').' has been updated!');		
 	
-				redirect('clients/profile_info');
+				redirect('clients/profile_info'); 
+				// hi;
 			}
 		}	
     }
