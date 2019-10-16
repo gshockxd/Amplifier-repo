@@ -4,7 +4,7 @@
 		<p class="h4 text-primary">List of User/s</p>
 		<div class="row">
 			<div class="col-sm">
-				<a class="btn btn-outline-secondary" href="clients/profile">Client</a>
+				<a class="btn btn-outline-secondary" href="profile">Client</a>
 			</div>
 			<div class="col-sm">
 				<a class="btn btn-outline-primary" href="performers/register">Service/Performer</a>

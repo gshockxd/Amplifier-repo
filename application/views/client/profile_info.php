@@ -19,8 +19,8 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="header">User information</h5>
                         <div class="px-2">
-                        <a href="profile_password_update_view" data-toggle="tooltip" data-placement="top" title="Update Password" class="btn btn-info"><i class="fas fa-cog fa-lg"></i></a>
-                        <a href="profile_edit" data-toggle="tooltip" data-placement="top" title="Edit user <?php echo $this->session->userdata('username') ?>" class="btn btn-primary"><i class="fas fa-user-edit fa-lg"></i></a>
+                        <a href="profile_password_edit_page" data-toggle="tooltip" data-placement="top" title="Update Password" class="btn btn-info"><i class="fas fa-cog fa-lg"></i></a>
+                        <a href="profile_edit_page" data-toggle="tooltip" data-placement="top" title="Edit user <?php echo $this->session->userdata('username') ?>" class="btn btn-primary"><i class="fas fa-user-edit fa-lg"></i></a>
                     </div>
                     </div>                        
                         

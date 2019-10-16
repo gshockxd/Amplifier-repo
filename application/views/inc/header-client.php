@@ -67,9 +67,6 @@
 								<a class="nav-link" href="profile">Dashboard <span class="sr-only">(current)</span></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Notifications</a>
-							</li>
-							<li class="nav-item">
 								<a class="nav-link" href="#">Events</a>
 							</li>
 							<li class="nav-item">
