@@ -1,75 +1,68 @@
 <?php 
 
-	class Clients extends CI_Controller {
-		public function user_register(){
-			$templates['title'] = 'Client Registration';
-			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
-
-			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required' => 'Please Input First Name', 'alpha'=>'First Name not valid, letters only'));
-			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required' => 'Please input Last Name', 'alpha'=>'Last Name not valid, letters only'));
-			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
-			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
-			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid'));
-			$this->form_validation->set_rules('pass', 'Password', 'required', array('required' => 'Please input Password'));
-			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]', array('matches'=>'Password not matched'));
-			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check');
-			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
-
-			$data['uname'] = $this->input->post('uname');
-			$data['fname'] = $this->input->post('fname');
-			$data['lname'] = $this->input->post('lname');
-			$data['number1'] = $this->input->post('number1');
-			$data['number2'] = $this->input->post('number2');
-			$data['email'] = $this->input->post('email');
-			$data['userfile'] = $this->input->post('userfile');
-			$data['address'] = $this->input->post('address');
-
-
-			if($this->form_validation->run() == FALSE){
-				$this->load->view('inc/header-client', $templates);
-				$this->load->view('client/register', $data);
-				$this->load->view('inc/footer');
-			}else{
-				$timestamp = date('Y_m_d_H_i_s');
-				$array = explode('.', $_FILES['userfile']['name']);
-				$ext = end($array);
-
-				// Upload Image
-				$config['file_name'] = $timestamp.'.'.$ext;
-				$config['upload_path'] = './assets/img/client';
-				$config['allowed_types'] = 'jpg|png';
-				$config['max_size'] = '2048';
-				$config['max_width'] = '50000';
-				$config['max_height'] = '50000';
-	
-				$this->load->library('upload', $config);
-	
-				if(!$this->upload->do_upload()){
-					$errors = array ('error' => $this->upload->display_errors());
-					$client_image = 'no_image.jpg';
-				}else{
-					$data = array ('upload_data' => $this->upload->data());
-					$client_image = 'assets/img/client/'.$timestamp.'.'.$ext;
-				
-					// print_r($config['file_name']);
-					// print_r($);
-					// die();
-
-				}
-
-				$this->client_model->create_user($client_image);
-				$session_user = $this->client_model->get_user($this->input->post('email'));
-				$this->session_model->session_user($session_user);
-
-				$this->session->set_flashdata('user_created', 'User '.$this->input->post('username').'has beend added!');
-				redirect('clients/profile');
-			}
-
+	class Clients extends CI_Controller {		
+		public function register_user(){
+			$this->register_model->register_user();
 		}
-		public function file_check($str){
+		public function logout (){
+			$this->session_model->unset_user();
+			redirect('clients/profile');
+		}
+		public function login_attempt(){
+			$this->login_model->login_attempt();
+		}
+		public function login(){
+			$this->login_model->index();
+		}
+		public function register (){
+			$this->register_model->index();
+		}
+		public function profile(){
+			$this->profile_model->index();			
+		}
+		public function history(){
+			$this->history_model->index();
+		}
+		public function booking(){
+			$this->booking_model->index();
+		}
+		public function calendar(){
+			$this->calendar_model->index();
+		}
+		public function package(){
+			$this->package_model->index();
+		}
+		public function profile_info(){
+			$this->profile_model->profile_info();
+		}
+		public function profile_edit_page(){
+			$this->profile_model->profile_edit_page();
+		}
+		public function profile_edit_info(){
+			$this->profile_model->profile_edit_info();
+		}
+		public function profile_password_edit_page(){
+			$this->profile_model->profile_password_edit_page();
+		}
+		public function profile_password_update(){
+			$this->profile_model->profile_password_update();
+		}
+		public function file_check(){
+			die('nice');
+			if(!$this->session->userdata('user_id')){
+				// redirect('clients/profile');
+			}
 			$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
 			$mime = get_mime_by_extension($_FILES['userfile']['name']);
 			if(isset($_FILES['userfile']['name']) && $_FILES['userfile']['name']!=""){
+				if($_FILES['userfile']['error'] != 0){
+					$this->form_validation->set_message('file_check', 'Image File Exceed 2MB');
+					return false;
+				}
+				// if($width > 5000 && $height > 5000){
+				// 	$this->form_validation->set_message('file_check', 'Image Dimension Exceed 5000 x 5000');
+				// 	return false;
+				// }
 				if(in_array($mime, $allowed_mime_type_arr)){
 					return true;
 				}else{
@@ -80,130 +73,70 @@
 				$this->form_validation->set_message('file_check', 'Please choose a file image to upload.');
 				return false;
 			}
-		}
-		public function logout (){
-			$this->session_model->unset_user();
-			redirect('clients/profile');
-		}
-		public function user_login(){
-			$templates['title'] = 'Client Login';
-
-			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email', array('required'=>'Email address is required', 'valid_email'=>'Email address not valid'));
-			$this->form_validation->set_rules('pass', 'Password', 'required', array('required'=>'Password is required'));
-			
-			$data['email'] = $this->input->post('email');
-			$data['pass'] = $this->input->post('pass');
-
-			if($this->form_validation->run() == FALSE){
-				$this->load->view('inc/header-no-navbar', $templates);
-				$this->load->view('client/login', $data);
-				$this->load->view('inc/footer');
-			}else{
-				$hash_pass = md5($data['pass']);
-				$query = $this->client_model->user_login($data['email'], $hash_pass);
-				// print_r($query);
-				// die();
-				
-				if(!$query){
-					$this->session->set_flashdata('user_not_matched', 'Invalid Email address or Password');
-					$this->session->set_flashdata('email', $this->input->post('email'));
-					redirect('clients/login');
-				}else{
-					$this->session_model->session_user($query);
-					$this->session->set_flashdata('user_logged_in', 'Welcome back '.$this->session->userdata('username').'.');
-
-					redirect ('clients/profile');
+		}				
+		public function file_check_update(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
+			$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+			$mime = get_mime_by_extension($_FILES['userfile']['name']);
+			if(isset($_FILES['userfile']['name']) && $_FILES['userfile']['name']!=""){
+				if($_FILES['userfile']['error'] != 0){
+					$this->form_validation->set_message('file_check_update', 'Image File Exceed 2MB');
+					return false;
 				}
+				// if($width > 5000 && $height > 5000){
+				// 	$this->form_validation->set_message('file_check_update', 'Image Dimension Exceed 5000 x 5000');
+				// 	return false;
+				// }
+				if(in_array($mime, $allowed_mime_type_arr)){
+					return true;
+				}else{
+					$this->form_validation->set_message('file_check_update', 'Please select only gif/jpg/png file.');
+					return false;
+				}
+			}else{
+				return true;
 			}
-		}
-		public function login(){
-			if($this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
-			$templates['title'] = 'Client Login';
-			
-			$this->load->view('inc/header-no-navbar', $templates);
-			$this->load->view('client/login');
-			$this->load->view('inc/footer');
-		}
-		public function register (){
-			if($this->session->userdata('user_id')){
-				// redirect('clients/profile');
-			}
-			$templates['title'] = 'Client Registration';
+		}	
 
-			$this->load->view('inc/header-no-navbar', $templates);
-			$this->load->view('client/register');
-			$this->load->view('inc/footer');
-		}
-		public function profile(){
-			$templates['title'] = 'Client Profile';
-			
-			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/profile');
-			$this->load->view('inc/footer');
-		}
-		public function history(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
-			$templates['title'] = 'Client History';
 
-			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/history');
-			$this->load->view('inc/footer');
-		}
-		public function booking(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
-			$templates['title'] = 'Client Booking';
-
-			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/booking');
-			$this->load->view('inc/footer');
-		}
-		public function calendar(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
-			$templates['title'] = 'Client Calendar';
-
-			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/calendar');
-			$this->load->view('inc/footer');
-		}
-		public function package(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
-			$templates['title'] = 'Client Package';
-
-			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/package');
-			$this->load->view('inc/footer');
-		}
 		public function chat(){
 			if(!$this->session->userdata('user_id')){
 				redirect('clients/profile');
 			}
-			$templates['title'] = 'Client Chat';
+			$templates['title'] = 'Chat';
+			$data['get_users_chats'] = array($this->client_model->get_users_chats());
+
+			
+            // echo '<pre>';
+            // // print_r($data1);
+            // print_r($data['get_users_chats']);
+            // echo '</pre>';
+			// die();
 
 			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/chat/chat');
+			$this->load->view('client/chat/chat', $data);
 			$this->load->view('inc/footer');
 		}
 		public function chat_new(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'New Message';
 
-			$users['users'] = $this->client_model->get_users();
+			$data['users'] = $this->client_model->get_name_only_users();
+			$data['get_users_chats'] = array($this->client_model->get_users_chats());
 			// $users['users'] = json_encode([$temp]);
 			
 			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/chat/chat_new', $users);
+			$this->load->view('client/chat/chat_new', $data);
 			$this->load->view('inc/footer');
 		}
 		public function chat_left(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
 			$templates['title'] = 'New Message';
 
 			$users['users'] =$this->client_model->get_chats();
@@ -213,26 +146,106 @@
 			$this->load->view('inc/footer');
 		}
 		public function chat_search(){
+			if(!$this->session->userdata('user_id')){
+				redirect('clients/profile');
+			}
+			$data['get_users_chats'] = array($this->client_model->get_users_chats());
+			// print($_SERVER['REQUEST_METHOD']);
+			// print_r($this->client_model->segment_url());
+			// die;
+
 			$this->form_validation->set_rules('userID', 'User ID', 'required', array('required'=> "User Not Found")); 
 			$this->form_validation->set_error_delimiters('', '');
+
+			// print_r (explode(", ",$this->input->post('userName')));
+			// print_r($this->input->post());
+			// die('herer');
+
+			$data['userID'] = $this->input->post('userID');
+			$data['user'] = $this->client_model->get_user_for_chat($data['userID']);
+			$data['users'] = $this->client_model->get_name_only_users();
+			$data['validate_user'] = $this->client_model->validate_user_name_in_compose_search();	
+			$data['userName'] = explode(", ",$this->input->post('userName'));
 
 			if($this->form_validation->run() === FALSE){
 				$templates['title'] = 'New Message';
 
-				$users['users'] = $this->client_model->get_users();
+				// die();
 
 				$this->load->view('inc/header-client', $templates);
-				$this->load->view('client/chat/chat_new', $users);
+				$this->load->view('client/chat/chat_new', $data);
 				$this->load->view('inc/footer');
 			}else{
+				if($this->input->post('search') == 'search'){
+					if($data['validate_user'] == NULL){
+						$templates['title'] = 'New Message';
+						$this->session->set_flashdata('user_not_found', 'User Not Found');
+						
+						$this->load->view('inc/header-client', $templates);
+						$this->load->view('client/chat/chat_new', $data);
+						$this->load->view('inc/footer');
+					}else{
+						$templates['title'] = 'New Message For '.$data['user']['fname'].' '.$data['user']['lname'] ;
+		
+						$this->load->view('inc/header-client', $templates);
+						$this->load->view('client/chat/chat_compose', $data);
+						$this->load->view('inc/footer');
+					}
+				}else if($this->input->post('send') == 'send'){
+					$this->form_validation->set_rules('message', 'Message', 'required', array('required'=>'Please Input Message'));
 
+					if($this->form_validation->run() === FALSE){
+						$templates['title'] = $data['user']['fname'].' '.$data['user']['lname'];
+						$data['chats'] = $this->client_model->get_user_chats($data['userID']);
+
+						// print_r($data['user']);
+						// die;
+						
+						$this->load->view('inc/header-client', $templates);
+						$this->load->view('client/chat/chat_compose_with_message', $data);
+						$this->load->view('inc/footer');
+					}else{
+						$this->client_model->send_message();
+						$templates['title'] = $data['user']['fname'].' '.$data['user']['lname'];
+
+						$data['chats'] = $this->client_model->get_user_chats($data['userID']);
+						// die();
+						$this->load->view('inc/header-client', $templates);
+						$this->load->view('client/chat/chat_compose_with_message', $data);
+						$this->load->view('inc/footer');
+					}
+
+				}else{
+					$templates['title'] = 'New Message';
+
+					$this->load->view('inc/header-client', $templates);
+					$this->load->view('client/chat/chat_new', $data);
+					$this->load->view('inc/footer');
+				}
 			}
 		}
-		public function profile_info(){
-			$templates['title'] = 'Profile Information';
+		public function click_user_left(){
+			$data['userID'] = $user_id = $_GET['user_id'];
+			
+			
+			$data['get_users_chats'] = array($this->client_model->get_users_chats());
+			$data['chats'] = $this->client_model->get_user_chats($data['userID']);
+			$data['user'] = $this->client_model->get_user_for_chat($data['userID']);
+			if(isset($data['get_users_chats'][0]['user_data'][0]) != NULL){
+				$templates['title'] = $data['get_users_chats'][0]['user_data'][0]['fname'].' '.$data['get_users_chats'][0]['user_data'][0]['lname'];
+			}else{
+				$templates['title'] = 'Message';
+			}
+			
 
 			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/profile_info');
+			$this->load->view('client/chat/chat_compose_with_message', $data);
 			$this->load->view('inc/footer');
+
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			// die;
+			
 		}
 	}

@@ -1,7 +1,7 @@
-<?php echo form_open_multipart('clients/user_register'); ?>
+<?php echo form_open_multipart('clients/register_user'); ?>
 	<div class="container py-3 col-lg-6 pt-3">
 		
-		<p class="h2 text-center"><img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" class="mr-5 mb-3" alt="" width="72" height="72">Client Registration</p>
+		<p class="h2 text-center"><img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" class="mr-5 mb-3" alt="" width="72" height="72"><?=$title ?></p>
 		<div class="row">
 			<div class="col-sm ">
 			<input value="client" class="sr-only" name="user_type">

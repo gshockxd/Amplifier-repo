@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('Asia/Hong_Kong');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/codeigniter/';
+$config['base_url'] = 'http://localhost/Amplifier-repo/';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,7 @@ $config['base_url'] = 'http://localhost/codeigniter/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'users';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

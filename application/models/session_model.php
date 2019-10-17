@@ -14,8 +14,9 @@
                 'telephone_2' =>$data['telephone_2'],
                 'offense' => $data['offense'],
                 'report_count' => $data['report_count'],
-                'date_registered' => $data['date_registered'],
-                'date_updated' => $data['date_updated']
+                'created_at' => $data['created_at'],
+                'updated_at' => $data['updated_at'],
+                'password' => $data['password']
             );
             return $this->session->set_userdata($newdata);            
         }

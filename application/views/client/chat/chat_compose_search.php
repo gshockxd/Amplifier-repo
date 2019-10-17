@@ -5,8 +5,8 @@
                 <div class="form-group row">
                     <label for="" class="col-md-1 col-form-label">To:</label>
                     <div class="col-md-10">
-                        <input type="hidden" id="userID" name="userID">
-                        <input type="text" id="userName" name="userName" class="form-control <?php echo form_error('userID') ? 'is-invalid' : '' ?> <?php echo $this->session->flashdata('user_not_found') ? 'is-invalid' : '' ?>"  data-toggle="tooltip" data-placement="top" title="<?php echo form_error('userID'); ?>" placeholder="<?php echo form_error('userID') ? $this->session->flashdata('user_not_found') ? $this->session->flashdata('user_not_found') : form_error('userID').'!' : 'Type a name of a person' ?>   ">
+                        <input type="hidden" id="userID" name="userID" value="<?php echo $userID ? $userID : '' ?>">
+                        <input type="text" id="userName" name="userName" class="form-control <?php echo form_error('userID') ? 'is-invalid' : '' ?>"  data-toggle="tooltip" data-placement="top" title="<?php echo form_error('userID'); ?>" placeholder="<?php echo form_error('userID') ? form_error('userID').'!' : 'Type a name of a person' ?>">
                     </div>
                     <button type="submit" name="search" value="search" class="col-md-1 col-form-label unstyled-button red-brown " ><i class="fas fa-search fa-lg"> </i></button>
 

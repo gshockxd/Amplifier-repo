@@ -12,8 +12,9 @@ class model extends CI_Model
     function fetch_data_profile()
     {
        $id = $this->uri->segment(2);
-       $this->db->select("*");
+       $this->db->select("users.*, count(report_to) as report_counts");
        $this->db->from("users");
+       $this->db->join("reports",'report_to=user_id');
        $this->db->where("user_id",$id);
        $query = $this->db->get();
        return $query;
@@ -120,12 +121,14 @@ class model extends CI_Model
     }
     function fetch_data_history()
     {
-       $date = date('y-m-d');;
-       $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+       $date = date('y-m-d');
+       $status = "pending";
+       $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
        $this->db->from("bookings");
        $this->db->join("users",'bookings.client_id=users.user_id');
        $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
        $this->db->where("event_date <",$date);
+       $this->db->where("bookings.status !=", $status);
        $query = $this->db->get();
        return $query;
     }

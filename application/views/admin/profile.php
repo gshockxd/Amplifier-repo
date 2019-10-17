@@ -91,7 +91,14 @@
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Number of offenses:</label> 
                                 <div class="col-8">
-                                  <p class="lead">10</p>                                 
+                                  <p class="lead"><?php echo $row->offense; ?> </p>                                 
+                                </div>
+                              </div>
+                              <hr>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Number of times Reported:</label> 
+                                <div class="col-8">
+                                  <p class="lead"><?php echo $row->report_counts; ?> </p>                                 
                                 </div>
                               </div>
                               <hr>
@@ -116,6 +123,24 @@
                                 </div>
                               </div>
                               <hr>
+
+                              <?php if($row->user_type=="performer"){ ?>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Artist type:</label> 
+                                <div class="col-8">
+                                  <p class="lead"><?php echo $row->artist_type; ?></p>                                  
+                                </div>
+                              </div>
+                              <hr>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Artist description:</label> 
+                                <div class="col-8">
+                                  <p class="lead"><?php echo $row->artist_desc; ?></p>                                  
+                                </div>
+                              </div>
+                              <hr>
+                              <?php } ?>
+
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Sample Outputs:</label> 
                                 <div class="col-8">

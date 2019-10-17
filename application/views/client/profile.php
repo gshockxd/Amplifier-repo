@@ -1,7 +1,7 @@
 <div class="container">
-	<?php if($this->session->flashdata('user_logged_in')): ?>
+	<?php if($this->session->flashdata('success_profile_page_message')): ?>
 		<div class="alert alert-success mt-3" role="alert">
-			<p><?php echo $this->session->flashdata('user_logged_in');?></p>
+			<p class="text-center"><?php echo $this->session->flashdata('success_profile_page_message');?></p>
 		</div>
 	<?php endif; ?>
 	

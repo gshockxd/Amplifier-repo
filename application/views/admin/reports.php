@@ -4,103 +4,112 @@
 
 <?php include('head.php'); ?>
 
-<body id="page-top">
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+                <body id="page-top">
+                <!-- Page Wrapper -->
+                <div id="wrapper">
 
-    <?php include('sidebar.php'); ?>
+                    <?php include('sidebar.php'); ?>
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+                    <!-- Content Wrapper -->
+                    <div id="content-wrapper" class="d-flex flex-column">
 
-      <!-- Main Content -->
-      <div id="content">
+                    <!-- Main Content -->
+                    <div id="content">
 
-        
-      <?php include('topbar.php'); ?>
-          <?php include('navbar.php'); ?>
+                        
+                    <?php include('topbar.php'); ?>
+                        <?php include('navbar.php'); ?>
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mr-4 mb-4">
-                  <h1 class="h3 mb-0 text-gray-800">
-                    <form class="form-inline ml-4 mb-1 "> 
-                        <input class="form-control mr-sm-2" placeholder="Search"> 
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" ><label class="fa fa-search"></label></button>   
-                    </form>
-                  </h1>
-                  <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"  data-toggle="modal" data-target="#addrep">
-                    <i class="fas fa-envelope fa-sm text-white-50"></i> Create Report</a>
-                </div>
-        <!-- end -->
-    <div class="container"> 
-        <div class="row">   
+                        <!-- Page Heading -->
+                        <div class="col-md-2 col-lg-6 mx-auto">
+                            <div class="card shadow mb-4">
+                                <div class="card-body center">
+                                    <form class="form-inline md-form form-sm mt-0">
+                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Packages" aria-label="Search">
+                                    </form>
+                                </div>
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"  data-toggle="modal" data-target="#addrep">
+                                                <i class="fas fa-envelope fa-sm text-white-50"></i> Create Report</a>
+                                </div>
+                            </div>
+                              
+                             
+                               
+                        <!-- end -->
+                <div class="container"> 
+                    <div class="row">   
                          <?php 
                             if($fetch_data_report->num_rows()>0)
                             {
                                foreach($fetch_data_report->result() as $row)
                                 { 
                         ?>
-                            <div class="col-sm md-10 m-3 pl-2">
-                                    <div class="card w-75"> 
-                                        <img class="card-img-top" src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" alt="Card image cap" style="width:800px; height:500px" >
-                                            <div class="card-body card-block" style="margin:5px"> 
-                                            <div class="dropdown">
-                                            <img src="<?php echo base_url(); ?><?php echo $row->report_from_photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                                                <h4 class="card-title d-inline"> Report from: <?php echo $row->report_from_fname; ?>&nbsp<?php echo $row->report_from_lname; ?></h4>
-                                            
-                                               
-                                                    <button class="btn fa fa-list-ul dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    </button>
+                        <div class=" m-4 col-md-12">
+                            
+                            <div class="card col-md-12 w-75 mx-auto" style="">
+                                <img src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" class="card-img-top" alt="...">
+                                <div class="card-body">                                                                    
+                                                                     
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">                                    
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="card-text"> Report from: <?php echo $row->report_from_fname; ?> <?php echo $row->report_from_lname; ?></p>
+                                                </div>
+                                                <div class="col-md-6">                                        
+                                                    <button class="btn fa fa-list-ul dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <div class="dropdown-header">Action:</div>
+                                                        <div class="dropdown-header">Action:</div>
                                                         <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->report_from; ?>">&nbsp View Profile</a>
-                                                    <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
-                                                    <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Blo1ck</a>
-                                                    </div>         
-                                                </div> 
-                                            <br>
-                                            <hr>
-                                            <div class="dropdown">
-                                            <img src="<?php echo base_url(); ?><?php echo $row->report_to_photo; ?>" alt="none" class="d-inline" style="width:50px;height:50px; border-radius:30px">
-                                            <h4 class="card-title d-inline"> Report to: <?php echo $row->report_to_fname; ?>&nbsp<?php echo $row->report_to_lname; ?></h4>  
-
-                                           
-                                                    <button class="btn fa fa-list-ul dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                       
-                                                    </button>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff<?php echo $row->report_from; ?>">&nbsp Select offense</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser<?php echo $row->report_from; ?>">&nbsp Block</a>
+                                                    </div>
+                                                </div>
+                                            </div>                                         
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                <p>Report to: <?php echo $row->report_to_fname; ?>&nbsp<?php echo $row->report_to_lname; ?></p>
+                                                </div>
+                                                <div class="col-md-6">                                           
+                                                    <button class="btn fa fa-list-ul dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <div class="dropdown-header">Action:</div>
                                                         <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->report_to; ?>">&nbsp View Profile</a>
                                                     <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
+                                                        <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff<?php echo $row->report_to; ?>">&nbsp Select offense</a>
                                                     <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
-                                                    </div>
-                                                    
-                                        </div> 
-                                                <hr>
-                                                <h6 class="card-subtitle mb-2 text-muted">Report ID: <?php echo $row->report_id; ?></h6> 
-                                                <a href="eventview/<?php echo $row->booking_id; ?>"> Event ID: <?php echo $row->booking_id; ?></a>
-                                                <br>
-                                                <hr>
-                                                <p class="card-text"> <b>REPORT DETAILS:</b></p> 
-                                                    <hr>
-                                                    <p class="card-text"> <?php echo $row->report_details; ?></p>  <br><br>
-                                                    <hr>
-                                                    <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport<?php echo $row->report_id; ?>"><span class="fa fa-trash"></span></a>
-                                                    </button></a>
-                                            </div> 
-                                    </div>
-                                </div> 
-                             
-                       <!-- delete modal -->
-                        <div class="modal fade" id="delreport<?php echo $row->report_id; ?>" tabindex="-1" role="dialog" aria-labelledby="delreport" aria-hidden="true">
+                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser<?php echo $row->report_to; ?>">&nbsp Block</a>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                            <!-- <h6 class="card-subtitle mb-2 text-muted">Report ID: <?php echo $row->report_id; ?></h6> -->
+                                            <a href="eventview/<?php echo $row->booking_id; ?>"> Event ID: <?php echo $row->booking_id; ?></a> 
+                                        </li>
+                                        
+                                        <li class="list-group-item">
+                                            <p class="card-text"> <b>REPORT DETAILS:</b></p> 
+                                        </li>
+                                        
+                                        <li class="list-group-item">
+                                            <p class="card-text"> <?php echo $row->report_details; ?></p><br><br>  
+                                        </li>
+                                        
+                                        <li class="list-group-item mx-auto">
+                                            <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delreport<?php echo $row->report_id; ?>"><span class="fa fa-trash"></span></a>
+                                        </li>
+                                    </ul> 
+                                </div>               
+                            </div>
+                        </div>
+     <!-- delete modal -->
+     <div class="modal fade" id="delreport<?php echo $row->report_id; ?>" tabindex="-1" role="dialog" aria-labelledby="delreport" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" id="deleteuser"><b>DELETE REPORT</b></h4>
+                                        <h4 class="modal-title" id="deletereport"><b>DELETE REPORT</b></h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
@@ -118,6 +127,121 @@
                             </div>
                         </div>
                         <!-- end -->
+                          <!-- Add violator Penalty Modal -->
+                          <div class="modal fade" id="addoff<?php echo $row->report_to; ?>" aria-labelledby="addoff" aria-hidden="true" style="width:1000px">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <form method="post" action="add_offense/<?php echo $row->report_to; ?>">
+
+                                    <div class="modal-header">
+                                        <H5>SELECT OFFENSE </H5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="1"> &nbsp  &nbsp 1st offense: Ban account for 3 days </label> 
+                                        </div>
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="2"> &nbsp  &nbsp 2nd offense: Ban account for 30 days </label> 
+                                        </div>
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="3"> &nbsp  &nbsp 3rd offense: Permanent block of account</label> 
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="add_offense/<?php echo $row->report_to; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end -->
+                        <!-- block violator modal -->
+                        <div class="modal fade" id="blckuser<?php echo $row->report_to; ?>" tabindex="-1" role="dialog" aria-labelledby="blckuser" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    BLOCK USER
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <H5>Are you sure you want to permanently block <?php echo $row->report_to_fname; ?>&nbsp<?php echo $row->report_to_lname; ?>?</H5>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="ban/<?php echo $row->report_to; ?>" type="button" > 
+                                        <button class="btn btn-danger">YES</button>
+                                    </a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- end -->
+                         <!-- Add reporter Penalty Modal -->
+                         <div class="modal fade" id="addoff<?php echo $row->report_from; ?>" aria-labelledby="addoff" aria-hidden="true" style="width:1000px">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <form method="post" action="add_offense/<?php echo $row->report_from; ?>">
+
+                                    <div class="modal-header">
+                                        <H5>SELECT OFFENSE </H5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="1"> &nbsp  &nbsp 1st offense: Ban account for 3 days </label> 
+                                        </div>
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="2"> &nbsp  &nbsp 2nd offense: Ban account for 30 days </label> 
+                                        </div>
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="3"> &nbsp  &nbsp 3rd offense: Permanent block of account</label> 
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="add_offense/<?php echo $row->report_from; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end -->
+                        <!-- block reporter modal -->
+                        <div class="modal fade" id="blckuser<?php echo $row->report_from; ?>" tabindex="-1" role="dialog" aria-labelledby="blckuser" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    BLOCK USER
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <H5>Are you sure you want to Permanently block <?php echo $row->report_from_fname; ?>&nbsp<?php echo $row->report_from_lname; ?>?</H5>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="ban/<?php echo $row->report_from; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- end -->
+                              
+                             
+                      
                         <?php
                          }
                         }
@@ -129,36 +253,36 @@
                         }
                     ?>         
     
-        
+                    
 
-    
-
-
-
-      <!-- End of Main Content -->
-
-      
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-  </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-    <?php include('logout_modal.php'); ?>
-      <?php include('footer-script.php'); ?>
-
-  
-</body>
+                
 
 
-<!-- add modal -->
-<div class="modal fade" id="addrep" tabindex="-1" role="dialog" aria-labelledby="addrep" aria-hidden="true">
+
+                <!-- End of Main Content -->
+
+                
+
+                </div>
+                <!-- End of Content Wrapper -->
+
+            </div>
+            <!-- End of Page Wrapper -->
+
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+                <?php include('logout_modal.php'); ?>
+                <?php include('footer-script.php'); ?>
+
+            
+            </body>
+
+
+        <!-- add modal -->
+        <div class="modal fade" id="addrep" tabindex="-1" role="dialog" aria-labelledby="addrep" aria-hidden="true">
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -245,60 +369,8 @@
                         </div>                    
                     </div>
                 </div>
-            </div>
-<!-- end -->
-  <!-- Add Penalty Modal -->
-  <div class="modal fade" id="addoff" aria-labelledby="addoff" aria-hidden="true" style="width:1000px">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <H5>SELECT OFFENCE</H5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-check"> 
-                                    <label class="form-check-label"> 
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked=""> &nbsp  &nbsp Increase Offence </label> 
-                                </div> 
-                                <div class="form-check"> <label class="form-check-label"> 
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option2"> &nbsp  &nbsp 1st Offence: Ban account for 72 hours </label> 
-                                </div>
-                                <div class="form-check"> <label class="form-check-label"> 
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3"> &nbsp  &nbsp 2nd Offence: Ban account for 30 days </label> 
-                                </div>
-                                <div class="form-check"> <label class="form-check-label"> 
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option4"> &nbsp  &nbsp 3rd Offence: Delete Account</label> 
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success">SUBMIT</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-  <!-- end -->
- <!-- block user modal -->
- <div class="modal fade" id="blckuser" tabindex="-1" role="dialog" aria-labelledby="blckuser" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                      BLOCK USER
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-                <div class="modal-body">
-                    <H5>Are you sure you want to Block username1234?</H5>
-                </div>
-                <div class="modal-footer">
-                   <button type="button" class="btn btn-danger">YES</button>
-                   <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                </div>
-            </div>
-        </div>
-<!-- end -->
+                <!-- end -->
+                      
+                       
 </html>

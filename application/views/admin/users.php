@@ -95,7 +95,7 @@
                             <div class="dropdown-header">Action:</div>
                               <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->user_id; ?>">&nbsp View</a>
                             <div class="dropdown-divider"></div>
-                              <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff<?php echo $row->user_id; ?>">&nbsp Add Offence</a>
+                              <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff<?php echo $row->user_id; ?>">&nbsp Add offense</a>
                             <div class="dropdown-divider"></div>
                               <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser<?php echo $row->user_id; ?>">&nbsp Block</a>
                             <div class="dropdown-divider"></div>
@@ -115,18 +115,21 @@
                                       Name: <br>
                                       Username: <br>
                                       Usertype: <br>
-                                      Report Count:<br> 
-                                      Number of offenses:<br>
-                                      Status:<br>
+                                      Offense number:<br>
+                                      Current Status:<br>
+                                      Date registered: <br>
+                                      Last update: <br>
                                   </td>
 
                                     <td class="table-bordered">
                                       <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br>
                                       <?php echo $row->username; ?> <br>
                                       <?php echo $row->user_type; ?>  <br>
-                                      <?php echo $row->report_count; ?> <br>
                                       <?php echo $row->offense; ?> <br>
                                       <?php echo $row->status; ?> <br>
+                                      <?php echo  date('F d, Y', strtotime($row->created_at)); ?> <br>
+                                      <?php echo  date('F d, Y', strtotime($row->updated_at)); ?> <br>
+
                                   </td>
                               </tr>
                             </table>
@@ -162,7 +165,7 @@
                                 <form method="post" action="add_offense/<?php echo $row->user_id; ?>">
 
                                     <div class="modal-header">
-                                        <H5>SELECT OFFENCE </H5>
+                                        <H5>SELECT OFFENSE </H5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
@@ -170,13 +173,13 @@
 
                                     <div class="modal-body">
                                         <div class="form-check"> <label class="form-check-label"> 
-                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="1"> &nbsp  &nbsp 1st Offence: Ban account for 3 days </label> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="1"> &nbsp  &nbsp 1st offense: Ban account for 3 days </label> 
                                         </div>
                                         <div class="form-check"> <label class="form-check-label"> 
-                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="2"> &nbsp  &nbsp 2nd Offence: Ban account for 30 days </label> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="2"> &nbsp  &nbsp 2nd offense: Ban account for 30 days </label> 
                                         </div>
                                         <div class="form-check"> <label class="form-check-label"> 
-                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="3"> &nbsp  &nbsp 3rd Offence: Permanent block of account</label> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="3"> &nbsp  &nbsp 3rd offense: Permanent block of account</label> 
                                         </div>
                                     </div>
 
