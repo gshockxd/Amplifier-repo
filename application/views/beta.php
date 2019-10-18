@@ -7,7 +7,7 @@
 				<a class="btn btn-outline-secondary" href="profile">Client</a>
 			</div>
 			<div class="col-sm">
-				<a class="btn btn-outline-primary" href="p_register">Service/Performer</a>
+				<a class="btn btn-outline-primary" href="p_index">Service/Performer</a>
 			</div>
 			<div class="col-sm">
 				<a class="btn btn-outline-info" href="users">Admin</a>

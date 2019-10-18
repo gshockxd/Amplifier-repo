@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'session','form_validation', 'pagination', 'upload');
+$autoload['libraries'] = array('database', 'session','form_validation', 'pagination');
 
 /*
 | -------------------------------------------------------------------
@@ -144,5 +144,8 @@ $autoload['model'] = array(
     'clients/login_model',
 
     'performers/p_register_model',
-    'performers/p_profile_model'
+    'performers/p_profile_model',
+    'performers/p_history_model',
+
+    'message_model'
 );

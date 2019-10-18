@@ -1,10 +1,7 @@
 <?php echo form_open('profile_password_update'); ?>
     <div class="container py-3">
-        <?php if($this->session->flashdata('pass_matched')): ?>
-            <div class="alert alert-success d-flex justify-content-center alert-block">
-                <?php echo $this->session->flashdata('pass_matched'); ?>
-            </div>
-        <?php endif; ?>
+        <?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '';  ?>
+        
         <div class="row">
             <div class="col-md-6">
                 <p class="h2">Change Password</p>     

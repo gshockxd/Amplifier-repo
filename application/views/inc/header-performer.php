@@ -67,22 +67,22 @@
 								<a class="nav-link" href="p_profile">Dashboard <span class="sr-only">(current)</span></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="notifications">Notifications</a>
+								<a class="nav-link" href="#">Notifications</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="bookings">Bookings</a>
+								<a class="nav-link" href="#">Bookings</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="booking">Book</a>
+								<a class="nav-link" href="p_history">History</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="calendar">Calendar</a>
+								<a class="nav-link" href="p_pricing">Pricing</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="package">Package</a>
+								<a class="nav-link" href="p_package">Package</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="chat">Chat</a>
+								<a class="nav-link" href="p_chat">Chat</a>
 							</li>
 						<?php endif; ?>
 			        </ul>
@@ -96,7 +96,7 @@
 									<a href="login" class="nav-link">Login</a>
 								</li>
 								<li class="nav-item">
-									<a href="register" class="nav-link">Register</a>
+									<a href="p_register" class="nav-link">Register</a>
 								</li>
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
@@ -110,7 +110,7 @@
 									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
 								</li>
 								<li class="nav-item">
-									<a href="logout_client" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
+									<a href="logout_user" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
 								</li>
 							<?php endif;?>
 			        	</ul>
@@ -120,10 +120,4 @@
 
 		    </div>
 		  </nav>
-		  
-		  <?php if($this->session->flashdata('user_created')): ?>
-			<div class="alert alert-success" role="alert">
-				<p><?php echo $this->session->flashdata('user_created'); ?></p>
-			</div>
-		<?php endif;?>
 

@@ -35,20 +35,21 @@
 				$this->load->view('client/profile_password_edit_page');
 				$this->load->view('inc/footer');
 			}else{
-				$check = $this->client_model->profile_update_password($data);
+				$check = $this->profile_model->profile_update_password($data);
 				if($check === FALSE){
-					$this->session->set_flashdata('pass_old_not_matched', 'Current Password Not Matched');
+					$this->session->set_flashdata('danger_message', 'Current Password Not Matched');
 					redirect('profile_password_edit_page');
 				}else{
-					$this->session->set_flashdata('pass_matched', 'Your Password Has Been Updated!');
+					$this->session->set_flashdata('success_message', 'Your Password Has Been Updated!');
 					redirect('profile_password_edit_page');
 				}
 			}
 		}
 		public function profile_edit_page(){			
 			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
+				redirect('profile');
 			}
+
 			$templates['title'] = 'Profile Edit';
 
 			$users['users'] = $this->client_model->get_user($this->session->userdata('email'));
@@ -136,13 +137,59 @@
 					}
 				}
 
-				$this->client_model->update_user($client_image);
-				$session_user = $this->client_model->get_user($this->session->userdata('email'));	
+				$this->profile_model->profile_update($client_image);
+				$session_user = $this->profile_model->user_select($this->session->userdata('email'));	
 				$this->session_model->session_user($session_user);
-				$this->session->set_flashdata('user_updated', 'Your profile has been updated!');		
+				$this->session->set_flashdata('success_message', 'Your profile has been updated!');		
 	
 				redirect('profile_info'); 
 				// hi;
 			}
 		}	
+        public function profile_update_password($data){
+            $condition =  array('email'=> $this->session->userdata('email'), 'password' => $data['passOld']);
+            $query = $this->db->get_where('users',$condition);
+			$profile = $query->row_array();
+			// echo $this->session->userdata('email');
+			// echo $data['passOld'];
+			// echo $this->db->last_query();
+			// print_r($profile);
+			// die;
+            if(!$profile){
+                return FALSE;
+            }else{
+                $data = array(
+                    'password' => $data['pass']
+                );
+                $this->db->set($data);
+                $this->db->where($condition);
+                $this->db->update('users');
+                // echo $this->db->last_query();
+                // die();
+            }      
+		}		
+        public function profile_update($client_image){
+            $date = date('Y-m-j H:i:s');
+            // die();
+            $data = array(
+                'username'=> $this->input->post('uname'),
+                'fname'=> $this->input->post('fname'),
+                'lname'=> $this->input->post('lname'),
+                'address'=> $this->input->post('address'),
+                'photo'=> $client_image,
+                'telephone_1'=> $this->input->post('number1'),
+                'telephone_2'=> $this->input->post('number2'),
+                'updated_at' => $date,
+            );
+
+            $this->db->set($data);
+            $this->db->where(array('email' => $this->session->userdata('email'), 'user_id' => $this->session->userdata('user_id')));
+            return $this->db->update('users');
+            // print_r($this->db->last_query());
+            // die('here');
+        } 
+        public function user_select($email){
+            $query = $this->db->get_where('users', array('email'=>$email));
+            return $query->row_array();
+        }
     }

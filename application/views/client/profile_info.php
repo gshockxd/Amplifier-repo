@@ -1,11 +1,7 @@
 <div class="container py-3">
+    <?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
     <div class="row">
         <div class="col-md-3">
-            <?php 
-                // echo '<pre>';
-                // print_r($this->session->userdata());
-                // echo '</pre>';
-            ?>
             <img src="<?php echo base_url(); echo $this->session->userdata('photo'); ?>" class="img-thumbnail" alt="">
         </div>
         <div class="col-md-9">

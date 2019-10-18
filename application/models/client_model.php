@@ -3,93 +3,20 @@
     class Client_Model extends CI_Model {
         public function __construct(){
             $this->load->database();
-        }        
-        public function create_user($client_image){
-            $date = date('Y-m-j H:i:s');
-            $data = array(
-                'user_id' => null,
-                'user_type'=> $this->input->post('user_type'),
-                'username'=> $this->input->post('uname'),
-                'password' => md5($this->input->post('pass')),
-                'status'=> 'pending',
-                'fname'=> $this->input->post('fname'),
-                'lname'=> $this->input->post('lname'),
-                'email' => $this->input->post('email'),
-                'address'=> $this->input->post('address'),
-                'rate'=>0,
-                'photo'=> $client_image,
-                'telephone_1'=> $this->input->post('number1'),
-                'telephone_2'=> $this->input->post('number2'),
-                'offense' => 0,
-                'report_count' => 0,
-                'media_fk' => null,
-                'created_at' => $date,
-                'updated_at' => $date
-            );
-            // echo date('Y-m-j H:i:s');
-            // die;
-
-            return $this->db->insert('users', $data);
-        }
-        public function update_user($client_image){
-            $date = date('Y-m-j H:i:s');
-            // die();
-            $data = array(
-                'username'=> $this->input->post('uname'),
-                'fname'=> $this->input->post('fname'),
-                'lname'=> $this->input->post('lname'),
-                'address'=> $this->input->post('address'),
-                'photo'=> $client_image,
-                'telephone_1'=> $this->input->post('number1'),
-                'telephone_2'=> $this->input->post('number2'),
-                'updated_at' => $date,
-            );
-
-            $this->db->set($data);
-            $this->db->where(array('email' => $this->session->userdata('email'), 'user_id' => $this->session->userdata('user_id')));
-            return $this->db->update('users');
-            // print_r($this->db->last_query());
-            // die('here');
-        }
-        public function profile_update_password($data){
-            $condition =  array('email'=> $this->session->userdata('email'), 'password' => $data['passOld']);
-            $query = $this->db->get_where('users',$condition);
-            $profile = $query->row_array();
-            if(!$profile){
-                return FALSE;
-            }else{
-                $data = array(
-                    'password' => $data['pass']
-                );
-                $this->db->set($data);
-                $this->db->where($condition);
-                $this->db->update('users');
-                // echo $this->db->last_query();
-                // die();
-            }      
-        }
-        public function get_user($email){
-            $query = $this->db->get_where('users', array('email'=>$email));
-            return $query->row_array();
-        }
-        public function get_user_using_id($id){
+        }       
+        public function get_user_using_id1($id){
             $query = $this->db->get_where('users', array('user_id'=>$id));
             return $query->row_array();
         }
-        public function user_login ($email, $pass){
-            $query = $this->db->get_where('users', array('email'=>$email, 'password' => $pass));
-            return $query->row_array();
-            // print_r($this->db->last_query());
-        }
-        public function get_users(){
+        public function get_users1(){
             $query= $this->db->get('users');
             return $query->result_array();
         }
-        public function get_chats(){
+        public function get_chats1(){
             $query= $this->db->get('chats');
             return $query->result_array();
         }
-        public function get_name_only_users(){
+        public function get_name_only_users1(){
             $this->db->where('user_id !=', $this->session->userdata('user_id'));
             $this->db->select(array('user_id', 'fname', 'lname'));
             $query= $this->db->get('users');
@@ -97,7 +24,7 @@
             // die();
             return $query->result_array();            
         }
-        public function send_message(){
+        public function send_message1(){
             $timestamp = date('Y-m-j H:i:s');
             $array = array(
                 'id'=> null,
@@ -127,7 +54,7 @@
                 return $this->session->set_userdata('lastMessage', $temp['created_at']);
             }
         }
-        public function get_user_data_and_chats($id){
+        public function get_user_data_and_chats1($id){
             
             // $query = $this->db->get_where('users', array('user_id'=>$id));
             // $data = $query->row_array();
@@ -143,7 +70,7 @@
 
             // print_r($this->db->last_query());
         }
-        public function get_users_chats(){
+        public function get_users_chats1(){
             // chat_left_module
             $this->db->order_by('chats.created_at', 'DESC');
             $this->db->where('compose_from', $this->session->userdata('user_id'));
@@ -191,7 +118,7 @@
             // echo '</pre>';
             // die();
         }
-        public function get_incoming_message(){
+        public function get_incoming_message1(){
             $this->db->where('send_to', $this->session->userdata('user_id'));
             $this->db->group_by('compose_from');
             $this->db->select('MAX(id) as id, users.*');
@@ -233,7 +160,7 @@
             // echo '</pre>';
             // die();
         }
-        public function get_user_chats($user_id){
+        public function get_user_chats1($user_id){
             $this->db->order_by('created_at', 'ASC');
             $this->db->where(array('send_to'=>$user_id, 'compose_from'=>$this->session->userdata('user_id')));
             $this->db->or_where( array('compose_from'=>$user_id, 'send_to'=>$this->session->userdata('user_id')));
@@ -252,7 +179,7 @@
 
             // die;
         }
-        public function get_recieve_user_chats($user_id){
+        public function get_recieve_user_chats1($user_id){
             // conversation
             $query = $this->db->get_where('chats', array('compose_from'=>$user_id, 'send_to'=>$this->session->userdata('user_id')));
             $return = $query->result_array();

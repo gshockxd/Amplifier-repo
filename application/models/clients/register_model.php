@@ -10,8 +10,8 @@
 			$this->load->view('client/register');
             $this->load->view('inc/footer');
         }
-        public function register_user(){            
-			$templates['title'] = 'Client Registration';
+        public function register_user(){    
+			$templates['title'] = 'Registration';
 			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
 
 			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required' => 'Please Input First Name', 'alpha'=>'First Name not valid, letters only'));
@@ -33,7 +33,6 @@
 			$data['userfile'] = $this->input->post('userfile');
 			$data['address'] = $this->input->post('address');
 			$data['pass'] = $this->input->post('pass');
-
 
 			if($this->form_validation->run() == FALSE){
 				$this->load->view('inc/header-no-navbar', $templates);
@@ -60,18 +59,14 @@
 				}else{
 					$data = array ('upload_data' => $this->upload->data());
 					$client_image = 'assets/img/client/'.$timestamp.'.'.$ext;
-				
-					// print_r($config['file_name']);
-					// print_r($);
-					// die();
-
 				}
 
 				$this->register_model->user_insert($client_image);
 				$session_user = $this->register_model->user_select($this->input->post('email'));
 				$this->session_model->session_user($session_user);
 
-				$this->session->set_flashdata('success_profile_page_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
+				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
+				
 				redirect('profile');
 			}
 		}

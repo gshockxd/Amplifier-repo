@@ -90,7 +90,7 @@
 		<div class="row">
 			<div class="col-md-6 d-flex justify-content-start">
 				<!-- <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anything in the form will be lost!">Back</button> -->
-				<a href="login" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anything in the form will be lost!">Cancel</a>
+				<a href="profile" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anything in the form will be lost!">Cancel</a>
 			</div>
 			<div class="col-md-6 d-flex justify-content-end">
 				<button type="submit" class="btn btn-primary">Register</button>

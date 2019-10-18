@@ -96,7 +96,7 @@
 									<a href="login" class="nav-link">Login</a>
 								</li>
 								<li class="nav-item">
-									<a href="register" class="nav-link">Register</a>
+									<a data-toggle="modal" data-target="#registerModal" class="nav-link">Register</a>
 								</li>
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
@@ -110,7 +110,7 @@
 									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
 								</li>
 								<li class="nav-item">
-									<a href="logout_client" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
+									<a href="logout_user" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
 								</li>
 							<?php endif;?>
 			        	</ul>
@@ -120,10 +120,27 @@
 
 		    </div>
 		  </nav>
-		  
-		  <?php if($this->session->flashdata('user_created')): ?>
-			<div class="alert alert-success" role="alert">
-				<p><?php echo $this->session->flashdata('user_created'); ?></p>
-			</div>
-		<?php endif;?>
 
+<!-- Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register, switch one?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-around">
+			<div class="row">
+				<div class="col-md-6">
+					<a href="register" class="btn btn-info">Client</a>
+				</div>
+				<div class="col-md-6">
+					<a href="p_register" class="btn btn-primary">Performer</a>
+				</div>
+			</div>
+      </div>
+    </div>
+  </div>
+</div>

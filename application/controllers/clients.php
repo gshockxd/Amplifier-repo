@@ -1,9 +1,6 @@
 <?php 
 
-	class Clients extends CI_Controller {		
-		public function register_user(){
-			$this->register_model->register_user();
-		}
+	class Clients extends CI_Controller {	
 		public function logout (){
 			$this->session_model->unset_user();
 			redirect('profile');
@@ -17,40 +14,68 @@
 		public function register (){
 			$this->register_model->index();
 		}
+		public function register_user(){
+			$this->register_model->register_user();
+		}
 		public function profile(){
 			$this->profile_model->index();			
 		}
 		public function history(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_client();
+			
 			$this->history_model->index();
 		}
 		public function booking(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->booking_model->index();
 		}
 		public function calendar(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->calendar_model->index();
 		}
 		public function package(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->package_model->index();
 		}
 		public function profile_info(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->profile_model->profile_info();
 		}
 		public function profile_edit_page(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->profile_model->profile_edit_page();
 		}
 		public function profile_edit_info(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->profile_model->profile_edit_info();
 		}
 		public function profile_password_edit_page(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->profile_model->profile_password_edit_page();
 		}
 		public function profile_password_update(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
 			$this->profile_model->profile_password_update();
 		}
 		public function file_check(){
-			if(!$this->session->userdata('user_id')){
-				// redirect('clients/profile');
-			}
+			
 			$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
 			$mime = get_mime_by_extension($_FILES['userfile']['name']);
 			if(isset($_FILES['userfile']['name']) && $_FILES['userfile']['name']!=""){
@@ -74,9 +99,7 @@
 			}
 		}				
 		public function file_check_update(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+
 			$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
 			$mime = get_mime_by_extension($_FILES['userfile']['name']);
 			if(isset($_FILES['userfile']['name']) && $_FILES['userfile']['name']!=""){
@@ -101,9 +124,10 @@
 
 
 		public function chat(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
+			
 			$templates['title'] = 'Chat';
 			$data['get_users_chats'] = array($this->client_model->get_users_chats());
 
@@ -119,9 +143,10 @@
 			$this->load->view('inc/footer');
 		}
 		public function chat_new(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
+
 			$templates['title'] = 'New Message';
 
 			$data['users'] = $this->client_model->get_name_only_users();
@@ -133,9 +158,10 @@
 			$this->load->view('inc/footer');
 		}
 		public function chat_left(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
+
 			$templates['title'] = 'New Message';
 
 			$users['users'] =$this->client_model->get_chats();
@@ -145,9 +171,10 @@
 			$this->load->view('inc/footer');
 		}
 		public function chat_search(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
+			
 			$data['get_users_chats'] = array($this->client_model->get_users_chats());
 			// print($_SERVER['REQUEST_METHOD']);
 			// print_r($this->client_model->segment_url());
@@ -247,4 +274,4 @@
 			// die;
 			
 		}
-	}
+	} 

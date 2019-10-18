@@ -7,7 +7,7 @@
 			$templates['title'] = 'Login';
 			
 			$this->load->view('inc/header-no-navbar', $templates);
-			$this->load->view('client/login');
+			$this->load->view('login');
 			$this->load->view('inc/footer');
         }
         public function login_attempt (){            
@@ -21,26 +21,28 @@
 
 			if($this->form_validation->run() == FALSE){
 				$this->load->view('inc/header-no-navbar', $templates);
-				$this->load->view('client/login', $data);
+				$this->load->view('login', $data);
 				$this->load->view('inc/footer');
 			}else{
 				$hash_pass = md5($data['pass']);
-				$query = $this->client_model->user_login($data['email'], $hash_pass);
-				// print_r($query);
-				// die();
+				$query = $this->login_model->user_login($data['email'], $hash_pass);
 				
 				if(!$query){
-					$this->session->set_flashdata('user_not_matched', 'Invalid Email address or Password');
+					$this->session->set_flashdata('danger_message', 'Invalid Email address or Password');
 					$this->session->set_flashdata('email', $this->input->post('email'));
 					redirect('login');
 				}else{
-					// echo $query['password'];
-					// die;
 					$this->session_model->session_user($query);
-					$this->session->set_flashdata('success_profile_page_message', 'Welcome back '.$this->session->userdata('fname').' '.$this->session->userdata('lname').'!');
+					$this->session->set_flashdata('success_message', 'Welcome back '.$this->session->userdata('fname').' '.$this->session->userdata('lname').'!');
 
-					redirect ('profile');
+					$this->session_model->session_check();
+					$this->session_model->user_type_check();
 				}
 			}
+		}
+		
+        public function user_login ($email, $pass){
+			$query = $this->db->get_where('users', array('email'=>$email, 'password' => $pass));
+            return $query->row_array();
         }
     }

@@ -13,7 +13,7 @@ $route['services']                      = 'welcome/services';
 $route['history']                       = 'welcome/history';
 $route['reports']                       = 'welcome/reports';
 $route['notifications']                 = 'welcome/notifications';
-$route['messages']                      = 'chat';
+$route['messages']                      = 'clients/chat';
 $route['profile/editprofile/(:num)']    = 'welcome/editprofile/$1  ';
 $route['delete_user/(:num)']            = 'welcome/delete_user/$1  ';
 $route['eventview/(:num)']              = 'welcome/eventview/$1';
@@ -25,30 +25,36 @@ $route['services']                      = 'welcome/services';
 $route['logout']                        = 'welcome/logout';
 $route['ban/(:num)']                    = 'welcome/ban/$1';
 
-// 
-$route['profile'] = 'clients/profile';
-$route['profile_password_edit_page'] = 'clients/profile_password_edit_page';
-$route['profile_password_update'] = 'clients/profile_password_update';
-$route['profile_info'] = 'clients/profile_info';
-$route['profile_edit'] = 'clients/profile_edit_page';
-$route['profile_edit_info'] = 'clients/profile_edit_info';
-$route['history_client'] = 'clients/history';
-$route['booking'] = 'clients/booking';
-$route['calendar'] = 'clients/calendar';
-$route['package'] = 'clients/package';
-$route['register'] = 'clients/register';
-$route['register_attempt'] = 'clients/register_user';
-$route['login'] = 'clients/login';
-$route['login_attempt'] = 'clients/login_attempt';
-$route['logout_client'] = 'clients/logout';
+//
+$route['profile']                       = 'clients/profile';
+$route['profile_password_edit_page']    = 'clients/profile_password_edit_page';
+$route['profile_password_update']       = 'clients/profile_password_update';
+$route['profile_info']                  = 'clients/profile_info';
+$route['profile_edit']                  = 'clients/profile_edit_page';
+$route['profile_edit_info']             = 'clients/profile_edit_info';
+$route['history_client']                = 'clients/history';
+$route['booking']                       = 'clients/booking';
+$route['calendar']                      = 'clients/calendar';
+$route['package']                       = 'clients/package';
+$route['register']                      = 'clients/register';
+$route['register_attempt']              = 'clients/register_user';
+$route['login']                         = 'clients/login';
+$route['login_attempt']                 = 'clients/login_attempt';
+$route['logout_user']                   = 'clients/logout';
 
-$route['chat'] = 'clients/chat';
-$route['chat_new'] = 'clients/chat_new';
+$route['chat']                          = 'clients/chat';
+$route['chat_new']                      = 'clients/chat_new';
 
 // 
-$route['p_register'] = 'performers/register';
-$route['p_register_attempt'] = 'performers/register_attempt';
-$route['p_profile'] = 'performers/profile';
+$route['p_register']                    = 'performers/register';
+$route['p_register_attempt']            = 'performers/register_attempt';
+$route['p_profile']                     = 'performers/profile';
+$route['p_notifications']               = 'performers/notifications';
+$route['p_bookings']                    = 'performers/bookings';
+$route['p_history']                     = 'performers/history';
+$route['p_pricing']                     = 'performers/pricing';
+$route['p_package']                     = 'performers/package';
+$route['p_chat']                        = 'performers/chat';
 
 
 /*

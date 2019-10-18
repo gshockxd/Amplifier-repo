@@ -9,13 +9,13 @@
         }
         public function register(){
 			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required'=> 'Please Input First Name', 'alpha' => 'Please input letters only'));
-			$this->form_validation->set_rules('uname', 'Username', 'required|alpha', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only'));
+			$this->form_validation->set_rules('uname', 'Username', 'required', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only'));
 			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required'=> 'Please Input Last Name', 'alpha' => 'Please input letters only'));
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=> 'Please Input Address'));
             $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required'=> 'Please Input Emaill Address', 'valid_email'=> 'Please Input a Valid Email Address', 'is_unique'=>'Email Address is already registered'));
 			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[11]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contact Number contains 11 numbers')); 
 			$this->form_validation->set_rules('number2', 'Contact Number 2', 'required|numeric|exact_length[11]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contact Number contains 11 numbers')); 
-			$this->form_validation->set_rules('userfile', 'Profile Picture', 'callback_file_check_photo');
+			$this->form_validation->set_rules('userfile', 'Profile Picture', 'callback_file_check');
 			$this->form_validation->set_rules('group_photo', 'Group Photo', 'callback_file_check_group_photo');
 			$this->form_validation->set_rules('video1', 'Video Sample 1', 'callback_file_check_video_1');
 			$this->form_validation->set_rules('video2', 'Video Sample 2', 'callback_file_check_video_2');
@@ -33,11 +33,6 @@
 			$data['service'] = $this->input->post('service');
 			$data['desc'] = $this->input->post('desc');
 
-			// echo '<pre>';
-			// print_r($_FILES);
-			// echo '</pre>';
-			// die();
-
             if($this->form_validation->run() === FALSE){
                 $templates['title'] = 'Registration';
 
@@ -51,7 +46,7 @@
 
 				// Upload Image
 				$config['file_name'] = $timestamp.'.'.$ext;
-				$config['upload_path'] = './assets/img/client';
+				$config['upload_path'] = './assets/img/performer';
 				$config['allowed_types'] = 'jpg|png';
 				$config['max_size'] = '2048';
 				$config['max_width'] = '50000';
@@ -61,17 +56,18 @@
 	
 				if(!$this->upload->do_upload()){
 					$errors = array ('error' => $this->upload->display_errors());
-					$performer_image = 'assets/img/client/no_image.jpg';
+					$performer_image = 'assets/img/performer/no_image.jpg';
 				}else{
 					$data = array ('upload_data' => $this->upload->data());
-					$performer_image = 'assets/img/client/'.$timestamp.'.'.$ext;			
+					$performer_image = 'assets/img/performer/'.$timestamp.'.'.$ext;			
 				}
 
-				$this->p_register_model->user_insert($performer_image);
+				$user_id = $this->p_register_model->user_insert($performer_image);
 				$session_user = $this->p_register_model->user_select($this->input->post('email'));
 				$this->session_model->session_user($session_user);
 
-				$this->session->set_flashdata('success_profile_page_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
+				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
+
 				redirect('p_profile');
 			}
 		}

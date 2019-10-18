@@ -1,7 +1,7 @@
 <?php echo form_open_multipart('p_register_attempt'); ?>
     <div class="container py-3">
         <div>
-            <p class="h2">Performer Registration</p>        
+            <p class="h2"><?=$title ?></p>        
             <div class="row mt-5">
                 <div class="col-md">
                     <div class="form-group">
@@ -57,8 +57,12 @@
                     <div class="col-md-12">
                         <label for="">Type of Service</label>
                         <select class="form-control <?php echo form_error('service') ? 'is-invalid' : ''; ?>" name="service">
-                            <option  selected disabled>-----------------------</option>
-                            <option value="1" <?php echo isset($service) == 1 ? 'selected' : '' ?>>ok!</option>
+                            <option  selected hidden disabled> PLease Select Type of Service</option>
+                            <option value="photographer" <?php echo isset($service) == 'photographer' ? 'selected' : '' ?>>Photographer</option>
+                            <option value="videographer" <?php echo isset($service) == 'videographer' ? 'selected' : '' ?>>videographer</option>
+                            <option value="host" <?php echo isset($service) == 'host' ? 'selected' : '' ?>>host</option>
+                            <option value="restaurant_gig" <?php echo isset($service) == 'restaurant_gig' ? 'selected' : '' ?>>Restaurant Gig</option>
+                            <option value="graduation_ball" <?php echo isset($service) == 'graduation_ball' ? 'selected' : '' ?>>Graduation Ball</option>
                         </select>
                         <div class="invalid-feedback">
                             <?php echo form_error('service') ?>
@@ -162,9 +166,9 @@
                 </div>
 			</div>
 		</div>
-        <div class="row py-3 d-flex justify-content-end">
-             <button type="submit" class="btn btn-outline-success ml-3" name="submit">Finish</button>
-             <a href="#" class="btn btn-outline-danger ml-3">Cancel</a>
+        <div class="row py-3 d-flex justify-content-between">
+             <a href="profile" class="btn btn-secondary ml-3" data-toggle="tooltip" data-placement="top" title="All data will be lost. Procceed?">Cancel</a>
+             <button type="submit" class="btn btn-primary mr-3" name="submit">Submit</button>
 	    </div>
 	</div>
 <?php form_close(); ?>

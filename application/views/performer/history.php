@@ -1,14 +1,11 @@
-<?php// $title="Service History: AMPLIFIER"; ?>
-<?php// require '../inc/header.php'; ?>
-	<div class="container">
+<div class="container">
 		<p class="h1 yellow-brown py-3 text-center">BOOKINGS</p>
 		
-<table id="example" class="table table-hover" style="width:100%">
+		<table id="datatable" class="table table-hover" style="width:100%">
         <thead>
             <tr>
-            	<th></th>
-                <th>Name</th>
-                <th>Schedule</th>
+				<th>Schedule</th>
+				<th>Event Venue</th>
                 <th>Status</th>
                 <th>Event Type</th>
                 <th class="text-center">Action</th>
@@ -16,29 +13,20 @@
             </tr>
         </thead>
         <tbody>
-        	<?php for($x=0; $x<100; $x++){ ?>
+        	<?php foreach($bookings as $b): ?>
 			
 	            <tr>
-	            	<td class="text-center">
-	            		<img src="<?php echo base_url(); ?>assets/img/artist.png" class="rounded-circle" height="50" width="50" alt="">
-	            	</td>
 	                <td class="">
-	                	<p>Nike Marti Caballes 
-	                		<span><br>
-	                			<small>Lorem Ipsum</small>
-	                		</span> 
-	                	</p>	                	
+						<?php echo date('F d, Y', strtotime($b['event_date'])) ?>             	
 	                </td>
 	                <td>
-	                	<p>03/28/2019
-							<span><br>
-								<small>Panubigan, Canlaon City</small>
-							</span>
-	                	</p>
+						<p class="text-uppercase yellow-brown"><?php echo $b['venue_name'] ?></p>
 	                </td>
-	                <td><p class="text-danger">Decline</p></td>
 	                <td>
-	                	<u class="yellow-brown font-weight-bold">SCHOOL EVENT</u>
+					<p class="text-uppercase <?php echo $b['status'] == 'approve' ? ' text-success' : ''; echo $b['status'] == 'cancel' ? ' text-danger' : ''; echo $b['status'] == 'block' ? ' text-warning' : ''; echo $b['status'] == 'pending' ? ' text-muted' : ''; ?>"><?php echo $b['status'] ?></p>
+					</td>
+	                <td>
+	                	<p class="text-uppercase yellow-brown"><?php echo $b['event_name'] ?></p>
 	                </td>
 	                <td class="d-flex justify-content-center ">
 	                	<a href="#" class="btn btn-outline-success mr-2 " data-toggle="tooltip" data-placement="top" title="Accept"><i class="fas fa-check "></i></a>
@@ -50,13 +38,12 @@
 	                </td>
 	            </tr>
 
-	        <?php } ?>
+	        <?php endforeach; ?>
         </tbody>
         <tfoot>
             <tr>
-            	<th></th>
-                <th>Name</th>
-                <th>Schedule</th>
+				<th>Schedule</th>
+				<th>Event Venue</th>
                 <th>Status</th>
                 <th>Event Type</th>
                 <th class="text-center">Action</th>
@@ -66,4 +53,3 @@
     </table>
 
 	</div>
-<?php// require '../inc/footer.php'; ?>

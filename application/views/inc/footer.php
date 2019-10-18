@@ -33,7 +33,7 @@
 	<script>
 	    // For dataTable
 		$(document).ready(function() {
-		    $('#example').DataTable( {     
+		    $('#datatable').DataTable( {     
 		        // ajax: 'https://api.myjson.com/bins/qgcu',
 		        // drawCallback: function(settings){
 		        //     var api = this.api();

@@ -48,5 +48,60 @@
             );
             return $this->session->unset_userdata($data);
         }
+        public function user_type_check (){
+            switch($this->session->userdata('user_type')){
+                case 'admin':
+                    redirect('users');
+                    break;
+                case 'client':
+                    redirect('profile');
+                    break;
+                case 'performer':
+                    redirect('p_profile');
+                    break;
+            }
+        }
+        public function session_check(){
+            if(!$this->session->userdata('user_id')){
+                $this->session->set_flashdata('danger_message', 'The page you trying to access requires login');
+                redirect('profile');
+            }
+        }
+        public function user_type_check_admin (){
+            switch($this->session->userdata('user_type')){
+                case 'client':
+                    $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
+                    redirect('profile');
+                    break;
+                case 'performer':
+                    $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
+                    redirect('p_profile');
+                    break;
+            }
+        }
+        public function user_type_check_client (){
+            switch($this->session->userdata('user_type')){
+                case 'admin':
+                    $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
+                    redirect('users');
+                    break;
+                case 'performer':
+                    $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
+                    redirect('p_profile');
+                    break;
+            }
+        }
+        public function user_type_check_performer (){
+            switch($this->session->userdata('user_type')){
+                case 'admin':
+                    $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
+                    redirect('users');
+                    break;
+                case 'client':
+                    $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
+                    redirect('profile');
+                    break;
+            }
+        }
         
     }

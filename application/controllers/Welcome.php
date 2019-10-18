@@ -2,11 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
-	public function index()
-	{
-		$this->load->view('/admin/index');
-	}
-
 	public function users()
 	{
 		$this->load->model('model');
@@ -20,7 +15,7 @@ class Welcome extends CI_Controller {
 		if($this->input->post("offenseNo")=="1")
 			{
 				$date=date('y-m-d');
-				$block_date=date_create($date);
+				$block_date	=date_create($date);
 				date_add($block_date, date_interval_create_from_date_string("3 days"));
 				echo date_format($block_date,"y-m-d");
 				$status="block";
@@ -28,7 +23,7 @@ class Welcome extends CI_Controller {
 		if($this->input->post("offenseNo")=="2")
 		{
 			$date=date('y-m-d');
-			$block_date=date_create($date);
+			$block_date	=date_create($date);
 			date_add($block_date, date_interval_create_from_date_string("30 days"));
 			echo date_format($block_date,"y-m-d");
 			$status="block";
@@ -40,9 +35,9 @@ class Welcome extends CI_Controller {
 		}
 		$this->form_validation->set_rules("offenseNo", "offense number", 'numeric');
 			$offense= array(
-					"offense" => $this->input->post("offenseNo"),
+					"offense" 	=> $this->input->post("offenseNo"),
 					"block_end" => date_format($block_date,"y-m-d"),
-					"status" => $status
+					"status" 	=> $status
 					);
 
 		$this->model->update_offense_user($offense);
@@ -125,7 +120,7 @@ class Welcome extends CI_Controller {
 		$this->load->library('upload', $config);
 		$this->upload->do_upload('pphoto');
 		$file_name=$this->upload->data();
-
+		$password = md5($this->input->post("password"));
 		if($this->form_validation->run())
 		{
 			$this->load->model("model");
@@ -137,18 +132,18 @@ class Welcome extends CI_Controller {
 			}
 
 			$data_insert = array(
-				"fname" => $this->input->post("fname"),
-				"lname" => $this->input->post("lname"),
-				"password" => $this->input->post("password"),
-				"username" => $this->input->post("username"),
-				"telephone_1" => $this->input->post("contact_number"),
-				"telephone_2" => $this->input->post("contact_number1"),
-				"email" => $this->input->post("email"),
-				"user_type" => $this->input->post("usertype"),
-				"address" => $this->input->post("address"),
-				"status" => $status,
-				"date_registered" => date('y-m-d'),
-				"photo" => $this->input->post("pphoto"),
+				"fname" 		=> $this->input->post("fname"),
+				"lname" 		=> $this->input->post("lname"),
+				"password" 		=> $password,
+				"username" 		=> $this->input->post("username"),
+				"telephone_1" 	=> $this->input->post("contact_number"),
+				"telephone_2" 	=> $this->input->post("contact_number1"),
+				"email" 		=> $this->input->post("email"),
+				"user_type" 	=> $this->input->post("usertype"),
+				"address" 		=> $this->input->post("address"),
+				"status" 		=> $status,
+				"created_at" 	=> date('y-m-d'),
+				"photo" 		=> $this->input->post("pphoto"),
 			);
 
 			$this->model->insert_data_users($data_insert);
@@ -167,11 +162,11 @@ class Welcome extends CI_Controller {
 		$this->load->library('upload');
 		$this->load->model("model");
 			$data_insert = array(
-				"booking_id" => $this->input->post("booking_id"),
-				"report_from" => $this->input->post("report_from"),
-				"report_to" => $this->input->post("violator"),
-				"report_photo" => $this->input->post("evidence"),
-				"report_details" => $this->input->post("report_info"),
+				"booking_id" 		=> $this->input->post("booking_id"),
+				"report_from" 		=> $this->input->post("report_from"),
+				"report_to" 		=> $this->input->post("violator"),
+				"report_photo" 		=> $this->input->post("evidence"),
+				"report_details" 	=> $this->input->post("report_info"),
 			);
 
 			$this->model->insert_data_report($data_insert);
@@ -203,17 +198,17 @@ class Welcome extends CI_Controller {
 			}
 
 			$data_insert = array(
-				"client_id" => $this->input->post("client"),
-				"performer_id" => $this->input->post("performer"),
-				"event_name" => $this->input->post("event_name"),
-				"down_payment" => $this->input->post("dp"),
-				"full_amount" => $this->input->post("payment"),
-				"event_time" => $this->input->post("time_event"),
-				"event_date" => $this->input->post("date_event"),
-				"venue_name" => $this->input->post("venue"),
-				"notes" => $this->input->post("publicinfo"),
-				"status" => $status,
-				"date_booked" => date('y-m-d')
+				"client_id" 	=> $this->input->post("client"),
+				"performer_id" 	=> $this->input->post("performer"),
+				"event_name" 	=> $this->input->post("event_name"),
+				"down_payment" 	=> $this->input->post("dp"),
+				"full_amount" 	=> $this->input->post("payment"),
+				"event_time" 	=> $this->input->post("time_event"),
+				"event_date" 	=> $this->input->post("date_event"),
+				"venue_name" 	=> $this->input->post("venue"),
+				"notes" 		=> $this->input->post("publicinfo"),
+				"status" 		=> $status,
+				"date_booked" 	=> date('y-m-d')
 			);
 
 			$this->model->insert_data_bookings($data_insert);
@@ -223,8 +218,8 @@ class Welcome extends CI_Controller {
 		{
 			echo '<script> alert("invalid inputs, Try again");</script>';
 			$this->load->model('model');
-			$data["fetch_data_client"] = $this->model->fetch_data_client();	
-			$data["fetch_data_perf"] = $this->model->fetch_data_perf();
+			$data["fetch_data_client"] 	= $this->model->fetch_data_client();	
+			$data["fetch_data_perf"] 	= $this->model->fetch_data_perf();
 			$this->load->view('/admin/addevent',$data);
 		}
 	
@@ -233,8 +228,8 @@ class Welcome extends CI_Controller {
 	public function addevent()
 	{
 		$this->load->model('model');
-		$data["fetch_data_client"] = $this->model->fetch_data_client();	
-		$data["fetch_data_perf"] = $this->model->fetch_data_perf();
+		$data["fetch_data_client"] 	= $this->model->fetch_data_client();	
+		$data["fetch_data_perf"] 	= $this->model->fetch_data_perf();
 		$this->load->view('/admin/addevent',$data);
 	}
 	public function editprofile()
@@ -262,9 +257,9 @@ class Welcome extends CI_Controller {
 	public function reports()
 	{
 		$this->load->model('model');
-		$data["fetch_data_user"] = $this->model->fetch_data_user();
-		$data["fetch_data_event"] = $this->model->fetch_data_event();
-		$data["fetch_data_report"] = $this->model->fetch_data_report();
+		$data["fetch_data_user"] 	= $this->model->fetch_data_user();
+		$data["fetch_data_event"] 	= $this->model->fetch_data_event();
+		$data["fetch_data_report"] 	= $this->model->fetch_data_report();
 		$this->load->view('/admin/reports',$data);
 	}
 	public function notifications()
