@@ -2,7 +2,7 @@
     class Login_Model extends CI_Model {
         public function index (){
             if($this->session->userdata('user_id')){
-				redirect('clients/profile');
+				// redirect('clients/profile');
 			}
 			$templates['title'] = 'Login';
 			
@@ -32,14 +32,14 @@
 				if(!$query){
 					$this->session->set_flashdata('user_not_matched', 'Invalid Email address or Password');
 					$this->session->set_flashdata('email', $this->input->post('email'));
-					redirect('clients/login');
+					redirect('login');
 				}else{
 					// echo $query['password'];
 					// die;
 					$this->session_model->session_user($query);
-					$this->session->set_flashdata('user_logged_in', 'Welcome back '.$this->session->userdata('username').'.');
+					$this->session->set_flashdata('success_profile_page_message', 'Welcome back '.$this->session->userdata('fname').' '.$this->session->userdata('lname').'!');
 
-					redirect ('clients/profile');
+					redirect ('profile');
 				}
 			}
         }

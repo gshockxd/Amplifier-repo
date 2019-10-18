@@ -6,7 +6,7 @@
 		}
 		public function logout (){
 			$this->session_model->unset_user();
-			redirect('clients/profile');
+			redirect('profile');
 		}
 		public function login_attempt(){
 			$this->login_model->login_attempt();
@@ -48,7 +48,6 @@
 			$this->profile_model->profile_password_update();
 		}
 		public function file_check(){
-			die('nice');
 			if(!$this->session->userdata('user_id')){
 				// redirect('clients/profile');
 			}

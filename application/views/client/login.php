@@ -1,6 +1,6 @@
 
 <div class="container py-3 form-signin">
-    <?php echo form_open('clients/login_attempt'); ?>
+    <?php echo form_open('login_attempt'); ?>
       <div class="text-center mb-4">
         <img class="mb-4 border border-danger " src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Login to <p>AMPLIFIER</p></h1>

@@ -38,10 +38,10 @@
 				$check = $this->client_model->profile_update_password($data);
 				if($check === FALSE){
 					$this->session->set_flashdata('pass_old_not_matched', 'Current Password Not Matched');
-					redirect('clients/profile_password_edit_page');
+					redirect('profile_password_edit_page');
 				}else{
-					$this->session->set_flashdata('pass_matched', 'Password Has Been Updated!');
-					redirect('clients/profile_password_edit_page');
+					$this->session->set_flashdata('pass_matched', 'Your Password Has Been Updated!');
+					redirect('profile_password_edit_page');
 				}
 			}
 		}
@@ -139,9 +139,9 @@
 				$this->client_model->update_user($client_image);
 				$session_user = $this->client_model->get_user($this->session->userdata('email'));	
 				$this->session_model->session_user($session_user);
-				$this->session->set_flashdata('user_updated', 'User '.$this->session->userdata('username').' has been updated!');		
+				$this->session->set_flashdata('user_updated', 'Your profile has been updated!');		
 	
-				redirect('clients/profile_info'); 
+				redirect('profile_info'); 
 				// hi;
 			}
 		}	

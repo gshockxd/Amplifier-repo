@@ -70,7 +70,7 @@
 								<a class="nav-link" href="#">Events</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="history">History</a>
+								<a class="nav-link" href="history_client">History</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="booking">Book</a>
@@ -110,7 +110,7 @@
 									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
 								</li>
 								<li class="nav-item">
-									<a href="logout" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
+									<a href="logout_client" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
 								</li>
 							<?php endif;?>
 			        	</ul>

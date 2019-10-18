@@ -54,9 +54,11 @@
                             <th scope="col">ID</th>
                             <th scope="col">VENUE</th>
                             <th scope="col">CLIENT NAME</th>
+                            <th scope="col">PERFORMER NAME</th>
                             <th scope="col">DATE</th>
                             <th scope="col">CLIENT RATING</th>
                             <th scope="col">ARTIST RATING</th>
+                            <th scope="col">STATUS</th>  
                             <th scope="col">ACTION</th>
                             </tr>
                         </thead>
@@ -68,13 +70,14 @@
                                 { 
                         ?>
                             <tr>
-                                <th scope="row"><?php echo $row->feedback_id; ?></th>
+                                <th scope="row"><?php echo $row->booking_id; ?></th>
                                 <th><?php echo $row->venue_name; ?></th>
-                                <td><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></td>
-                                <td><?php echo $row->event_date; ?></td>
+                                <td><?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?></td>
+                                <td><?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?></td>
+                                <td><?php echo  date('F d, Y', strtotime($row->event_date)); ?></td>
                                 <td>
                                 <?php
-                                for($i=0;$i<$row->rating; $i++)
+                                for($i=0;$i<$row->client_rating; $i++)
                                 { 
                                 ?>
                                     <div class="fa fa-star"></div>
@@ -84,42 +87,18 @@
                                 </td>
                                 <td>
                                 <?php
-                                for($i=0;$i<$row->rating; $i++)
+                                for($i=0;$i<$row->performer_rating; $i++)
                                 { 
                                 ?>
                                     <div class="fa fa-star"></div>
                                 <?php
                                 }
                                 ?>
+                                <th><?php echo $row->status; ?></th>
                                 <td>
-                                    <a href="histview/<?php echo $row->feedback_id; ?>"><button class="btn btn-outline-info fa fa-eye"></button></a>
-                                    <a href="#" data-toggle="modal" data-target="#delhist"><button class="btn btn-outline-danger fa fa-trash"></button></a>
+                                    <a href="eventview/<?php echo $row->booking_id; ?>"><button class="btn btn-outline-info fa fa-eye"></button></a>
                                 </td>
                             </tr>
-                            
-                        <!-- delete modal -->
-                            <div class="modal fade" id="delhist" tabindex="-1" role="dialog" aria-labelledby="delhist" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="deleteuser"><b>DELETE<b></h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <H5>Are you Sure you want to delete this history details</H5>
-                                        </div>
-                                        <div class="modal-footer">
-                                        <a href="delete_history/<?php echo $row->feedback_id; ?>" type="button" >
-                                            <button class="btn btn-danger">YES</button>
-                                        </a>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end -->
                         <?php
                                 }
                         ?>

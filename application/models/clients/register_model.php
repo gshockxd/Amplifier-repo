@@ -16,8 +16,8 @@
 
 			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required' => 'Please Input First Name', 'alpha'=>'First Name not valid, letters only'));
 			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required' => 'Please input Last Name', 'alpha'=>'Last Name not valid, letters only'));
-			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
-			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
+			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[11]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Contact Number should be exactly 11 digits'));
+			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric|exact_length[11]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Contact Number should be exactly 11 digits'));
 			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid'));
 			$this->form_validation->set_rules('pass', 'Password', 'required', array('required' => 'Please input Password'));
 			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]', array('matches'=>'Password not matched'));
@@ -67,12 +67,43 @@
 
 				}
 
-				$this->client_model->create_user($client_image);
-				$session_user = $this->client_model->get_user($this->input->post('email'));
+				$this->register_model->user_insert($client_image);
+				$session_user = $this->register_model->user_select($this->input->post('email'));
 				$this->session_model->session_user($session_user);
 
 				$this->session->set_flashdata('success_profile_page_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
-				redirect('clients/profile');
+				redirect('profile');
 			}
+		}
+		public function user_select($email){
+            $query = $this->db->get_where('users', array('email'=>$email));
+            return $query->row_array();
+        }
+		public function user_insert($performer_image){
+            $date = date('Y-m-j H:i:s');
+            $data = array(
+                'user_id' => null,
+                'user_type'=> $this->input->post('user_type'),
+                'username'=> $this->input->post('uname'),
+                'password' => md5($this->input->post('pass')),
+                'status'=> 'pending',
+                'fname'=> $this->input->post('fname'),
+                'lname'=> $this->input->post('lname'),
+                'email' => $this->input->post('email'),
+                'address'=> $this->input->post('address'),
+                'rate'=>0,
+                'photo'=> $performer_image,
+                'telephone_1'=> $this->input->post('number1'),
+                'telephone_2'=> $this->input->post('number2'),
+                'offense' => 0,
+                'report_count' => 0,
+                'media_fk' => null,
+                'created_at' => $date,
+				'updated_at' => $date
+            );
+            // echo date('Y-m-j H:i:s');
+            // die;
+
+            return $this->db->insert('users', $data);
         }
     }

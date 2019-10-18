@@ -10,7 +10,7 @@
 				<a class="btn btn-outline-primary" href="p_register">Service/Performer</a>
 			</div>
 			<div class="col-sm">
-				<a class="btn btn-outline-info" href="index">Admin</a>
+				<a class="btn btn-outline-info" href="users">Admin</a>
 			</div>
 		</div>
 	</div>

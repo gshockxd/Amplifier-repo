@@ -13,7 +13,7 @@
 		<div class="row py-3">
 			<div class="col-sm">
 				<p class="text-muted">Place Description Here</p>
-				<textarea name="desc" id="editor1" cols="30" rows="10"></textarea>
+				<textarea name="desc" id="ckeditor" cols="30" rows="10"></textarea>
 				<div class="d-flex justify-content-center ">
 					<a href="#" class="mt-3 btn btn-outline-dark">BOOK EVENT</a>		
 				</div>

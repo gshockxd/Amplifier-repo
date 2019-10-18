@@ -1,4 +1,4 @@
-<?php echo form_open_multipart('clients/register_user'); ?>
+<?php echo form_open_multipart('register_attempt'); ?>
 	<div class="container py-3 col-lg-6 pt-3">
 		
 		<p class="h2 text-center"><img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" class="mr-5 mb-3" alt="" width="72" height="72"><?=$title ?></p>

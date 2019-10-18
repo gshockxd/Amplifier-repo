@@ -95,9 +95,9 @@
                             <div class="dropdown-header">Action:</div>
                               <a class="dropdown-item fas fa-eye fa-fw" href="profile/<?php echo $row->user_id; ?>">&nbsp View</a>
                             <div class="dropdown-divider"></div>
-                              <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff">&nbsp Add Offence</a>
+                              <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#" data-toggle="modal" data-target="#addoff<?php echo $row->user_id; ?>">&nbsp Add Offence</a>
                             <div class="dropdown-divider"></div>
-                              <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser">&nbsp Block</a>
+                              <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#" data-toggle="modal" data-target="#blckuser<?php echo $row->user_id; ?>">&nbsp Block</a>
                             <div class="dropdown-divider"></div>
                               <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal" data-target="#deluser<?php echo $row->user_id; ?>">&nbsp Delete</a>
                           </div>
@@ -154,6 +154,62 @@
                                     </div>
                                 </div>
                             </div>
+                        <!-- end -->
+                         <!-- Add Penalty Modal -->
+                          <div class="modal fade" id="addoff<?php echo $row->user_id; ?>" aria-labelledby="addoff" aria-hidden="true" style="width:1000px">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <form method="post" action="add_offense/<?php echo $row->user_id; ?>">
+
+                                    <div class="modal-header">
+                                        <H5>SELECT OFFENCE </H5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="1"> &nbsp  &nbsp 1st Offence: Ban account for 3 days </label> 
+                                        </div>
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="2"> &nbsp  &nbsp 2nd Offence: Ban account for 30 days </label> 
+                                        </div>
+                                        <div class="form-check"> <label class="form-check-label"> 
+                                            <input class="form-check-input" type="radio" name="offenseNo" id="offenseNo" value="3"> &nbsp  &nbsp 3rd Offence: Permanent block of account</label> 
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href="add_offense/<?php echo $row->user_id; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                                    </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end -->
+                        
+                        <!-- block user modal -->
+                        <div class="modal fade" id="blckuser<?php echo $row->user_id; ?>" tabindex="-1" role="dialog" aria-labelledby="blckuser" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                  BLOCK USER
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                  <H5>Are you sure you want to Permanently block <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>?</H5>
+                              </div>
+                              <div class="modal-footer">
+                                  <a href="ban/<?php echo $row->user_id; ?>" type="button" > <button class="btn btn-danger">YES</button></a>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <!-- end -->
           <?php
             }
@@ -302,61 +358,7 @@
                           </div>
                       </div>
           <!-- end -->
-          <!-- Add Penalty Modal -->
-          <div class="modal fade" id="addoff" aria-labelledby="addoff" aria-hidden="true" style="width:1000px">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <H5>SELECT OFFENCE</H5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-check"> 
-                                            <label class="form-check-label"> 
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked=""> &nbsp  &nbsp Increase Offence </label> 
-                                        </div> 
-                                        <div class="form-check"> <label class="form-check-label"> 
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option2"> &nbsp  &nbsp 1st Offence: Ban account for 72 hours </label> 
-                                        </div>
-                                        <div class="form-check"> <label class="form-check-label"> 
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3"> &nbsp  &nbsp 2nd Offence: Ban account for 30 days </label> 
-                                        </div>
-                                        <div class="form-check"> <label class="form-check-label"> 
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option4"> &nbsp  &nbsp 3rd Offence: Delete Account</label> 
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-success">SUBMIT</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-          <!-- end -->
-        
-        <!-- block user modal -->
-        <div class="modal fade" id="blckuser" tabindex="-1" role="dialog" aria-labelledby="blckuser" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                              BLOCK USER
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                        <div class="modal-body">
-                            <H5>Are you sure you want to Block username1234?</H5>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger">YES</button>
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                        </div>
-                    </div>
-                </div>
-        <!-- end -->
+         
 
  
 

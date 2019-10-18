@@ -1,4 +1,4 @@
-<?php echo form_open('clients/profile_password_update'); ?>
+<?php echo form_open('profile_password_update'); ?>
     <div class="container py-3">
         <?php if($this->session->flashdata('pass_matched')): ?>
             <div class="alert alert-success d-flex justify-content-center alert-block">

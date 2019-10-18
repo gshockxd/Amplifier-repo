@@ -13,6 +13,50 @@ class Welcome extends CI_Controller {
 		$data["fetch_data_user"] = $this->model->fetch_data_user();
 		$this->load->view('/admin/users', $data);
 	}
+	public function offense_count($id)
+	{
+		$this->load->model('model');
+		$this->load->library('upload');
+		if($this->input->post("offenseNo")=="1")
+			{
+				$date=date('y-m-d');
+				$block_date=date_create($date);
+				date_add($block_date, date_interval_create_from_date_string("3 days"));
+				echo date_format($block_date,"y-m-d");
+				$status="block";
+			}
+		if($this->input->post("offenseNo")=="2")
+		{
+			$date=date('y-m-d');
+			$block_date=date_create($date);
+			date_add($block_date, date_interval_create_from_date_string("30 days"));
+			echo date_format($block_date,"y-m-d");
+			$status="block";
+		}
+		if($this->input->post("offenseNo")=="3")
+		{
+			$status="banned";
+			$block_date=date_create("0000-00-00");
+		}
+		$this->form_validation->set_rules("offenseNo", "offense number", 'numeric');
+			$offense= array(
+					"offense" => $this->input->post("offenseNo"),
+					"block_end" => date_format($block_date,"y-m-d"),
+					"status" => $status
+					);
+
+		$this->model->update_offense_user($offense);
+		redirect(base_url() ."users");
+	}
+	public function ban($id)
+	{
+		$this->load->model('model');
+		$this->load->library('upload');
+		$status="banned";
+		$ban= array("status" => $status);
+		$this->model->update_ban_user($ban);
+		redirect(base_url() ."users");
+	}
 	public function delete_user($id)
 	{
 		$this->load->model('model');
