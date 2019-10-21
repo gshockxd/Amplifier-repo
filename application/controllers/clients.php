@@ -46,31 +46,31 @@
 		}
 		public function profile_info(){
 			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			// $this->session_model->user_type_check_client();
 			
 			$this->profile_model->profile_info();
 		}
 		public function profile_edit_page(){
 			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			// $this->session_model->user_type_check_client();
 			
 			$this->profile_model->profile_edit_page();
 		}
 		public function profile_edit_info(){
 			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			// $this->session_model->user_type_check_client();
 			
 			$this->profile_model->profile_edit_info();
 		}
 		public function profile_password_edit_page(){
 			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			// $this->session_model->user_type_check_client();
 			
 			$this->profile_model->profile_password_edit_page();
 		}
 		public function profile_password_update(){
 			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			// $this->session_model->user_type_check_client();
 			
 			$this->profile_model->profile_password_update();
 		}

@@ -35,6 +35,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/datatables.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/sticky-footer-navbar.css">
 	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-flatly.css"> -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-<?php echo $theme == 'darkly' ? 'darkly' : 'flatly'; ?>.css">
 	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"> -->
@@ -55,7 +56,7 @@
 <body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-bottom">
 		    <div class="container">
-		        <a class="navbar-brand" href="p_profile">AMPLIFIER</a>
+		        <a class="navbar-brand" href="<?php echo base_url() ?>p_profile">AMPLIFIER</a>
 		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		        <span class="navbar-toggler-icon"></span>
 		        </button>
@@ -64,25 +65,19 @@
 			        <ul class="navbar-nav mr-auto">
 						<?php if($this->session->userdata('user_id')): ?>
 							<li class="nav-item active">
-								<a class="nav-link" href="p_profile">Dashboard <span class="sr-only">(current)</span></a>
+								<a class="nav-link" href="<?php echo base_url() ?>p_profile">Dashboard <span class="sr-only">(current)</span></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Notifications</a>
+								<a class="nav-link" href="<?php echo base_url() ?>p_bookings">Bookings</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Bookings</a>
+								<a class="nav-link" href="<?php echo base_url() ?>p_pricing">Pricing</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="p_history">History</a>
+								<a class="nav-link" href="<?php echo base_url() ?>p_package">Package</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="p_pricing">Pricing</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="p_package">Package</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="p_chat">Chat</a>
+								<a class="nav-link" href="<?php echo base_url() ?>p_chat">Chat</a>
 							</li>
 						<?php endif; ?>
 			        </ul>
@@ -93,10 +88,10 @@
 				            </li> -->
 							<?php if(!$this->session->userdata('user_id')): ?>
 								<li class="nav-item">
-									<a href="login" class="nav-link">Login</a>
+									<a href="<?php echo base_url() ?>login" class="nav-link">Login</a>
 								</li>
 								<li class="nav-item">
-									<a href="p_register" class="nav-link">Register</a>
+									<a href="<?php echo base_url() ?>p_register" class="nav-link">Register</a>
 								</li>
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
@@ -107,10 +102,10 @@
 									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope fa-lg"></i></a>
 								</li>
 								<li class="nav-item">
-									<a href="profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
+									<a href="<?php echo base_url() ?>profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
 								</li>
 								<li class="nav-item">
-									<a href="logout_user" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
+									<a href="<?php echo base_url() ?>logout_user" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
 								</li>
 							<?php endif;?>
 			        	</ul>

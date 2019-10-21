@@ -51,9 +51,11 @@ $route['p_register_attempt']            = 'performers/register_attempt';
 $route['p_profile']                     = 'performers/profile';
 $route['p_notifications']               = 'performers/notifications';
 $route['p_bookings']                    = 'performers/bookings';
-$route['p_history']                     = 'performers/history';
 $route['p_pricing']                     = 'performers/pricing';
+$route['p_pricing_validate']            = 'performers/pricing_validate';
 $route['p_package']                     = 'performers/package';
+$route['p_package_edit_page/(:num)']    = 'performers/package_edit_page/$1'; 
+$route['p_package_update']              = 'performers/package_update';
 $route['p_chat']                        = 'performers/chat';
 
 

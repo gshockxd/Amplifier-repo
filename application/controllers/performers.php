@@ -15,29 +15,38 @@
 			$this->load->view('performer/profile');
 			$this->load->view('inc/footer');
 		}
-		public function history(){
+		public function bookings(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();
 
-			$this->p_history_model->index();
+			$this->p_booking_model->index();
 		}
 		public function pricing(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();
-			$templates['title'] = 'Pricing';
+			
+			$this->p_pricing_model->index();
+		}
+		public function pricing_validate(){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_performer();
 
-			$this->load->view('inc/header-performer', $templates);
-			$this->load->view('performer/pricing');
-			$this->load->view('inc/footer');
+			$this->p_pricing_model->pricing_validate();
 		}
 		public function package(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();
-			$templates['title'] = 'Package';
 
-			$this->load->view('inc/header-performer', $templates);
-			$this->load->view('performer/package');
-			$this->load->view('inc/footer');
+			$this->p_package_model->index();
+		}
+		public function package_edit_page(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_performer();
+
+			$this->p_package_model->package_edit_page();
+		}
+		public function package_update(){
+			$this->p_package_model->package_update();
 		}
 		public function chat(){
 			$this->session_model->session_check();		

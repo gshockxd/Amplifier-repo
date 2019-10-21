@@ -37,7 +37,7 @@
 	                	<p class="text-uppercase yellow-brown"><?php echo $b['event_name'] ?></p>
 					</td>
 					<td>
-						<p><?php echo $b['artist_type'] ?></p>
+						<p class="text-uppercase"><?php echo $b['artist_type'] ?></p>
 					</td>
 	                <td class="d-flex justify-content-center ">
 	                	<a href="#" class="btn btn-outline-success mr-2 " data-toggle="tooltip" data-placement="top" title="Accept"><i class="fas fa-check "></i></a>

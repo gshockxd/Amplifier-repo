@@ -1,3 +1,5 @@
+<?php if($this->session->userdata('user_type') == 'client'): ?>
+
 <?php
 	// session_start();
 	if(!isset($_SESSION['theme'])){
@@ -144,3 +146,7 @@
     </div>
   </div>
 </div>
+
+<?php elseif($this->session->userdata('user_type') == 'performer'): ?>
+	<?php $this->load->view('inc/header-performer'); ?>
+<?php endif; ?>
