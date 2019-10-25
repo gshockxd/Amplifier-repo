@@ -7,6 +7,7 @@
                         Package Name:
                     </div>
                     <div class="col-md-9">
+                        <input type="hidden" name="id" value="<?php echo $this->uri->segment(2); ?>">
                         <input type="text" name="package_name" class="form-control <?php echo form_error('package_name') ? 'is-invalid' : '' ?> " value="<?php echo isset($package_name) ? $package_name : '' ?>">    
                         <div class="invalid-feedback">
                             <?php echo form_error('package_name') ?>

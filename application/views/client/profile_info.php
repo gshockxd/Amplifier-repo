@@ -57,6 +57,20 @@
                                 <div class="col font-weight-bold"><?php echo $this->session->userdata('address'); ?></div>
                             </div>
                         </li>
+                        <?php if($this->session->userdata('artist_type') != null): ?>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Service</div>
+                                    <div class="col font-weight-bold text-capitalize"><?php echo $this->session->userdata('artist_type'); ?></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Service Description</div>
+                                    <div class="col font-weight-bold"><?php echo $this->session->userdata('artist_desc'); ?></div>
+                                </div>
+                            </li>
+                        <?php endif; ?>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Offense</div>

@@ -1,8 +1,9 @@
+<!-- <div class="mb-5"></div>
 <footer class="footer bg-light">
     <div class="container">
 		<small> © 2019 AMPLIFIER</small>
     </div>
-</footer>
+</footer> -->
 
 	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>

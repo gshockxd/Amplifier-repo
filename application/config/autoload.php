@@ -142,6 +142,7 @@ $autoload['model'] = array(
     'clients/package_model',
     'clients/register_model',
     'clients/login_model',
+    'clients/event_model',
 
     'performers/p_register_model',
     'performers/p_profile_model',

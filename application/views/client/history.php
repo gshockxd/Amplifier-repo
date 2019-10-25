@@ -54,7 +54,7 @@
 				<?php endforeach; ?>
 			<?php else: ?>			
 				<tr>
-					<td colspan="100%" class="text-center"><h4 class="text-muted">No Event Found</h4></td>
+					<td colspan="100%" class="text-center"><h4 class="text-muted">No Entries Found</h4></td>
 				</tr>
 			<?php endif; ?>
         </tbody>

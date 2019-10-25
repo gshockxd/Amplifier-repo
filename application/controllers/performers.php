@@ -48,6 +48,9 @@
 		public function package_update(){
 			$this->p_package_model->package_update();
 		}
+		public function p_package_delete(){
+			$this->p_package_model->p_package_delete();
+		}
 		public function chat(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();

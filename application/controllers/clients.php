@@ -26,11 +26,35 @@
 			
 			$this->history_model->index();
 		}
+		public function events (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->event_model->index();
+		}
+		public function event_info (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->event_model->event_info();
+		}
 		public function booking(){
 			$this->session_model->session_check();			
 			$this->session_model->user_type_check_client();
 			
 			$this->booking_model->index();
+		}
+		public function booking_book_event(){
+			$this->session_model->session_check();			
+			$this->session_model->user_type_check_client();
+			
+			$this->booking_model->booking_book_event();
+		}
+		public function booking_attempt(){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->booking_model->booking_attempt();
 		}
 		public function calendar(){
 			$this->session_model->session_check();			
