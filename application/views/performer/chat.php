@@ -1,165 +1,143 @@
-<?php// $title="Service Chat: AMPLIFIER";?>
-<?php// include '../inc/header.php'; ?>
 
-<div class="container py-3">
-    <div class="row"> 
-        <div class="col-sm-4"> <!-- {{-- START OF LVL 1--}} -->
-            <p class="font-weight-bold text-center red-brown h5">Messages</p>
-            <hr>
-            <!-- {{-- <div class="row">
-                    {{-- lvl 1 
-                <div class="col-sm">
-                    {{-- lvl 1.1 
-                    <h2 class="text-primary">Recent</h2>
-                </div>  
-                <div class="col-sm">
-                    {{-- lvl 1.2 
-                    <input type="text" placeholder="search">
-                </div>
-            </div> --}} -->
-            <div class="inbox-chat">
-                <div id="chat-2">
-                    <a href="chat.php" class="btn btn-outline-chat">
-                        <div class="row text-chat">
-                           <!--  {{-- lvl 1.2 --}} -->
-                            <div class="col-sm-2">
-                                <!-- {{-- lvl 1.2.1 --}} -->
-                                <img src="<?php echo base_url(); ?>assets/img/pp.png " alt="" class="avatar-img rounded-circle">
-                            </div>
-                            <div class="col-sm-10">
-                               <!--  {{-- lvl 1.2.2 --}} -->
-                                <div class="row">
-                                    <div class="col-sm-7 ">
-                                        <p class="">Nike Marti Caballes</p>
-                                    </div>
-                                    <div class="col-sm-5 ">
-                                        <p class="h6 ">11:01 PM</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm">
-                                       <!--  {{-- lvl 1.2.2.1 --}} -->
-                                        <p class="">You: Test, which is a new appr..</p>
-                                    </div>
-                                </div>
-                            </div>                    
-                        </div>
-                    </a>
-                </div>
-                <div class="py-1"></div>
+<?php echo form_open('p_chat_send_search_message/'.$this->uri->segment(2)); ?>
 
-                <?php for($x=0; $x<10; $x++){ ?>
-                    <div id="chat-2">
-                        <a href="" class="btn btn-outline-chat">                            
-                            <div class="row text-chat">
-                               <!--  {{-- lvl 1.2 --}} -->
-                                <div class="col-sm-2">
-                                    <!-- {{-- lvl 1.2.1 --}} -->
-                                    <img src="<?php echo base_url(); ?>assets/img/pp.png " alt="" class="avatar-img rounded-circle">
-                                </div>
-                                <div class="col-sm-10">
-                                   <!--  {{-- lvl 1.2.2 --}} -->
-                                    <div class="row">
-                                        <div class="col-sm-7 ">
-                                            <p class=" ">Nike Marti Caballes</p>
-                                        </div>
-                                        <div class="col-sm-5 ">
-                                            <p class=" h6">11:01 PM</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm">
-                                           <!--  {{-- lvl 1.2.2.1 --}} -->
-                                            <p class="">You: Test, which is a new appr..</p>
-                                        </div>
-                                    </div>
-                                </div>                    
-                            </div>
-                        </a>
-                    </div>
-                    <div class="py-1"></div>
-                <?php } ?>
+<input type="hidden" value="<?php echo $this->uri->segment(2); ?>" name="id">
 
-            </div>
-
-        </div>  <!-- {{-- END OF lvl 1--}} -->
-
-        <div class="col-sm-8">
-            <p class="h5 font-weight-bold red-brown d-flex justify-content-center">Nike Marti Caballes</p>
-            <hr class="">
-            <!-- {{-- Incoming Msg --}} -->
-            <div class="inbox-convo">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <img src="<?php echo base_url(); ?>assets/img/okarin.png " class="msg-img rounded-circle" alt="">
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="inbox-padding inbox-bg-incoming float-left">Test work directly with our designers and suppliers, and sell direct to you, which means quality, exclusiv </p>
-                        <p class="text-muted msg-time clear-left">5:56 PM</p>
-                    </div>
-                    <div class="col-sm-4 ">
-                        <!-- {{-- 2.3 --}} -->
-                    </div>
-                </div>
-
-                <!-- {{-- Outgoing Msg --}} -->
-                <div class="row ">
-                    <div class="col-sm-4 ">
-                        <!-- {{-- 3.1 --}} -->
-                    </div>
-                    <div class="col-sm-6 ">
-                        <p class="float-right inbox-padding inbox-bg-yellow-brown text-white">Test Test work directly with our designers and suppliers, and sell direct to you, which means quality, exclusiv </p>
-                        <p class="d-flex msg-time text-muted justify-content-end clear-right">6:44 PM</p>
-                    </div>
-                    <div class="col-sm-1">
-                        <img src="<?php echo base_url(); ?>assets/img/okarin.png" class="msg-img rounded-circle align-items-center" alt="">
-                    </div>
-                </div>
-                <!-- {{-- end of outgoing msg --}} -->
-
-                    <?php for($x=0; $x<10; $x++){ ?>
-                    <!-- {{-- Incoming Msg --}} -->
-                        <div class="row">
-                            <div class="col-sm-1">
-                                <img src="<?php echo base_url(); ?>assets/img/okarin.png " class="msg-img rounded-circle" alt="">
-                            </div>
-                            <div class="col-sm-6">
-                                <p class="inbox-padding inbox-bg-incoming float-left">Test work directly with our designers and suppliers, and sell direct to you, which means quality, exclusiv </p>
-                                <p class="text-muted msg-time clear-left">5:56 PM</p>
-                            </div>
-                            <div class="col-sm-4 ">
-                                <!-- {{-- 2.3 --}} -->
-                            </div>
-                        </div>
+    <div class="container py-3">
+    <?php 
         
-                        <!-- {{-- Outgoing Msg --}} -->
-                        <div class="row ">
-                            <div class="col-sm-4 ">
-                                <!-- {{-- 3.1 --}} -->
-                            </div>
-                            <div class="col-sm-6 ">
-                                <p class="float-right inbox-padding inbox-bg-yellow-brown text-white">Test Test work directly with our designers and suppliers, and sell direct to you, which means quality, exclusiv </p>
-                                <p class="d-flex msg-time text-muted justify-content-end clear-right">6:44 PM</p>
-                            </div>
-                            <div class="col-sm-1">
-                                <img src="<?php echo base_url(); ?>assets/img/okarin.png  " class="msg-img rounded-circle align-items-center" alt="">
-                            </div>
-                        </div>
-                        <!-- {{-- end of outgoing msg --}} -->
-                    <?php } ?>
-            </div>
-            <div class="c-hr"></div>
-            <div class="row ">
-                <div class="col-sm-11">
-                    <!-- <input type="text" placeholder="Type a message..." class="form-group form-control"> -->
-                    <textarea name="" id="" class="form-group form-control" rows="1"></textarea>
+                // echo '<pre>';
+                // print_r($chats);
+                // echo '</pre>';
+                // die();
+    ?>
+    <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-8">
+                <div class="form-group row">
+                    <label for="" class="col-md-1 col-form-label"></label>
+                    <div class="col-md-10">
+                        <input type="text" id="userName" name="userName" class="form-control <?php echo form_error('userID') ? 'is-invalid' : '' ?> <?php echo $this->session->flashdata('user_not_found') ? 'is-invalid' : '' ?>"  data-toggle="tooltip" data-placement="top" title="<?php echo form_error('userID'); ?>" placeholder="<?php echo form_error('userID') ? $this->session->flashdata('user_not_found') ? $this->session->flashdata('user_not_found') : form_error('userID').'!' : 'Type a name of a person' ?>   ">
+                    </div>
+                    <button type="submit" name="search" value="search" class="col-md-1 col-form-label unstyled-button red-brown " ><i class="fas fa-search fa-lg"> </i></button>
+
+                    <!-- <div class="col-md-1 col-form-label"><a href="" type="submit" class="red-brown"><i class="fas fa-search fa-lg"></i></a></div>\ -->
                 </div>
-                <div class="col-sm-1">
-                    <a href="#">send icon</a>
+            </div>
+        </div>
+
+        <div class="row"> 
+            <div class="col-md-4"> <!-- {{-- START OF LVL 1--}} -->
+                <p class="font-weight-bold text-center red-brown h5">Messages</p>
+                <hr>
+                <div class="inbox-chat">
+
+                    <?php foreach($chats['left_panel'] as $c): ?>
+                        <div id="chat-2">
+                            <a href="<?php echo base_url(); echo 'p_chat/'; echo $c['user_id']?>" class="btn btn-outline-chat col-md-12">
+                                <div class="row text-chat">
+                                <!--  {{-- lvl 1.2 --}} -->
+                                    <div class="col-md-2">
+                                        <!-- {{-- lvl 1.2.1 --}} -->
+                                        <img src="<?php echo base_url(); echo $c['photo'] ?>" alt="" class="avatar-img rounded-circle">
+                                    </div>
+                                    <div class="col-md-10 ">
+                                    <!--  {{-- lvl 1.2.2 --}} -->
+                                        <div class="row ">
+                                            <div class="col-md-8 ">
+                                                <p class="text-capitalize"><?php echo $c['fname'] ?> <?php echo $c['lname'] ?></p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <small><?php echo date('h:i a m/d/y', strtotime($c[0]['created_at'])) ?></small>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <!--  {{-- lvl 1.2.2.1 --}} -->
+                                                <p class="d-flex justify-content-start"><?php echo $c[0]['message'] ?></p>
+                                            </div>
+                                        </div>
+                                    </div>                    
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                    <div class="py-1"></div>
+                </div>
+            </div>  <!-- {{-- END OF lvl 1--}} -->
+
+            <div class="col-md-8">
+                <p class="h5 font-weight-bold red-brown d-flex justify-content-center"><?php echo $user_info['fname'] ?> <?php echo $user_info['lname'] ?></p>
+                <hr class="">
+                <!-- {{-- Incoming Msg --}} -->
+                <div class="inbox-convo">
+
+                    <?php foreach($chats['incoming_message'] as $ch): ?>
+                        <?php if($ch['incoming_id'] == $this->session->userdata('user_id')): ?>
+                        <!-- {{-- Incoming Msg --}} -->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <img src="<?php echo base_url(); echo $user_info['photo']?>" class="msg-img rounded-circle" alt="">
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="inbox-padding inbox-bg-incoming float-left"> <?php echo $ch['message'] ?> </p>
+                                    <p class="text-muted msg-time clear-left"><?php echo date('h:i a m/d/y', strtotime($ch['c_created_at'])) ?></p>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <!-- {{-- 2.3 --}} -->
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($ch['outgoing_id'] == $this->session->userdata('user_id')): ?>
+            
+                            <!-- {{-- Outgoing Msg --}} -->
+                            <div class="row ">
+                                <div class="col-md-4 ">
+                                    <!-- {{-- 3.1 --}} -->
+                                </div>
+                                <div class="col-md-6 ">
+                                    <p class="float-right inbox-padding inbox-bg-yellow-brown text-white"><?php echo $ch['message'] ?></p>
+                                    <p class="d-flex msg-time text-muted justify-content-end clear-right"><?php echo date('h:i a m/d/y', strtotime($ch['c_created_at'])); ?> </p>
+                                </div>
+                                <div class="col-md-1">
+                                    <img src="<?php echo base_url(); echo $this->session->userdata('photo') ?>" class="msg-img rounded-circle align-items-center" alt="">
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                            <!-- {{-- end of outgoing msg --}} -->
+                    <?php endforeach; ?>
+
+                </div>
+                <div class="c-hr"></div>
+                <div class="row pr-3">
+                    <div class="col-md-11 ">
+                        <input type="text" name="message" class="form-group form-control <?php echo form_error('message') ? 'is-invalid' : '' ?>" placeholder="<?php echo form_error('message') ? form_error('message') : 'Type a message...' ?>">
+                    </div>
+                    <div class="col-md-1 ">
+                        <button type="submit" name="send_message" value="send_message" class="unstyled-button red-brown"><i class="far fa-paper-plane fa-2x"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+<?php form_close(); ?>
 
-<?php// include '../inc/footer.php'; ?>
+<script type='text/javascript'>
+	var tmp = <?php echo json_encode($users) ?>;
+	// console.log(tmp);
+	var users = [];
+	for (var i = 0; i < tmp.length; i++) {
+		// alert(tmp[i].id);
+		item = {};
+		item["value"] = tmp[i].user_id;
+		item['label'] = tmp[i].lname+", "+tmp[i].fname;
+		// if (tmp[i].username == null) {
+		// 	item["label"] = tmp[i].lname+", "+tmp[i].fname;
+		// } else {
+		// 	item["label"] = tmp[i].lname+", "+tmp[i].fname+" "+tmp[i].mname;
+		// }
+        users.push(item);
+    }
+    
+        console.log(tmp);
+</script>	

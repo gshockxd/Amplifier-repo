@@ -38,6 +38,12 @@
 
 			$this->event_model->event_info();
 		}
+		public function print_pdf(){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->event_model->print_pdf();
+		}
 		public function booking(){
 			$this->session_model->session_check();			
 			$this->session_model->user_type_check_client();

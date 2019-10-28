@@ -69,7 +69,7 @@
 								<a class="nav-link" href="<?php echo base_url()?>profile">Dashboard <span class="sr-only">(current)</span></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>events">Events</a>
+								<a class="nav-link" href="<?php echo base_url()?>c_events">Events</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>history_client">History</a>

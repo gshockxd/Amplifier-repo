@@ -13,7 +13,8 @@ $route['services']                      = 'welcome/services';
 $route['history']                       = 'welcome/history';
 $route['reports']                       = 'welcome/reports';
 $route['notifications']                 = 'welcome/notifications';
-$route['messages']                      = 'clients/chat';
+// $route['messages']                      = 'clients/chat';
+$route['messages']                        = 'performers/chat';
 $route['profile/editprofile/(:num)']    = 'welcome/editprofile/$1  ';
 $route['delete_user/(:num)']            = 'welcome/delete_user/$1  ';
 $route['eventview/(:num)']              = 'welcome/eventview/$1';
@@ -36,8 +37,9 @@ $route['history_client']                = 'clients/history';
 $route['booking']                       = 'clients/booking';
 $route['booking_book_event/(:num)']     = 'clients/booking_book_event/$1';
 $route['booking_attempt/(:num)']        = 'clients/booking_attempt/$1';
-$route['events']                        = 'clients/events';
+$route['c_events']                      = 'clients/events';
 $route['events/(:num)']                 = 'clients/event_info/$1';
+$route['print_event/(:num)']            = 'clients/print_pdf/$1';
 $route['calendar']                      = 'clients/calendar';
 $route['package']                       = 'clients/package';
 $route['register']                      = 'clients/register';
@@ -62,6 +64,8 @@ $route['p_package_edit_page/(:num)']    = 'performers/package_edit_page/$1';
 $route['p_package_delete/(:num)']       = 'performers/p_package_delete/$1';
 $route['p_package_update']              = 'performers/package_update';
 $route['p_chat']                        = 'performers/chat';
+$route['p_chat/(:num)']                 = 'performers/chat_message/$1';
+$route['p_chat_send_search_message/(:num)']    = 'performers/send_search_message/$1';
 
 
 /*

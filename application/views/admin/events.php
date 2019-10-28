@@ -81,7 +81,7 @@
                                 <td> <?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?></td>
                                 <td>   <?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?></td>
                                 <td> <?php echo  date('F d, Y', strtotime($row->event_date)); ?></td>
-                                <td> <?php echo $row->event_time; ?></td>
+                                <td> <?php echo $row->event_to; ?></td>
                                 <td>
                                 <div class="dropdown no-arrow">
                                   <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

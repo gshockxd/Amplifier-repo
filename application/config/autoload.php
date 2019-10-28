@@ -149,6 +149,7 @@ $autoload['model'] = array(
     'performers/p_booking_model',
     'performers/p_pricing_model',
     'performers/p_package_model',
+    'performers/p_chat_model',
 
     'message_model'
 );
