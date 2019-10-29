@@ -84,7 +84,7 @@
 								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
 							</li> -->
 							<li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>chat">Chat</a>
+								<a class="nav-link" href="<?php echo base_url()?>c_chat">Chat</a>
 							</li>
 						<?php endif; ?>
 			        </ul>

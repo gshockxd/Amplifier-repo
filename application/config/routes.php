@@ -48,8 +48,10 @@ $route['login']                         = 'clients/login';
 $route['login_attempt']                 = 'clients/login_attempt';
 $route['logout_user']                   = 'clients/logout';
 
-$route['chat']                          = 'clients/chat';
-$route['chat_new']                      = 'clients/chat_new';
+$route['c_chat']                        = 'clients/chat';
+$route['c_chat/(:num)']                 = 'clients/chat_message/$1';
+$route['c_chat_send_search_message/(:num)']    = 'clients/send_search_message/$1';
+$route['c_chat_compose/(:num)']         = 'clients/chat_compose/$1'; 
 
 // 
 $route['p_register']                    = 'performers/register';
@@ -66,6 +68,7 @@ $route['p_package_update']              = 'performers/package_update';
 $route['p_chat']                        = 'performers/chat';
 $route['p_chat/(:num)']                 = 'performers/chat_message/$1';
 $route['p_chat_send_search_message/(:num)']    = 'performers/send_search_message/$1';
+$route['p_chat_compose/(:num)']         = 'performers/chat_compose/$1'; 
 
 
 /*
