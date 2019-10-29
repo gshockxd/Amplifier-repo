@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2019 at 09:52 AM
+-- Generation Time: Oct 16, 2019 at 02:10 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -21,6 +21,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `amplifier`
 --
+drop database amplifier;
+create database amplifier;
+use amplifier;
 
 -- --------------------------------------------------------
 
@@ -69,24 +72,25 @@ CREATE TABLE `bookings` (
   `event_time` time NOT NULL,
   `notes` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('approve','block','cancel','pending') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `event_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `event_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_rating` int(11) NOT NULL,
+  `performer_rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`booking_id`, `client_id`, `performer_id`, `venue_name`, `event_date`, `full_amount`, `payment_status`, `date_booked`, `down_payment`, `event_time`, `notes`, `status`, `event_name`) VALUES
-(1, 1, 2, '1', '2019-10-11', '13000.00', 'dp', '2019-10-09', '1300.00', '34:00:00', 'no pool', 'approve', 'octoberfest1'),
-(2, 1, 2, '2', '2019-10-23', '300.00', 'dp', '2019-10-15', '100.00', '14:00:00', 'free pool', 'approve', 'octoberfest2'),
-(3, 2, 1, '2', '2019-10-15', '1000.00', 'none', '2019-10-05', '1000.00', '22:00:00', 'hello', 'approve', 'octoberfest3'),
-(5, 1, 2, 'qweqwe', '2019-10-10', '123123.00', 'dp', '2019-10-08', '123123.00', '00:03:23', '123123', 'pending', 'octoberfest4'),
-(6, 1, 8, 'help', '2019-10-26', '123123.00', 'dp', '2019-10-08', '123123.00', '00:12:31', 'awdqwe', 'pending', 'octoberfest5'),
-(7, 1, 7, 'help', '2019-10-11', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:31', '31231', 'pending', 'octoberfest6'),
-(8, 1, 8, 'help', '2019-10-12', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:31', '123123', 'pending', 'octoberfest7'),
-(9, 1, 7, 'help', '2019-10-11', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:34', 'qweq', 'pending', 'octoberfest8'),
-(10, 1, 8, 'qweqwe', '2019-10-18', '123.00', 'dp', '2019-10-08', '12313.00', '00:01:23', '12312', 'approve', 'octoberfest9'),
-(11, 1, 8, 'surigao', '2019-10-05', '12300.00', 'dp', '2019-10-09', '1230.00', '00:01:20', 'cebu', 'approve', 'cebu home');
+INSERT INTO `bookings` (`booking_id`, `client_id`, `performer_id`, `venue_name`, `event_date`, `full_amount`, `payment_status`, `date_booked`, `down_payment`, `event_time`, `notes`, `status`, `event_name`, `client_rating`, `performer_rating`) VALUES
+(1, 1, 2, 'Cebu', '2019-10-11', '13000.00', 'dp', '2019-10-09', '1300.00', '23:00:00', 'no pool', 'approve', 'octoberfest1', 2, 5),
+(2, 1, 2, 'cebu', '2019-10-23', '300.00', 'dp', '2019-10-15', '100.00', '14:00:00', 'free pool', 'approve', 'octoberfest2', 1, 0),
+(3, 2, 1, 'cebu', '2019-10-15', '1000.00', 'none', '2019-10-05', '1000.00', '22:00:00', 'hello', 'approve', 'octoberfest3', 4, 5),
+(5, 1, 2, 'qweqwe', '2019-10-10', '123123.00', 'dp', '2019-10-08', '123123.00', '00:03:23', '123123', 'cancel', 'octoberfest4', 0, 0),
+(6, 1, 8, 'help', '2019-10-26', '123123.00', 'dp', '2019-10-08', '123123.00', '00:12:31', 'awdqwe', 'cancel', 'octoberfest5', 0, 0),
+(7, 1, 7, 'help', '2019-10-11', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:31', '31231', 'approve', 'octoberfest6', 0, 0),
+(8, 1, 8, 'help', '2019-10-12', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:31', '123123', 'approve', 'octoberfest7', 0, 0),
+(9, 1, 7, 'help', '2019-10-11', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:34', 'qweq', 'pending', 'octoberfest8', 0, 0),
+(10, 1, 8, 'qweqwe', '2019-10-18', '123.00', 'dp', '2019-10-08', '12313.00', '00:01:23', '12312', 'approve', 'octoberfest9', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -154,7 +158,6 @@ CREATE TABLE `feedbacks` (
 --
 
 INSERT INTO `feedbacks` (`feedback_id`, `booking_id`, `to_id`, `from_id`, `rating`, `message`, `created_at`) VALUES
-(1, 1, 1, 2, '5.0', 'Niceniceniec', '2019-10-03 17:00:00'),
 (2, 2, 1, 2, '2.0', 'badbadbad', '2019-10-15 17:00:00'),
 (3, 3, 2, 1, '1.0', 'okay', '2019-10-09 17:00:00');
 
@@ -170,7 +173,10 @@ CREATE TABLE `galleries` (
   `album_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `sample_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sample_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sample_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -261,7 +267,7 @@ CREATE TABLE `notifications` (
 --
 
 CREATE TABLE `packages` (
-  `packege_id` bigint(20) NOT NULL,
+  `package_id` bigint(20) NOT NULL,
   `package_name` varchar(255) NOT NULL,
   `price` decimal(8,2) NOT NULL,
   `details` text NOT NULL,
@@ -273,8 +279,7 @@ CREATE TABLE `packages` (
 -- Dumping data for table `packages`
 --
 
-INSERT INTO `packages` (`packege_id`, `package_name`, `price`, `details`, `owner`, `date_created`) VALUES
-(1, '3 music for 1 hour', '200.00', '3 music for 1 hour', 2, '2019-10-05'),
+INSERT INTO `packages` (`package_id`, `package_name`, `price`, `details`, `owner`, `date_created`) VALUES
 (2, '2 hours singing', '2000.00', '2 hours maximum time', 2, '2019-10-03'),
 (3, 'hello', '2000.00', '300 songs in sixty minutes', 1, '2019-10-30');
 
@@ -310,12 +315,10 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`report_id`, `booking_id`, `report_from`, `report_to`, `report_photo`, `report_details`) VALUES
-(1, 1, 1, 2, 'assets/img/1.jpg\r\n', 'did not attend'),
 (2, 2, 2, 1, 'assets/img/1.jpg\r\n', 'fake event'),
 (3, 3, 1, 3, 'assets/img/1.jpg\r\n', 'not paid'),
 (4, 1, 1, 1, '', '123'),
-(8, 1, 1, 1, '', '123'),
-(9, 1, 1, 1, '', '');
+(8, 1, 1, 1, '', '123');
 
 -- --------------------------------------------------------
 
@@ -328,7 +331,7 @@ CREATE TABLE `users` (
   `user_type` enum('client','performer','admin','') COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('block','verified','pending','') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `status` enum('block','verified','pending','banned') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `fname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -336,25 +339,25 @@ CREATE TABLE `users` (
   `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_registered` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
   `offense` set('1','2','3','0') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `report_count` int(11) NOT NULL DEFAULT 0,
   `media_fk` bigint(20) UNSIGNED DEFAULT NULL,
-  `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `block_end` date NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `status`, `fname`, `email`, `address`, `rate`, `photo`, `telephone_1`, `telephone_2`, `date_registered`, `offense`, `report_count`, `media_fk`, `lname`) VALUES
-(1, 'client', 'user1', 'pass', 'verified', 'client', 'email@gmail.com', 'cebu', '1200.00', 'assets/img/1.jpg', '09123331', '09123123123', '2019-10-10', '2', 0, NULL, 'last'),
-(2, 'performer', 'user2', 'pas', 'pending', 'perforemr', 'email2@gmail.com', 'talamban', '12333.00', 'assets/img/1.jpg', '09123331', '0912333', '2019-10-22', '3', 1, NULL, 'name'),
-(3, '', 'bad', 'bad', 'block', 'bad', 'bad', 'baduser', '1200.00', 'assets/img/1.jpg', '1231231', '12313123', '2019-10-24', '3', 100, NULL, 'invalid'),
-(4, 'admin', 'username1234', 'password', '', 'britt', 'gshockxd0@gmail.com', '', '0.00', '', '09127055497', '0917055497', '2019-10-07', '', 0, NULL, 'montalvo'),
-(7, 'performer', 'username12345', 'password', '', 'brittmon', 'enarosal04@yahoo.com', '', '0.00', '', '09127055497', '0909', '2019-10-07', '0', 0, NULL, 'talvo'),
-(8, 'performer', 'usernameeee', 'password', '', 'brittttt', 'gshockxd01@gmail.com', '', '0.00', '', '0917055497', '', '2019-10-08', '0', 0, NULL, 'maosdasd'),
-(9, 'performer', 'usernameeeeeeee', 'password', 'verified', 'montalo', 'montasd@gmail.com', '', '0.00', '', '09127055497', '', '2019-10-08', '0', 0, NULL, 'bitt');
+INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `status`, `fname`, `email`, `address`, `rate`, `photo`, `telephone_1`, `telephone_2`, `created_at`, `offense`, `report_count`, `media_fk`, `lname`, `block_end`, `updated_at`) VALUES
+(1, 'client', 'user1', 'pass', 'banned', 'client', 'email@gmail.com', 'cebu', '1200.00', 'assets/img/1.jpg', '09123331', '09123123123', '2019-10-09 17:00:00', '3', 0, NULL, 'last', '0000-00-00', '2019-10-16 12:06:09'),
+(2, 'performer', 'user2', 'pas', 'block', 'perforemr', 'email2@gmail.com', 'talamban', '12333.00', 'assets/img/1.jpg', '09123331', '0912333', '2019-10-21 17:00:00', '2', 1, NULL, 'name', '2019-11-14', '2019-10-16 12:06:09'),
+(3, '', 'bad', 'bad', 'banned', 'bad', 'bad', 'baduser', '1200.00', 'assets/img/1.jpg', '1231231', '12313123', '2019-10-23 17:00:00', '3', 100, NULL, 'invalid', '0000-00-00', '2019-10-16 12:06:09'),
+(7, 'performer', 'username12345', 'password', '', 'brittmon', 'enarosal04@yahoo.com', '', '0.00', '', '09127055497', '0909', '2019-10-06 17:00:00', '0', 0, NULL, 'talvo', '0000-00-00', '2019-10-16 12:06:09'),
+(8, 'performer', 'usernameeee', 'password', '', 'brittttt', 'gshockxd01@gmail.com', '', '0.00', '', '0917055497', '', '2019-10-07 17:00:00', '0', 0, NULL, 'maosdasd', '0000-00-00', '2019-10-16 12:06:09');
 
 -- --------------------------------------------------------
 
@@ -434,7 +437,8 @@ ALTER TABLE `feedbacks`
 -- Indexes for table `galleries`
 --
 ALTER TABLE `galleries`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `media`
@@ -464,7 +468,7 @@ ALTER TABLE `notifications`
 -- Indexes for table `packages`
 --
 ALTER TABLE `packages`
-  ADD PRIMARY KEY (`packege_id`),
+  ADD PRIMARY KEY (`package_id`),
   ADD KEY `owner` (`owner`);
 
 --
@@ -576,7 +580,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `packege_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `package_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `reports`
@@ -588,7 +592,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `venues`
@@ -612,6 +616,12 @@ ALTER TABLE `bookings`
 --
 ALTER TABLE `feedbacks`
   ADD CONSTRAINT `feedbacks_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking_id`);
+
+--
+-- Constraints for table `galleries`
+--
+ALTER TABLE `galleries`
+  ADD CONSTRAINT `galleries_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `packages`

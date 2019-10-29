@@ -1,7 +1,8 @@
-<?php// $title="Service Profile: AMPLIFIER"; ?>
-<?php// require '../inc/header.php'; ?>
 
 <div class="container">
+	<?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '';  ?>
+	<?php $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '';  ?>
+
 	<div class="row py-3">
 		<div class="col-sm-8">
 			<img src="<?php echo base_url(); ?>assets/img/artist.png" height="100%" width="100%" alt="">	
@@ -46,5 +47,3 @@
 		</div>
 	</div>
 </div>
-
-<?php// require '../inc/footer.php'; ?>

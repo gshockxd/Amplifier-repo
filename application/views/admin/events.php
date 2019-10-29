@@ -80,8 +80,8 @@
                                 <td> <?php echo $row->venue_name; ?></td>
                                 <td> <?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?></td>
                                 <td>   <?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?></td>
-                                <td> <?php echo $row->event_date; ?></td>
-                                <td> <?php echo $row->event_time; ?></td>
+                                <td> <?php echo  date('F d, Y', strtotime($row->event_date)); ?></td>
+                                <td> <?php echo $row->event_to; ?></td>
                                 <td>
                                 <div class="dropdown no-arrow">
                                   <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,7 +91,7 @@
                                   <div class="dropdown-divider"></div>
                                   <a class="dropdown-item fas fa-eye fa-fw" href="eventview/<?php echo $row->booking_id; ?>">&nbsp More Details</a> 
                                   <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal" data-target="#delevent<?php echo $row->booking_id; ?>">&nbsp Delete</a>   
+                                  <a class="dropdown-item fas fa-stop fa-fw" href="#" data-toggle="modal" data-target="#delevent<?php echo $row->booking_id; ?>">&nbsp Delete</a>   
                                   </div>
                                 </div>
                                 </td>
@@ -102,7 +102,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                           <div class="modal-header">
-                                              DELETE EVENT
+                                              CANCEL EVENT
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>

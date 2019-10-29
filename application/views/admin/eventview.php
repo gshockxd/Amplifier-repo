@@ -42,13 +42,14 @@
                             
                                     ?>
 		                    
-                              <div class="form-group row">
+                              <!-- <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">EVENT ID:</label> 
                                 <div class="col-8">
                                   <p class="lead"><?php echo $row->booking_id; ?></p>
                                 </div>      
                               </div>
-                              <hr>
+                              <hr> -->
+                              <br>
                               <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label"> Client Name:</label> 
                                 <div class="col-8">
@@ -101,7 +102,7 @@
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Date</label> 
                                 <div class="col-8">
-                                  <p class="lead"><?php echo $row->event_date; ?></p>                                  
+                                  <p class="lead"><?php echo  date('F d, Y', strtotime($row->event_date)); ?></p>                                  
                                 </div>
                               </div>
                               <hr>
@@ -112,17 +113,53 @@
                                 </div>
                               </div>
                               <hr>
+                              
                               <div class="form-group row">
-                                <label for="text" class="col-4 col-form-label">Client Notes to performer:</label> 
+                                <label for="text" class="col-4 col-form-label">Client ratings to performer:</label> 
+                                <div class="col-8">
+                                <?php
+                                for($i=0;$i<$row->client_rating; $i++)
+                                { 
+                                ?>
+                                    <div class="fa fa-star"></div>
+                                <?php
+                                }
+                                ?>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Client comment:</label> 
                                 <div class="col-8">
                                   <p class="lead"><?php echo $row->notes; ?></p>                                
                                 </div>
                               </div>
                               <hr>
+
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Performer ratings to Client:</label> 
+                                <div class="col-8">
+                                <?php
+                                for($i=0;$i<$row->performer_rating; $i++)
+                                { 
+                                ?>
+                                    <div class="fa fa-star"></div>
+                                <?php
+                                }
+                                ?>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Performer's comment:</label> 
+                                <div class="col-8">
+                                  <p class="lead"><?php echo $row->notes; ?></p>                                
+                                </div>
+                              </div>
+                              <hr>
+                                
                               <div class="form-group row">
                                 <label for="text" class="col-4 col-form-label">Date Booked</label> 
                                 <div class="col-8">
-                                  <p class="lead"><?php echo $row->date_booked; ?></p>                                  
+                                  <p class="lead"><?php echo  date('F d, Y', strtotime($row->date_booked)); ?></p>                                  
                                 </div>
                               </div>
                               <?php

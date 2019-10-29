@@ -12,8 +12,9 @@ class model extends CI_Model
     function fetch_data_profile()
     {
        $id = $this->uri->segment(2);
-       $this->db->select("*");
+       $this->db->select("users.*, count(report_to) as report_counts");
        $this->db->from("users");
+       $this->db->join("reports",'report_to=user_id');
        $this->db->where("user_id",$id);
        $query = $this->db->get();
        return $query;
@@ -61,6 +62,22 @@ class model extends CI_Model
        $this->db->where("user_id",$id);
        $this->db->delete("users");
     }
+    function update_offense_user($offense)
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("report_count");
+       $this->db->from("users");
+       $this->db->where("user_id",$id);
+       $this->db->update("users", $offense);
+    }
+    function update_ban_user($ban)
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("status");
+       $this->db->from("users");
+       $this->db->where("user_id",$id);
+       $this->db->update("users", $ban);
+    }
     function fetch_delete_event()
     {
        $id = $this->uri->segment(2);
@@ -75,18 +92,6 @@ class model extends CI_Model
        $this->db->from("bookings");
        $this->db->join("users",'bookings.client_id=users.user_id');
        $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
-       $query = $this->db->get();
-       return $query;
-    }
-    function fetch_data_history_data()
-    {
-      $date = date();
-      $status = "approve";
-      $this->db->distinct();
-      $this->db->select('*');
-      $this->db->from('bookings');
-      $this->db->where('event_date <', $date); 
-      $this->db->where('status', $status); 
        $query = $this->db->get();
        return $query;
     }
@@ -116,10 +121,14 @@ class model extends CI_Model
     }
     function fetch_data_history()
     {
-       $this->db->select("*");
-       $this->db->from("feedbacks");
-       $this->db->join("users",'feedbacks.from_id=users.user_id');
-       $this->db->join("bookings",'feedbacks.booking_id=bookings.booking_id');
+       $date = date('y-m-d');
+       $status = "pending";
+       $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+       $this->db->from("bookings");
+       $this->db->join("users",'bookings.client_id=users.user_id');
+       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+       $this->db->where("event_date <",$date);
+       $this->db->where("bookings.status !=", $status);
        $query = $this->db->get();
        return $query;
     }

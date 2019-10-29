@@ -62,7 +62,7 @@
                                 <div class="text-center "> 
                                     <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal" data-target="#delpack<?php echo $row->package_id; ?>"><span class="fa fa-trash"></span></a>
                                 </div>
-                                <div class="text-center font-weight-light font-italic"><?php echo $row->date_created; ?><br></div>
+                                <div class="text-center font-weight-light font-italic">Date Created: <?php echo  date('F d, Y', strtotime($row->date_created)); ?><br></div>
                             </div>
                         </div>
                     </div>

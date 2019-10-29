@@ -1,63 +1,73 @@
-<?php //$title="Client History: AMPLIFIER"; ?>
-<?php// require '../inc/header-client.php'; ?>
-	<div class="container">
-		<p class="h1 red-brown py-3 text-center">EVENT HISTORY</p>
+<div class="container">
+	<p class="h1 red-brown py-3 text-center">EVENT HISTORY</p>
 		
-<table id="example" class="table table-hover" style="width:100%">
+	<table id="datatable" class="table table-hover" style="width:100%">
         <thead>
             <tr>
-            	<th></th>
-                <th>Name</th>
-                <th>Schedule</th>
+				<th>Schedule</th>
+				<th>Event Venue</th>
                 <th>Status</th>
                 <th>Event Type</th>
-                <th>Service</th>
+				<th>Service</th>
+				<th>Action</th>
                 <th></th>
             </tr>
-        </thead>
+		</thead>
+		<?php 
+			// echo '<pre>';
+			// print_r($history[0]['username']);
+			// echo '</pre>';
+			// die();
+		?>
         <tbody>
-        	<?php for($x=0; $x<100; $x++){ ?>
-			
-	            <tr>
-	            	<td class="text-center">
-	            		<img src="<?php echo base_url(); ?>assets/img/artist.png" class="rounded-circle" height="50" width="50" alt="">
-	            	</td>
+			<?php if($history): ?>
+				<?php foreach($history as $b): ?>
+
+				<tr>
 	                <td class="">
-	                	<p>Nike Marti Caballes </p>	                	
+						<?php echo date('F d, Y', strtotime($b['event_date'])) ?>             	
 	                </td>
 	                <td>
-	                	<p>03/28/2019
-							<span><br>
-								<small>Panubigan, Canlaon City</small>
-							</span>
-	                	</p>
-	                </td>
-	                <td><p class="text-danger">Decline</p></td>
-	                <td>
-	                	<u class="red-brown font-weight-bold">SCHOOL EVENT</u>
+						<p class="text-uppercase yellow-brown"><?php echo $b['venue_name'] ?></p>
 	                </td>
 	                <td>
-	                	<u class="red-brown font-weight-bold">PHOTOGRAPHER</u>
+					<p class="text-uppercase <?php echo $b['status'] == 'approve' ? ' text-success' : ''; echo $b['status'] == 'cancel' ? ' text-danger' : ''; echo $b['status'] == 'block' ? ' text-warning' : ''; echo $b['status'] == 'pending' ? ' text-muted' : ''; ?>"><?php echo $b['status'] ?></p>
+					</td>
+	                <td>
+	                	<p class="text-uppercase yellow-brown"><?php echo $b['event_name'] ?></p>
+					</td>
+					<td>
+						<p class="text-uppercase"><?php echo $b['artist_type'] ?></p>
+					</td>
+	                <td class="d-flex justify-content-center ">
+	                	<a href="#" class="btn btn-outline-success mr-2 " data-toggle="tooltip" data-placement="top" title="Accept"><i class="fas fa-check "></i></a>
+	                	<a href="#" class="btn btn-outline-danger mr-2 " data-toggle="tooltip" data-placement="top" title="Decline"><i class="fas fa-times "></i></a>
+	                	<a href="#" class="btn btn-outline-primary " data-toggle="tooltip" data-placement="top" title="Edit user.. this should be dynamic!"><i class="far fa-edit "></i></a>
 	                </td>
 	                <td>
-	                	<a href="#" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="Redirect to https.. this should be dynamic!"><i class="fas fa-external-link-alt"></i></a>
+	                	<a href="#" class="btn btn-outline-info" data-toggle="tooltip" data-placement="top" title="Redirect to https.. this should be dynamic!"><i class="fas fa-external-link-alt "></i></a>
 	                </td>
 	            </tr>
+				
+					
 
-	        <?php } ?>
+				<?php endforeach; ?>
+			<?php else: ?>			
+				<tr>
+					<td colspan="100%" class="text-center"><h4 class="text-muted">No Entries Found</h4></td>
+				</tr>
+			<?php endif; ?>
         </tbody>
         <tfoot>
             <tr>
-            	<th></th>
-                <th>Name</th>
                 <th>Schedule</th>
+				<th>Venue</th>
                 <th>Status</th>
                 <th>Event Type</th>
-                <th>Service</th>
+				<th>Service</th>
+				<th>Action</th>
                 <th></th>
             </tr>
         </tfoot>
     </table>
-
-	</div>
-<?php// require '../inc/footer.php'; ?>
+</div>

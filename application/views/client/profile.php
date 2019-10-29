@@ -1,9 +1,7 @@
 <div class="container">
-	<?php if($this->session->flashdata('user_logged_in')): ?>
-		<div class="alert alert-success mt-3" role="alert">
-			<p><?php echo $this->session->flashdata('user_logged_in');?></p>
-		</div>
-	<?php endif; ?>
+
+	<?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '';  ?>
+	<?php $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '';  ?>
 	
 	<div class="row py-3">
 
@@ -50,4 +48,3 @@
 		</div>
 	</div>
 </div>
-<?php// require '../inc/footer.php'; ?>

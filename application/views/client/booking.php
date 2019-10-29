@@ -1,23 +1,37 @@
-<?php// $title = 'Client Booking: AMPLIFIER' ;?>
-<?php// require '../inc/header-client.php'; ?>
-	<div class="container py-3">
-		<p class="h2 text-center">PHOTOGRAPHY AVAILABLE</p>
-		<div class="row py-3">
-			<div class="col-sm">
-				<img src="<?php echo base_url(); ?>assets/img/client.png" class="" height="100%" width="100%" alt="">
+<div class="container">
+
+<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+
+
+<?php if($packages): ?>
+	<p class="h3 py-3 red-brown text-center">Pick an Event</p>
+	<div class="card-columns">
+		<?php foreach($packages as $p): ?>
+		<div class="card">
+			<div class="card-header bg-primary">
+				<p class="h5 text-center text-white"><?php echo $p['package_name'] ?></p>
 			</div>
-			<div class="col-sm">
-				<img src="<?php echo base_url(); ?>assets/img/client.png" class="" height="100%" width="100%" alt="">
-			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><?php echo $p['details'] ?></li>
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-md-10">
+							₱ <?php echo $p['price'] ?>
+						</div>
+						<div class="col-md-2">
+							<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white"><i class="fas fa-book"></i></a>
+						</div>
+					</div>	
+				</li>				
+			</ul>
 		</div>
-		<div class="row py-3">
-			<div class="col-sm">
-				<p class="text-muted">Place Description Here</p>
-				<textarea name="desc" id="editor1" cols="30" rows="10"></textarea>
-				<div class="d-flex justify-content-center ">
-					<a href="#" class="mt-3 btn btn-outline-dark">BOOK EVENT</a>		
-				</div>
-			</div>
-		</div>
+		<?php endforeach; ?>
 	</div>
-<?php// require '../inc/footer.php'; ?>
+<?php else: ?>
+	<div class="alert alert-secondary my-3">
+		<p class="h3 text-center">No Package/s Found</p>
+	</div>
+<?php endif; ?>
+
+</div>

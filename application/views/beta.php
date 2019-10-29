@@ -4,13 +4,13 @@
 		<p class="h4 text-primary">List of User/s</p>
 		<div class="row">
 			<div class="col-sm">
-				<a class="btn btn-outline-secondary" href="clients/profile">Client</a>
+				<a class="btn btn-outline-secondary" href="profile">Client</a>
 			</div>
 			<div class="col-sm">
-				<a class="btn btn-outline-primary" href="performers/register">Service/Performer</a>
+				<a class="btn btn-outline-primary" href="p_index">Service/Performer</a>
 			</div>
 			<div class="col-sm">
-				<a class="btn btn-outline-info" href="#">Admin <span class="text-danger">N/A</span> <i class="fas fa-beer"></i> </a>
+				<a class="btn btn-outline-info" href="users">Admin</a>
 			</div>
 		</div>
 	</div>
