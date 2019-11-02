@@ -165,6 +165,7 @@
 
 <?php elseif($this->session->userdata('user_type') == 'performer'): ?>
 	<?php $this->load->view('inc/header-performer'); ?>
+<<<<<<< .merge_file_a08744
 <<<<<<< .merge_file_a13704
 <<<<<<< .merge_file_a09240
 <<<<<<< .merge_file_a14680
@@ -182,3 +183,6 @@
 =======
 <?php endif; ?>
 >>>>>>> .merge_file_a13688
+=======
+<?php endif; ?>
+>>>>>>> .merge_file_a13684
