@@ -75,7 +75,7 @@
 								<a class="nav-link" href="<?php echo base_url()?>history_client">History</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>booking">Book</a>
+								<a class="nav-link" href="<?php echo base_url()?>booking">Package</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>calendar">Calendar</a>
@@ -83,9 +83,9 @@
 							<!-- <li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
 							</li> -->
-							<li class="nav-item">
+							<!-- <li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>c_chat">Chat</a>
-							</li>
+							</li> -->
 						<?php endif; ?>
 			        </ul>
 			        <form class="form-inline my-2 my-lg-0" method="POST" action="#">
@@ -106,7 +106,7 @@
 									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
 								</li>
 								<li class="nav-item">
-									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope fa-lg"></i></a>
+									<a href="<?php echo base_url()?>c_chat" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="far fa-envelope fa-lg"></i></a>
 								</li>
 								<li class="nav-item">
 									<a href="<?php echo base_url()?>profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
