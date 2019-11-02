@@ -27,37 +27,33 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?php echo $title ?></title>
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/datatables.css">
-    <link rel="stylesheet" type="text/css"
-        href="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
-    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-flatly.css"> -->
-    <link rel="stylesheet"
-        href="<?php echo base_url(); ?>assets/css/bootstrap-<?php echo $theme == 'darkly' ? 'darkly' : 'flatly'; ?>.css">
-    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/floating-labels.css"> -->
-
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/api/fontawesome/css/all.css">
-    <script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/all.js"></script>
-    <script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/brands.js"></script>
-    <script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/solid.js"></script>
-    <script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/fontawesome.js"></script>
+	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title><?php echo $title ?></title>
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-reboot.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/datatables.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/jquery-ui.css">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-flatly.css"> -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-<?php echo $theme == 'darkly' ? 'darkly' : 'flatly'; ?>.css">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/floating-labels.css"> -->
+	
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/api/fontawesome/css/all.css">
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/all.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/brands.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/solid.js"></script>
+	<script defer src="<?php echo base_url(); ?>assets/api/fontawesome/js/fontawesome.js"></script>
 
 
-    <link href="<?php echo base_url(); ?>assets/api/fontawesome/css/fontawesome.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/api/fontawesome/css/brands.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/api/fontawesome/css/solid.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-materia.css"> -->
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/fontawesome.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/brands.css" rel="stylesheet">
+	<link href="<?php echo base_url(); ?>assets/api/fontawesome/css/solid.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-materia.css"> -->
 </head>
-
 <body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-bottom">
 		    <div class="container">
@@ -72,36 +68,24 @@
 							<li class="nav-item active">
 								<a class="nav-link" href="<?php echo base_url()?>profile">Dashboard <span class="sr-only">(current)</span></a>
 							</li>
-							<!-- <li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
-							</li> -->
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>c_events">Events</a>
 							</li>
-							<!-- <li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
-							</li> -->
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>history_client">History</a>
 							</li>
-							<!-- <li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
-							</li> -->
 							<li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>booking">Book</a>
+								<a class="nav-link" href="<?php echo base_url()?>booking">Package</a>
 							</li>
-							<!-- <li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
-							</li> -->
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>calendar">Calendar</a>
 							</li>
 							<!-- <li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
 							</li> -->
-							<li class="nav-item">
+							<!-- <li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>c_chat">Chat</a>
-							</li>
+							</li> -->
 						<?php endif; ?>
 			        </ul>
 			        <form class="form-inline my-2 my-lg-0" method="POST" action="#">
@@ -122,7 +106,7 @@
 									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
 								</li>
 								<li class="nav-item">
-									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope fa-lg"></i></a>
+									<a href="<?php echo base_url()?>c_chat" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="far fa-envelope fa-lg"></i></a>
 								</li>
 								<li class="nav-item">
 									<a href="<?php echo base_url()?>profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
@@ -136,8 +120,8 @@
 		        </div>
 
 
-        </div>
-    </nav>
+		    </div>
+		  </nav>
 
 <!-- Modal -->
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -165,24 +149,4 @@
 
 <?php elseif($this->session->userdata('user_type') == 'performer'): ?>
 	<?php $this->load->view('inc/header-performer'); ?>
-<<<<<<< .merge_file_a08744
-<<<<<<< .merge_file_a13704
-<<<<<<< .merge_file_a09240
-<<<<<<< .merge_file_a14680
-<<<<<<< .merge_file_a14972
 <?php endif; ?>
-=======
-<?php endif; ?>
->>>>>>> .merge_file_a13832
-=======
-<?php endif; ?>
->>>>>>> .merge_file_a03352
-=======
-<?php endif; ?>
->>>>>>> .merge_file_a08872
-=======
-<?php endif; ?>
->>>>>>> .merge_file_a13688
-=======
-<?php endif; ?>
->>>>>>> .merge_file_a13684
