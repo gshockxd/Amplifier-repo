@@ -59,114 +59,98 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-bottom">
-        <div class="container">
-            <a class="navbar-brand" href="<?php echo base_url()?>profile">AMPLIFIER</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-bottom">
+		    <div class="container">
+		        <a class="navbar-brand" href="<?php echo base_url()?>profile">AMPLIFIER</a>
+		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="navbar-toggler-icon"></span>
+		        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <?php if($this->session->userdata('user_id')): ?>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?php echo base_url()?>profile">Dashboard <span
-                                class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url()?>c_events">Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url()?>history_client">History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url()?>booking">Book</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url()?>calendar">Calendar</a>
-                    </li>
-                    <!-- <li class="nav-item">
+		        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			        <ul class="navbar-nav mr-auto">
+						<?php if($this->session->userdata('user_id')): ?>
+							<li class="nav-item active">
+								<a class="nav-link" href="<?php echo base_url()?>profile">Dashboard <span class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo base_url()?>c_events">Events</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo base_url()?>history_client">History</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo base_url()?>booking">Book</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo base_url()?>calendar">Calendar</a>
+							</li>
+							<!-- <li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
 							</li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url()?>c_chat">Chat</a>
-                    </li>
-                    <!-- <li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
-							</li> -->
-                    <!-- <li class="nav-item">
+							<li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>c_chat">Chat</a>
-							</li> -->
-                    <?php endif; ?>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" method="POST" action="#">
-                    <ul class="navbar-nav">
-                        <!-- <li class="nav-item">
+							</li>
+						<?php endif; ?>
+			        </ul>
+			        <form class="form-inline my-2 my-lg-0" method="POST" action="#">
+			            <ul class="navbar-nav">
+				            <!-- <li class="nav-item">
 					            <a href="<?php// echo $page ?> " class="nav-link"  data-toggle="tooltip" data-placement="bottom" title="Dark Mode: <?php// echo $theme == 'flatly' ? 'OFF' : 'ON' ?>"><i class="fas fa-toggle-<?php echo $theme == 'flatly' ? 'off' : 'on' ?> fa-lg"></i></a>
 				            </li> -->
-                        <?php if(!$this->session->userdata('user_id')): ?>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url()?>login" class="nav-link">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a data-toggle="modal" data-target="#registerModal" class="nav-link">Register</a>
-                        </li>
-                        <?php endif; ?>
-                        <?php if($this->session->userdata('user_id')): ?>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom"
-                                title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url()?>c_chat" class="nav-link" data-toggle="tooltip"
-                                data-placement="bottom" title="Messages"><i class="far fa-envelope fa-lg"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url()?>profile_info" class="nav-link" data-toggle="tooltip"
-                                data-placement="bottom"
-                                title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img
-                                    src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>"
-                                    width="25" height="25" class="rounded-circle" alt=""></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url()?>logout_user" class="nav-link" data-toggle="tooltip"
-                                data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
-                        </li>
-                        <?php endif;?>
-                    </ul>
-                </form>
-            </div>
+							<?php if(!$this->session->userdata('user_id')): ?>
+								<li class="nav-item">
+									<a href="<?php echo base_url()?>login" class="nav-link">Login</a>
+								</li>
+								<li class="nav-item">
+									<a data-toggle="modal" data-target="#registerModal" class="nav-link">Register</a>
+								</li>
+							<?php endif; ?>
+							<?php if($this->session->userdata('user_id')): ?>
+								<li class="nav-item">
+									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
+								</li>
+								<li class="nav-item">
+									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new messages"><i class="far fa-envelope fa-lg"></i></a>
+								</li>
+								<li class="nav-item">
+									<a href="<?php echo base_url()?>profile_info" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->session->userdata('fname'); echo ' '.$this->session->userdata('lname'); ?>"><img src="<?php echo base_url(); ?><?php echo $this->session->userdata('photo')?>" width="25" height="25" class="rounded-circle" alt=""></a>
+								</li>
+								<li class="nav-item">
+									<a href="<?php echo base_url()?>logout_user" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fas fa-sign-in-alt fa-lg"></i></a>
+								</li>
+							<?php endif;?>
+			        	</ul>
+			        </form>
+		        </div>
 
 
         </div>
     </nav>
 
-    <!-- Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Register, switch one?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body d-flex justify-content-around">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a href="<?php echo base_url()?>register" class="btn btn-info">Client</a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="<?php echo base_url()?>p_register" class="btn btn-primary">Performer</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register, switch one?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex justify-content-around">
+			<div class="row">
+				<div class="col-md-6">
+					<a href="<?php echo base_url()?>register" class="btn btn-info">Client</a>
+				</div>
+				<div class="col-md-6">
+					<a href="<?php echo base_url()?>p_register" class="btn btn-primary">Performer</a>
+				</div>
+			</div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <?php elseif($this->session->userdata('user_type') == 'performer'): ?>
-    <?php $this->load->view('inc/header-performer'); ?>
-    <?php endif; ?>
+<?php elseif($this->session->userdata('user_type') == 'performer'): ?>
+	<?php $this->load->view('inc/header-performer'); ?>
+<?php endif; ?>
