@@ -1,45 +1,40 @@
-<?php// $title = 'Service Price Rates: AMPLIFIER'; ?>
-<?php// require '../inc/header.php'; ?>
 <div class="container">
-	<p class="h1 yellow-brown text-center py-3">PRICE RATES/ PACKAGES</p>
-	<div class="row">
-		<div class="col-sm inbox-bg-incoming pt-5 text-center">
-			<p class="h3 ">Professional</p>
-			<div class=" pt-3">
-				<img src="<?php echo base_url(); ?>assets/img/artist.png" height="100" width="150" alt="">
-			</div>
-			<p class=" pt-3"><strong class="h1">$49</strong><span class="text-muted">/month</span></p>
-			<?php for($x=0; $x<5; $x++){ ?>
-				<p class="text-muted"><span>[icon] </span>em ipsum dolor sit amet </p>
-			<?php } ?>
-		</div>
 
-		<div class="col-sm py-1 text-center border-3">
-			<p class="h3 ">Enterprise</p>
-			<div class=" pt-3">
-				<img src="<?php echo base_url(); ?>assets/img/artist.png" height="100" width="150" alt="">
-			</div>
-			<p class=" pt-3"><strong class="h1">$49</strong><span class="">/month</span></p>
-			<?php for($x=0; $x<5; $x++){ ?>
-				<p class="font-weight-bold"><span>[icon] </span>em ipsum dolor sit amet </p>
-			<?php } ?>
-		</div>
+<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
 
-		<div class="col-sm inbox-bg-incoming pt-5 text-center">
-			<p class="h3 ">Premium</p>
-			<div class=" pt-3">
-				<img src="<?php echo base_url(); ?>assets/img/artist.png" height="100" width="150" alt="">
+
+<?php if($packages): ?>
+	<p class="h3 py-3 yellow-brown text-center">Your Packages</p>
+	<div class="card-columns">
+		<?php foreach($packages as $p): ?>
+		<div class="card">
+			<div class="card-header bg-primary">
+				<p class="h5 text-center text-white"><?php echo $p['package_name'] ?></p>
 			</div>
-			<p class=" pt-3"><strong class="h1">$129</strong><span class="text-muted">/month</span></p>
-			<?php for($x=0; $x<5; $x++){ ?>
-				<p class="text-muted"><span>[icon] </span>em ipsum dolor sit amet </p>
-			<?php } ?>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><?php echo $p['details'] ?></li>
+				<li class="list-group-item">₱ <?php echo $p['price'] ?></li>
+				<li class="list-group-item">
+					<div class="row">
+						<div class="col-md-8 ">
+							<small>Created: <?php echo date('h:i:s a M d, y', strtotime($p['created_at'])) ?></small>
+							<small>Updated: <?php echo date('h:i:s a M d, y', strtotime($p['updated_at'])) ?></small>
+						</div>
+						<div class="col-md-4 ">
+							<a href="p_package_edit_page/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white"><i class="fas fa-pen"></i></a>
+							<a href="p_package_delete/<?php echo $p['package_id'] ?>" class="btn btn-danger text-white"><i class="fas fa-trash"></i></a>
+						</div>
+					</div>
+				</li>
+			</ul>
 		</div>
+		<?php endforeach; ?>
 	</div>
-
-	<div class="py-5 text-center">
-		<a href="#" class="btn btn-outline-dark"><p class="h1">Book</p></a>
+<?php else: ?>
+	<div class="alert alert-secondary my-3">
+		<p class="h3 text-center">No Package/s Found</p>
 	</div>
+<?php endif; ?>
 
 </div>
-<?php// require '../inc/footer.php'; ?>

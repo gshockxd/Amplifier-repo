@@ -1,5 +1,5 @@
 
-<?php echo form_open('p_chat_send_search_message/'.$this->uri->segment(2)); ?>
+<?php echo form_open('c_chat_send_search_message/'.$this->uri->segment(2)); ?>
 
 <?php
     // userinfo
@@ -94,7 +94,7 @@
                     <?php if($chats['left_panel']): ?>
                         <?php foreach($chats['left_panel'] as $c): ?>
                             <div id="chat-2">
-                                <a href="<?php echo base_url(); echo 'p_chat/'; echo $c['user_id']?>" class="btn btn-outline-chat col-md-12">
+                                <a href="<?php echo base_url(); echo 'c_chat/'; echo $c['user_id']?>" class="btn btn-outline-chat col-md-12">
                                     <div class="row text-chat">
                                     <!--  {{-- lvl 1.2 --}} -->
                                         <div class="col-md-2">

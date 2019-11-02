@@ -1,14 +1,9 @@
-<footer class="border-top border-bottom p-3 mt-3 bg-light">
+<!-- <div class="mb-5"></div>
+<footer class="footer bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="clearfix">
-                   <small> © 2019 AMPLIFIER</small>
-                </div>
-            </div>
-        </div>
+		<small> © 2019 AMPLIFIER</small>
     </div>
-</footer>
+</footer> -->
 
 	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>

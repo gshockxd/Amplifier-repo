@@ -99,7 +99,6 @@
 					'artist_type' => $this->input->post('service'),
 					'artist_desc' => $this->input->post('desc')
 				);
-
 				$this->db->insert('users', $data);
 				return $new_user_id = $this->db->insert_id();
 		}

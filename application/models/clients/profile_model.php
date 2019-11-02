@@ -81,6 +81,8 @@
 			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check_update');
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
+			$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
+			$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
 
 			$data['uname'] = $this->input->post('uname');
 			$data['fname'] = $this->input->post('fname');
@@ -89,6 +91,8 @@
 			$data['number2'] = $this->input->post('number2');
 			$data['userfile'] = $this->input->post('userfile');
 			$data['address'] = $this->input->post('address');
+			$data['service'] = $this->input->post('service');
+			$data['desc'] = $this->input->post('desc');
 
 			if($this->form_validation->run() == FALSE){
 				$this->load->view('inc/header-client', $templates);
@@ -178,7 +182,9 @@
                 'address'=> $this->input->post('address'),
                 'photo'=> $client_image,
                 'telephone_1'=> $this->input->post('number1'),
-                'telephone_2'=> $this->input->post('number2'),
+				'telephone_2'=> $this->input->post('number2'),
+				'artist_type' => $this->input->post('service'),
+				'artist_desc' => $this->input->post('desc'),
                 'updated_at' => $date,
             );
 

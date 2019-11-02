@@ -80,6 +80,7 @@
                                 { 
                     
                             ?>
+<<<<<<< HEAD
                                     <tr>
                                         <td scope="row"> <?php echo $row->booking_id; ?></td>
                                         <td> <?php echo $row->event_name; ?></td>
@@ -115,6 +116,33 @@
                                 <!-- event delete modal -->
                                 <div class="modal fade" id="delevent<?php echo $row->booking_id; ?>" tabindex="-1"
                                     role="dialog" aria-labelledby="delevent" aria-hidden="true">
+=======
+                              <tr>
+                                <td scope="row"> <?php echo $row->booking_id; ?></td>
+                                <td> <?php echo $row->event_name; ?></td>
+                                <td> <?php echo $row->venue_name; ?></td>
+                                <td> <?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?></td>
+                                <td>   <?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?></td>
+                                <td> <?php echo  date('F d, Y', strtotime($row->event_date)); ?></td>
+                                <td> <?php echo $row->event_to; ?></td>
+                                <td>
+                                <div class="dropdown no-arrow">
+                                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-list-alt fa-lg fa-fw text-blue-400 pl-3"></i>
+                                  </a>
+                                <div class="dropdown-menu dropdown-menu-down shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item fas fa-eye fa-fw" href="eventview/<?php echo $row->booking_id; ?>">&nbsp More Details</a> 
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item fas fa-stop fa-fw" href="#" data-toggle="modal" data-target="#delevent<?php echo $row->booking_id; ?>">&nbsp Delete</a>   
+                                  </div>
+                                </div>
+                                </td>
+                            </tr>       
+                        </tbody>
+                        <!-- event delete modal -->
+                        <div class="modal fade" id="delevent<?php echo $row->booking_id; ?>" tabindex="-1" role="dialog" aria-labelledby="delevent" aria-hidden="true">
+>>>>>>> f5b64d28e6bdaabe8b681fe6f0e33f81c9aac71e
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">

@@ -1,5 +1,5 @@
 <?php echo form_open_multipart('profile_edit_info'); ?>
-<div class="container py-3">
+<div class="container py-3 mb-5">
     <div class="row">
         <div class="col-md-3">
             <?php 
@@ -97,6 +97,36 @@
                                 </div>
                             </div>
                         </li>
+                        <?php if($this->session->userdata('artist_type') != null): ?>                            
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Phone Number 2</div>
+                                    <div class="col font-weight-bold">
+                                        <select class="form-control <?php echo form_error('service') ? 'is-invalid' : ''; ?>" name="service">
+                                            <option  selected hidden disabled> PLease Select Type of Service</option>
+                                            <option value="photographer" <?php echo isset($service) == 'photographer' ? 'selected' : $this->session->userdata('artist_type') == 'photographer' ? 'selected' : '' ?>>Photographer</option>
+                                            <option value="videographer" <?php echo isset($service) == 'videographer' ? 'selected' : $this->session->userdata('artist_type') == 'videographer' ? 'selected' : '' ?>>videographer</option>
+                                            <option value="host" <?php echo isset($service) == 'host' ? 'selected' : $this->session->userdata('artist_type') == 'host' ? 'selected' : '' ?>>Host</option>
+                                            <option value="restaurant gig" <?php echo isset($service) == 'restaurant gig' ? 'selected' : $this->session->userdata('artist_type') == 'restaurant gig' ? 'selected' : '' ?>>Restaurant Gig</option>
+                                            <option value="graduation ball" <?php echo isset($service) == 'graduation ball' ? 'selected' : $this->session->userdata('artist_type') == 'graduation ball' ? 'selected' : '' ?>>Graduation Ball</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('service') ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Service Description</div>
+                                    <div class="col font-weight-bold"><textarea name="desc" id="ckeditor" value="" class="form-control <?php echo form_error('desc') ? 'is-invalid' : '' ?>" rows="1"><?php echo isset($desc)  ? $desc   : $this->session->userdata('artist_desc'); ?></textarea>
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('desc'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endif; ?>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Offense</div>

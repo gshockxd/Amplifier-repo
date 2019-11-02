@@ -142,10 +142,15 @@ $autoload['model'] = array(
     'clients/package_model',
     'clients/register_model',
     'clients/login_model',
+    'clients/event_model',
+    'clients/c_chat_model',
 
     'performers/p_register_model',
     'performers/p_profile_model',
-    'performers/p_history_model',
+    'performers/p_booking_model',
+    'performers/p_pricing_model',
+    'performers/p_package_model',
+    'performers/p_chat_model',
 
     'message_model'
 );

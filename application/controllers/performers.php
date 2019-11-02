@@ -15,38 +15,59 @@
 			$this->load->view('performer/profile');
 			$this->load->view('inc/footer');
 		}
-		public function history(){
+		public function bookings(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();
 
-			$this->p_history_model->index();
+			$this->p_booking_model->index();
 		}
 		public function pricing(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();
-			$templates['title'] = 'Pricing';
+			
+			$this->p_pricing_model->index();
+		}
+		public function pricing_validate(){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_performer();
 
-			$this->load->view('inc/header-performer', $templates);
-			$this->load->view('performer/pricing');
-			$this->load->view('inc/footer');
+			$this->p_pricing_model->pricing_validate();
 		}
 		public function package(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();
-			$templates['title'] = 'Package';
 
-			$this->load->view('inc/header-performer', $templates);
-			$this->load->view('performer/package');
-			$this->load->view('inc/footer');
+			$this->p_package_model->index();
+		}
+		public function package_edit_page(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_performer();
+
+			$this->p_package_model->package_edit_page();
+		}
+		public function package_update(){
+			$this->p_package_model->package_update();
+		}
+		public function p_package_delete(){
+			$this->p_package_model->p_package_delete();
 		}
 		public function chat(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();
-			$templates['title'] = 'Chat';
 
-			$this->load->view('inc/header-performer', $templates);
-			$this->load->view('performer/chat');
-			$this->load->view('inc/footer');
+			$this->p_chat_model->index();
+		}
+		public function chat_message(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_performer();
+
+			$this->p_chat_model->chat_message();
+		}
+		public function send_search_message (){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_performer();
+
+			$this->p_chat_model->send_search_message();			
 		}
 		public function file_check(){
 			$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
