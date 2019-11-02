@@ -72,6 +72,9 @@
 							<li class="nav-item active">
 								<a class="nav-link" href="<?php echo base_url()?>profile">Dashboard <span class="sr-only">(current)</span></a>
 							</li>
+							<!-- <li class="nav-item">
+								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
+							</li> -->
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo base_url()?>c_events">Events</a>
 							</li>
@@ -162,6 +165,7 @@
 
 <?php elseif($this->session->userdata('user_type') == 'performer'): ?>
 	<?php $this->load->view('inc/header-performer'); ?>
+<<<<<<< .merge_file_a13704
 <<<<<<< .merge_file_a09240
 <<<<<<< .merge_file_a14680
 <<<<<<< .merge_file_a14972
@@ -175,3 +179,6 @@
 =======
 <?php endif; ?>
 >>>>>>> .merge_file_a08872
+=======
+<?php endif; ?>
+>>>>>>> .merge_file_a13688
