@@ -133,6 +133,8 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
+    'admin/a_chat_model',
+
     'client_model', 
     'session_model', 
     'clients/profile_model',

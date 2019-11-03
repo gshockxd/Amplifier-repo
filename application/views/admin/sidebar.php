@@ -52,12 +52,21 @@
             <span>Notifications</span></a>
     </li>
 
+<<<<<<< HEAD
     <!-- Messages -->
     <li class="nav-item">
         <a class="nav-link" href="messages">
             <i class="fa fa-envelope-o"></i>
             <span>Messages</span></a>
     </li>
+=======
+      <!-- Messages -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url();?>a_chat">
+        <i class="fa fa-envelope-o"></i>
+          <span>Messages</span></a>
+      </li>
+>>>>>>> 901f278effa31b0420140e5fa3fba35c5d863ba2
 
     <!-- Logout -->
     <li class="nav-item">
