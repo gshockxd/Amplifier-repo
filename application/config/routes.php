@@ -13,8 +13,6 @@ $route['services']                      = 'welcome/services';
 $route['history']                       = 'welcome/history';
 $route['reports']                       = 'welcome/reports';
 $route['notifications']                 = 'welcome/notifications';
-// $route['messages']                      = 'clients/chat';
-$route['messages']                        = 'performers/chat';
 $route['profile/editprofile/(:num)']    = 'welcome/editprofile/$1  ';
 $route['delete_user/(:num)']            = 'welcome/delete_user/$1  ';
 $route['eventview/(:num)']              = 'welcome/eventview/$1';
@@ -25,6 +23,11 @@ $route['add_offense/(:num)']            = 'welcome/offense_count/$1';
 $route['services']                      = 'welcome/services';
 $route['logout']                        = 'welcome/logout';
 $route['ban/(:num)']                    = 'welcome/ban/$1';
+
+$route['a_chat']                        = 'admin/chat';
+$route['a_chat/(:num)']                 = 'admin/chat_message/$1';
+$route['a_chat_send_search_message/(:num)']    = 'admin/send_search_message/$1';
+$route['a_chat_compose/(:num)']         = 'admin/chat_compose/$1'; 
 
 //
 $route['profile']                       = 'clients/profile';

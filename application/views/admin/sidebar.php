@@ -54,7 +54,7 @@
 
       <!-- Messages -->
       <li class="nav-item">
-        <a class="nav-link" href="messages">
+        <a class="nav-link" href="<?php echo base_url();?>a_chat">
         <i class="fa fa-envelope-o"></i>
           <span>Messages</span></a>
       </li>
