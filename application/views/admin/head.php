@@ -1,3 +1,10 @@
+<?php if($this->session->userdata('user_type') == 'admin'){
+    $this->session->userdata('user_type') == 'admin';
+    }else{
+        redirect(base_url() ."login");
+    
+} ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
