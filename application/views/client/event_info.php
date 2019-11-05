@@ -79,7 +79,7 @@
                                     <p class="font-weight-bold">Service Type</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p class="text-capitalize"><?php echo $event['artist_type'] ?></p>
+                                    <p class="text-capitalize"><?php echo $event['artist_type'] ? $event['artist_type'] : 'None' ?></p>
                                 </div>
                             </div>
                         </div>

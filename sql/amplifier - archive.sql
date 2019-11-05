@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2019 at 02:10 PM
+-- Generation Time: Oct 31, 2019 at 10:35 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -21,9 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `amplifier`
 --
-drop database amplifier;
-create database amplifier;
-use amplifier;
 
 -- --------------------------------------------------------
 
@@ -63,34 +60,22 @@ CREATE TABLE `bookings` (
   `booking_id` bigint(20) NOT NULL,
   `client_id` bigint(20) NOT NULL,
   `performer_id` bigint(20) NOT NULL,
+  `package_id` bigint(20) NOT NULL,
   `venue_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_date` date NOT NULL,
+  `event_from` time NOT NULL,
+  `event_to` time NOT NULL,
   `full_amount` decimal(8,2) NOT NULL,
   `payment_status` enum('dp','paid','none','') COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_booked` date DEFAULT NULL,
   `down_payment` decimal(8,2) NOT NULL,
-  `event_time` time NOT NULL,
   `notes` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('approve','block','cancel','pending') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `event_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `client_rating` int(11) NOT NULL,
-  `performer_rating` int(11) NOT NULL
+  `artist_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_rating` int(11) DEFAULT NULL,
+  `performer_rating` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `bookings`
---
-
-INSERT INTO `bookings` (`booking_id`, `client_id`, `performer_id`, `venue_name`, `event_date`, `full_amount`, `payment_status`, `date_booked`, `down_payment`, `event_time`, `notes`, `status`, `event_name`, `client_rating`, `performer_rating`) VALUES
-(1, 1, 2, 'Cebu', '2019-10-11', '13000.00', 'dp', '2019-10-09', '1300.00', '23:00:00', 'no pool', 'approve', 'octoberfest1', 2, 5),
-(2, 1, 2, 'cebu', '2019-10-23', '300.00', 'dp', '2019-10-15', '100.00', '14:00:00', 'free pool', 'approve', 'octoberfest2', 1, 0),
-(3, 2, 1, 'cebu', '2019-10-15', '1000.00', 'none', '2019-10-05', '1000.00', '22:00:00', 'hello', 'approve', 'octoberfest3', 4, 5),
-(5, 1, 2, 'qweqwe', '2019-10-10', '123123.00', 'dp', '2019-10-08', '123123.00', '00:03:23', '123123', 'cancel', 'octoberfest4', 0, 0),
-(6, 1, 8, 'help', '2019-10-26', '123123.00', 'dp', '2019-10-08', '123123.00', '00:12:31', 'awdqwe', 'cancel', 'octoberfest5', 0, 0),
-(7, 1, 7, 'help', '2019-10-11', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:31', '31231', 'approve', 'octoberfest6', 0, 0),
-(8, 1, 8, 'help', '2019-10-12', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:31', '123123', 'approve', 'octoberfest7', 0, 0),
-(9, 1, 7, 'help', '2019-10-11', '123123.00', 'dp', '2019-10-08', '12313.00', '00:12:34', 'qweq', 'pending', 'octoberfest8', 0, 0),
-(10, 1, 8, 'qweqwe', '2019-10-18', '123.00', 'dp', '2019-10-08', '12313.00', '00:01:23', '12312', 'approve', 'octoberfest9', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -100,12 +85,20 @@ INSERT INTO `bookings` (`booking_id`, `client_id`, `performer_id`, `venue_name`,
 
 CREATE TABLE `chats` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `conversation_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `incoming_id` bigint(20) NOT NULL,
+  `outgoing_id` bigint(20) NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chats`
+--
+
+INSERT INTO `chats` (`id`, `incoming_id`, `outgoing_id`, `message`, `created_at`, `updated_at`) VALUES
+(87, 45, 44, 'hello nike gwapo', '2019-10-29 09:04:37', '2019-10-29 09:04:37'),
+(88, 44, 45, 'angela diay ko hehe', '2019-10-29 09:05:21', '2019-10-29 09:05:21');
 
 -- --------------------------------------------------------
 
@@ -152,14 +145,6 @@ CREATE TABLE `feedbacks` (
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `feedbacks`
---
-
-INSERT INTO `feedbacks` (`feedback_id`, `booking_id`, `to_id`, `from_id`, `rating`, `message`, `created_at`) VALUES
-(2, 2, 1, 2, '2.0', 'badbadbad', '2019-10-15 17:00:00'),
-(3, 3, 2, 1, '1.0', 'okay', '2019-10-09 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -268,20 +253,24 @@ CREATE TABLE `notifications` (
 
 CREATE TABLE `packages` (
   `package_id` bigint(20) NOT NULL,
-  `package_name` varchar(255) NOT NULL,
+  `package_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` decimal(8,2) NOT NULL,
-  `details` text NOT NULL,
+  `details` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `owner` bigint(20) NOT NULL,
-  `date_created` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `booked` int(11) NOT NULL,
+  `date_created` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `packages`
 --
 
-INSERT INTO `packages` (`package_id`, `package_name`, `price`, `details`, `owner`, `date_created`) VALUES
-(2, '2 hours singing', '2000.00', '2 hours maximum time', 2, '2019-10-03'),
-(3, 'hello', '2000.00', '300 songs in sixty minutes', 1, '2019-10-30');
+INSERT INTO `packages` (`package_id`, `package_name`, `price`, `details`, `owner`, `booked`, `date_created`, `created_at`, `updated_at`) VALUES
+(19, 'music delight', '25000.00', '<p>* 3 hours of singing</p>\r\n\r\n<p>* client&#39;s choice of songs</p>\r\n\r\n<p>* first five songs are free</p>\r\n', 44, 1, '0000-00-00', '2019-10-22 09:39:18', '2019-10-22 12:22:45'),
+(20, 'Christmas', '2000.00', '<p>Angela is Main Host</p>\r\n', 44, 1, '0000-00-00', '2019-10-24 09:06:37', '2019-10-24 09:06:49'),
+(21, 'package', '10000.00', '<p>lorem</p>\r\n', 45, 0, '0000-00-00', '2019-10-29 08:58:24', '2019-10-29 08:59:41');
 
 -- --------------------------------------------------------
 
@@ -310,16 +299,6 @@ CREATE TABLE `reports` (
   `report_details` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `reports`
---
-
-INSERT INTO `reports` (`report_id`, `booking_id`, `report_from`, `report_to`, `report_photo`, `report_details`) VALUES
-(2, 2, 2, 1, 'assets/img/1.jpg\r\n', 'fake event'),
-(3, 3, 1, 3, 'assets/img/1.jpg\r\n', 'not paid'),
-(4, 1, 1, 1, '', '123'),
-(8, 1, 1, 1, '', '123');
-
 -- --------------------------------------------------------
 
 --
@@ -345,19 +324,24 @@ CREATE TABLE `users` (
   `media_fk` bigint(20) UNSIGNED DEFAULT NULL,
   `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `block_end` date NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `artist_type` enum('photographer','videographer','host','restaurant gig','graduation ball') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `artist_desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `status`, `fname`, `email`, `address`, `rate`, `photo`, `telephone_1`, `telephone_2`, `created_at`, `offense`, `report_count`, `media_fk`, `lname`, `block_end`, `updated_at`) VALUES
-(1, 'client', 'user1', 'pass', 'banned', 'client', 'email@gmail.com', 'cebu', '1200.00', 'assets/img/1.jpg', '09123331', '09123123123', '2019-10-09 17:00:00', '3', 0, NULL, 'last', '0000-00-00', '2019-10-16 12:06:09'),
-(2, 'performer', 'user2', 'pas', 'block', 'perforemr', 'email2@gmail.com', 'talamban', '12333.00', 'assets/img/1.jpg', '09123331', '0912333', '2019-10-21 17:00:00', '2', 1, NULL, 'name', '2019-11-14', '2019-10-16 12:06:09'),
-(3, '', 'bad', 'bad', 'banned', 'bad', 'bad', 'baduser', '1200.00', 'assets/img/1.jpg', '1231231', '12313123', '2019-10-23 17:00:00', '3', 100, NULL, 'invalid', '0000-00-00', '2019-10-16 12:06:09'),
-(7, 'performer', 'username12345', 'password', '', 'brittmon', 'enarosal04@yahoo.com', '', '0.00', '', '09127055497', '0909', '2019-10-06 17:00:00', '0', 0, NULL, 'talvo', '0000-00-00', '2019-10-16 12:06:09'),
-(8, 'performer', 'usernameeee', 'password', '', 'brittttt', 'gshockxd01@gmail.com', '', '0.00', '', '0917055497', '', '2019-10-07 17:00:00', '0', 0, NULL, 'maosdasd', '0000-00-00', '2019-10-16 12:06:09');
+INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `status`, `fname`, `email`, `address`, `rate`, `photo`, `telephone_1`, `telephone_2`, `created_at`, `offense`, `report_count`, `media_fk`, `lname`, `block_end`, `updated_at`, `artist_type`, `artist_desc`) VALUES
+(1, 'client', 'user1', 'pass', 'banned', 'client', 'email@gmail.com', 'cebu', '1200.00', 'assets/img/1.jpg', '09123331', '09123123123', '2019-10-09 17:00:00', '3', 0, NULL, 'last', '0000-00-00', '2019-10-16 12:06:09', '', ''),
+(2, 'performer', 'user2', 'pas', 'block', 'perforemr', 'email2@gmail.com', 'talamban', '12333.00', 'assets/img/1.jpg', '09123331', '0912333', '2019-10-21 17:00:00', '2', 1, NULL, 'name', '2019-11-14', '2019-10-16 12:06:09', '', ''),
+(3, '', 'bad', 'bad', 'banned', 'bad', 'bad', 'baduser', '1200.00', 'assets/img/1.jpg', '1231231', '12313123', '2019-10-23 17:00:00', '3', 100, NULL, 'invalid', '0000-00-00', '2019-10-16 12:06:09', '', ''),
+(7, 'performer', 'username12345', 'password', '', 'brittmon', 'enarosal04@yahoo.com', '', '0.00', '', '09127055497', '0909', '2019-10-06 17:00:00', '0', 0, NULL, 'talvo', '0000-00-00', '2019-10-16 12:06:09', '', ''),
+(8, 'performer', 'usernameeee', 'password', '', 'brittttt', 'gshockxd01@gmail.com', '', '0.00', '', '0917055497', '', '2019-10-07 17:00:00', '0', 0, NULL, 'maosdasd', '0000-00-00', '2019-10-16 12:06:09', 'graduation ball', ''),
+(44, 'client', 'ShiroViper', '41fd220f05ed0d8c56e3b83af87d45d7', 'pending', 'Nike', 'nikemarticaballes@gmail.com', 'Banilad', '0.00', 'assets/img/performer/2019_10_22_15_06_02.PNG', '09321902242', '09321902242', '2019-10-22 07:06:02', '', 0, NULL, 'Caballes', '0000-00-00', '2019-10-29 08:52:27', 'restaurant gig', '<p>I can host in different events</p>\r\n\r\n<p>and do nothing&nbsp;</p>\r\n\r\n<p>hehe</p>\r\n'),
+(45, 'performer', 'JhonCena', '41fd220f05ed0d8c56e3b83af87d45d7', 'pending', 'Angela', 'ceuva@gmail.com', 'Banilad', '0.00', 'assets/img/client/2019_10_22_17_12_19.jpg', '09321902242', '09365468580', '2019-10-22 09:12:19', '', 0, NULL, 'Cueva', '0000-00-00', '2019-10-22 09:12:19', NULL, NULL),
+(46, 'client', 'NikeMarti1', '41fd220f05ed0d8c56e3b83af87d45d7', 'pending', 'Shiro', 'cortes@gmail.com', 'banilad', '0.00', 'assets/img/client/2019_10_29_13_30_15.jpg', '09321902242', '09321902242', '2019-10-29 05:30:15', '', 0, NULL, 'Viper', '0000-00-00', '2019-10-29 05:30:15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -406,13 +390,16 @@ ALTER TABLE `bookings`
   ADD PRIMARY KEY (`booking_id`),
   ADD KEY `client_id` (`client_id`),
   ADD KEY `user_id` (`performer_id`),
-  ADD KEY `venue_id` (`venue_name`);
+  ADD KEY `venue_id` (`venue_name`),
+  ADD KEY `package_id` (`package_id`);
 
 --
 -- Indexes for table `chats`
 --
 ALTER TABLE `chats`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `incoming_id` (`incoming_id`),
+  ADD KEY `outgoing_id` (`outgoing_id`);
 
 --
 -- Indexes for table `conversations`
@@ -520,13 +507,13 @@ ALTER TABLE `artist_types`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `booking_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `conversations`
@@ -580,7 +567,7 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `package_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `reports`
@@ -592,7 +579,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `venues`
@@ -608,14 +595,22 @@ ALTER TABLE `venues`
 -- Constraints for table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`performer_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `bookings_ibfk_2` FOREIGN KEY (`performer_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `bookings_ibfk_3` FOREIGN KEY (`client_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `bookings_ibfk_4` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`);
+
+--
+-- Constraints for table `chats`
+--
+ALTER TABLE `chats`
+  ADD CONSTRAINT `chats_ibfk_1` FOREIGN KEY (`incoming_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `chats_ibfk_2` FOREIGN KEY (`outgoing_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  ADD CONSTRAINT `feedbacks_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking_id`);
+  ADD CONSTRAINT `feedbacks_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `galleries`
@@ -633,9 +628,9 @@ ALTER TABLE `packages`
 -- Constraints for table `reports`
 --
 ALTER TABLE `reports`
-  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking_id`),
-  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`report_from`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`report_to`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`report_from`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`report_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

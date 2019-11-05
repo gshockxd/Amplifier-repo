@@ -5,7 +5,7 @@
 
 
 <?php if($packages): ?>
-	<p class="h3 py-3 red-brown text-center">Pick an Event</p>
+	<p class="h3 py-3 red-brown text-center">Pick a Package</p>
 	<div class="card-columns">
 		<?php foreach($packages as $p): ?>
 		<div class="card">

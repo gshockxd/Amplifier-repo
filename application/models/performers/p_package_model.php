@@ -80,7 +80,7 @@
                 $this->db->where(array('package_id'=>$id, 'owner'=>$this->session->userdata('user_id')));
                 $this->db->delete('packages');
                 
-                $this->session->set_flashdata('success_message', 'Package Deleted');
+                $this->session->set_flashdata('success_message', 'Package has been successfully Deleted!');
                 redirect('p_package');
             }
         }

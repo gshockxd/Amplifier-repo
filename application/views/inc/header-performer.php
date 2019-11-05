@@ -56,7 +56,9 @@
 <body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-bottom">
 		    <div class="container">
-		        <a class="navbar-brand" href="<?php echo base_url() ?>p_profile">AMPLIFIER</a>
+		        <a class="navbar-brand" href="<?php echo base_url() ?>p_bookings">
+					<img src="<?php echo base_url(); ?>assets/img/website/logo1.png" height="25" alt=""> 
+				</a>
 		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		        <span class="navbar-toggler-icon"></span>
 		        </button>
@@ -64,41 +66,41 @@
 		        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			        <ul class="navbar-nav mr-auto">
 						<?php if($this->session->userdata('user_id')): ?>
-							<li class="nav-item active">
-								<a class="nav-link" href="<?php echo base_url() ?>p_profile">Dashboard <span class="sr-only">(current)</span></a>
-							</li>
-							<li class="nav-item">
+							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'p_profile' ? 'active' : '' ?>">
+								<a class="nav-link" href="<?php echo base_url() ?>p_profile">Dashboard</a>
+							</li> -->
+							<li class="nav-item <?php echo $this->uri->segment(1) == 'p_bookings' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url() ?>p_bookings">Bookings</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="<?php echo base_url() ?>p_pricing">Pricing</a>
+							<li class="nav-item <?php echo $this->uri->segment(1) == 'p_pricing' ? 'active' : '' ?>">
+								<a class="nav-link" href="<?php echo base_url() ?>p_pricing">Add Package</a>
 							</li>
-							<li class="nav-item">
+							<li class="nav-item <?php echo $this->uri->segment(1) == 'p_package' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url() ?>p_package">Package</a>
 							</li>
-							<li class="nav-item">
-								<!-- <a class="nav-link" href="<?php echo base_url() ?>p_chat">Chat</a> -->
-							</li>
+							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'p_profile' ? 'active' : '' ?>">
+								<a class="nav-link" href="<?php echo base_url() ?>p_chat">Chat</a>
+							</li> -->
 						<?php endif; ?>
 			        </ul>
 			        <form class="form-inline my-2 my-lg-0" method="POST" action="#">
 			            <ul class="navbar-nav">
-				            <!-- <li class="nav-item">
+				            <!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'p_profile' ? 'active' : '' ?>">
 					            <a href="<?php// echo $page ?> " class="nav-link"  data-toggle="tooltip" data-placement="bottom" title="Dark Mode: <?php// echo $theme == 'flatly' ? 'OFF' : 'ON' ?>"><i class="fas fa-toggle-<?php echo $theme == 'flatly' ? 'off' : 'on' ?> fa-lg"></i></a>
 				            </li> -->
 							<?php if(!$this->session->userdata('user_id')): ?>
-								<li class="nav-item">
+								<li class="nav-item ">
 									<a href="<?php echo base_url() ?>login" class="nav-link">Login</a>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item ">
 									<a href="<?php echo base_url() ?>p_register" class="nav-link">Register</a>
 								</li>
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
-								<li class="nav-item">
+								<li class="nav-item <?php echo $this->uri->segment(1) == '#' ? 'active' : '' ?>">
 									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item <?php echo $this->uri->segment(1) == 'p_chat' ? 'active' : '' ?>">
 									<a href="<?php echo base_url() ?>p_chat" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="far fa-envelope fa-lg"></i></a>
 								</li>
 								<li class="nav-item">

@@ -54,11 +54,18 @@
                     redirect('users');
                     break;
                 case 'client':
-                    redirect('profile');
+                    if($this->uri->segment(1) != 'profile'){
+                        redirect('profile');
+                    }
                     break;
                 case 'performer':
-                    redirect('p_profile');
+                    redirect('p_bookings');
                     break;
+            }
+        }
+        public function session_index_page(){
+            if($this->session->userdata('user_id')){
+                $this->session_model->user_type_check();
             }
         }
         public function session_check(){
@@ -75,7 +82,7 @@
                     break;
                 case 'performer':
                     $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
-                    redirect('p_profile');
+                    redirect('p_bookings');
                     break;
             }
         }
@@ -87,7 +94,7 @@
                     break;
                 case 'performer':
                     $this->session->set_flashdata('danger_message', 'The page your trying to access is invalid');
-                    redirect('p_profile');
+                    redirect('p_bookings');
                     break;
             }
         }

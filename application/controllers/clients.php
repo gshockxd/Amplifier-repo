@@ -6,18 +6,23 @@
 			redirect('profile');
 		}
 		public function login_attempt(){
+			$this->session_model->session_index_page ();
 			$this->login_model->login_attempt();
 		}
 		public function login(){
+			$this->session_model->session_index_page ();
 			$this->login_model->index();
 		}
 		public function register (){
+			$this->session_model->session_index_page ();
 			$this->register_model->index();
 		}
 		public function register_user(){
+			$this->session_model->session_index_page ();
 			$this->register_model->register_user();
 		}
 		public function profile(){
+			$this->session_model->session_index_page ();
 			$this->profile_model->index();			
 		}
 		public function history(){
@@ -32,11 +37,29 @@
 
 			$this->event_model->index();
 		}
+		public function event_created (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->event_model->event_created();			
+		}
 		public function event_info (){
 			$this->session_model->session_check();
 			$this->session_model->user_type_check_client();
 
 			$this->event_model->event_info();
+		}
+		public function event_add (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->event_model->event_add();
+		}
+		public function event_add_attempt (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->event_model->event_add_attempt();
 		}
 		public function print_pdf(){
 			$this->session_model->session_check();

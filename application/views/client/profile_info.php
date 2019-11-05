@@ -1,16 +1,15 @@
 <div class="container py-3">
     <?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <img src="<?php echo base_url(); echo $this->session->userdata('photo'); ?>" class="img-thumbnail" alt="">
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <?php if($this->session->flashdata('user_updated')): ?>
                 <div class="alert alert-success alert-block">
                     <?php echo $this->session->flashdata('user_updated'); ?>
                 </div>
             <?php endif; ?>
-            <p class="h3"><?php echo $this->session->userdata('fname'); ?> <?php echo $this->session->userdata('lname'); ?></p>
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="header">User information</h5>

@@ -2,9 +2,10 @@
     class Profile_Model extends CI_Model {
         public function index (){
 			$templates['title'] = 'AMPLIFIER';
-			
+			$data['package'] = $this->profile_model->get_three_packages();
+
 			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/profile');
+			$this->load->view('client/profile', $data);
 			$this->load->view('inc/footer');            
 		}        
 		public function profile_password_edit_page(){			
@@ -81,8 +82,15 @@
 			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check_update');
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
-			$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
-			$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
+
+			if($this->session->userdata('user_type') == 'performer'){				
+				$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
+				$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
+			}
+
+			echo '<pre>';
+			print_r($this->input->post());
+			echo '</pre>';
 
 			$data['uname'] = $this->input->post('uname');
 			$data['fname'] = $this->input->post('fname');
@@ -94,7 +102,7 @@
 			$data['service'] = $this->input->post('service');
 			$data['desc'] = $this->input->post('desc');
 
-			if($this->form_validation->run() == FALSE){
+			if($this->form_validation->run() === FALSE){
 				$this->load->view('inc/header-client', $templates);
 				$this->load->view('client/profile_edit', $data);
 				$this->load->view('inc/footer');
@@ -144,7 +152,7 @@
 				$this->profile_model->profile_update($client_image);
 				$session_user = $this->profile_model->user_select($this->session->userdata('email'));	
 				$this->session_model->session_user($session_user);
-				$this->session->set_flashdata('success_message', 'Your profile has been updated!');		
+				$this->session->set_flashdata('success_message', 'Profile has been updated!');		
 	
 				redirect('profile_info'); 
 				// hi;
@@ -197,5 +205,12 @@
         public function user_select($email){
             $query = $this->db->get_where('users', array('email'=>$email));
             return $query->row_array();
-        }
+		}
+		public function get_three_packages(){
+			$this->db->limit(3);
+			$this->db->group_by('owner');
+			$this->db->order_by('RAND()');
+			$query = $this->db->get_where('packages', array('booked'=>0));
+			return $data = $query->result_array();
+		}
     }

@@ -1,19 +1,20 @@
 <div class="container">
-		<p class="h1 yellow-brown py-3 text-center">BOOKINGS</p>
-		
+	<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
+	<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+	<?php if($bookings): ?>	
+		<p class="h1 yellow-brown py-3 text-center">Booked Package</p>	
 		<table id="datatable" class="table table-hover" style="width:100%">
-        <thead>
-            <tr>
-				<th>Schedule</th>
-				<th>Event Venue</th>
-                <th>Status</th>
-                <th>Event Type</th>
-                <th class="text-center">Action</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-			<?php if($bookings): ?>				
+			<thead>
+				<tr>
+					<th>Schedule</th>
+					<th>Event Venue</th>
+					<th>Status</th>
+					<th>Event Type</th>
+					<th class="text-center">Action</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>			
 				<?php foreach($bookings as $b): ?>				
 					<tr>
 						<td class="">
@@ -38,24 +39,22 @@
 						</td>
 					</tr>
 				<?php endforeach; ?>				
-			<?php else: ?>
+			</tbody>
+			<tfoot>
 				<tr>
-					<td colspan="12">
-						<p class="text-muted text-center h4"> No Entries Found</p>
-					</td>
+					<th>Schedule</th>
+					<th>Event Venue</th>
+					<th>Status</th>
+					<th>Event Type</th>
+					<th class="text-center">Action</th>
+					<th></th>
 				</tr>
-			<?php endif; ?>
-        </tbody>
-        <tfoot>
-            <tr>
-				<th>Schedule</th>
-				<th>Event Venue</th>
-                <th>Status</th>
-                <th>Event Type</th>
-                <th class="text-center">Action</th>
-                <th></th>
-            </tr>
-        </tfoot>
-    </table>
-
+			</tfoot>
+		</table>
+	<?php else: ?>
+		<div class="text-center mt-5">
+			<img src="<?php echo base_url(); ?>assets/img/website/not_found.svg" height="50%" width="50%" alt="">
+			<p class="h4 mt-3 yellow-brown">No Booked Package</p>
+		</div>
+	<?php endif;?>
 	</div>

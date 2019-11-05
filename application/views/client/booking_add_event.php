@@ -1,6 +1,6 @@
 <?php echo form_open('booking_attempt/'.$this->uri->segment(2)) ?>
 <div class="container my-3">
-    <p class="h3 text-center">Book an Event</p>
+    <p class="h3 text-center">Book a Package</p>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">

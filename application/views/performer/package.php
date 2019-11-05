@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" <?php if($packages): ?> style="background-image: url('<?php echo base_url(); ?>assets/img/website/card_postal.svg');" <?php endif; ?> >
 
 <?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
 <?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
 
 
 <?php if($packages): ?>
-	<p class="h3 py-3 yellow-brown text-center">Your Packages</p>
+	<p class="h3 pt-2 yellow-brown text-center">Your Packages</p>
 	<div class="card-columns">
 		<?php foreach($packages as $p): ?>
 		<div class="card">
@@ -32,9 +32,14 @@
 		<?php endforeach; ?>
 	</div>
 <?php else: ?>
-	<div class="alert alert-secondary my-3">
+	<!-- <div class="alert alert-secondary my-3">
 		<p class="h3 text-center">No Package/s Found</p>
+	</div> -->
+	<div class="text-center mt-5">
+		<img src="<?php echo base_url(); ?>assets/img/website/empty.svg" height="50%" width="50%" alt="">
+		<p class="h4 mt-3 yellow-brown">No Package Found</p>
 	</div>
+
 <?php endif; ?>
 
 </div>
