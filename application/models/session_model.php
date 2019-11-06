@@ -20,7 +20,8 @@
                 'created_at' => $data['created_at'],
                 'updated_at' => $data['updated_at'],
                 'artist_type' => $data['artist_type'],
-                'artist_desc' => $data['artist_desc']
+                'artist_desc' => $data['artist_desc'],
+                'block_end' => $data['block_end']
             );
             return $this->session->set_userdata($newdata);            
         }
@@ -44,21 +45,33 @@
                 'created_at' ,
                 'updated_at' ,
                 'artist_type',
-                'artist_desc'
+                'artist_desc',
+                'block_end'
             );
             return $this->session->unset_userdata($data);
         }
         public function user_type_check (){
-            switch($this->session->userdata('user_type')){
-                case 'admin':
-                    redirect('users');
-                    break;
-                case 'client':
-                    redirect('profile');
-                    break;
-                case 'performer':
-                    redirect('p_profile');
-                    break;
+            if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned")
+            {
+                    $data = array( 
+                        'user_type' ,
+                        'artist_type',
+                        'artist_desc',
+                    );
+                $this->session->unset_userdata($data);
+                redirect('block_page');
+            }else{
+                switch($this->session->userdata('user_type')){
+                    case 'admin':
+                        redirect('users');
+                        break;
+                    case 'client':
+                        redirect('profile');
+                        break;
+                    case 'performer':
+                        redirect('p_profile');
+                        break;
+                }
             }
         }
         public function session_check(){

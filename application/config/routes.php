@@ -5,34 +5,29 @@ $route['default_controller'] = 'welcome/users';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['users']                         = 'welcome/users';
-$route['profile/(:num)']                = 'welcome/profile/$1';
-$route['events']                        = 'welcome/events';
-$route['addevent']                      = 'welcome/addevent';
-$route['services']                      = 'welcome/services';
-$route['history']                       = 'welcome/history';
-$route['reports']                       = 'welcome/reports';
-$route['notifications']                 = 'welcome/notifications';
-<<<<<<< HEAD
-$route['messages']                      = 'clients/chat';
-$route['messages']                        = 'performers/chat';
-=======
->>>>>>> 901f278effa31b0420140e5fa3fba35c5d863ba2
-$route['profile/editprofile/(:num)']    = 'welcome/editprofile/$1  ';
-$route['delete_user/(:num)']            = 'welcome/delete_user/$1  ';
-$route['eventview/(:num)']              = 'welcome/eventview/$1';
-$route['delete_report/(:num)']          = 'welcome/delete_report/$1';
-$route['delete_event/(:num)']           = 'welcome/delete_event/$1';
-$route['delete_package/(:num)']         = 'welcome/delete_package/$1';
-$route['add_offense/(:num)']            = 'welcome/offense_count/$1';
-$route['services']                      = 'welcome/services';
-$route['logout']                        = 'welcome/logout';
-$route['ban/(:num)']                    = 'welcome/ban/$1';
+$route['users']                                 = 'welcome/users';
+$route['profile/(:num)']                        = 'welcome/profile/$1';
+$route['events']                                = 'welcome/events';
+$route['addevent']                              = 'welcome/addevent';
+$route['history']                               = 'welcome/history';
+$route['reports']                               = 'welcome/reports';
+$route['notifications']                         = 'welcome/notifications';
+$route['profile/editprofile/(:num)']            = 'welcome/editprofile/$1  ';
+$route['delete_user/(:num)']                    = 'welcome/delete_user/$1  ';
+$route['eventview/(:num)']                      = 'welcome/eventview/$1';
+$route['delete_report/(:num)']                  = 'welcome/delete_report/$1';
+$route['delete_event/(:num)']                   = 'welcome/delete_event/$1';
+$route['delete_package/(:num)']                 = 'welcome/delete_package/$1';
+$route['add_offense/(:num)']                    = 'welcome/offense_count/$1';
+$route['services']                              = 'welcome/services';
+$route['block_page']                            = 'welcome/block_page';
+$route['logout']                                = 'welcome/logout';
+$route['ban/(:num)']                            = 'welcome/ban/$1';
+$route['a_chat']                                = 'admin/chat';
+$route['a_chat/(:num)']                         = 'admin/chat_message/$1';
+$route['a_chat_send_search_message/(:num)']     = 'admin/send_search_message/$1';
+$route['a_chat_compose/(:num)']                 = 'admin/chat_compose/$1'; 
 
-$route['a_chat']                        = 'admin/chat';
-$route['a_chat/(:num)']                 = 'admin/chat_message/$1';
-$route['a_chat_send_search_message/(:num)']    = 'admin/send_search_message/$1';
-$route['a_chat_compose/(:num)']         = 'admin/chat_compose/$1'; 
 
 //
 $route['profile']                       = 'clients/profile';
@@ -127,6 +122,3 @@ $route['p_chat_compose/(:num)']         = 'performers/chat_compose/$1';
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-
-
-

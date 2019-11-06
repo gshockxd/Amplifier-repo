@@ -42,32 +42,44 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
 
                                     <div class="container-fluid">
-                                        <form method="post" action="<?php echo base_url()?>welcome/search_results">
-                                            <select name="usertype" class="btn btn-outline-info dropdown-toggle">
-                                            <option selected disabled>Usertype</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="performer">Performer</option>
-                                                <option value="client">Client</option>
-                                            </select>
+
+                                        <div class="col-sm-12 col-md-2 d-inline p-2">
+                                            <div class="dropdown mb-4 d-inline p-2">
+                                                <button class="btn btn-primary dropdown-toggle " type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Usertype
+                                                </button>
+                                                <div class="dropdown-menu animated--fade-in"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">admin</a>
+                                                    <a class="dropdown-item" href="#">client</a>
+                                                    <a class="dropdown-item" href="#">performer</a>
+                                                </div>
+                                            </div>
 
 
-                                            <select name="status" class="btn btn-outline-info dropdown-toggle">
-                                            <option selected disabled>Status</option>
-                                                <option value="pending">Pending</option>
-                                                <option value="verified">Verified</option>
-                                                <option value="block">Blocked</option>
-                                                <option value="banned">Banned</option>
-
-                                            </select>
+                                            <div class="dropdown mb-4 d-inline p-2">
+                                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Status
+                                                </button>
+                                                <div class="dropdown-menu animated--fade-in"
+                                                    aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">pending</a>
+                                                    <a class="dropdown-item" href="#">verified</a>
+                                                    <a class="dropdown-item" href="#">blocked</a>
+                                                </div>
+                                            </div>
 
                                             <a href="#" class="btn btn-outline-success btn-icon-split">
                                                 <span class="icon">
                                                     <i class="fas fa-arrow-right"></i>
                                                 </span>
-                                                <button class="btn btn-outline-success" type="submit">Sort</button>
+                                                <span class="text">Sort</span>
                                             </a>
-
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -75,9 +87,9 @@
                     </div>
 
                     <?php 
-        if($fetch_data_user->num_rows()>0)
+        if($search_results->num_rows()>0)
         {
-          foreach($fetch_data_user->result() as $row)
+          foreach($search_results->result() as $row)
           {
         ?>
                     <!--User Dropdown Card-->
@@ -240,36 +252,6 @@
                     <?php
             }
             ?>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1
-                                to 5 of 57 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                                        <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-                                            class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                    <li class="paginate_button page-item next" id="dataTable_next"><a href="#"
-                                            aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-                                            class="page-link">Next</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 

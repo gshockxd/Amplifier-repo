@@ -102,6 +102,12 @@ class Welcome extends CI_Controller {
 		$data["fetch_data_event"] = $this->model->fetch_data_event();
 		$this->load->view('/admin/events', $data);
 	}
+	public function block_page()
+	{
+		
+		$this->load->view('/admin/block_page');
+	}
+	
 	public function form_validation()
 	{
 		$this->load->library('form_validation');
@@ -121,6 +127,7 @@ class Welcome extends CI_Controller {
 		$this->upload->do_upload('pphoto');
 		$file_name=$this->upload->data();
 		$password = md5($this->input->post("password"));
+
 		if($this->form_validation->run())
 		{
 			$this->load->model("model");
@@ -148,9 +155,7 @@ class Welcome extends CI_Controller {
 
 			$this->model->insert_data_users($data_insert);
 			redirect(base_url() ."users");
-		}
-		else
-		{
+		}else{
 			echo '<script> alert("invalid inputs, Try again");</script>';
 			$this->load->model('model');
 			$data["fetch_data_user"] = $this->model->fetch_data_user();
@@ -177,50 +182,66 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->load->library('upload');
-		$this->form_validation->set_rules("client", "client", 'required|alpha_numeric_spaces');
-		$this->form_validation->set_rules("performer", "performer", 'required|alpha_numeric_spaces');
-		$this->form_validation->set_rules("dp", "dp", 'required|numeric|greater_than_equal_to[0]');
-		$this->form_validation->set_rules("payment", "payment", 'required|numeric|greater_than_equal_to[0]');
-		$this->form_validation->set_rules("date_event", "date event", 'required');
-		$this->form_validation->set_rules("venue", "venue", 'required');
-		$this->form_validation->set_rules("event_name", "event name", 'required');
-		$this->form_validation->set_rules("time_event", "duration", 'required|greater_than_equal_to[0]');
-		
-		if($this->form_validation->run())
+		$data["fetch_data_packages"] = $this->model->fetch_data_packages();
+		$this->form_validation->set_rules('event_name', '', 'required', array('required'=>'Please Input Event Name'));
+		$this->form_validation->set_rules('event_date', '', 'required', array('required'=>'No Date Selected'));
+		$this->form_validation->set_rules('event_to', '', 'required', array('required'=>'No Time Selected'));
+		$this->form_validation->set_rules('duration', '', 'required', array('required'=>'No Time Selected'));
+		// $this->form_validation->set_rules('full_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
+		$this->form_validation->set_rules('down_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
+		$this->form_validation->set_rules('location', '', 'required', array('required'=>'Location is required'));
+		$this->form_validation->set_rules('notes', '', 'required', array('required'=>'Notes is required'));
+		// date verfication
+		$date=date('y-m-d');
+		$set_date	=date_create($date);
+		date_add($set_date, date_interval_create_from_date_string("3 days"));
+		if(date_format($set_date,"y-m-d")>$this->input->post("date_event"))
 		{
-			$this->load->model("model");
-
-			if($this->input->post("approve"))
+			if($this->form_validation->run())
 			{
-				$status = "approve";
+				$this->load->model("model");
+				$status1 = "44";
+
+				if($this->input->post("approve"))
+				{
+					$status = "approve";
+				}else{
+					$status ="pending";
+				}
+
+				$data_insert = array(
+					"client_id" 	=> $this->input->post("client"),
+					"performer_id" 	=> $status1,
+					"full_amount" 	=> $status1,
+					"package_id" 	=> $this->input->post("package"),
+					"event_name" 	=> $this->input->post("event_name"),
+					"down_payment" 	=> $this->input->post("dp"),
+					"event_to" 		=> $this->input->post("time_event"),
+					"event_date" 	=> $this->input->post("date_event"),
+					"venue_name" 	=> $this->input->post("venue"),
+					"notes" 		=> $this->input->post("publicinfo"),
+					"status" 		=> $status,
+					"date_booked" 	=> date('y-m-d')
+				);
+
+				$this->model->insert_data_bookings($data_insert);
+				redirect(base_url() ."events");
 			}else{
-				$status ="pending";
+				echo '<script> alert("invalid inputs, Try again");</script>';
+				$this->load->model('model');
+				$data["fetch_data_client"] 		= $this->model->fetch_data_client();	
+				$data["fetch_data_packages"] 	= $this->model->fetch_data_packages();
+				$this->load->view('/admin/addevent',$data);
 			}
-
-			$data_insert = array(
-				"client_id" 	=> $this->input->post("client"),
-				"performer_id" 	=> $this->input->post("performer"),
-				"event_name" 	=> $this->input->post("event_name"),
-				"down_payment" 	=> $this->input->post("dp"),
-				"full_amount" 	=> $this->input->post("payment"),
-				"event_time" 	=> $this->input->post("time_event"),
-				"event_date" 	=> $this->input->post("date_event"),
-				"venue_name" 	=> $this->input->post("venue"),
-				"notes" 		=> $this->input->post("publicinfo"),
-				"status" 		=> $status,
-				"date_booked" 	=> date('y-m-d')
-			);
-
-			$this->model->insert_data_bookings($data_insert);
-			redirect(base_url() ."events");
-		}
-		else
-		{
-			echo '<script> alert("invalid inputs, Try again");</script>';
+		}else{
+			echo '<script> alert("event must be 3 days before the event");</script>';
 			$this->load->model('model');
-			$data["fetch_data_client"] 	= $this->model->fetch_data_client();	
-			$data["fetch_data_perf"] 	= $this->model->fetch_data_perf();
-			$this->load->view('/admin/addevent',$data);
+			$data["fetch_data_client"] 		= $this->model->fetch_data_client();	
+			$data["fetch_data_packages"] 	= $this->model->fetch_data_packages();
+			// $this->load->view('/admin/addevent',$data);
+			echo date_format($set_date,"Y-m-d"); 
+			echo " ";
+			echo $this->input->post("date_event");
 		}
 	
 	}
@@ -229,7 +250,7 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->model('model');
 		$data["fetch_data_client"] 	= $this->model->fetch_data_client();	
-		$data["fetch_data_perf"] 	= $this->model->fetch_data_perf();
+		$data["fetch_data_packages"] 	= $this->model->fetch_data_packages();
 		$this->load->view('/admin/addevent',$data);
 	}
 	public function editprofile()

@@ -35,7 +35,7 @@
 
 			$this->form_validation->set_rules('event_name', '', 'required', array('required'=>'Please Input Event Name'));
 			$this->form_validation->set_rules('event_date', '', 'required', array('required'=>'No Date Selected'));
-			$this->form_validation->set_rules('event_time', '', 'required', array('required'=>'No Time Selected'));
+			$this->form_validation->set_rules('event_to', '', 'required', array('required'=>'No Time Selected'));
 			$this->form_validation->set_rules('duration', '', 'required', array('required'=>'No Time Selected'));
 			// $this->form_validation->set_rules('full_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
 			$this->form_validation->set_rules('down_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
@@ -44,7 +44,7 @@
 
 			$data['event_name'] = $this->input->post('event_name');
 			$data['event_date'] = $this->input->post('event_date');
-			$data['event_time'] = $this->input->post('event_time');
+			$data['event_to'] = $this->input->post('event_time');
 			$data['duration'] = $this->input->post('duration');
 			$data['full_payment'] = $this->input->post('full_payment');
 			$data['down_payment'] = $this->input->post('down_payment');

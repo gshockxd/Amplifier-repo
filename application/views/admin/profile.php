@@ -143,8 +143,6 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <?php } ?>
-
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Sample Outputs:</label>
                                         <div class="col-8">
@@ -156,7 +154,10 @@
                                                 class="h-100 w-25 border border-primary rounded"></a>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <?php } ?>
+
+                                    
+                                  
 
                                 </div>
                             </div>

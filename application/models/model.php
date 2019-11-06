@@ -119,6 +119,7 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+ 
     function fetch_data_history()
     {
        $date = date('y-m-d');
