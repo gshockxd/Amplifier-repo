@@ -47,7 +47,7 @@
     </li>
     <!-- Notifications  -->
     <li class="nav-item">
-        <a class="nav-link" href="notifications">
+        <a class="nav-link" href="<?php echo base_url('notifications');?>">
             <i class="fa fa-list-alt"></i>
             <span>Notifications</span></a>
     </li>

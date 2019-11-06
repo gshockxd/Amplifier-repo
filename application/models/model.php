@@ -70,6 +70,15 @@ class model extends CI_Model
        $this->db->where("user_id",$id);
        $this->db->update("users", $offense);
     }
+    function update_offense_user1($offense)
+    {
+       $id = $this->session->userdata('user_id');
+       echo $id;
+       $this->db->select("status");
+       $this->db->from("users");
+       $this->db->where("user_id",$id);
+       $this->db->update("users", $offense);
+    }
     function update_ban_user($ban)
     {
        $id = $this->uri->segment(2);
@@ -118,6 +127,28 @@ class model extends CI_Model
        $this->db->join("users",'packages.owner=users.user_id');
        $query = $this->db->get();
        return $query;
+    }
+    function fetch_data_notifications()
+    {
+       $date = date('y-m-d');
+       $this->db->select("*");
+       $this->db->from("notifications");
+       $this->db->where("created_at",$date);
+       $query = $this->db->get();
+       $query2 = $this->db->count_all_results('notif_status');
+       $this->session->userdata('notif_count')== $query2;
+       return $query;
+    }
+    function fetch_data_notifications_count()
+    {
+       $this->db->SELECT("notif_status");
+       $this->db->from("notifications");
+       $this->db->where("notif_status","notified");
+       $this->db->count_all_results('notif_status');
+
+       $query = $this->db->get();
+       $this->session->userdata('notif_count') == $query;
+       return $this->session->userdata('notif_count');
     }
  
     function fetch_data_history()

@@ -4,14 +4,18 @@
        echo '<script> history.go(-1); </script>';
     
     } 
-    if($this->session->userdata('status') == 'block' || $this->session->userdata('status') == 'banned'){
     
-    }else{
-       echo '<script> history.go(-1); </script>';
+      
+    $date_block =date("F d, Y",strtotime($this->session->userdata('block_end')));
+    $date_today = date("F d, Y");
+
+       if($date_block == $date_today){
+        redirect('changeoff');
+        }
+
     
-    } 
-    if(date("F d, Y",strtotime($this->session->userdata('block_end'))==date("F d, Y")){
-        echo '<script> history.go(-1); </script>'; } 
+
+   
      ?>
 
 <head>
@@ -99,7 +103,7 @@
     <img src="<?php echo base_url(); ?>assets/img/block.png" alt="image"
         class="h-25 w-10 mt-5 rounded mx-auto d-block"></a>
     <?php if($this->session->userdata('status')=="banned"){ ?>
-    <h3 class="text-center text-dark font-weight-bold" style="font-family:times">Your account has been terminated</p>
+    <h3 class="text-center text-dark font-weight-bold" style="font-family:helvetica">Your account has been terminated</h3>
         <?php }else{ ?>
         <br>
         <br>

@@ -43,6 +43,22 @@ class Welcome extends CI_Controller {
 		$this->model->update_offense_user($offense);
 		redirect(base_url() ."users");
 	}
+	public function changeoff()
+	{
+		$this->load->model('model');
+		$this->load->library('upload');
+		$block_date=date_create("0000-00-00");
+
+			$offense= array(
+					"block_end" => date_format($block_date,"y-m-d"),
+					"status" 	=> "verified"
+					);
+
+		$this->model->update_offense_user1($offense);
+		echo '<script> alert("Account can now be used please login again");</script>';
+		echo '<script> window.location.replace("login")</script>';
+		
+	}
 	public function ban($id)
 	{
 		$this->load->model('model');
@@ -283,13 +299,17 @@ class Welcome extends CI_Controller {
 		$data["fetch_data_report"] 	= $this->model->fetch_data_report();
 		$this->load->view('/admin/reports',$data);
 	}
+	public function notifications_count()
+	{
+		$this->load->model('model');
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+		$this->load->view('/admin/notifications', $data);
+	}
 	public function notifications()
 	{
-		$this->load->view('/admin/notifications');
-	}
-	public function messages()
-	{
-		$this->load->view('/client/chat');
+		$this->load->model('model');
+		$data["fetch_data_notifications"] = $this->model->fetch_data_notifications();
+		$this->load->view('/admin/notifications', $data);
 	}
 	public function logout()
 	{

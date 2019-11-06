@@ -1,6 +1,8 @@
 <?php
+
     class Session_Model extends CI_Model {
         public function session_user ($data){
+        
             $newdata = array(
                 'user_id' => $data['user_id'],
                 'user_type' => $data['user_type'],
@@ -21,7 +23,8 @@
                 'updated_at' => $data['updated_at'],
                 'artist_type' => $data['artist_type'],
                 'artist_desc' => $data['artist_desc'],
-                'block_end' => $data['block_end']
+                'block_end' => $data['block_end'],
+                'notif_count' => "1" 
             );
             return $this->session->set_userdata($newdata);            
         }

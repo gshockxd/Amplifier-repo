@@ -21,6 +21,7 @@ $route['delete_package/(:num)']                 = 'welcome/delete_package/$1';
 $route['add_offense/(:num)']                    = 'welcome/offense_count/$1';
 $route['services']                              = 'welcome/services';
 $route['block_page']                            = 'welcome/block_page';
+$route['changeoff']                            = 'welcome/changeoff';
 $route['logout']                                = 'welcome/logout';
 $route['ban/(:num)']                            = 'welcome/ban/$1';
 $route['a_chat']                                = 'admin/chat';

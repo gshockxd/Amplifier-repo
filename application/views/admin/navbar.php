@@ -6,7 +6,7 @@
          <a class="nav-link dropdown-toggle" href="notifications" id="alerts" role="button" aria-expanded="false">
              <i class="fas fa-bell fa-fw"></i>
              <!-- Counter - Alerts -->
-             <span class="badge badge-danger badge-counter">3+</span>
+             <span class="badge badge-danger badge-counter"><?php echo $this->session->userdata('notif_count'); ?></span>
          </a>
          <!-- Nav Item - Messages -->
      <li class="nav-item dropdown no-arrow mx-1">

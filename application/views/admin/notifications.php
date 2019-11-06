@@ -23,88 +23,143 @@
                 <!-- Begin Page Content -->
 
                 <form class="form-inline">
-                    <input class="form-control-plaintext" type="text" placeholder="Selected Date:08/20/2019"
-                        readonly="Selected Date:08/20/2019" style="margin-left:15px">
+                    <input class="form-control-plaintext" type="text"
+                        placeholder="<?php echo $date_today = date("F d, Y"); ?>"
+                        readonly="<?php echo $date_today = date("F d, Y"); ?>" style="margin-left:15px">
                     <input class="form-control mr-sm-2" type="date" placeholder="Search" style="margin-left:15px">
                     <button class="btn btn-success my-2 my-sm-0 fa fa-search" type="submit"></button>
                 </form>
                 <br>
-                <div class="list-group m-3">
-                    <div href="#" class="list-group-item list-group-item flex-column align-items-start">
+
+                
+        <?php 
+            if($fetch_data_notifications->num_rows()>0)
+            {
+                foreach($fetch_data_notifications->result() as $row)
+                { 
+                    if($row->notif_type=="user")
+                    {
+        ?>
+                        <?php 
+                        if($row->status=="seen")
+                        {  
+                        ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item-secondary flex-column align-items-start">
+                    <?php 
+                        }else{ 
+                    ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item flex-column align-items-start">
+                    <?php 
+                    } ?>
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">100 Pending Email Verifications</h5>
-                            <small class="text-muted">3 hours ago
-                                <br>
-                                <Button class="btn btn-outline-danger fa fa-trash" data-toggle="modal"
-                                    data-target="#delreport"></button>
-                                <a class="btn btn-link btn-outline-info fa fa-eye" href="users"></a>
-                            </small>
+                            <h5 class="mb-2 text-uppercase"><?php echo $row->notif_status; echo " "; echo $row->notif_type; ?> Account</h5>
+
+                            <br>
+                            <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center"
+                                href="<?php echo base_url('profile/'); echo $row->user_id; ?>"></a>
+
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
+                        <p class="mb-1"><?php echo  $row->notif_status ?> user account number <?php echo  $row->user_id ?>. Click to view more details</p>
+                        <small
+                            class="text-muted"><?php echo date('F d, Y  H:i', strtotime($row->created_at)); ?></small><br>
+                        <small class="text-muted"><?php echo date('H:i', strtotime($row->created_at)); ?> </small>
                     </div>
-                    <div href="#" class="list-group-item list-group-item flex-column align-items-start">
+                    <?php } ?>
+               <?php
+                    if($row->notif_type=="report")
+                    {
+                ?>
+                        <?php 
+                        if($row->status=="seen")
+                        {  
+                        ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item-secondary flex-column align-items-start">
+                    <?php 
+                        }else{ 
+                    ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item flex-column align-items-start">
+                    <?php 
+                    } ?>
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">300 Reports Received</h5>
-                            <small class="text-muted">3 hours ago
-                                <br>
-                                <Button class="btn btn-outline-danger fa fa-trash" data-toggle="modal"
-                                    data-target="#delreport"></button>
-                                <a class="btn btn-link btn-outline-info fa fa-eye" href="reports"></a>
-                            </small>
+                            <h5 class="mb-2 text-uppercase"><?php echo $row->notif_status; ?> Account</h5>
+
+                            <br>
+                            <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center"
+                                href="<?php echo base_url('reports'); ?>"></a>
+
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
+                        <p class="mb-1">A new report has been added with report number <?php echo  $row->report_id ?>. Click to view more details</p>
+                        <small
+                            class="text-muted"><?php echo date('F d, Y  H:i', strtotime($row->created_at)); ?></small><br>
+                        <small class="text-muted"><?php echo date('H:i', strtotime($row->created_at)); ?> </small>
                     </div>
-                    <div href="#" class="list-group-item list-group-item flex-column align-items-start">
+                    <?php } ?>
+                <?php
+                    if($row->notif_type=="event")
+                    {
+                ?>
+                        <?php 
+                        if($row->status=="seen")
+                        {  
+                        ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item-secondary flex-column align-items-start">
+                    <?php 
+                        }else{ 
+                    ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item flex-column align-items-start">
+                    <?php 
+                    } ?>
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">624 Events scheduled today</h5>
-                            <small class="text-muted">3 hours ago
-                                <br>
-                                <Button class="btn btn-outline-danger fa fa-trash" data-toggle="modal"
-                                    data-target="#delreport"></button>
-                                <a class="btn btn-link btn-outline-info fa fa-eye" href="events"></a>
-                            </small>
+                            <h5 class="mb-2 text-uppercase"><?php echo $row->notif_type; ?> <?php echo $row->notif_status; ?></h5>
+
+                            <br>
+                            <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center"
+                                href="<?php echo base_url('eventview/'); echo $row->booking_id;  ?>"></a>
+
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
+                        <p class="mb-1">A new booking has been <?php echo $row->notif_status; ?> with booking number <?php echo  $row->booking_id ?>. Click to view more details</p>
+                        <small
+                            class="text-muted"><?php echo date('F d, Y  H:i', strtotime($row->created_at)); ?></small><br>
+                        <small class="text-muted"><?php echo date('H:i', strtotime($row->created_at)); ?> </small>
                     </div>
-                    <div href="#" class="list-group-item list-group-item flex-column align-items-start">
+                    <?php } ?>
+
+                    <?php
+                    if($row->notif_type=="package")
+                    {
+                ?>
+                        <?php 
+                        if($row->status=="seen")
+                        {  
+                        ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item-secondary flex-column align-items-start">
+                    <?php 
+                        }else{ 
+                    ?>
+                    <div href="#" class="list-group-item mr-4 ml-4 mt-2 mb-2 list-group-item flex-column align-items-start">
+                    <?php 
+                    } ?>
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">12900 successful bookings this week</h5>
-                            <small class="text-muted">3 hours ago
-                                <br>
-                                <Button class="btn btn-outline-danger fa fa-trash" data-toggle="modal"
-                                    data-target="#delreport"></button>
-                                <a class="btn btn-link btn-outline-info fa fa-eye" href="history"></a>
-                            </small>
+                            <h5 class="mb-2 text-uppercase"><?php echo $row->notif_type; ?> <?php echo $row->notif_status; ?></h5>
+
+                            <br>
+                            <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center"
+                                href="<?php echo base_url('services'); ?>"></a>
+
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
+                        <p class="mb-1">A new package has been <?php echo $row->notif_status; ?> with package number <?php echo  $row->package_id ?>. Click to view more details</p>
+                        <small
+                            class="text-muted"><?php echo date('F d, Y  H:i', strtotime($row->created_at)); ?></small><br>
+                        <small class="text-muted"><?php echo date('H:i', strtotime($row->created_at)); ?> </small>
                     </div>
-                    <div href="#" class="list-group-item list-group-item flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">1209990 total users</h5>
-                            <small class="text-muted">3 hours ago
-                                <br>
-                                <Button class="btn btn-outline-danger fa fa-trash" data-toggle="modal"
-                                    data-target="#delreport"></button>
-                                <a class="btn btn-link btn-outline-info fa fa-eye" href="users"></a>
-                            </small>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p>
-                        <small class="text-muted">Donec id elit non mi porta.</small>
-                    </div>
-                </div>
+                    <?php } ?>
+        <?php
+            }
+                }
+        ?>
 
 
 
-                </form>
                 <!-- End of Main Content -->
 
 
@@ -120,29 +175,7 @@
             <i class="fas fa-angle-up"></i>
         </a>
 
-
-        <!-- del notification modal -->
-        <div class="modal fade" id="delreport" tabindex="-1" role="dialog" aria-labelledby="delreport"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <H5>Are you sure you want to clear this notification?</H5>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger">YES</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                    </div>
-                </div>
-            </div>
-            <!-- end -->
-            <?php include('footer-script.php'); ?>
+        <?php include('footer-script.php'); ?>
 
 
 </body>
