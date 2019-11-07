@@ -52,9 +52,9 @@
 			</tfoot>
 		</table>
 	<?php else: ?>
-		<div class="text-center mt-5">
+		<div class="text-center mt-3">
+			<p class="h4 mb-3 yellow-brown">No Booked Package</p>
 			<img src="<?php echo base_url(); ?>assets/img/website/not_found.svg" height="50%" width="50%" alt="">
-			<p class="h4 mt-3 yellow-brown">No Booked Package</p>
 		</div>
 	<?php endif;?>
 	</div>

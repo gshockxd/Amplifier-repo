@@ -77,9 +77,9 @@
 							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'c_created_events' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url()?>c_created_events">Events</a>
 							</li> -->
-							<li class="nav-item <?php echo $this->uri->segment(1) == 'c_event_add' ? 'active' : '' ?>">
+							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'c_event_add' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url()?>c_event_add">Add Event</a>
-							</li>
+							</li> -->
 							<li class="nav-item <?php echo $this->uri->segment(1) == 'history_client' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url()?>history_client">History</a>
 							</li>

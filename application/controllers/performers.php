@@ -48,10 +48,22 @@
 			$this->p_package_model->package_edit_page();
 		}
 		public function package_update(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_performer();
+
 			$this->p_package_model->package_update();
 		}
 		public function p_package_delete(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_performer();
+
 			$this->p_package_model->p_package_delete();
+		}
+		public function gallery(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_performer();
+
+			$this->p_gallery_model->index();
 		}
 		public function chat(){
 			$this->session_model->session_check();		
@@ -117,7 +129,7 @@
 				return false;
 			}
 		}		
-		public function file_check_video_1(){	
+		public function file_check_video_1(){
 			$allowed_mime_type_arr = array('video/mp4');
 			$mime = get_mime_by_extension($_FILES['video1']['name']);
 			if(isset($_FILES['video1']['name']) && $_FILES['video1']['name']!=""){
@@ -126,51 +138,66 @@
 					return false;
 				}
 				if(in_array($mime, $allowed_mime_type_arr)){
-					return true;
+					if($_FILES['video1']['size'] <= 200000000){
+						return true;
+					}else{
+						$this->form_validation->set_message('file_check_video_1', 'Video file size exceed 200mb, please select another video.');
+						return false;
+					}
 				}else{
 					$this->form_validation->set_message('file_check_video_1', 'Please select only mp4 file.');
 					return false;
 				}
 			}else{
-				$this->form_validation->set_message('file_check_video_1', 'Please choose a file image to upload.');
+				$this->form_validation->set_message('file_check_video_1', 'Please choose a video file.');
 				return false;
 			}
 		}	
 		public function file_check_video_2(){
 			$allowed_mime_type_arr = array('video/mp4');
-			$mime = get_mime_by_extension($_FILES['video1']['name']);
-			if(isset($_FILES['video1']['name']) && $_FILES['video1']['name']!=""){
-				if($_FILES['video1']['error'] != 0){
+			$mime = get_mime_by_extension($_FILES['video2']['name']);
+			if(isset($_FILES['video2']['name']) && $_FILES['video2']['name']!=""){
+				if($_FILES['video2']['error'] != 0){
 					$this->form_validation->set_message('file_check_video_2', 'The video file is corrupted. Cannot proceed');
 					return false;
 				}
 				if(in_array($mime, $allowed_mime_type_arr)){
-					return true;
+					if($_FILES['video2']['size'] <= 200000000){
+						return true;
+					}else{
+						$this->form_validation->set_message('file_check_video_2', 'Video file size exceed 200mb, please select another video.');
+						return false;
+					}
 				}else{
 					$this->form_validation->set_message('file_check_video_2', 'Please select only mp4 file.');
 					return false;
 				}
 			}else{
-				$this->form_validation->set_message('file_check_video_2', 'Please choose a file image to upload.');
+				$this->form_validation->set_message('file_check_video_2', 'Please choose a video file.');
 				return false;
 			}
 		}	
 		public function file_check_video_3(){
 			$allowed_mime_type_arr = array('video/mp4');
-			$mime = get_mime_by_extension($_FILES['video1']['name']);
-			if(isset($_FILES['video1']['name']) && $_FILES['video1']['name']!=""){
-				if($_FILES['video1']['error'] != 0){
+			$mime = get_mime_by_extension($_FILES['video3']['name']);
+			if(isset($_FILES['video3']['name']) && $_FILES['video3']['name']!=""){
+				if($_FILES['video3']['error'] != 0){
 					$this->form_validation->set_message('file_check_video_3', 'The video file is corrupted. Cannot proceed');
 					return false;
 				}
 				if(in_array($mime, $allowed_mime_type_arr)){
-					return true;
+					if($_FILES['video3']['size'] <= 200000000){
+						return true;
+					}else{
+						$this->form_validation->set_message('file_check_video_3', 'Video file size exceed 200mb, please select another video.');
+						return false;
+					}
 				}else{
 					$this->form_validation->set_message('file_check_video_3', 'Please select only mp4 file.');
 					return false;
 				}
 			}else{
-				$this->form_validation->set_message('file_check_video_3', 'Please choose a file image to upload.');
+				$this->form_validation->set_message('file_check_video_3', 'Please choose a video file.');
 				return false;
 			}
 		}	

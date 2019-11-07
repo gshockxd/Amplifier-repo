@@ -32,12 +32,9 @@
 		<?php endforeach; ?>
 	</div>
 <?php else: ?>
-	<!-- <div class="alert alert-secondary my-3">
-		<p class="h3 text-center">No Package/s Found</p>
-	</div> -->
-	<div class="text-center mt-5">
+	<div class="text-center mt-3">
+		<p class="h4 mb-3 yellow-brown">No Package Found</p>
 		<img src="<?php echo base_url(); ?>assets/img/website/empty.svg" height="50%" width="50%" alt="">
-		<p class="h4 mt-3 yellow-brown">No Package Found</p>
 	</div>
 
 <?php endif; ?>

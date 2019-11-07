@@ -14,6 +14,10 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
+						<label for="">Service Type</label>
+						<input readonly value="<?php echo $this->session->userdata('artist_type'); ?>" class="form-control is-valid text-capitalize">
+					</div>
+					<div class="form-group">
 						<label for="">Package Name</label>
 						<input type="text" name="name" value="<?php echo isset($name) ? $name : '' ?>" class="form-control <?php echo form_error('name') ? 'is-invalid' : '' ?>">
 						<div class="invalid-feedback">

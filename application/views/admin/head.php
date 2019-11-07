@@ -1,3 +1,9 @@
+<?php if($this->session->userdata('user_type') == 'admin'){
+    $this->session->userdata('user_type') == 'admin';
+    }else{
+        redirect(base_url() ."profile");
+    
+} ?>
 
 <head>
   <meta charset="utf-8">

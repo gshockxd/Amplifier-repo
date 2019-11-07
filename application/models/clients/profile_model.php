@@ -59,10 +59,7 @@
 			$this->load->view('client/profile_edit', $users);
 			$this->load->view('inc/footer');
 		}
-        public function profile_info (){            
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+        public function profile_info (){        
 			$templates['title'] = 'Profile Information';
 
 			$this->load->view('inc/header-client', $templates);
@@ -70,9 +67,6 @@
 			$this->load->view('inc/footer');
 		}
 		public function profile_edit_info(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
 			$templates['title'] = 'Edit Profile';
 
 			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
@@ -88,9 +82,9 @@
 				$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
 			}
 
-			echo '<pre>';
-			print_r($this->input->post());
-			echo '</pre>';
+			// echo '<pre>';
+			// print_r($this->input->post());
+			// echo '</pre>';
 
 			$data['uname'] = $this->input->post('uname');
 			$data['fname'] = $this->input->post('fname');
@@ -210,7 +204,20 @@
 			$this->db->limit(3);
 			$this->db->group_by('owner');
 			$this->db->order_by('RAND()');
+			$this->db->join('band_galleries', 'user_id = owner');
+			$this->db->select('packages.*, band_galleries.*, band_galleries.created_at as g_created_at, band_galleries.updated_at as g_updated_at');
 			$query = $this->db->get_where('packages', array('booked'=>0));
 			return $data = $query->result_array();
+		}
+		public function performer_profile_info (){
+			$this->db->select('bookings.*, users.*');
+			$this->db->join('users', 'users.user_id = bookings.performer_id');
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
+			$data = $query->row_array();
+
+			$templates['title'] = 'Performer Info';
+			$this->load->view('inc/header-client', $templates);
+			$this->load->view('client/performer_event_info', $data);
+			$this->load->view('inc/footer');
 		}
     }

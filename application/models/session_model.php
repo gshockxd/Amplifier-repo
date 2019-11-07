@@ -71,7 +71,7 @@
         public function session_check(){
             if(!$this->session->userdata('user_id')){
                 $this->session->set_flashdata('danger_message', 'The page you trying to access requires login');
-                redirect('profile');
+                redirect('login');
             }
         }
         public function user_type_check_admin (){

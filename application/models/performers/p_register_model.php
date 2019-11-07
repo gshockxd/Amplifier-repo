@@ -99,7 +99,7 @@
 
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
 
-				redirect('p_profile');
+				redirect('p_bookings');
 			}
 		}
 		public function user_select($email){

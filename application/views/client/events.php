@@ -2,19 +2,19 @@
 <?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
 <?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
 <!-- <?php// echo '<pre>'; print_r($bookings[0]); echo '</pre>' ?> -->
-    <p class="h1 text-center">Booked Events</p>
-    <table class="table table-hover" id="datatable">
-        <thead>
-            <tr>
-            <th scope="col">Event Name</th>
-            <th scope="col">Venue</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if($bookings): ?>                
+    <?php if($bookings): ?>        
+        <p class="h4 text-center red-brown">Booked Events</p>
+        <table class="table table-hover" id="datatable">
+            <thead>
+                <tr>
+                <th scope="col">Event Name</th>
+                <th scope="col">Venue</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>              
                 <?php foreach($bookings as $b): ?>
                     <tr>
                         <td><?php echo $b['event_name'] ?></td>
@@ -26,18 +26,21 @@
                         </td>
                     </tr>
                 <?php endforeach; ?>
-            <?php else: ?>
-                <td class="text-muted h4 text-center" colspan="12">No Entries Found</td>
-            <?php endif;?>
-        </tbody>
-        <tfoot>
-            <tr>
-            <th scope="col">Event Name</th>
-            <th scope="col">Venue</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Action</th>
-            </tr>
-        </tfoot>
-    </table>
+            </tbody>
+            <tfoot>
+                <tr>
+                <th scope="col">Event Name</th>
+                <th scope="col">Venue</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Action</th>
+                </tr>
+            </tfoot>
+        </table>
+    <?php else: ?>
+        <div class="mt-3 text-center">
+            <p class="h4 mb-3 red-brown">No Booked Events</p>
+            <img src="<?php echo base_url() ?>assets/img/website/void.svg" height="50%" width="50%" alt="">
+        </div>
+    <?php endif; ?>
 </div>

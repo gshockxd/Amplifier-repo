@@ -97,6 +97,21 @@
                 redirect('booking');
             }
         }
+        public function delete_event(){
+            $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
+            $data = $query->row_array();
+            
+            $this->db->delete('bookings', array('booking_id'=>$this->uri->segment(2)));
+            
+            $this->db->set('booked', 0);
+            $this->db->where('package_id', $data['package_id']);
+            $this->db->update('packages');
+
+            $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully deleted!');
+
+            redirect('c_events');
+            return;
+        }
         public function event_insert(){
             $date = date('Y-m-d');
             $timestamps = date('Y-m-d H:i:s');

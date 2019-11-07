@@ -25,11 +25,23 @@
 			$this->session_model->session_index_page ();
 			$this->profile_model->index();			
 		}
+		public function gallery(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_client();
+
+			$this->c_gallery_model->index();
+		}
 		public function history(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_client();
 			
 			$this->history_model->index();
+		}
+		public function delete_event(){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->event_model->delete_event();
 		}
 		public function events (){
 			$this->session_model->session_check();
@@ -84,6 +96,18 @@
 			$this->session_model->user_type_check_client();
 
 			$this->booking_model->booking_attempt();
+		}
+		public function performer_profile_info (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->profile_model->performer_profile_info();
+		}
+		public function performer_gallery (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->c_gallery_model->performer_gallery();
 		}
 		public function calendar(){
 			$this->session_model->session_check();			
