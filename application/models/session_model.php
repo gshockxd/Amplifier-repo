@@ -2,7 +2,24 @@
 
     class Session_Model extends CI_Model {
         public function session_user ($data){
-        
+            if($data['user_type']=="admin")
+            {
+                $notified = "notified";
+                $this->db->select("*");
+                $this->db->from("notifications");
+                $this->db->where("status",$notified);
+                $query2 = $this->db->count_all_results();    
+            }else{
+                $notified = "notified";
+                $user_id  = $data['user_id'];
+                $this->db->select("*");
+                $this->db->from("notifications");
+                $this->db->where("status",$notified);
+                $this->db->where("user_id",$user_id);
+                $query2 = $this->db->count_all_results();   
+            }
+          
+          
             $newdata = array(
                 'user_id' => $data['user_id'],
                 'user_type' => $data['user_type'],
@@ -24,9 +41,12 @@
                 'artist_type' => $data['artist_type'],
                 'artist_desc' => $data['artist_desc'],
                 'block_end' => $data['block_end'],
-                'notif_count' => "1" 
+                'notif_count' => $query2
+                
             );
-            return $this->session->set_userdata($newdata);            
+            return $this->session->set_userdata($newdata); 
+           
+
         }
         public function unset_user(){
             $data = array(
@@ -49,7 +69,8 @@
                 'updated_at' ,
                 'artist_type',
                 'artist_desc',
-                'block_end'
+                'block_end',
+                'notif_count'
             );
             return $this->session->unset_userdata($data);
         }
@@ -64,6 +85,7 @@
                 $this->session->unset_userdata($data);
                 redirect('block_page');
             }else{
+                
                 switch($this->session->userdata('user_type')){
                     case 'admin':
                         redirect('users');

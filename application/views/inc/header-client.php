@@ -103,7 +103,7 @@
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
 								<li class="nav-item">
-									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
+									<a href="<?php echo base_url('c_notifications')?>" class="nav-link " data-toggle="tooltip" data-placement="bottom" title="notifications"><i class="far fa-bell fa-lg"></i><span class="badge badge-danger badge-counter"><?php echo $this->session->userdata('notif_count'); ?></span></a>
 								</li>
 								<li class="nav-item">
 									<a href="<?php echo base_url()?>c_chat" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="far fa-envelope fa-lg"></i></a>

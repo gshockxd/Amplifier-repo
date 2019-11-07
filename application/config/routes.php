@@ -42,6 +42,7 @@ $route['booking']                       = 'clients/booking';
 $route['booking_book_event/(:num)']     = 'clients/booking_book_event/$1';
 $route['booking_attempt/(:num)']        = 'clients/booking_attempt/$1';
 $route['c_events']                      = 'clients/events';
+$route['c_notifications']               = 'clients/notifications';
 $route['events/(:num)']                 = 'clients/event_info/$1';
 $route['print_event/(:num)']            = 'clients/print_pdf/$1';
 $route['calendar']                      = 'clients/calendar';

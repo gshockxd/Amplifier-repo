@@ -3,7 +3,7 @@
 
      <!-- Nav Item - Alerts -->
      <li class="nav-item dropdown no-arrow mx-1">
-         <a class="nav-link dropdown-toggle" href="notifications" id="alerts" role="button" aria-expanded="false">
+         <a class="nav-link dropdown-toggle" href="<?php echo base_url('notifications');?>" id="alerts" role="button" aria-expanded="false">
              <i class="fas fa-bell fa-fw"></i>
              <!-- Counter - Alerts -->
              <span class="badge badge-danger badge-counter"><?php echo $this->session->userdata('notif_count'); ?></span>

@@ -2,12 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
-	public function users()
-	{
-		$this->load->model('model');
-		$data["fetch_data_user"] = $this->model->fetch_data_user();
-		$this->load->view('/admin/users', $data);
-	}
+	
 	public function offense_count($id)
 	{
 		$this->load->model('model');
@@ -39,8 +34,19 @@ class Welcome extends CI_Controller {
 					"block_end" => date_format($block_date,"y-m-d"),
 					"status" 	=> $status
 					);
+				
+					
 
 		$this->model->update_offense_user($offense);
+		$notif_insert = array(
+			"user_id" 		=> $id,
+			"notif_type" 	=> "user",
+			"notif_status" 	=> $status,
+			"status" 		=> "notified",
+			"notif_name" 	=> $status
+		
+		);
+		$this->model->insert_data_notifications($notif_insert);
 		redirect(base_url() ."users");
 	}
 	public function changeoff()
@@ -66,6 +72,15 @@ class Welcome extends CI_Controller {
 		$status="banned";
 		$ban= array("status" => $status);
 		$this->model->update_ban_user($ban);
+		$notif_insert = array(
+			"user_id" 		=> $id,
+			"notif_type" 	=> "user",
+			"notif_status" 	=> $status,
+			"status" 		=> "notified",
+			"notif_name" 	=> $status
+		
+		);
+		$this->model->insert_data_notifications($notif_insert);
 		redirect(base_url() ."users");
 	}
 	public function delete_user($id)
@@ -99,25 +114,7 @@ class Welcome extends CI_Controller {
 		redirect(base_url() ."services");
 	}
 
-	public function profile($id)
-	{
-		$this->load->model('model');
-		$data["fetch_data_profile"] = $this->model->fetch_data_profile();
-		$this->load->view('/admin/profile',$data);
-	}
-	public function eventview($id)
-	{
-		$this->load->model('model');
-		$data["fetch_data_event_detail"] = $this->model->fetch_data_event_detail();
-		$this->load->view('/admin/eventview',$data);
-	}
-
-	public function events()
-	{
-		$this->load->model('model');
-		$data["fetch_data_event"] = $this->model->fetch_data_event();
-		$this->load->view('/admin/events', $data);
-	}
+	
 	public function block_page()
 	{
 		
@@ -170,6 +167,18 @@ class Welcome extends CI_Controller {
 			);
 
 			$this->model->insert_data_users($data_insert);
+			if($status=="pending"){
+			$notif_insert = array(
+				"user_id" 		=> $this->db->insert_id(),
+				"notif_type" 	=> "user",
+				"notif_status" 	=> "pending",
+				"status" 		=> "notified",
+				"notif_name" 	=> $this->input->post("username")
+			
+			);
+			$this->model->insert_data_notifications($notif_insert);
+			}
+			
 			redirect(base_url() ."users");
 		}else{
 			echo '<script> alert("invalid inputs, Try again");</script>';
@@ -182,15 +191,35 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->library('upload');
 		$this->load->model("model");
+	
 			$data_insert = array(
 				"booking_id" 		=> $this->input->post("booking_id"),
 				"report_from" 		=> $this->input->post("report_from"),
 				"report_to" 		=> $this->input->post("violator"),
 				"report_photo" 		=> $this->input->post("evidence"),
 				"report_details" 	=> $this->input->post("report_info"),
+			
 			);
 
 			$this->model->insert_data_report($data_insert);
+				$notif_insert = array(
+					"user_id" 		=> $this->input->post("report_from"),
+					"notif_type" 	=> "report",
+					"notif_status" 	=> "reporter",
+					"status" 		=> "notified",
+					"notif_name" 	=> "Report",
+					"report_id"		=> $this->db->insert_id()
+				);
+				$notif_insert2 = array(
+					"user_id" 		=> $this->input->post("violator"),
+					"notif_type" 	=> "report",
+					"notif_status" 	=> "reported",
+					"status" 		=> "notified",
+					"notif_name" 	=> "Report",
+					"report_id"		=> $this->db->insert_id()
+				);
+				$this->model->insert_data_notifications($notif_insert);
+				$this->model->insert_data_notifications2($notif_insert2);
 			redirect(base_url() ."reports");
 		
 	}
@@ -198,11 +227,10 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->load->library('upload');
-		$data["fetch_data_packages"] = $this->model->fetch_data_packages();
 		$this->form_validation->set_rules('event_name', '', 'required', array('required'=>'Please Input Event Name'));
 		$this->form_validation->set_rules('event_date', '', 'required', array('required'=>'No Date Selected'));
-		$this->form_validation->set_rules('event_to', '', 'required', array('required'=>'No Time Selected'));
-		$this->form_validation->set_rules('duration', '', 'required', array('required'=>'No Time Selected'));
+		// $this->form_validation->set_rules('event_to', '', 'required', array('required'=>'No Time Selected'));
+		// $this->form_validation->set_rules('duration', '', 'required', array('required'=>'No Time Selected'));
 		// $this->form_validation->set_rules('full_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
 		$this->form_validation->set_rules('down_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
 		$this->form_validation->set_rules('location', '', 'required', array('required'=>'Location is required'));
@@ -211,7 +239,7 @@ class Welcome extends CI_Controller {
 		$date=date('y-m-d');
 		$set_date	=date_create($date);
 		date_add($set_date, date_interval_create_from_date_string("3 days"));
-		if(date_format($set_date,"y-m-d")>$this->input->post("date_event"))
+		if(date_format($set_date,"y-m-d")<$this->input->post("date_event"))
 		{
 			if($this->form_validation->run())
 			{
@@ -239,9 +267,18 @@ class Welcome extends CI_Controller {
 					"status" 		=> $status,
 					"date_booked" 	=> date('y-m-d')
 				);
-
 				$this->model->insert_data_bookings($data_insert);
-				redirect(base_url() ."events");
+				$data["insert_data_bookings"] 		= $this->model->insert_data_bookings();	
+				$notif_insert = array(
+					"user_id" 		=> $this->input->post("client"),
+					"notif_type" 	=> "event",
+					"notif_status" 	=> "booked",
+					"status" 		=> "notified",
+					"notif_name" 	=> $this->input->post("event_name"),
+					"booking_id"	=> $data
+				);
+				$this->model->insert_data_notifications($notif_insert);
+				echo $data;
 			}else{
 				echo '<script> alert("invalid inputs, Try again");</script>';
 				$this->load->model('model');
@@ -267,16 +304,15 @@ class Welcome extends CI_Controller {
 		$this->load->model('model');
 		$data["fetch_data_client"] 	= $this->model->fetch_data_client();	
 		$data["fetch_data_packages"] 	= $this->model->fetch_data_packages();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
 		$this->load->view('/admin/addevent',$data);
 	}
-	public function editprofile()
-	{
-		$this->load->view('/admin/editprofile');
-	}
+	
 	public function services()
 	{
 		$this->load->model('model');
 		$data["fetch_data_packages"] = $this->model->fetch_data_packages();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
 		$this->load->view('/admin/services', $data);
 	}
 	public function history()
@@ -289,6 +325,7 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->model('model');
 		$data["fetch_data_histview"] = $this->model->fetch_data_histview();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
 		$this->load->view('/admin/histview',$data);
 	}
 	public function reports()
@@ -296,20 +333,45 @@ class Welcome extends CI_Controller {
 		$this->load->model('model');
 		$data["fetch_data_user"] 	= $this->model->fetch_data_user();
 		$data["fetch_data_event"] 	= $this->model->fetch_data_event();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
 		$data["fetch_data_report"] 	= $this->model->fetch_data_report();
 		$this->load->view('/admin/reports',$data);
-	}
-	public function notifications_count()
-	{
-		$this->load->model('model');
-		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
-		$this->load->view('/admin/notifications', $data);
 	}
 	public function notifications()
 	{
 		$this->load->model('model');
 		$data["fetch_data_notifications"] = $this->model->fetch_data_notifications();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
 		$this->load->view('/admin/notifications', $data);
+	}
+	public function profile($id)
+	{
+		$this->load->model('model');
+		$data["fetch_data_profile"] = $this->model->fetch_data_profile();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+		$this->load->view('/admin/profile',$data);
+	}
+	public function eventview($id)
+	{
+		$this->load->model('model');
+		$data["fetch_data_event_detail"] = $this->model->fetch_data_event_detail();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+		$this->load->view('/admin/eventview',$data);
+	}
+
+	public function events()
+	{
+		$this->load->model('model');
+		$data["fetch_data_event"] = $this->model->fetch_data_event();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+		$this->load->view('/admin/events', $data);
+	}
+	public function users()
+	{
+		$this->load->model('model');
+		$data["fetch_data_user"] = $this->model->fetch_data_user();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+		$this->load->view('/admin/users', $data);
 	}
 	public function logout()
 	{
