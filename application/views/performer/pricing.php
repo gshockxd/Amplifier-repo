@@ -3,7 +3,7 @@
 		<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
 		<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
 		<div class="py-3">
-			<p class="h2 yellow-brown text-center">Add Package</p>
+			<p class="h3 yellow-brown text-center">Add Package</p>
 			<div class="row">
 				<div class="col-md-6">
 					<label for="" class="text-muted">Place description and what the package consists of</label>

@@ -68,7 +68,7 @@
                 </div>
             </div> -->
             <div class="form-group">
-                <label for="">Payment</label>
+                <label for="">First Payment</label>
                 <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" >
                 <div class="invalid-feedback">
                     <?php echo form_error('down_payment') ?>

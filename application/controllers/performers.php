@@ -23,6 +23,24 @@
 
 			$this->p_booking_model->index();
 		}
+		public function event_info (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_performer();
+			
+			$this->p_package_model->get_event_info();
+		}
+		public function event_status_approve (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_performer();
+			
+			$this->event_model->event_status_approve();
+		}
+		public function event_status_decline (){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_performer();
+			
+			$this->event_model->event_status_decline();
+		}
 		public function pricing(){
 			$this->session_model->session_check();		
 			$this->session_model->user_type_check_performer();

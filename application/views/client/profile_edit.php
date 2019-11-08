@@ -24,7 +24,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="header">Edit User information</h5>
                         <div class="px-2">
-                            <a href="profile_info" data-toggle="tooltip" data-placement="top" title="Cancel" class="btn btn-danger mr-2">X</a>
+                            <a href="profile_info" data-toggle="tooltip" data-placement="top" title="Cancel" class="btn btn-danger mr-2"><i class="fas fa-times "></i></a>
                             <button class="btn btn-primary" type="submit" data-toggle="tooltip" data-placement="top" title="Save Changes"><i class="fas fa-save fa-lg"></i></button>                      
                         </div>
                     </div>                        

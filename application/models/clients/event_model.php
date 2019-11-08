@@ -137,4 +137,36 @@
             $query = $this->db->get_where('events', array('client_id'));
             return $query->result_array();
         }
+        public function event_status_approve (){
+            $query = $this->db->get_where('bookings', array('booking_id' => $this->uri->segment(2)));
+            $data = $query->row_array();
+
+            if($data['performer_id'] == $this->session->userdata('user_id')){
+                $this->db->set(array('status'=>'approve'));
+                $this->db->where('booking_id', $this->uri->segment(2));
+                $this->db->update('bookings');
+                
+                $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Approved!');
+                redirect('p_bookings');
+            }else{
+                $this->session->set_flashdata('danger_message', 'The event your trying to approve is not found!');
+                redirect('p_bookings');
+            }
+        }
+        public function event_status_decline (){            
+            $query = $this->db->get_where('bookings', array('booking_id' => $this->uri->segment(2)));
+            $data = $query->row_array();
+
+            if($data['performer_id'] == $this->session->userdata('user_id')){
+                $this->db->set(array('status'=>'cancel'));
+                $this->db->where('booking_id', $this->uri->segment(2));
+                $this->db->update('bookings');
+                
+                $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Decline!');
+                redirect('p_bookings');
+            }else{
+                $this->session->set_flashdata('danger_message', 'The event your trying to decline is not found!');
+                redirect('p_bookings');
+            }
+        }
     }

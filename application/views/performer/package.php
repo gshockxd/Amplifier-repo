@@ -21,10 +21,12 @@
 							<small>Created: <?php echo date('h:i:s a M d, y', strtotime($p['created_at'])) ?></small>
 							<small>Updated: <?php echo date('h:i:s a M d, y', strtotime($p['updated_at'])) ?></small>
 						</div>
-						<div class="col-md-4 ">
-							<a href="p_package_edit_page/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white"><i class="fas fa-pen"></i></a>
-							<a href="p_package_delete/<?php echo $p['package_id'] ?>" class="btn btn-danger text-white"><i class="fas fa-trash"></i></a>
-						</div>
+						<?php if($p['booked'] == 0): ?>							
+							<div class="col-md-4 ">
+								<a href="<?php if($p['booked'] == 0): echo base_url();?>p_package_edit_page/<?php echo $p['package_id'] ?><?php else: ?>#<?php endif; ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="<?php echo $p['booked'] == 0 ? 'Edit Package' : 'This package is currently in booked' ?>"><i class="fas fa-pen"></i></a>
+								<a href="<?php if($p['booked'] == 0): echo base_url();?>p_package_delete/<?php echo $p['package_id'] ?><?php else: ?>#<?php endif; ?>" class="btn btn-danger text-white" data-toggle="tooltip" data-placement="top" title="<?php echo $p['booked'] == 0 ? 'Delete Package' : 'This package is currently in booked' ?>"><i class="fas fa-trash"></i></a>
+							</div>
+						<?php endif; ?>
 					</div>
 				</li>
 			</ul>
