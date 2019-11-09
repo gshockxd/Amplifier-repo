@@ -83,37 +83,86 @@ class Welcome extends CI_Controller {
 		$this->model->insert_data_notifications($notif_insert);
 		redirect(base_url() ."users");
 	}
+// delete start
 	public function delete_user($id)
 	{
 		$this->load->model('model');
-		$data["fetch_delete_user"] = $this->model->fetch_delete_user();
+		$offense= array("status" 	=> "hide");
+
+		$this->model->update_hide_user($offense);
+		$notif_insert = array(
+				"user_id" 		=> $id,
+				"notif_type" 	=> "user",
+				"notif_status" 	=> "removed",
+				"status" 		=> "notified",
+				"notif_name" 	=> "Removed User"
+	
+			);
+		
+		$this->model->insert_data_notifications($notif_insert);	
 		redirect(base_url() ."users");
 	}
 	public function delete_report($id)
 	{
 		$this->load->model('model');
-		$data["fetch_delete_report"] = $this->model->fetch_delete_report();
-		redirect(base_url() ."reports");
-	}
-	public function delete_history($id)
-	{
-		$this->load->model('model');
-		$data["fetch_delete_history"] = $this->model->fetch_delete_history();
-		redirect(base_url() ."history");
+		$offense= array("reports_status" 	=> "hide");
+
+		$this->model->update_hide_report($offense);
+		
+		$notif_insert = array(
+			"report_id" 	=> $id,
+			"notif_type" 	=> "report",
+			"notif_status" 	=> "removed",
+			"status" 		=> "notified",
+			"notif_name" 	=> "Removed Report"
+
+		);
+	
+	$this->model->insert_data_notifications($notif_insert);	
+	redirect(base_url() ."reports");
+	
 	}
 	public function delete_event($id)
 	{
 		$this->load->model('model');
-		$data["fetch_delete_event"] = $this->model->fetch_delete_event();
-		redirect(base_url() ."events");
+		$offense= array("status" 	=> "hide");
+
+		$this->model->update_hide_event($offense);
+		
+
+		$notif_insert = array(
+			"booking_id" 		=> $id,
+			"notif_type" 	=> "event",
+			"notif_status" 	=> "cancel",
+			"status" 		=> "notified",
+			"notif_name" 	=> "Cancelled Event"
+
+		);
+	$this->model->insert_data_notifications($notif_insert);	
+	redirect(base_url() ."events");
 	}
+
 	public function delete_package($id)
 	{
 		$this->load->model('model');
-		$data["fetch_delete_package"] = $this->model->fetch_delete_package();
-		redirect(base_url() ."services");
-	}
+		$offense= array("package_status" 	=> "hide");
 
+		$this->model->update_hide_package($offense);
+		
+		$notif_insert = array(
+			"package_id" 	=> $id,
+			"notif_type" 	=> "package",
+			"notif_status" 	=> "removed",
+			"status" 		=> "notified",
+			"notif_name" 	=> "Removed package"
+
+		);
+		$this->model->insert_data_notifications($notif_insert);	
+		redirect(base_url() ."services");
+
+
+	}
+// delete end
 	
 	public function block_page()
 	{
@@ -133,24 +182,49 @@ class Welcome extends CI_Controller {
 		$this->form_validation->set_rules("contact_number1", "contact number 2", 'integer|max_length[13]');
 		$this->form_validation->set_rules("email", "email", 'required|valid_email');
 		$this->form_validation->set_rules("usertype", "usertype", 'required');
-		$this->form_validation->set_rules("usertype", "usertype", 'required');
-		$config['upload_path']          = './assets/img/';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$this->load->library('upload', $config);
-		$this->upload->do_upload('pphoto');
-		$file_name=$this->upload->data();
+
+		// if($_FILES['userfile']){
+		// 	$this->form_validation->set_rules('userfile', 'userfile', 'callback_file_check');
+		// }
+
 		$password = md5($this->input->post("password"));
+		
 
 		if($this->form_validation->run())
 		{
-			$this->load->model("model");
-			if($this->input->post("verify"))
-			{
-				$status = "verified";
+			$timestamp = date('Y_m_d_H_i_s');
+			$array = explode('.', $_FILES['userfile']['name']);
+			$ext = end($array);
+
+			// Upload Image
+			$config['file_name'] = $timestamp.'.'.$ext;
+			$config['upload_path'] = './assets/img/client/';
+			$config['allowed_types'] = 'jpg|png';
+			$config['max_size'] = '2048';
+			$config['max_width'] = '50000';
+			$config['max_height'] = '50000';
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			if(!$this->upload->do_upload()){
+				$errors = $this->upload->display_errors();
+				$client_image = 'assets/img/client/no_image.jpg';
 			}else{
-				$status ="pending";
+				$data = array ('upload_data' => $this->upload->data());
+				$client_image = 'assets/img/client/'.$timestamp.'.'.$ext;
 			}
 
+		// 			echo '<pre>';
+		// print_r($_FILES);
+		// echo $client_image;
+		// echo $errors;
+		// echo $config['upload_path'];	
+		// echo '</pre>';
+		// die;
+
+			$this->load->model("model");
+				$status = "verified";
 			$data_insert = array(
 				"fname" 		=> $this->input->post("fname"),
 				"lname" 		=> $this->input->post("lname"),
@@ -163,17 +237,18 @@ class Welcome extends CI_Controller {
 				"address" 		=> $this->input->post("address"),
 				"status" 		=> $status,
 				"created_at" 	=> date('y-m-d'),
-				"photo" 		=> $this->input->post("pphoto"),
+				"photo" 		=> $client_image,
 			);
 
 			$this->model->insert_data_users($data_insert);
-			if($status=="pending"){
+			if($status=="verified"){
+			$details = "has Created a new account";
 			$notif_insert = array(
 				"user_id" 		=> $this->db->insert_id(),
 				"notif_type" 	=> "user",
-				"notif_status" 	=> "pending",
+				"notif_status" 	=> "created",
 				"status" 		=> "notified",
-				"notif_name" 	=> $this->input->post("username")
+				"notif_name" 	=> $this->input->post("fname")
 			
 			);
 			$this->model->insert_data_notifications($notif_insert);
@@ -187,117 +262,164 @@ class Welcome extends CI_Controller {
 			$this->load->view('/admin/users', $data);
 		}
 	}
-	public function form_validation_report()
-	{
-		$this->load->library('upload');
-		$this->load->model("model");
-	
-			$data_insert = array(
-				"booking_id" 		=> $this->input->post("booking_id"),
-				"report_from" 		=> $this->input->post("report_from"),
-				"report_to" 		=> $this->input->post("violator"),
-				"report_photo" 		=> $this->input->post("evidence"),
-				"report_details" 	=> $this->input->post("report_info"),
-			
-			);
 
-			$this->model->insert_data_report($data_insert);
-				$notif_insert = array(
-					"user_id" 		=> $this->input->post("report_from"),
-					"notif_type" 	=> "report",
-					"notif_status" 	=> "reporter",
-					"status" 		=> "notified",
-					"notif_name" 	=> "Report",
-					"report_id"		=> $this->db->insert_id()
-				);
-				$notif_insert2 = array(
-					"user_id" 		=> $this->input->post("violator"),
-					"notif_type" 	=> "report",
-					"notif_status" 	=> "reported",
-					"status" 		=> "notified",
-					"notif_name" 	=> "Report",
-					"report_id"		=> $this->db->insert_id()
-				);
-				$this->model->insert_data_notifications($notif_insert);
-				$this->model->insert_data_notifications2($notif_insert2);
-			redirect(base_url() ."reports");
-		
-	}
-	public function form_validation_event()
+// report add
+	public function form_validation_report()
 	{
 		$this->load->library('form_validation');
 		$this->load->library('upload');
-		$this->form_validation->set_rules('event_name', '', 'required', array('required'=>'Please Input Event Name'));
-		$this->form_validation->set_rules('event_date', '', 'required', array('required'=>'No Date Selected'));
-		// $this->form_validation->set_rules('event_to', '', 'required', array('required'=>'No Time Selected'));
-		// $this->form_validation->set_rules('duration', '', 'required', array('required'=>'No Time Selected'));
-		// $this->form_validation->set_rules('full_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
-		$this->form_validation->set_rules('down_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
-		$this->form_validation->set_rules('location', '', 'required', array('required'=>'Location is required'));
-		$this->form_validation->set_rules('notes', '', 'required', array('required'=>'Notes is required'));
-		// date verfication
-		$date=date('y-m-d');
-		$set_date	=date_create($date);
-		date_add($set_date, date_interval_create_from_date_string("3 days"));
-		if(date_format($set_date,"y-m-d")<$this->input->post("date_event"))
+	
+
+		// if($_FILES['userfile']){
+		// 	$this->form_validation->set_rules('userfile', 'userfile', 'callback_file_check');
+		// }
+		if($this->form_validation->run())
 		{
-			if($this->form_validation->run())
-			{
-				$this->load->model("model");
-				$status1 = "44";
+			$timestamp = date('Y_m_d_H_i_s');
+			$array = explode('.', $_FILES['userfile']['name']);
+			$ext = end($array);
 
-				if($this->input->post("approve"))
-				{
-					$status = "approve";
-				}else{
-					$status ="pending";
-				}
+			// Upload Image
+			$config['file_name'] = $timestamp.'.'.$ext;
+			$config['upload_path'] = './assets/img/report/';
+			$config['allowed_types'] = 'mp4|mkv|jpg|png';
+			$config['max_size'] = '10048';
+			$config['max_width'] = '50000';
+			$config['max_height'] = '50000';
 
-				$data_insert = array(
-					"client_id" 	=> $this->input->post("client"),
-					"performer_id" 	=> $status1,
-					"full_amount" 	=> $status1,
-					"package_id" 	=> $this->input->post("package"),
-					"event_name" 	=> $this->input->post("event_name"),
-					"down_payment" 	=> $this->input->post("dp"),
-					"event_to" 		=> $this->input->post("time_event"),
-					"event_date" 	=> $this->input->post("date_event"),
-					"venue_name" 	=> $this->input->post("venue"),
-					"notes" 		=> $this->input->post("publicinfo"),
-					"status" 		=> $status,
-					"date_booked" 	=> date('y-m-d')
-				);
-				$this->model->insert_data_bookings($data_insert);
-				$data["insert_data_bookings"] 		= $this->model->insert_data_bookings();	
-				$notif_insert = array(
-					"user_id" 		=> $this->input->post("client"),
-					"notif_type" 	=> "event",
-					"notif_status" 	=> "booked",
-					"status" 		=> "notified",
-					"notif_name" 	=> $this->input->post("event_name"),
-					"booking_id"	=> $data
-				);
-				$this->model->insert_data_notifications($notif_insert);
-				echo $data;
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+		
+			if(!$this->upload->do_upload()){
+				$errors = $this->upload->display_errors();
+				$report_image = 'assets/img/report/no_image.jpg';
 			}else{
-				echo '<script> alert("invalid inputs, Try again");</script>';
-				$this->load->model('model');
-				$data["fetch_data_client"] 		= $this->model->fetch_data_client();	
-				$data["fetch_data_packages"] 	= $this->model->fetch_data_packages();
-				$this->load->view('/admin/addevent',$data);
-			}
-		}else{
-			echo '<script> alert("event must be 3 days before the event");</script>';
-			$this->load->model('model');
-			$data["fetch_data_client"] 		= $this->model->fetch_data_client();	
-			$data["fetch_data_packages"] 	= $this->model->fetch_data_packages();
-			// $this->load->view('/admin/addevent',$data);
-			echo date_format($set_date,"Y-m-d"); 
-			echo " ";
-			echo $this->input->post("date_event");
+				$data = array ('upload_data' => $this->upload->data());
+				$report_image = 'assets/img/report/'.$timestamp.'.'.$ext;
+			
+		echo '<pre>';
+		print_r($_FILES);
+		echo $report_image;
+		echo $errors;
+		echo $config['upload_path'];	
+		echo '</pre>';
+		die;
 		}
+					
+
+			$this->load->model("model");
+				$data_insert = array(
+					"booking_id" 		=> $this->input->post("booking_id"),
+					"report_from" 		=> $this->input->post("report_from"),
+					"report_to" 		=> $this->input->post("violator"),
+					"report_photo" 		=> $report_image,
+					"report_details" 	=> $this->input->post("report_info"),
+				
+				);
+				
+			}
+			// $notif_insert = array(
+			// 	"user_id" 		=> $this->input->post("report_from"),
+			// 	"notif_type" 	=> "report",
+			// 	"notif_status" 	=> "reporter",
+			// 	"status" 		=> "notified",
+			// 	"notif_name" 	=> "New report has been added",
+			// 	"report_id"		=> $this->db->insert_id()
+			// );
+			// $notif_insert2 = array(
+			// 	"user_id" 		=> $this->input->post("violator"),
+			// 	"notif_type" 	=> "report",
+			// 	"notif_status" 	=> "reported",
+			// 	"status" 		=> "notified",
+			// 	"notif_name" 	=> "Account Reported",
+			// 	"report_id"		=> $this->db->insert_id()
+			// );
+			//
+			// $this->model->insert_data_notifications2($notif_insert2);	
+			redirect(base_url() ."reports");
+	
 	
 	}
+
+	public function form_validation_event()
+	{
+		$id = $this->uri->segment(2);
+	
+			$this->db->where('package_id', $id);
+			$temp = $this->db->get('packages');
+			$data['package'] = $temp->row_array();
+			$this->load->view('admin/addevent', $data);
+		
+		}
+		public function booking_attempt(){
+			$id = $this->uri->segment(2);			
+			$this->db->where('package_id', $id);
+			$this->db->join('users', 'users.user_id = packages.owner');
+			$this->db->select('packages.*, users.*');
+			$temp = $this->db->get('packages');
+			$data['package'] = $temp->row_array();
+
+			$this->form_validation->set_rules('event_name', '', 'required', array('required'=>'Please Input Event Name'));
+			$this->form_validation->set_rules('event_date', '', 'required', array('required'=>'No Date Selected'));
+			$this->form_validation->set_rules('event_to', '', 'required', array('required'=>'No Time Selected'));
+			$this->form_validation->set_rules('duration', '', 'required', array('required'=>'No Time Selected'));
+			// $this->form_validation->set_rules('full_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
+			$this->form_validation->set_rules('down_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
+			$this->form_validation->set_rules('location', '', 'required', array('required'=>'Location is required'));
+			$this->form_validation->set_rules('notes', '', 'required', array('required'=>'Notes is required'));
+			
+			$data['event_name'] = $this->input->post('event_name');
+			$data['event_date'] = $this->input->post('event_date');
+			$data['event_to'] = $this->input->post('event_time');
+			$data['duration'] = $this->input->post('duration');
+			$data['down_payment'] = $this->input->post('down_payment');
+			$data['location'] = $this->input->post('location');
+			$data['notes'] = $this->input->post('notes');
+		
+			
+			if($this->form_validation->run() === FALSE){
+			
+				echo '<script> alert("Booking failed, Try again");</script>';
+				$this->load->view('admin/addevent', $data);
+				var_dump($data);
+		
+			}else{
+				$this->booking_model->event_insert($data['package']);
+
+				$this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully booked!');
+				redirect('booking');
+			}
+		
+		}
+		public function event_insert($package){
+			$timestamps = date('Y-m-d');
+			$data = array(
+				'client_id'=> $this->session->userdata('user_id'),
+				'performer_id'=> $package['owner'],
+				'package_id'=> $package['package_id'],
+				'venue_name'=> $this->input->post('location'),
+				'event_date'=> $this->input->post('event_date'),
+				'event_from'=> $this->input->post('duration'),
+				'event_to'=> $this->input->post('event_time'),
+				'notes'=> $this->input->post('notes'),
+				'full_amount'=> $package['price'],
+				'down_payment'=> $this->input->post('down_payment'),
+				'payment_status'=> 'dp',
+				'date_booked'=> $timestamps,
+				'event_name'=> $this->input->post('event_name'),
+				'artist_type'=> $package['artist_type']
+			);
+
+			$this->db->insert('bookings', $data);
+			$id = $this->db->insert_id();
+			// echo $this->db->last_query();
+			// die();
+
+			$this->db->set('booked', 1);
+			$this->db->where('package_id', $package['package_id']);
+			$this->db->update('packages');
+			return $id;
+		}
 	
 	public function addevent()
 	{
@@ -379,6 +501,30 @@ class Welcome extends CI_Controller {
 	}
 
 
+	public function file_check(){
+			
+		$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+		$mime = get_mime_by_extension($_FILES['userfile']['name']);
+		if(isset($_FILES['userfile']['name']) && $_FILES['userfile']['name']!=""){
+			if($_FILES['userfile']['error'] != 0){
+				$this->form_validation->set_message('file_check', 'Image File Exceed 2MB');
+				return false;
+			}
+			// if($width > 5000 && $height > 5000){
+			// 	$this->form_validation->set_message('file_check', 'Image Dimension Exceed 5000 x 5000');
+			// 	return false;
+			// }
+			if(in_array($mime, $allowed_mime_type_arr)){
+				return true;
+			}else{
+				$this->form_validation->set_message('file_check', 'Please select only gif/jpg/png file.');
+				return false;
+			}
+		}else{
+			$this->form_validation->set_message('file_check', 'Please choose a file image to upload.');
+			return false;
+		}
+	}	
 
 
 }

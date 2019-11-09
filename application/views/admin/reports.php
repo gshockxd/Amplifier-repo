@@ -149,14 +149,14 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <H5>Are you Sure you want to delete this Report
-                                            No:<?php echo $row->report_id; ?></H5>
+                                        <H5>Are you sure you want to delete report from:</H5> 
+                                            <br><br><h4 class="text-center"><?php echo $row->report_from_fname;echo " "; echo $row->report_from_lname; ?></h4>
                                     </div>
                                     <div class="modal-footer">
                                         <a href="delete_report/<?php echo $row->report_id; ?>" type="button">
                                             <button class="btn btn-danger">YES</button>
                                         </a>
-                                        <button type="button" class="btn btn-danger"
+                                        <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">CANCEL</button>
                                     </div>
                                 </div>
@@ -415,10 +415,16 @@
                         <label for="comment">Additional Info:</label>
                         <input type="text" name="report_info" class="form-control lg" id="comment" \>
                     </div>
-                    <label for="comment">Attach evidence(Optional):</label>
-                    <div class="custom-file">
-                        <input type="file" name="evidence" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile"></label>
+                    <label for="userfile">Add Profile Picture</label>
+                        <div class="custom-file">
+                            <input type="file"
+                                class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
+                                name="userfile" id="customFile">
+                            <label class="custom-file-label" for="customFile"></label>
+                            <div class="invalid-feedback">
+                                < <div class="form-group"><?php echo form_error('userfile'); ?>
+                            </div>
+                        </div>
                     </div>
                     <br>
                     <br>

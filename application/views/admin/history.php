@@ -53,19 +53,18 @@
                         </div>
                     </div>
                     <div class="card mb-4">
-                        <div class="table-responsive">
-                            <table class="table">
+                    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">VENUE</th>
-                                        <th scope="col">CLIENT NAME</th>
-                                        <th scope="col">PERFORMER NAME</th>
-                                        <th scope="col">DATE</th>
-                                        <th scope="col">CLIENT RATING</th>
-                                        <th scope="col">ARTIST RATING</th>
-                                        <th scope="col">STATUS</th>
-                                        <th scope="col">ACTION</th>
+                                        <th class="th-sm">ID</th>
+                                        <th class="th-sm">VENUE</th>
+                                        <th class="th-sm">CLIENT NAME</th>
+                                        <th class="th-sm">PERFORMER NAME</th>
+                                        <th class="th-sm">DATE</th>
+                                        <th class="th-sm">CLIENT RATING</th>
+                                        <th class="th-sm">ARTIST RATING</th>
+                                        <th class="th-sm">STATUS</th>
+                                        <th class="th-sm">ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,31 +120,26 @@
                             of 57 entries</div>
                     </div>
 
-                    <div class="col-sm-12 col-md-12 offset-4">
-                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                                    <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-                                        class="page-link">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                <li class="paginate_button page-item next" id="dataTable_next"><a href="#"
-                                        aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-                                        class="page-link">Next</a></li>
-                                        
-                            </ul>
-                        </div>
-                    </div>
+                    < <script>
+            $(document).ready(function () {
+            $('#dtMaterialDesignExample').DataTable();
+            $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+                $(this).parent().append($(this).children());
+            });
+            $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+                const $this = $(this);
+                $this.attr("placeholder", "Search");
+                $this.removeClass('form-control-sm');
+            });
+            $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+            $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+            $('#dtMaterialDesignExample_wrapper select').removeClass(
+            'custom-select custom-select-sm form-control form-control-sm');
+            $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+            $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
+            $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+            });
+            </script>
                 </div>
                 <?php
          
@@ -154,7 +148,7 @@
         ?>
             </div>
             <!-- End of Main Content -->
-
+           
 
 
         </div>

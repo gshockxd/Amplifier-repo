@@ -114,7 +114,7 @@
                         <div class="card-body">
                             <div class="container-fluid">
                                 <div class="table responsive">
-                                    <Table class="table table-reflow">
+                                    <Table id="datatable" class="table table-reflow">
                                         <tr role="row" class="odd">
                                             <td><img src="<?php echo base_url(); ?><?php echo $row->photo; ?>"
                                                     style="height:150px; width:180px; border-radius:100px"></a></td>
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <H5>Are you sure you want to delete
-                                        <?php echo $row->user_id; ?>&nbsp<?php echo $row->lname; ?>?</H5>
+                                        <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>?</H5>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="delete_user/<?php echo $row->user_id; ?>" type="button"> <button
@@ -274,7 +274,27 @@
             </div>
 
         </div>
+        <script>
+	    // For dataTable
+		$(document).ready(function() {
+		    $('#datatable').DataTable( {     
+		        // ajax: 'https://api.myjson.com/bins/qgcu',
+		        // drawCallback: function(settings){
+		        //     var api = this.api();
+		            
+		        //     /* Add some tooltips for demonstration purposes */
+		        //     $('td', api.table().container()).each(function () {
+		        //        $(this).attr('title', $(this).text());
+		        //     });
 
+		        //     /* Apply the tooltips */
+		        //     $('td', api.table().container()).tooltip({
+		        //        container: 'body'
+		        //     });          
+		        // }  
+		    });
+		} );
+	</script>
 
         <?php
           }
@@ -322,7 +342,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?php echo base_url()?>welcome/form_validation">
+                <form method="post" action="<?php echo base_url()?>welcome/form_validation" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="First Name">First Name:</label>
@@ -364,15 +384,15 @@
                         <input type="email" name="email" class="form-control" id="email">
                         <span class="text-danger"><?php echo form_error("email"); ?></span>
                     </div>
-                    <div class="form-group">
+                   
                         <label for="">Add Profile Picture</label>
                         <div class="custom-file">
                             <input type="file"
                                 class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
                                 name="userfile" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose Photo</label>
+                            <label class="custom-file-label" for="customFile"></label>
                             <div class="invalid-feedback">
-                                <?php echo form_error('userfile'); ?>
+                                 <div class="form-group"><?php echo form_error('userfile'); ?>
                             </div>
                         </div>
                     </div>
@@ -386,10 +406,7 @@
                         </select>
                         <span class="text-danger"><?php echo form_error("usertype"); ?></span>
                     </div>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" name="verify" class="custom-control-input" id="verify">
-                        <label class="custom-control-label" for="verify">Verify</label>
-                    </div>
+                   
 
                     <div class="modal-footer">
                         <input type="submit" name="adduser" class="btn btn-success" />
