@@ -11,7 +11,7 @@
         }
         public function select_packages(){
             $this->db->order_by('updated_at', 'DESC');
-            $query = $this->db->get_where('packages', array('owner'=>$this->session->userdata('user_id'), 'booked'=> 0));
+            $query = $this->db->get_where('packages', array('owner'=>$this->session->userdata('user_id')));
             return $query->result_array();
         }
         public function package_edit_page(){
@@ -80,8 +80,18 @@
                 $this->db->where(array('package_id'=>$id, 'owner'=>$this->session->userdata('user_id')));
                 $this->db->delete('packages');
                 
-                $this->session->set_flashdata('success_message', 'Package Deleted');
+                $this->session->set_flashdata('success_message', 'Package has been successfully Deleted!');
                 redirect('p_package');
             }
+        }
+        public function get_event_info (){
+            $templates['title'] = 'Event Info';
+
+            $query = $this->db->get_where('bookings', array('booking_id'=> $this->uri->segment(2)));
+            $data['event'] = $query->row_array();
+
+            $this->load->view('inc/header-performer', $templates);
+            $this->load->view('performer/event_info', $data);
+            $this->load->view('inc/footer');
         }
     }

@@ -133,6 +133,8 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
+    'admin/a_chat_model',
+
     'client_model', 
     'session_model', 
     'clients/profile_model',
@@ -144,13 +146,15 @@ $autoload['model'] = array(
     'clients/login_model',
     'clients/event_model',
     'clients/c_chat_model',
+    'clients/c_gallery_model',
+    'clients/c_rate_model',
 
     'performers/p_register_model',
-    'performers/p_profile_model',
     'performers/p_booking_model',
     'performers/p_pricing_model',
     'performers/p_package_model',
     'performers/p_chat_model',
+    'performers/p_gallery_model',
 
     'message_model'
 );

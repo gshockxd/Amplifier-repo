@@ -2,9 +2,10 @@
     class Profile_Model extends CI_Model {
         public function index (){
 			$templates['title'] = 'AMPLIFIER';
-			
+			$data['package'] = $this->profile_model->get_three_packages();
+
 			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/profile');
+			$this->load->view('client/profile', $data);
 			$this->load->view('inc/footer');            
 		}        
 		public function profile_password_edit_page(){			
@@ -58,10 +59,7 @@
 			$this->load->view('client/profile_edit', $users);
 			$this->load->view('inc/footer');
 		}
-        public function profile_info (){            
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+        public function profile_info (){        
 			$templates['title'] = 'Profile Information';
 
 			$this->load->view('inc/header-client', $templates);
@@ -69,9 +67,6 @@
 			$this->load->view('inc/footer');
 		}
 		public function profile_edit_info(){
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
 			$templates['title'] = 'Edit Profile';
 
 			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
@@ -81,8 +76,15 @@
 			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check_update');
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
-			$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
-			$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
+
+			// if($this->session->userdata('user_type') == 'performer'){				
+			// 	$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
+			// 	$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
+			// }
+
+			// echo '<pre>';
+			// print_r($this->input->post());
+			// echo '</pre>';
 
 			$data['uname'] = $this->input->post('uname');
 			$data['fname'] = $this->input->post('fname');
@@ -94,7 +96,7 @@
 			$data['service'] = $this->input->post('service');
 			$data['desc'] = $this->input->post('desc');
 
-			if($this->form_validation->run() == FALSE){
+			if($this->form_validation->run() === FALSE){
 				$this->load->view('inc/header-client', $templates);
 				$this->load->view('client/profile_edit', $data);
 				$this->load->view('inc/footer');
@@ -144,7 +146,7 @@
 				$this->profile_model->profile_update($client_image);
 				$session_user = $this->profile_model->user_select($this->session->userdata('email'));	
 				$this->session_model->session_user($session_user);
-				$this->session->set_flashdata('success_message', 'Your profile has been updated!');		
+				$this->session->set_flashdata('success_message', 'Profile has been updated!');		
 	
 				redirect('profile_info'); 
 				// hi;
@@ -173,6 +175,16 @@
             }      
 		}		
         public function profile_update($client_image){
+			if($this->input->post('service') || $this->input->post('desc')){
+				$artist_type = $this->input->post('service');
+				$artist_desc = $this->input->post('desc');
+			}else{
+				$artist_type = null;
+				$artist_desc = null;
+			}
+			// echo $artist_type;
+			// echo $artist_desc;
+			// die;
             $date = date('Y-m-j H:i:s');
             // die();
             $data = array(
@@ -186,8 +198,8 @@
 				'artist_type' => $this->input->post('service'),
 				'artist_desc' => $this->input->post('desc'),
                 'updated_at' => $date,
-            );
-
+			);
+		
             $this->db->set($data);
             $this->db->where(array('email' => $this->session->userdata('email'), 'user_id' => $this->session->userdata('user_id')));
             return $this->db->update('users');
@@ -197,5 +209,25 @@
         public function user_select($email){
             $query = $this->db->get_where('users', array('email'=>$email));
             return $query->row_array();
-        }
+		}
+		public function get_three_packages(){
+			$this->db->limit(3);
+			$this->db->group_by('owner');
+			$this->db->order_by('RAND()');
+			$this->db->join('band_galleries', 'user_id = owner');
+			$this->db->select('packages.*, band_galleries.*, band_galleries.created_at as g_created_at, band_galleries.updated_at as g_updated_at');
+			$query = $this->db->get_where('packages', array('booked'=>0));
+			return $data = $query->result_array();
+		}
+		public function performer_profile_info (){
+			$this->db->select('bookings.*, users.*');
+			$this->db->join('users', 'users.user_id = bookings.performer_id');
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
+			$data = $query->row_array();
+
+			$templates['title'] = 'Performer Info';
+			$this->load->view('inc/header-client', $templates);
+			$this->load->view('client/performer_event_info', $data);
+			$this->load->view('inc/footer');
+		}
     }

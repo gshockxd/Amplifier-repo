@@ -1,30 +1,37 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['default_controller'] = 'welcome/users';
+// need to change
+$route['default_controller'] = 'clients/profile';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['users']                         = 'welcome/users';
-$route['profile/(:num)']                = 'welcome/profile/$1';
-$route['events']                        = 'welcome/events';
-$route['addevent']                      = 'welcome/addevent';
-$route['services']                      = 'welcome/services';
-$route['history']                       = 'welcome/history';
-$route['reports']                       = 'welcome/reports';
-$route['notifications']                 = 'welcome/notifications';
-// $route['messages']                      = 'clients/chat';
-$route['messages']                        = 'performers/chat';
-$route['profile/editprofile/(:num)']    = 'welcome/editprofile/$1  ';
-$route['delete_user/(:num)']            = 'welcome/delete_user/$1  ';
-$route['eventview/(:num)']              = 'welcome/eventview/$1';
-$route['delete_report/(:num)']          = 'welcome/delete_report/$1';
-$route['delete_event/(:num)']           = 'welcome/delete_event/$1';
-$route['delete_package/(:num)']         = 'welcome/delete_package/$1';
-$route['add_offense/(:num)']            = 'welcome/offense_count/$1';
-$route['services']                      = 'welcome/services';
-$route['logout']                        = 'welcome/logout';
-$route['ban/(:num)']                    = 'welcome/ban/$1';
+$route['users']                                 = 'welcome/users';
+$route['profile/(:num)']                        = 'welcome/profile/$1';
+$route['events']                                = 'welcome/events';
+$route['addevent']                              = 'welcome/addevent';
+$route['history']                               = 'welcome/history';
+$route['reports']                               = 'welcome/reports';
+$route['notifications']                         = 'welcome/notifications';
+$route['profile/editprofile/(:num)']            = 'welcome/editprofile/$1  ';
+$route['delete_user/(:num)']                    = 'welcome/delete_user/$1  ';
+$route['eventview/(:num)']                      = 'welcome/eventview/$1';
+$route['addevents/(:num)']                       = 'welcome/form_validation_event/$1';
+$route['delete_report/(:num)']                  = 'welcome/delete_report/$1';
+$route['delete_event/(:num)']                   = 'welcome/delete_event/$1';
+$route['delete_package/(:num)']                 = 'welcome/delete_package/$1';
+$route['add_offense/(:num)']                    = 'welcome/offense_count/$1';
+$route['services']                              = 'welcome/services';
+$route['block_page']                            = 'welcome/block_page';
+$route['changeoff']                            = 'welcome/changeoff';
+$route['logout']                                = 'welcome/logout';
+$route['ban/(:num)']                            = 'welcome/ban/$1';
+$route['a_chat']                                = 'admin/chat';
+$route['booking_attempt_admin/(:num)']          = 'welcome/booking_attempt/$1';
+$route['a_chat/(:num)']                         = 'admin/chat_message/$1';
+$route['a_chat_send_search_message/(:num)']     = 'admin/send_search_message/$1';
+$route['a_chat_compose/(:num)']                 = 'admin/chat_compose/$1'; 
+
 
 //
 $route['profile']                       = 'clients/profile';
@@ -33,20 +40,31 @@ $route['profile_password_update']       = 'clients/profile_password_update';
 $route['profile_info']                  = 'clients/profile_info';
 $route['profile_edit']                  = 'clients/profile_edit_page';
 $route['profile_edit_info']             = 'clients/profile_edit_info';
+$route['c_gallery/(:num)']              = 'clients/gallery/$1';
 $route['history_client']                = 'clients/history';
+$route['history_client/(:num)']         = 'clients/history_info/$1';
+$route['rate_event/(:num)']             = 'clients/rate_event/$1';
+$route['rating_attempt/(:num)']         = 'clients/rate_attempt'; 
 $route['booking']                       = 'clients/booking';
 $route['booking_book_event/(:num)']     = 'clients/booking_book_event/$1';
 $route['booking_attempt/(:num)']        = 'clients/booking_attempt/$1';
 $route['c_events']                      = 'clients/events';
+// $route['c_event_add']                   = 'clients/event_add';
+$route['c_event_add_attempt']           = 'clients/event_add_attempt';
+$route['c_notifications']               = 'clients/notifications';
 $route['events/(:num)']                 = 'clients/event_info/$1';
 $route['print_event/(:num)']            = 'clients/print_pdf/$1';
+$route['c_delete_event/(:num)']         = 'clients/delete_event';
 $route['calendar']                      = 'clients/calendar';
-$route['package']                       = 'clients/package';
+// $route['package']                       = 'clients/package';
+// $route['c_created_events']              = 'clients/event_created';
 $route['register']                      = 'clients/register';
 $route['register_attempt']              = 'clients/register_user';
 $route['login']                         = 'clients/login';
 $route['login_attempt']                 = 'clients/login_attempt';
 $route['logout_user']                   = 'clients/logout';
+$route['performer_profile_info/(:num)'] = 'clients/performer_profile_info/$1';
+$route['c_performer_gallery/(:num)']    = 'clients/performer_gallery/$1';
 
 $route['c_chat']                        = 'clients/chat';
 $route['c_chat/(:num)']                 = 'clients/chat_message/$1';
@@ -56,15 +74,19 @@ $route['c_chat_compose/(:num)']         = 'clients/chat_compose/$1';
 // 
 $route['p_register']                    = 'performers/register';
 $route['p_register_attempt']            = 'performers/register_attempt';
-$route['p_profile']                     = 'performers/profile';
+// $route['p_profile']                     = 'performers/profile';
 $route['p_notifications']               = 'performers/notifications';
 $route['p_bookings']                    = 'performers/bookings';
+$route['p_event_info/(:num)']           = 'performers/event_info/$1';
+$route['p_approve_event/(:num)']         = 'performers/event_status_approve/$1';
+$route['p_decline_event/(:num)']        = 'performers/event_status_decline/$1';
 $route['p_pricing']                     = 'performers/pricing';
 $route['p_pricing_validate']            = 'performers/pricing_validate';
 $route['p_package']                     = 'performers/package';
 $route['p_package_edit_page/(:num)']    = 'performers/package_edit_page/$1'; 
 $route['p_package_delete/(:num)']       = 'performers/p_package_delete/$1';
 $route['p_package_update']              = 'performers/package_update';
+$route['p_gallery']                     = 'performers/gallery';
 $route['p_chat']                        = 'performers/chat';
 $route['p_chat/(:num)']                 = 'performers/chat_message/$1';
 $route['p_chat_send_search_message/(:num)']    = 'performers/send_search_message/$1';
@@ -119,6 +141,3 @@ $route['p_chat_compose/(:num)']         = 'performers/chat_compose/$1';
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-
-
-

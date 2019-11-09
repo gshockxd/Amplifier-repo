@@ -150,6 +150,23 @@
     @include media-breakpoint-only(xl) {
       column-count: 5;
     }
-  }
+}
 
+.video-frame{
+  border-radius: 20px;
+}
+
+.border-black-3{
+  border-style: solid;
+  border-color: #6c757d !important;
+  border-width: 3px !important;
+  border-radius: 20px;
+}
+
+.border-primary-3 {
+   border-style: soild;
+   border-color: #2C3E50 !important;
+   border-width: 3px !important;
+   border-radius: 7px !important;
+}
 /**/

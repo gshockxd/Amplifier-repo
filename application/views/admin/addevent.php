@@ -2,25 +2,25 @@
 <html lang="en">
 
 
-  <?php include('head.php'); ?>
+<?php include('head.php'); ?>
 
 <body id="page-top">
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-    <?php include('sidebar.php'); ?>
+        <?php include('sidebar.php'); ?>
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-      <!-- Main Content -->
-      <div id="content">
+            <!-- Main Content -->
+            <div id="content">
 
-        
-      <?php include('topbar.php'); ?>
-          <?php include('navbar.php'); ?>
 
-          <!-- <script>
+                <?php include('topbar.php'); ?>
+                <?php include('navbar.php'); ?>
+
+                <!-- <script>
             var countBox =1;
             var boxName = 0;
             function addInput()
@@ -31,162 +31,168 @@
             }
             </script> -->
 
-        <!-- Begin Page Content -->
-       
-     <div class="container">
-		    <div class="card  w-100 mb-5 mx-auto">
-               
-		        <div class="card-body">
-		            <div class="row">
-		                <div class="col-md-12">
-		                    <h4 class="">Event Details</h4>
-		                    <hr>
-		                </div>
-		            </div>
-		            <div class="row">
-		                <div class="col-md-12">
-                    <form method="post" action="<?php echo base_url()?>welcome/form_validation_event">
-                              <div class="form-group row">
-                                <label for="client" class="col-4 col-form-label">Client Name:</label> 
-                                <div class="col-8">
-                                    
-                                    <select id="client" name="client" class="custom-select">
-                                    <?php
-                                      if($fetch_data_client->num_rows()>0)
-                                      {
-                                      foreach($fetch_data_client->result() as $row)
-                                        { 
-                                    ?>
-                                    <option value="<?php echo $row->user_id; ?>"><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
-                                    <?php
-                                      }
-                                    }
-                                    ?>
-                                    </select>
-                                    <?php echo form_error("client"); ?>
-                                </div>
-                              </div>
-                                <hr>
-                              <div class="form-group row">
-                                <label for="performer" class="col-4 col-form-label">Performer</label> 
-                                <div class="col-8">
-                                  <select id="performer" name="performer" class="custom-select">
-                                  <?php
-                                  if($fetch_data_perf->num_rows()>0)
-                                   {
-                                   foreach($fetch_data_perf->result() as $perf)
-                                    { 
-                                    ?>
-                                    <option value="<?php echo $perf->user_id; ?>"><?php echo $perf->fname; ?>&nbsp<?php echo $perf->lname; ?></option>
-                                    <?php
-                                      }
-                                    }
-                                    ?>
-                                  </select>
-                                  <?php echo form_error("performer"); ?>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="dp" class="col-4 col-form-label">Down Payment</label> 
-                                <div class="col-8">
-                                  <input id="number" name="dp" placeholder="Enter Down Payment" class="form-control here" required="required" type="number">
-                                  <?php echo form_error("dp"); ?>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="payment" class="col-4 col-form-label">Full Payment</label> 
-                                <div class="col-8">
-                                  <input id="number" name="payment" placeholder="Enter Full Payment" class="form-control here" required="required" type="number">
-                                  <?php echo form_error("payment"); ?>
-                                  <!-- <span id="responce"></span>
-                                 <button type="button" class="btn btn-outline-danger mt-1" onclick="addInput()"><span class="fas fa-plus"></span></button> -->
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="form-group row">
-                                <label for="venue" class="col-4 col-form-label">Event Title</label> 
-                                <div class="col-8">
-                                <input id="text" name="event_name" placeholder="Enter Event Title" class="form-control here" required="required" type="text">
-                                <?php echo form_error("event_name"); ?>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="venue" class="col-4 col-form-label">Venue</label> 
-                                <div class="col-8">
-                                <input id="text" name="venue" placeholder="Enter venue" class="form-control here" required="required" type="text">
-                                <?php echo form_error("address"); ?>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="date" class="col-4 col-form-label">Date</label> 
-                                <div class="col-8">
-                                <input id="date" name="date_event" placeholder="Enter Date" class="form-control here" required="required" type="date">
-                                <?php echo form_error("date event"); ?>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="time" class="col-4 col-form-label">Duration</label> 
-                                <div class="col-8">
-                                  <input id="time" name="time_event" placeholder="Event Duration(hours:minutes)" class="form-control here" type="number">
-                                  <?php echo form_error("duration"); ?>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="publicinfo" class="col-4 col-form-label">Additional info to performers</label> 
-                                <div class="col-8">
-                                  <textarea id="publicinfo" name="publicinfo" cols="40" rows="4" class="form-control"></textarea>
-                                </div>
-                              </div>
-                              <div class="custom-control custom-switch">
-                                      <input type="checkbox" name="approve" class="custom-control-input" id="approve">
-                                      <label class="custom-control-label" for="approve">Approve booking</label>
-                              </div>
-                              <div class="form-group row">
-                              <div class="offset-4 col-8">
-                                  <input name="submit" name="addevent" type="submit" class="btn btn-info">
-                                  <button class="btn-danger"><a href="events" class="btn-danger">Cancel</a></button>
-                                </div>
-                              </div>
-                            </form>
-                          
-		                </div>
-		            </div>
-		            
-		        </div>
-		    </div>
-		</div>
-	</div>
-</div>
-                    
-             
-      <!-- end -->
-      
-      
-      
-      
-      </div>
-      <!-- /.container-fluid -->
+                <!-- Begin Page Content -->
 
-      </div>
+                <?php echo form_open('booking_attempt_admin/'.$this->uri->segment(2)) ?>
+<div class="container my-3">
+    <p class="h3 text-center">Book an Event</p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="">Event Name</label>
+                <input type="text" class="form-control <?php echo form_error('event_name') ? 'is-invalid' : '' ?>" name="event_name" value="<?php echo isset($event_name) ? $event_name : '' ?>">
+                <div class="invalid-feedback">
+                    <?php echo form_error('event_name') ?>
+                </div>
             </div>
-            <!-- End of Main Content -->
-
-            
-
-          </div>
-          <!-- End of Content Wrapper -->
-
+            <div class="row">
+                <div class="col-md-6">
+                       <div class="form-group">
+                        <label for="">Event Date</label>
+                        <input type="date" name="event_date" class="form-control <?php echo form_error('event_date') ? 'is-invalid' : '' ?>" value="<?php echo isset($event_date) ? $event_date : '' ?>" >
+                        <div class="invalid-feedback">
+                            <?php echo form_error('event_date') ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Package Name</label>
+                        <input class="form-control text-capitalize" disabled value="<?php echo $package['package_name'] ?>" >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                       <div class="form-group">
+                        <label for="">From</label>
+                        <input type="time" name="duration" class="form-control <?php echo form_error('duration') ? 'is-invalid' : '' ?>" value="<?php echo isset($duration) ? $duration : '' ?>" >
+                        <div class="invalid-feedback">
+                            <?php echo form_error('duration') ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">To</label>
+                        <input type="time" name="event_time" class="form-control <?php echo form_error('event_time') ? 'is-invalid' : '' ?>" value="<?php echo isset($event_time) ? $event_time : '' ?>" >
+                        <div class="invalid-feedback">
+                            <?php echo form_error('event_time') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-md-6">
+                       <div class="form-group">
+                        <label for="">Expected Payment/Full Payment</label>
+                        <input type="number" name="full_payment" class="form-control <?php echo form_error('full_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($full_payment) ? $full_payment : '' ?>" >
+                        <div class="invalid-feedback">
+                            <?php echo form_error('full_payment') ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Partial Payment/Downpayment</label>
+                        <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" >
+                        <div class="invalid-feedback">
+                            <?php echo form_error('down_payment') ?>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="form-group">
+                <label for="">Payment</label>
+                <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" >
+                <div class="invalid-feedback">
+                    <?php echo form_error('down_payment') ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Venue Location</label>
+                <input type="text" class="form-control <?php echo form_error('location') ? 'is-invalid' : '' ?>" name="location" value="<?php echo isset($localtion) ? $location : '' ?>">
+                <div class="invalid-feedback">
+                    <?php echo form_error('location') ?>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Notes</label>
+                <textarea name="notes" id="ckeditor" class="form-control <?php echo form_error('notes') ? 'is-invalid' : '' ?>"><?php echo isset($notes) ? $notes : '' ?></textarea>
+                <div class="invalid-feedback">
+                    <?php echo form_error('notes') ?>
+                </div>
+            </div>
         </div>
-        <!-- End of Page Wrapper -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-capitalize text-white"><?php echo $package['package_name'] ?></div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><?php echo $package['details'] ?></li>
+                    <li  class="list-group-item">                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Price Offer:  </p>
+                            </div>
+                            <div class="col-md-6">
+                               ₱ <?php echo $package['price'] ?>
+                            </div>
+                        </div>
+                    </li>
+                    <li  class="list-group-item">                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Last Update:  </p>
+                            </div>
+                            <div class="col-md-6">
+                                <?php echo date('F d, Y m:i a', strtotime($package['updated_at'])) ?>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row my-3 d-flex justify-content-center">
+                <div class="col-md-3">
+                    <a href="<?php echo base_url('services') ?>" class="btn btn-danger btn-block">Cancel</a>
+                </div>
+                <div class="col-md-3 offset-md-3">
+                    <button class="btn btn-primary btn-block" type="submit">Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php form_close() ?>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-          <i class="fas fa-angle-up"></i>
-        </a>
 
-          <?php include('footer-script.php'); ?>
+        <!-- end -->
 
-        
-  </body>
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+    </div>
+    </div>
+    <!-- End of Main Content -->
+
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <?php include('footer-script.php'); ?>
+
+
+</body>
 
 </html>

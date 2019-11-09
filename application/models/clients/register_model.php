@@ -4,21 +4,21 @@
             if($this->session->userdata('user_id')){
 				// redirect('clients/profile');
 			}
-			$templates['title'] = 'Registration';
+			$templates['title'] = 'Client Registration';
 
 			$this->load->view('inc/header-no-navbar', $templates);
 			$this->load->view('client/register');
             $this->load->view('inc/footer');
         }
         public function register_user(){    
-			$templates['title'] = 'Registration';
+			$templates['title'] = 'Client Registration';
 			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
 
 			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required' => 'Please Input First Name', 'alpha'=>'First Name not valid, letters only'));
 			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required' => 'Please input Last Name', 'alpha'=>'Last Name not valid, letters only'));
 			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[11]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Contact Number should be exactly 11 digits'));
 			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric|exact_length[11]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Contact Number should be exactly 11 digits'));
-			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid'));
+			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid', 'is_unique'=>'Email Address is already taken'));
 			$this->form_validation->set_rules('pass', 'Password', 'required', array('required' => 'Please input Password'));
 			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]', array('matches'=>'Password not matched'));
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check');
@@ -81,7 +81,7 @@
                 'user_type'=> $this->input->post('user_type'),
                 'username'=> $this->input->post('uname'),
                 'password' => md5($this->input->post('pass')),
-                'status'=> 'pending',
+                'status'=> 'verified',
                 'fname'=> $this->input->post('fname'),
                 'lname'=> $this->input->post('lname'),
                 'email' => $this->input->post('email'),
@@ -95,9 +95,7 @@
                 'media_fk' => null,
                 'created_at' => $date,
 				'updated_at' => $date
-            );
-            // echo date('Y-m-j H:i:s');
-            // die;
+			);
 
             return $this->db->insert('users', $data);
         }

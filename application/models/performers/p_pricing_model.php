@@ -11,7 +11,8 @@
             $this->form_validation->set_rules('name', 'Package Name', 'required', array('required'=>'Please Input Package Name'));
             $this->form_validation->set_rules('price', 'Price Offer', 'required|numeric|greater_than[4]', array('required'=>'Please Input Price', 'numeric'=>'Please input a valid Price', 'greater_than'=>'Price is greater or equal to 5'));
             $this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
-
+            // $this->form_validation->set_rules('userfile', 'Profile Picture', 'callback_file_check');
+            
             $data['name'] = $this->input->post('name');
             $data['price'] = $this->input->post('price');
             $data['desc'] = $this->input->post('desc');

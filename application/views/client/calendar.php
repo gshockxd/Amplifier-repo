@@ -4,7 +4,7 @@
 		<p class="h2 red-brown">CALENDAR</p>
 		<div class="row pt-3">
 			<div class="col-sm">
-				<p class=""><span class="h4 text-warning">WARNING!</span> This is an image.</p>
+				<!-- <p class=""><span class="h4 text-warning">WARNING!</span> This is an image.</p> -->
 				<img src="<?php echo base_url(); ?>assets/img/calendar.png" height="400" width="400" alt="">
 			</div>
 			<div class="col-sm">

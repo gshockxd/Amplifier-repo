@@ -11,9 +11,14 @@
 		public function booking_book_event(){
 			$id = $this->uri->segment(2);
 			
-			$this->db->where('package_id', $id);
-			$temp = $this->db->get('packages');
+			$this->db->select('packages.*, users.*, users.created_at as u_created_at, users.updated_at as u_updated_at');
+			$this->db->join('users', 'users.user_id = packages.owner');
+			$temp = $this->db->get_where('packages', array('package_id'=>$id));
 			$data['package'] = $temp->row_array();
+
+			// echo '<pre>';
+			// print_r($data['package']);
+			// echo '</pre>';
 			
 			$templates['title'] = 'Booking';
 			$this->load->view('inc/header-client', $templates);
@@ -21,6 +26,7 @@
 			$this->load->view('inc/footer');
 		}
 		public function booking_attempt(){
+			$templates['title'] = 'Book Event';
 			$id = $this->uri->segment(2);			
 			$this->db->where('package_id', $id);
 			$this->db->join('users', 'users.user_id = packages.owner');
@@ -44,7 +50,7 @@
 
 			$data['event_name'] = $this->input->post('event_name');
 			$data['event_date'] = $this->input->post('event_date');
-			$data['event_time'] = $this->input->post('event_time');
+			$data['event_to'] = $this->input->post('event_time');
 			$data['duration'] = $this->input->post('duration');
 			$data['full_payment'] = $this->input->post('full_payment');
 			$data['down_payment'] = $this->input->post('down_payment');
@@ -52,20 +58,39 @@
 			$data['notes'] = $this->input->post('notes');
 
 			if($this->form_validation->run() === FALSE){
-				$templates['title'] = 'Book Event';
 
 				$this->load->view('inc/header-client', $templates);
 				$this->load->view('client/booking_add_event', $data);
 				$this->load->view('inc/footer');
 			}else{
-				$book_id = $this->booking_model->event_insert($data['package']);
+				echo $data['date_error'] = $this->booking_model->check_date($data); echo '<br>';
+				echo $data['time_error'] = $this->booking_model->check_time($data);
 
-				$this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully booked!');
-				redirect('booking');
+				if($data['date_error'] || $data['time_error']){
+					$this->load->view('inc/header-client', $templates);
+					$this->load->view('client/booking_add_event', $data);
+					$this->load->view('inc/footer');				
+				}else{			
+					$book_id = $this->booking_model->event_insert($data['package']);
+					$this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully booked!');
+					redirect('booking');			
+				}		
 			}
 		}
 		public function event_insert($package){
 			$timestamps = date('Y-m-d');
+			if($this->input->post('down_payment') >= $package['price']){
+				$payment_status = 'paid';
+			}else{
+				$payment_status = 'dp';
+			}
+
+			// echo '<pre>';
+			// print_r($package);
+			// print_r($this->input->post());
+			// echo '</pre>';
+			// die;
+
 			$data = array(
 				'client_id'=> $this->session->userdata('user_id'),
 				'performer_id'=> $package['owner'],
@@ -77,7 +102,7 @@
 				'notes'=> $this->input->post('notes'),
 				'full_amount'=> 0,
 				'down_payment'=> $this->input->post('down_payment'),
-				'payment_status'=> 'dp',
+				'payment_status'=> $payment_status,
 				'date_booked'=> $timestamps,
 				'event_name'=> $this->input->post('event_name'),
 				'artist_type'=> $package['artist_type']
@@ -94,8 +119,27 @@
 			return $id;
 		}
 		public function get_packages(){
-			$this->db->where(array('booked'=> 0));
-			$query = $this->db->get('packages');
+			$this->db->join('users', 'user_id = owner');
+			$this->db->select('packages.*, artist_type');
+			$query = $this->db->get_where('packages', array('booked'=> 0));
 			return $query->result_array();
+		}
+		public function check_date(){
+			if($this->input->post('event_date') < date('Y-m-d')){
+				return $data['date_error'] = 'Date selected is invalid';
+			}else{			
+				return NULL;
+			}
+		}
+		public function check_time(){	
+			if($this->input->post('event_date') <= date('Y-m-d')){
+				if($this->input->post('duration') < date('H:i')){
+					return $data['time_error'] = 'Time selected is already passed';										
+				}else{
+					return NULL;
+				}
+			}else{			
+				return NULL;
+			}			
 		}
     }

@@ -1,7 +1,7 @@
 <?php echo form_open_multipart('profile_edit_info'); ?>
 <div class="container py-3 mb-5">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <?php 
                 // echo '<pre>';
                 // print_r($this->session->userdata());
@@ -19,13 +19,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <p class="h3">Edit <?php echo $this->session->userdata('fname'); ?> <?php echo $this->session->userdata('lname'); ?></p>
+        <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="header">Edit User information</h5>
                         <div class="px-2">
-                            <a href="profile_info" data-toggle="tooltip" data-placement="top" title="Cancel" class="btn btn-danger mr-2">X</a>
+                            <a href="profile_info" data-toggle="tooltip" data-placement="top" title="Cancel" class="btn btn-danger mr-2"><i class="fas fa-times "></i></a>
                             <button class="btn btn-primary" type="submit" data-toggle="tooltip" data-placement="top" title="Save Changes"><i class="fas fa-save fa-lg"></i></button>                      
                         </div>
                     </div>                        
@@ -98,7 +97,7 @@
                             </div>
                         </li>
                         <?php if($this->session->userdata('artist_type') != null): ?>                            
-                            <li class="list-group-item">
+                            <li class="list-group-item sr-only">
                                 <div class="row">
                                     <div class="col">Phone Number 2</div>
                                     <div class="col font-weight-bold">
@@ -116,7 +115,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item sr-only">
                                 <div class="row">
                                     <div class="col">Service Description</div>
                                     <div class="col font-weight-bold"><textarea name="desc" id="ckeditor" value="" class="form-control <?php echo form_error('desc') ? 'is-invalid' : '' ?>" rows="1"><?php echo isset($desc)  ? $desc   : $this->session->userdata('artist_desc'); ?></textarea>
@@ -124,6 +123,21 @@
                                             <?php echo form_error('desc'); ?>
                                         </div>
                                     </div>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                        
+                        <?php if($this->session->userdata('artist_type') != null): ?>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Service</div>
+                                    <div class="col font-weight-bold text-capitalize"><?php echo $this->session->userdata('artist_type'); ?></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Service Description</div>
+                                    <div class="col font-weight-bold"><?php echo $this->session->userdata('artist_desc'); ?></div>
                                 </div>
                             </li>
                         <?php endif; ?>

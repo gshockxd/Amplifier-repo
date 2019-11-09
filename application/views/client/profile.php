@@ -1,50 +1,65 @@
-<div class="container">
+<!-- <?php// echo '<pre>'; print_r($package); echo '</pre>'; echo rand(999999999,9); ?> -->
+
+<div class="container my-3">
 
 	<?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '';  ?>
 	<?php $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '';  ?>
 	
-	<div class="row py-3">
-
-		<div class="col-sm-8">
-			<img src="<?php echo base_url(); ?>assets/img/client.png" height="100%" width="100%" alt="">	
+	<?php if(array_key_exists(0, $package)): ?>
+		<div class="row">
+			<div class="col-md-7">
+				<img src="<?php echo base_url(); echo $package[0]['band_photo'] ?>" class="border-black-3" width="100%" alt="">	
+			</div>
+			<div class="col-md-5">
+				<p class="h1 red-brown"><?php echo $package[0]['package_name'] ?></p>
+				<p class=""><?php echo $package[0]['details'] ?></p>
+				<p class="text-muted py-3"></p>
+				<a href="<?php echo base_url(); ?>c_gallery/<?php echo $package[0]['package_id'] ?>" class="btn btn-info" data-placement="top" title="" data-toggle="tooltip"><span class="fas fa-photo-video"></span> Preview</a>
+				<a href="<?php echo base_url(); ?>booking_book_event/<?php echo $package[0]['package_id'] ?>" class="btn btn-primary ml-2" data-placement="top" title="Book <?php echo $package[0]['package_name'] ?>" data-toggle="tooltip"><span class="fas fa-book"></span> Book</a>
+			</div>
 		</div>
-		<div class="col-sm-4">
-			<p class="h1 red-brown">Nike Marti Caballes</p>
-			<p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown p</p>
-			<p class="text-muted py-3">Source Link</p>
-		</div>
-	</div>
+	<?php endif; ?>
 
-	<div class="row py-3">
-		<div class="col-sm">
-			<p class="h2 d-flex justify-content-center">BAND AVAILABLE!</p>
-			<div class="row">
-				<div class="col-sm">
-					<img src="<?php echo base_url(); ?>assets/img/client.png" height="150" width="100%" alt="">
-				</div>
-				<div class="col-sm">
-					<p class="text-muted">LASTIKO/BAND</p>
-					<p class="red-brown font-weight-bold">g established fact that a reader will be distracted by the readable content of a page </p>
-					<div class="d-flex justify-content-center">
-						<a href="" class="btn btn-outline-dark">View</a>
+	<div class="row mt-3">
+		<?php if(array_key_exists(1, $package)): ?>
+			<div class="col-md-6">
+				<p class="h2 d-flex justify-content-center"><?php echo $package[1]['package_name'] ?></p>
+				<div class="row">
+					<div class="col-md-7">
+						<img src="<?php echo base_url(); echo $package[1]['band_photo']; ?>" class="border-black-3	" width="100%" alt="">
+					</div>
+					<div class="col-md-5">
+						<p class="red-brown"><?php echo $package[1]['details'] ?></p>
+						<div class="d-flex justify-content-center">
+							<a href="<?php echo base_url(); ?>c_gallery/<?php echo $package[0]['package_id'] ?>" class="btn btn-info mr-2" data-placement="top" title="" data-toggle="tooltip"><span class="fas fa-photo-video"></span> Preview</a>
+							<a href="<?php echo base_url(); ?>booking_book_event/<?php echo $package[1]['package_id'] ?>" class="btn btn-primary" data-placement="top" title="Book <?php echo $package[1]['package_name'] ?>" data-toggle="tooltip"><span class="fas fa-book"></span> Book</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm">
-			<p class="h2 d-flex justify-content-center">PHOTOGRAPHER AVAILABLE</p>
-			<div class="row">
-				<div class="col-sm">
-					<img src="<?php echo base_url(); ?>assets/img/client.png" height="150" width="100%" alt="">
-				</div>
-				<div class="col-sm">
-					<p class="text-muted">OPISINA PRODUCTIONS</p>
-					<p class="red-brown font-weight-bold">g established fact that a reader will be distracted by the readable content of a page </p>
-					<div class="d-flex justify-content-center">
-						<a href="" class="btn btn-outline-dark">View</a>
+		<?php endif; ?>
+		<?php if(array_key_exists(2, $package)): ?>
+			<div class="col-md-6">
+				<p class="h2 d-flex justify-content-center"><?php echo $package[2]['package_name'] ?></p>
+				<div class="row">
+					<div class="col-md">
+						<img src="<?php echo base_url(); echo $package[2]['band_photo']?>" class="border-black-3" width="100%" alt="">
+					</div>
+					<div class="col-md">
+						<p class="red-brown font-weight-bold"><?php echo $package[2]['details'] ?> </p>
+						<div class="d-flex justify-content-center">
+							<a href="<?php echo base_url(); ?>c_gallery/<?php echo $package[0]['package_id'] ?>" class="btn btn-info mr-2" data-placement="top" title="" data-toggle="tooltip"><span class="fas fa-photo-video"></span> Preview</a>
+							<a href="<?php echo base_url(); ?>booking_book_event/<?php echo $package[2]['package_id'] ?>" class="btn btn-primary" data-placement="top" title="Book <?php echo $package[2]['package_name'] ?>" data-toggle="tooltip"><span class="fas fa-book"></span> Book</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		<?php endif; ?>
 	</div>
+	<?php if(!$package): ?>
+		<div class="mt-3 text-center">
+			<p class="red-brown h4">Cleaned up! <span class="h5">No available packages at this time</span></p>
+			<img src="<?php echo base_url() ?>assets/img/website/clean_up.svg" class="mt-3" width="50%" alt="">
+		</div>
+	<?php endif; ?>
 </div>
