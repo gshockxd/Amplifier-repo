@@ -95,9 +95,7 @@
                 'media_fk' => null,
                 'created_at' => $date,
 				'updated_at' => $date
-            );
-            // echo date('Y-m-j H:i:s');
-            // die;
+			);
 
             return $this->db->insert('users', $data);
         }

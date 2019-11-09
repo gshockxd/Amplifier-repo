@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <a href="addevent" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                        <a href="services" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                             <i class="fas fa-music fa-sm text-white-50"></i> Add Event</a>
                     </div>
                     <div class="card mb-4">
@@ -69,6 +69,7 @@
                                         <th scope="col">PERFORMER NAME</th>
                                         <th scope="col">DATE</th>
                                         <th scope="col">TIME</th>
+                                        <th scope="col">STATUS</th>
                                         <th scope="col">ACTION</th>
                                     </tr>
                                 </thead>
@@ -90,6 +91,7 @@
                                         </td>
                                         <td> <?php echo  date('F d, Y', strtotime($row->event_date)); ?></td>
                                         <td> <?php echo $row->event_to; ?></td>
+                                        <td> <?php echo $row->status; ?></td>
                                         <td>
                                             <div class="dropdown no-arrow">
                                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -106,7 +108,7 @@
                                                     <a class="dropdown-item fas fa-stop fa-fw" href="#"
                                                         data-toggle="modal"
                                                         data-target="#delevent<?php echo $row->booking_id; ?>">&nbsp
-                                                        Delete</a>
+                                                        Cancel Event</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -125,7 +127,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <H5>Are you sure you want to delete event:<br>
+                                                <H5>Are you sure you want to cancel event:<br>
                                                     <?php echo $row->event_name; ?></H5>
                                             </div>
                                             <div class="modal-footer">

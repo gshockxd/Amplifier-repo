@@ -130,6 +130,7 @@
 					'artist_type' => $this->input->post('service'),
 					'artist_desc' => $this->input->post('desc')
 				);				
+				die('here');
 				$this->db->insert('users', $data);
 				$new_user_id = $this->db->insert_id();
 

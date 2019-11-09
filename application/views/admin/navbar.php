@@ -13,7 +13,7 @@
          <a class="nav-link dropdown-toggle" href="messages" id="messages" aria-haspopup="true" aria-expanded="false">
              <i class="fas fa-envelope fa-fw"></i>
              <!-- Counter - Messages -->
-             <span class="badge badge-danger badge-counter">7</span>
+           
          </a>
          <!-- Nav Item - User Information -->
      <li class="nav-item dropdown no-arrow">
