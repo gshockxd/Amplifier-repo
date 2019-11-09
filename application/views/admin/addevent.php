@@ -70,24 +70,24 @@
                                         </div>
                                         <hr>
                                         <div class="form-group row">
-                                            <label for="performer" class="col-4 col-form-label">Performer</label>
+                                            <label for="package" class="col-4 col-form-label">Pacakge Name</label>
                                             <div class="col-8">
-                                                <select id="performer" name="performer" class="custom-select">
+                                                <select id="package" name="package" class="custom-select">
                                                     <?php
-                                  if($fetch_data_perf->num_rows()>0)
+                                  if($fetch_data_packages->num_rows()>0)
                                    {
-                                   foreach($fetch_data_perf->result() as $perf)
+                                   foreach($fetch_data_packages->result() as $package)
                                     { 
                                     ?>
-                                                    <option value="<?php echo $perf->user_id; ?>">
-                                                        <?php echo $perf->fname; ?>&nbsp<?php echo $perf->lname; ?>
+                                                    <option value="<?php echo $package->package_id; ?>">
+                                                        <?php echo $package->package_name; ?>
                                                     </option>
                                                     <?php
                                       }
                                     }
                                     ?>
                                                 </select>
-                                                <?php echo form_error("performer"); ?>
+                                                <?php echo form_error("package"); ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">

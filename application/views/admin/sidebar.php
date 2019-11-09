@@ -16,20 +16,20 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="users">
+        <a class="nav-link" href="<?php echo base_url('users') ?>">
             <i class="fa fa-users"></i>
             <span>Users</span></a>
     </li>
 
     <!-- Events  -->
     <li class="nav-item">
-        <a class="nav-link" href="events">
+        <a class="nav-link" href="<?php echo base_url('events') ?>">
             <i class="fa fa-calendar"></i>
             <span>Events</span></a>
     </li>
     <!-- Services  -->
     <li class="nav-item">
-        <a class="nav-link" href="services">
+        <a class="nav-link" href="<?php echo base_url('services') ?>">
             <i class="fa fa-suitcase"></i>
             <span>Packages</span></a>
     </li>
@@ -41,23 +41,23 @@
     </li>
     <!-- Reports  -->
     <li class="nav-item">
-        <a class="nav-link" href="reports">
+        <a class="nav-link" href="<?php echo base_url('reports') ?>">
             <i class="fa fa-exclamation-triangle"></i>
             <span>Reports</span></a>
     </li>
     <!-- Notifications  -->
     <li class="nav-item">
-        <a class="nav-link" href="notifications">
+        <a class="nav-link" href="<?php echo base_url('notifications');?>">
             <i class="fa fa-list-alt"></i>
             <span>Notifications</span></a>
     </li>
 
-      <!-- Messages -->
-      <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url();?>a_chat">
-        <i class="fa fa-envelope-o"></i>
-          <span>Messages</span></a>
-      </li>
+    <!-- Messages -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('a_chat');?>">
+            <i class="fa fa-envelope-o"></i>
+            <span>Messages</span></a>
+    </li>
 
     <!-- Logout -->
     <li class="nav-item">
@@ -72,10 +72,13 @@
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
+    <!-- <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+      </div> -->
+
 </ul>
+
+
 
 <?php include('logout_modal.php'); ?>
 

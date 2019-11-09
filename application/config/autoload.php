@@ -147,6 +147,7 @@ $autoload['model'] = array(
     'clients/event_model',
     'clients/c_chat_model',
     'clients/c_gallery_model',
+    'clients/c_rate_model',
 
     'performers/p_register_model',
     'performers/p_profile_model',

@@ -42,44 +42,32 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
 
                                     <div class="container-fluid">
-
-                                        <div class="col-sm-12 col-md-2 d-inline p-2">
-                                            <div class="dropdown mb-4 d-inline p-2">
-                                                <button class="btn btn-primary dropdown-toggle " type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Usertype
-                                                </button>
-                                                <div class="dropdown-menu animated--fade-in"
-                                                    aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">admin</a>
-                                                    <a class="dropdown-item" href="#">client</a>
-                                                    <a class="dropdown-item" href="#">performer</a>
-                                                </div>
-                                            </div>
+                                        <form method="post" action="<?php echo base_url()?>welcome/search_results">
+                                            <select name="usertype" class="btn btn-outline-info dropdown-toggle">
+                                            <option selected disabled>Usertype</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="performer">Performer</option>
+                                                <option value="client">Client</option>
+                                            </select>
 
 
-                                            <div class="dropdown mb-4 d-inline p-2">
-                                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false">
-                                                    Status
-                                                </button>
-                                                <div class="dropdown-menu animated--fade-in"
-                                                    aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">pending</a>
-                                                    <a class="dropdown-item" href="#">verified</a>
-                                                    <a class="dropdown-item" href="#">blocked</a>
-                                                </div>
-                                            </div>
+                                            <select name="status" class="btn btn-outline-info dropdown-toggle">
+                                            <option selected disabled>Status</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="verified">Verified</option>
+                                                <option value="block">Blocked</option>
+                                                <option value="banned">Banned</option>
+
+                                            </select>
 
                                             <a href="#" class="btn btn-outline-success btn-icon-split">
                                                 <span class="icon">
                                                     <i class="fas fa-arrow-right"></i>
                                                 </span>
-                                                <span class="text">Sort</span>
+                                                <button class="btn btn-outline-success" type="submit">Sort</button>
                                             </a>
-                                        </div>
+
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -103,8 +91,8 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                    aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelle
+                                    dby="dropdownMenuLink">
                                     <div class="dropdown-header">Action:</div>
                                     <a class="dropdown-item fas fa-eye fa-fw"
                                         href="profile/<?php echo $row->user_id; ?>">&nbsp View</a>
@@ -377,9 +365,16 @@
                         <span class="text-danger"><?php echo form_error("email"); ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="Contact_number1">Profile Picture:</label><br>
-                        <input type="file" name="pphoto" size="20" />
-                        <span class="text-danger"><?php echo form_error("photo"); ?></span>
+                        <label for="">Add Profile Picture</label>
+                        <div class="custom-file">
+                            <input type="file"
+                                class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
+                                name="userfile" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose Photo</label>
+                            <div class="invalid-feedback">
+                                <?php echo form_error('userfile'); ?>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="Usertype">Usertype:</label><br>

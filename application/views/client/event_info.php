@@ -109,7 +109,7 @@
         </div>
         <div class=" d-flex justify-content-end mt-2">
             <a href="<?php echo base_url(); ?>performer_profile_info/<?php echo $this->uri->segment(2) ?>"  class="btn btn-primary col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Performer Info"><i class="fas fa-user"></i></a>
-            <a <?php ?> data-toggle="modal" data-target="#alertDelete" <?php endif; ?> href="#" class="text-white btn btn-danger col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Delete Event"><i class="fas fa-trash-alt"></i></a>
+            <a <?php if($event['status'] == 'pending'): ?> data-toggle="modal" data-target="#alertDelete" <?php endif; ?> href="#" class="text-white btn btn-danger col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="<?php echo $event['status'] == 'pending' ? 'Delete Event' : 'Event is already approved' ?>"><i class="fas fa-trash-alt"></i></a>
             <a href="<?php echo base_url(); ?>print_event/<?php echo $this->uri->segment(2) ?>" target="_blank"  class="btn btn-info col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Print"><i class="fas fa-print"></i></a>
             <a href="<?php echo base_url(); ?>c_events"  class="btn btn-secondary col-md-1" data-toggle="tooltip" data-placement="top" title="Return"><i class="fas fa-arrow-left"></i></a>
         </div>         

@@ -42,6 +42,10 @@ class model extends CI_Model
     {
        $id = $this->uri->segment(2);
        $this->db->select("*");
+       $this->db->from("notifications");
+       $this->db->where("report_id",$id);
+       $this->db->delete("notifications");
+       $this->db->select("*");
        $this->db->from("reports");
        $this->db->where("report_id",$id);
        $this->db->delete("reports");
@@ -66,6 +70,15 @@ class model extends CI_Model
     {
        $id = $this->uri->segment(2);
        $this->db->select("report_count");
+       $this->db->from("users");
+       $this->db->where("user_id",$id);
+       $this->db->update("users", $offense);
+    }
+    function update_offense_user1($offense)
+    {
+       $id = $this->session->userdata('user_id');
+       echo $id;
+       $this->db->select("status");
        $this->db->from("users");
        $this->db->where("user_id",$id);
        $this->db->update("users", $offense);
@@ -119,6 +132,30 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+    function fetch_data_notifications()
+    {
+      $date = date('Y-m-d');
+      $this->db->select("*");
+      $this->db->from("notifications");
+      $this->db->where("created_at",$date);
+      $query = $this->db->get();    
+      return $query;
+    }
+    function fetch_data_notifications_count()
+    {
+      $date = date('Y-m-d');
+      $this->db->select("*");
+      $this->db->from("notifications");
+      $notified = "notified";
+      $this->db->where("status",$notified);
+      $this->db->where("created_at",$date);
+      $query2 = $this->db->count_all_results();
+      $newdata = array(
+          'notif_count' => $query2 
+      );    
+      return $this->session->set_userdata($newdata);;
+    }
+ 
     function fetch_data_history()
     {
        $date = date('y-m-d');
@@ -164,7 +201,16 @@ class model extends CI_Model
     }
     function insert_data_report($data_insert)
     {
-       $this->db->insert("reports", $data_insert);
+      $this->db->insert("reports", $data_insert);
+
+    }
+    function insert_data_notifications($notif_insert)
+    {
+       $this->db->insert("notifications", $notif_insert);
+    }
+    function insert_data_notifications2($notif_insert2)
+    {
+       $this->db->insert("notifications", $notif_insert2);
     }
 
 }

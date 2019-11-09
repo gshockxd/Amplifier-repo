@@ -22,7 +22,7 @@
 			$this->register_model->register_user();
 		}
 		public function profile(){
-			$this->session_model->session_index_page ();
+			// $this->session_model->session_index_page ();
 			$this->profile_model->index();			
 		}
 		public function gallery(){
@@ -36,6 +36,24 @@
 			$this->session_model->user_type_check_client();
 			
 			$this->history_model->index();
+		}
+		public function history_info(){
+			$this->session_model->session_check();		
+			$this->session_model->user_type_check_client();
+			
+			$this->history_model->history_info();
+		}
+		public function rate_event(){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+			
+			$this->c_rate_model->index();
+		}
+		public function rate_attempt(){
+			$this->session_model->session_check();
+			$this->session_model->user_type_check_client();
+
+			$this->c_rate_model->rate_attempt();
 		}
 		public function delete_event(){
 			$this->session_model->session_check();

@@ -12,7 +12,7 @@
             <div class="modal-body">Confirm Logout</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="logout_user">Logout</a>
+                <a class="btn btn-primary" href="<?php echo base_url('logout_user'); ?>">Logout</a>
             </div>
         </div>
     </div>

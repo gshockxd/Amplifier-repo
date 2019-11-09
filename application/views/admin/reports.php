@@ -129,7 +129,10 @@
                                             <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal"
                                                 data-target="#delreport<?php echo $row->report_id; ?>"><span
                                                     class="fa fa-trash"></span></a>
+                                                    <br>
                                         </li>
+                                        <small class="text-center "><?php echo date('F j, Y g:i a',strtotime($row->date_reported)); ?></small>
+
                                     </ul>
                                 </div>
                             </div>

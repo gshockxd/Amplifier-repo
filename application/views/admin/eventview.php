@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="history"><button type="button" class="btn fas fa-arrow-left"></button></a>
+                                    <a href="<?php echo base_url('history');?>"><button type="button" class="btn fas fa-arrow-left"></button></a>
                                     <h4 align="center">EVENT DETAILS</h4>
                                     <hr>
                                 </div>
@@ -118,7 +118,7 @@
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Duration:</label>
                                         <div class="col-8">
-                                            <p class="lead"><?php echo $row->event_time; ?>&nbsp (HH:MM:SS)</p>
+                                            <p class="lead"><?php echo $row->event_to; ?>&nbsp (HH:MM:SS)</p>
                                         </div>
                                     </div>
                                     <hr>

@@ -1,6 +1,8 @@
 <div class="container">
+<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
 	<?php if($history): ?>
-		<p class="h1 red-brown py-3 text-center">Event History</p>
+		<p class="h3 red-brown py-3 text-center">Event History</p>
 			
 		<table id="datatable" class="table table-hover" style="width:100%">
 			<thead>
@@ -11,7 +13,6 @@
 					<th>Event Type</th>
 					<th>Service</th>
 					<th>Action</th>
-					<th></th>
 				</tr>
 			</thead>
 			<?php 
@@ -28,24 +29,19 @@
 						<?php echo date('F d, Y', strtotime($b['event_date'])) ?>             	
 					</td>
 					<td>
-						<p class="text-uppercase yellow-brown"><?php echo $b['venue_name'] ?></p>
+						<p class="text-capitalize"><?php echo $b['venue_name'] ?></p>
 					</td>
 					<td>
-					<p class="text-uppercase <?php echo $b['status'] == 'approve' ? ' text-success' : ''; echo $b['status'] == 'cancel' ? ' text-danger' : ''; echo $b['status'] == 'block' ? ' text-warning' : ''; echo $b['status'] == 'pending' ? ' text-muted' : ''; ?>"><?php echo $b['status'] ?></p>
+					<p class="text-capitalize <?php echo $b['status'] == 'approve' ? ' text-success' : ''; echo $b['status'] == 'cancel' ? ' text-danger' : ''; echo $b['status'] == 'block' ? ' text-warning' : ''; echo $b['status'] == 'pending' ? ' text-muted' : ''; ?>"><?php echo $b['status'] ?></p>
 					</td>
 					<td>
-						<p class="text-uppercase yellow-brown"><?php echo $b['event_name'] ?></p>
+						<p class="text-capitalize"><?php echo $b['event_name'] ?></p>
 					</td>
 					<td>
-						<p class="text-uppercase"><?php echo $b['artist_type'] ?></p>
-					</td>
-					<td class="d-flex justify-content-center ">
-						<a href="#" class="btn btn-outline-success mr-2 " data-toggle="tooltip" data-placement="top" title="Accept"><i class="fas fa-check "></i></a>
-						<a href="#" class="btn btn-outline-danger mr-2 " data-toggle="tooltip" data-placement="top" title="Decline"><i class="fas fa-times "></i></a>
-						<a href="#" class="btn btn-outline-primary " data-toggle="tooltip" data-placement="top" title="Edit user.. this should be dynamic!"><i class="far fa-edit "></i></a>
+						<p class="text-capitalize"><?php echo $b['artist_type'] ?></p>
 					</td>
 					<td>
-						<a href="#" class="btn btn-outline-info" data-toggle="tooltip" data-placement="top" title="Redirect to https.. this should be dynamic!"><i class="fas fa-external-link-alt "></i></a>
+						<a href="<?php base_url(); ?>history_client/<?php echo $b['booking_id'] ?>" target="_blank" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More Details"><i class="fas fa-external-link-alt "></i></a>
 					</td>
 				</tr>
 				
@@ -61,7 +57,6 @@
 					<th>Event Type</th>
 					<th>Service</th>
 					<th>Action</th>
-					<th></th>
 				</tr>
 			</tfoot>
 		</table>

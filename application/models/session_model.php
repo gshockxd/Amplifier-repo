@@ -1,6 +1,24 @@
 <?php
+
     class Session_Model extends CI_Model {
         public function session_user ($data){
+            if($data['user_type']=="admin")
+            {
+                $notified = "notified";
+                $this->db->select("*");
+                $this->db->from("notifications");
+                $this->db->where("status",$notified);
+                $query2 = $this->db->count_all_results();    
+            }else{
+                // $notified = "notified";
+                // $user_id  = $data['user_id'];
+                // $this->db->select("*");
+                // $this->db->from("notifications");
+                // $this->db->where("status",$notified);
+                // $this->db->where("user_id",$user_id);
+                // $query2 = $this->db->count_all_results();   
+            }          
+          
             $newdata = array(
                 'user_id' => $data['user_id'],
                 'user_type' => $data['user_type'],
@@ -20,9 +38,14 @@
                 'created_at' => $data['created_at'],
                 'updated_at' => $data['updated_at'],
                 'artist_type' => $data['artist_type'],
-                'artist_desc' => $data['artist_desc']
+                'artist_desc' => $data['artist_desc'],
+                'block_end' => $data['block_end'],
+                'notif_count' => $query2
+                
             );
-            return $this->session->set_userdata($newdata);            
+            return $this->session->set_userdata($newdata); 
+           
+
         }
         public function unset_user(){
             $data = array(
@@ -44,23 +67,34 @@
                 'created_at' ,
                 'updated_at' ,
                 'artist_type',
-                'artist_desc'
+                'artist_desc',
+                'block_end',
+                'notif_count'
             );
             return $this->session->unset_userdata($data);
         }
         public function user_type_check (){
-            switch($this->session->userdata('user_type')){
-                case 'admin':
-                    redirect('users');
-                    break;
-                case 'client':
-                    if($this->uri->segment(1) != 'profile'){
+            if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned")
+            {
+                    $data = array( 
+                        'user_type' ,
+                        'artist_type',
+                        'artist_desc',
+                    );
+                $this->session->unset_userdata($data);
+                redirect('block_page');
+            }else{              
+                switch($this->session->userdata('user_type')){
+                    case 'admin':
+                        redirect('users');
+                        break;
+                    case 'client':
                         redirect('profile');
-                    }
-                    break;
-                case 'performer':
-                    redirect('p_bookings');
-                    break;
+                        break;
+                    case 'performer':
+                        redirect('p_bookings');
+                        break;
+                }
             }
         }
         public function session_index_page(){
