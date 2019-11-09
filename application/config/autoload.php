@@ -150,7 +150,6 @@ $autoload['model'] = array(
     'clients/c_rate_model',
 
     'performers/p_register_model',
-    'performers/p_profile_model',
     'performers/p_booking_model',
     'performers/p_pricing_model',
     'performers/p_package_model',

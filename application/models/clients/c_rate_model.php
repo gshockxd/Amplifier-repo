@@ -3,7 +3,7 @@
         public function index (){
             $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
             $data['rate'] = $query->row_array();
-            if($data){
+            if($data['rate']){
                 $templates['title'] = 'Event Rating';
 
                 $this->load->view('inc/header-client', $templates);
@@ -11,7 +11,7 @@
                 $this->load->view('inc/footer');
             }else{
                 $this->session->set_flashdata('danger_message', 'The event your trying to rate is not found!');
-                redirect('history_client/'.$this->uri->segment(2));
+                redirect('history_client/'.$this->session->userdata('history_client_id'));
             }
         }
         public function rate_attempt(){
@@ -24,13 +24,24 @@
             $data['rate1'] = $this->input->post('rate1');
             $data['rate2'] = $this->input->post('rate2');
 
-            if($this->form_validation->run() === FALSE){
-                $this->load->view('inc/header-client', $templates);
-                $this->load->view('client/rate', $data);
-                $this->load->view('inc/footer');
+            if($data['rate']){
+                if($this->form_validation->run() === FALSE){
+                    $this->load->view('inc/header-client', $templates);
+                    $this->load->view('client/rate', $data);
+                    $this->load->view('inc/footer');
+                }else{
+                    $average = ($data['rate1'] + $data['rate2']) / 2; 
+                    $this->db->set(array('client_rating'=>$average));
+                    $this->db->where('booking_id', $this->uri->segment(2));
+                    $this->db->update('bookings');
+                    
+                    $this->session->set_flashdata('success_message', 'Event '.$data['rate']['event_name'].' has been successfully rated!');
+                    redirect('history_client/'.$this->uri->segment(2));
+                }
             }else{
-                echo $average = ($data['rate1'] + $data['rate2']) / 2; 
-                
+                $this->session->set_flashdata('danger_message', 'The event your trying to rate is not found!');
+                redirect('history_client/'.$this->uri->segment(2));
             }
+            
         }
     }

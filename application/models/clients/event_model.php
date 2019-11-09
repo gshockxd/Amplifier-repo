@@ -51,7 +51,22 @@
         }
         public function get_bookings(){
             $query = $this->db->get_where('bookings', array('client_id'=> $this->session->userdata('user_id'), 'date_booked != '=> NULL));
-            return $query->result_array();
+            $data = $query->result_array();
+
+            foreach($data as $d){
+				$system_date_time = strtotime(date('Y-m-d H:i:s'));
+				$sql_date_time = strtotime($d['event_date'].' '.$d['event_to']);
+                if($system_date_time <= $sql_date_time){
+                    $upcoming_events[] = $d;
+                }
+            }
+
+            if(isset($upcoming_events)){
+                return $upcoming_events;
+            }else{
+                return FALSE;
+            }
+
         }
         public function get_event($id){
             $query = $this->db->get_where('bookings', array('booking_id'=> $id, 'client_id'=>$this->session->userdata('user_id')));

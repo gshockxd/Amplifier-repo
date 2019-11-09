@@ -55,4 +55,10 @@
 			</div>
 		<?php endif; ?>
 	</div>
+	<?php if(!$package): ?>
+		<div class="mt-3 text-center">
+			<p class="red-brown h4">Cleaned up! <span class="h5">No available packages at this time</span></p>
+			<img src="<?php echo base_url() ?>assets/img/website/clean_up.svg" class="mt-3" width="50%" alt="">
+		</div>
+	<?php endif; ?>
 </div>

@@ -97,7 +97,7 @@
                             </div>
                         </li>
                         <?php if($this->session->userdata('artist_type') != null): ?>                            
-                            <li class="list-group-item">
+                            <li class="list-group-item sr-only">
                                 <div class="row">
                                     <div class="col">Phone Number 2</div>
                                     <div class="col font-weight-bold">
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item sr-only">
                                 <div class="row">
                                     <div class="col">Service Description</div>
                                     <div class="col font-weight-bold"><textarea name="desc" id="ckeditor" value="" class="form-control <?php echo form_error('desc') ? 'is-invalid' : '' ?>" rows="1"><?php echo isset($desc)  ? $desc   : $this->session->userdata('artist_desc'); ?></textarea>
@@ -123,6 +123,21 @@
                                             <?php echo form_error('desc'); ?>
                                         </div>
                                     </div>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+                        
+                        <?php if($this->session->userdata('artist_type') != null): ?>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Service</div>
+                                    <div class="col font-weight-bold text-capitalize"><?php echo $this->session->userdata('artist_type'); ?></div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Service Description</div>
+                                    <div class="col font-weight-bold"><?php echo $this->session->userdata('artist_desc'); ?></div>
                                 </div>
                             </li>
                         <?php endif; ?>

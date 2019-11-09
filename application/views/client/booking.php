@@ -1,4 +1,4 @@
-<div class="container my-3" style="background-image: url('<?php echo base_url() ?>assets/img/website/card_postal.svg');">
+<div class="container my-3" <?php if($packages): ?> style="background-image: url('<?php echo base_url() ?>assets/img/website/card_postal.svg');" <?php endif; ?>>
 
 <?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
 <?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
@@ -32,7 +32,7 @@
 <?php else: ?>
 <div class="mt-3 text-center">
 	<p class="h4 mb-3 red-brown">No Package Found</p>
-	<img src="<?php echo base_url(); ?>assets/img/website/empty.svg" height="50%" width="50%" alt="">
+	<img src="<?php echo base_url(); ?>assets/img/website/a_moment_to_relax.svg" height="50%" width="50%" alt="">
 </div>
 <?php endif; ?>
 

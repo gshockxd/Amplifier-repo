@@ -18,7 +18,14 @@
                 // $this->db->where("user_id",$user_id);
                 // $query2 = $this->db->count_all_results();   
             }          
-          
+            if($this->session->userdata('user_type') == 'performer'){
+                $artist_type = $this->session->userdata('artist_type');
+                $artist_desc = $this->session->userdata('artist_desc');
+            }else{                
+                $artist_type =  $data['artist_type'];
+                $artist_desc = $data['artist_desc'];
+            }
+            
             $newdata = array(
                 'user_id' => $data['user_id'],
                 'user_type' => $data['user_type'],
@@ -37,8 +44,8 @@
                 'media_fk'=> $data['media_fk'],
                 'created_at' => $data['created_at'],
                 'updated_at' => $data['updated_at'],
-                'artist_type' => $data['artist_type'],
-                'artist_desc' => $data['artist_desc'],
+                'artist_type' => $artist_type,
+                'artist_desc' => $artist_desc,
                 'block_end' => $data['block_end'],
                 'notif_count' => $query2
                 

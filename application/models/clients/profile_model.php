@@ -77,10 +77,10 @@
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check_update');
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
 
-			if($this->session->userdata('user_type') == 'performer'){				
-				$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
-				$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
-			}
+			// if($this->session->userdata('user_type') == 'performer'){				
+			// 	$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
+			// 	$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
+			// }
 
 			// echo '<pre>';
 			// print_r($this->input->post());
@@ -175,6 +175,16 @@
             }      
 		}		
         public function profile_update($client_image){
+			if($this->input->post('service') || $this->input->post('desc')){
+				$artist_type = $this->input->post('service');
+				$artist_desc = $this->input->post('desc');
+			}else{
+				$artist_type = null;
+				$artist_desc = null;
+			}
+			// echo $artist_type;
+			// echo $artist_desc;
+			// die;
             $date = date('Y-m-j H:i:s');
             // die();
             $data = array(
@@ -188,8 +198,8 @@
 				'artist_type' => $this->input->post('service'),
 				'artist_desc' => $this->input->post('desc'),
                 'updated_at' => $date,
-            );
-
+			);
+		
             $this->db->set($data);
             $this->db->where(array('email' => $this->session->userdata('email'), 'user_id' => $this->session->userdata('user_id')));
             return $this->db->update('users');

@@ -17,11 +17,16 @@
 				$system_date_time = strtotime(date('Y-m-d H:i:s'));
 				$sql_date_time = strtotime($d['event_date'].' '.$d['event_to']);
 
-				if($system_date_time <= $sql_date_time){
+				// TESTING
+				if($system_date_time >= $sql_date_time){
 					$past_event[] = $d;	
 				}
 			}
-			return $past_event;
+			if(isset($past_event)){
+				return $past_event;
+			}else{
+				return FALSE;
+			}
 		}
 		public function history_info(){
 			$templates['title'] = 'History Event Info';

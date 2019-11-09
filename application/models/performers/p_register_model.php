@@ -113,7 +113,7 @@
 					'user_type'=> 'performer',
 					'username'=> $this->input->post('uname'),
 					'password' => md5($this->input->post('pass')),
-					'status'=> 'pending',
+					'status'=> 'verified',
 					'fname'=> $this->input->post('fname'),
 					'lname'=> $this->input->post('lname'),
 					'email' => $this->input->post('email'),

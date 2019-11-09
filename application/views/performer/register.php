@@ -70,11 +70,11 @@
                             <label for="">Type of Service</label>
                             <select class="form-control <?php echo form_error('service') ? 'is-invalid' : ''; ?>" name="service">
                                 <option  selected hidden disabled> PLease Select Type of Service</option>
-                                <option value="photographer" <?php echo isset($service) == 'photographer' ? 'selected' : '' ?>>Photographer</option>
-                                <option value="videographer" <?php echo isset($service) == 'videographer' ? 'selected' : '' ?>>videographer</option>
-                                <option value="host" <?php echo isset($service) == 'host' ? 'selected' : '' ?>>Host</option>
-                                <option value="restaurant gig" <?php echo isset($service) == 'restaurant gig' ? 'selected' : '' ?>>Restaurant Gig</option>
-                                <option value="graduation ball" <?php echo isset($service) == 'graduation ball' ? 'selected' : '' ?>>Graduation Ball</option>
+                                <option value="photographer" <?php echo isset($service) ? $service == 'photographer' ? 'selected' : '' : '' ?>>Photographer</option>
+                                <option value="videographer" <?php echo isset($service) ? $service == 'videographer' ? 'selected' : '' : '' ?>>videographer</option>
+                                <option value="host" <?php echo isset($service) ? $service == 'host' ? 'selected' : '' : '' ?>>Host</option>
+                                <option value="restaurant gig" <?php echo isset($service) ? $service == 'restaurant gig' ? 'selected' : '' : '' ?>>Restaurant Gig</option>
+                                <option value="graduation ball" <?php echo isset($service) ? $service == 'graduation ball' ? 'selected' : '' : '' ?>>Graduation Ball</option>
                             </select>
                             <div class="invalid-feedback">
                                 <?php echo form_error('service') ?>

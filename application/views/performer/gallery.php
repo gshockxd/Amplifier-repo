@@ -1,7 +1,7 @@
 <div class="container py-3" style="background-image: url('<?php// echo base_url(); ?>assets/img/website/video_streaming.svg');">
     <!-- <?php// echo '<pre>'; print_r($galleries); echo '</pre>'; ?> -->
     
-    <p class="h3 yellow-brown text-center">Band Videos</p>
+    <p class="h4 yellow-brown text-center">Band Videos</p>
     <div class="row">
         <div class="col-md-4">
             <div class="embed-responsive embed-responsive-16by9  border-black-3">
@@ -21,7 +21,7 @@
     </div>
     <div class="row pt-3">
         <div class="col-md-6 text-center">
-            <p class="text-center yellow-brown h3">Band Photo</p>
+            <p class="text-center yellow-brown h4">Band Photo</p>
             <img src="<?php echo base_url(); echo $galleries['band_photo'] ?>" class="border-black-3" width="100%" alt="">
         </div>
         <div class="col-md-6">

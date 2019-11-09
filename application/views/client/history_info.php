@@ -1,8 +1,9 @@
 <!-- <?php// echo '<pre>'; print_r($history); echo '</pre>'; ?> -->
-<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
-<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
 <div class="container my-3">
+<?php $this->session->set_userdata('history_client_id', $this->uri->segment(2)) ?>
     <div class="col-md-10 offset-md-1">
+        <?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
+        <?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
         <div class="card">
             <div class="card-header"><p class="h4 text-center"><?php echo $history['event_name'] ?></p></div>
             <ul class="list-group list-group-flush">
@@ -111,7 +112,11 @@
         </div>
 
         <div class=" d-flex justify-content-end mt-2">
-            <a href="<?php echo base_url(); ?>rate_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Rate Event">Rate <i class="fas fa-exclamation"></i></a>        
+            <?php if($history['client_rating']): ?>          
+                <a href="#"  class="btn btn-success col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rated">Rated <i class="fas fa-check"></i></a>  
+            <?php else: ?>      
+                <a href="<?php echo base_url(); ?>rate_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Rate Event">Rate <i class="fas fa-exclamation"></i></a>  
+            <?php endif; ?>      
             <a href="<?php echo base_url(); ?>performer_profile_info/<?php echo $this->uri->segment(2) ?>"  class="btn btn-primary col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Performer Info"><i class="fas fa-user"></i></a>
             <a href="<?php echo base_url(); ?>print_event/<?php echo $this->uri->segment(2) ?>" target="_blank"  class="btn btn-info col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Print"><i class="fas fa-print"></i></a>
             <a href="<?php echo base_url(); ?>c_events"  class="btn btn-secondary col-md-1" data-toggle="tooltip" data-placement="top" title="Return"><i class="fas fa-arrow-left"></i></a>
