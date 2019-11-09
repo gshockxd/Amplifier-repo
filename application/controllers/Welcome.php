@@ -174,8 +174,8 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->load->library('upload');
-		$this->form_validation->set_rules("fname", "first name", 'required|alpha');
-		$this->form_validation->set_rules("lname", "last name", 'required|alpha');
+		$this->form_validation->set_rules("fname", "first name", 'required');
+		$this->form_validation->set_rules("lname", "last name", 'required');
 		$this->form_validation->set_rules("password", "password", 'required|min_length[6]');
 		$this->form_validation->set_rules("username", "username", 'required|min_length[6]');
 		$this->form_validation->set_rules("contact_number", "contact number", 'required|integer|max_length[13]');
@@ -429,11 +429,73 @@ class Welcome extends CI_Controller {
 		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
 		$this->load->view('/admin/addevent',$data);
 	}
+// search start
+	public function search_results()
+	{
+		$this->load->model('model');
 	
+		if($this->input->post('usertype')=='admin'){
+			$usertype="admin";
+		}
+		else if($this->input->post('usertype')=='client'){
+			$usertype="client";
+		}
+		else if($this->input->post('usertype')=='performer'){
+			$usertype="performer";
+		}else{
+			$usertype="*";
+		}
+		if($this->input->post('status')=='verified'){
+			$status="verified";
+		}
+		else if($this->input->post('status')=='block'){
+			$status="block";
+		}
+		else if($this->input->post('status')=='banned'){
+			$status="banned";
+		}else{
+			$status="*";
+		}
+		$this->model->query_results_user($usertype, $status);
+		$data["query_results_user"] 	= $this->model->query_results_user($usertype, $status);	
+		$this->load->view('/admin/search_user',$data);
+	}
+	public function search_results_report()
+	{
+		$this->load->model('model');
+		if($this->input->post('user_id')==''){
+			$user_id="*";
+		}else{
+			$user_id=$this->input->post('user_id');
+		}
+		$this->model->query_results_report($user_id);
+		$data["query_results_report"] 	= $this->model->query_results_report($user_id);	
+		$data["fetch_data_user"] 	= $this->model->fetch_data_user();
+		$data["fetch_data_event"] 	= $this->model->fetch_data_event();
+		$this->load->view('/admin/search_report',$data);
+		
+	}
+	public function search_results_package()
+	{
+		$this->load->model('model');
+		if($this->input->post('user_id')==''){
+			$user_id="*";
+		}else{
+			$user_id=$this->input->post('user_id');
+		}
+		$this->model->query_results_package($user_id);
+		$data["query_results_package"] 	= $this->model->query_results_package($user_id);	
+		$data["fetch_data_perf"] 		= $this->model->fetch_data_perf();
+		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+		$this->load->view('/admin/search_package',$data);
+		
+	}
+// search_end
 	public function services()
 	{
 		$this->load->model('model');
 		$data["fetch_data_packages"] = $this->model->fetch_data_packages();
+		$data["fetch_data_perf"] 	= $this->model->fetch_data_perf();
 		$data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
 		$this->load->view('/admin/services', $data);
 	}

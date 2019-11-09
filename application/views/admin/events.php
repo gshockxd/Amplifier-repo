@@ -23,30 +23,39 @@
                 <!-- Begin Page Content -->
                 <div class="container">
 
-                    <a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                         aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-fw fa-sort"></i>
-                        <span>Search by:</span>
+                        <span>Filter</span>
                     </a>
                     <div class="card" style="width:50%; margin:10px;">
                         <div class="card-block">
                             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                                 data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
+
                                     <div class="container-fluid">
-                                        <span class=" mb-0 pl-3 text-gray-800">Date</span>
-                                        <form class="form-inline ml-4 mb-1 ">
+                                        <form method="post" action="<?php echo base_url('welcome/search_results')?>">
                                             <input class="form-control mr-sm-2" type="date"
-                                                placeholder="Search by Date">
-                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><label
-                                                    class="fa fa-search"></label></button>
-                                        </form>
-                                        <span class=" mb-0 pl-3 text-gray-800">Name</span>
-                                        <form class="form-inline ml-4 mb-1 ">
-                                            <input class="form-control mr-sm-2" type="text"
-                                                placeholder="Search by name">
-                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><label
-                                                    class="fa fa-search"></label></button>
+                                                    placeholder="Search by Date">
+                                            </select>
+
+
+                                            <select name="status" class="btn btn-outline-info dropdown-toggle">
+                                            <option selected disabled>Status</option>
+                                                <option value="verified">Verified</option>
+                                                <option value="block">Blocked</option>
+                                                <option value="banned">Banned</option>
+
+                                            </select>
+
+                                         
+                                                <button class="btn btn-outline-success" type="submit"><i class="fas fa-arrow-right"></i>Sort</button>
+                                                    
+                                              
+                                               
+                                            </a>
+
                                         </form>
                                     </div>
                                 </div>

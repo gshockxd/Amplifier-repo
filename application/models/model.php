@@ -163,6 +163,54 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+//search start
+    function query_results_user($usertype,$status)
+    {
+     
+       $this->db->select("*");
+       $this->db->from("users");
+       if($usertype!="*"){
+       $this->db->where("user_type=",$usertype);
+      }
+      if($status!="*")
+      {
+       $this->db->where("status=",$status);
+      }      
+      $this->db->where("status!=","hide");
+       $query = $this->db->get();
+       return $query;
+    }
+    function query_results_package($user_id)
+    {
+     
+       $this->db->select("*");
+       $this->db->from("packages");
+      if($user_id!="*")
+      {
+       $this->db->where("owner",$user_id);
+      }      
+      $this->db->where("package_status!=","hide");
+      $this->db->join("users",'packages.owner=users.user_id');
+       $query = $this->db->get();
+       return $query;
+    }
+    function query_results_report($user_id)
+    {
+     
+      $this->db->select("reports.*,bookings.*,users.fname as report_from_fname,u2.fname AS report_to_fname,users.lname as report_from_lname,u2.lname AS report_to_lname, u2.photo AS report_from_photo,users.photo as report_to_photo");
+      $this->db->from("reports");
+      $this->db->where("reports_status!=","hide");
+      if($user_id!="*"){
+         $this->db->where("report_from=",$user_id);
+         $this->db->or_where("report_to=",$user_id);
+        }
+      $this->db->join("users",'reports.report_from=users.user_id');
+      $this->db->join("users as u2",'reports.report_to=u2.user_id');
+      $this->db->join("bookings",'reports.booking_id=bookings.booking_id');
+      $query = $this->db->get();
+      return $query;
+    }
+//search end
     function fetch_data_user()
     {
        $this->db->select("*");

@@ -52,9 +52,9 @@
                         <div class="row mx-auto">
 
                             <?php 
-                    if($fetch_data_packages->num_rows()>0)
+                    if($query_results_package->num_rows()>0)
                     {
-                        foreach($fetch_data_packages->result() as $row)
+                        foreach($query_results_package->result() as $row)
                         {
                     ?>
                             <div class="col-sm-4 mb-3 col-md-4">
@@ -63,8 +63,8 @@
                                         <h3 class="card-title">
                                             <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none"
                                                 style="width:50px;height:50px; border-radius:30px">
-                                            <a href="profile/<?php echo $row->user_id; ?>" class="text-secondary">
-                                                <h3 class="text-center"><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></h3></a>
+                                            <a href="profile/<?php echo $row->user_id; ?>" class="text-secondary text-center">
+                                                <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></a>
                                         </h3>
                                         <hr>
                                         <p class="lead text-center">

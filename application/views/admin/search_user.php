@@ -23,7 +23,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Users</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Filter Results</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                             data-toggle="modal" data-target="#adduser">
                             <i class="fas fa-user-plus fa-sm text-white-50"></i> Add Users</a>
@@ -59,12 +59,7 @@
 
                                             </select>
 
-                                         
-                                                <button class="btn btn-outline-success" type="submit"><i class="fas fa-arrow-right"></i>Sort</button>
-                                                    
-                                              
-                                               
-                                            </a>
+                                            <button class="btn btn-outline-success" type="submit"><i class="fas fa-arrow-right"></i>Sort</button>
 
                                         </form>
                                     </div>
@@ -74,9 +69,9 @@
                     </div>
 
                     <?php 
-        if($fetch_data_user->num_rows()>0)
+        if($query_results_user->num_rows()>0)
         {
-          foreach($fetch_data_user->result() as $row)
+          foreach($query_results_user->result() as $row)
           {
         ?>
                     <!--User Dropdown Card-->

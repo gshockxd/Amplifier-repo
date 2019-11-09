@@ -9,12 +9,7 @@
              <span class="badge badge-danger badge-counter"><?php echo $this->session->userdata('notif_count'); ?></span>
          </a>
          <!-- Nav Item - Messages -->
-     <li class="nav-item dropdown no-arrow mx-1">
-         <a class="nav-link dropdown-toggle" href="messages" id="messages" aria-haspopup="true" aria-expanded="false">
-             <i class="fas fa-envelope fa-fw"></i>
-             <!-- Counter - Messages -->
-           
-         </a>
+   
          <!-- Nav Item - User Information -->
      <li class="nav-item dropdown no-arrow">
          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
