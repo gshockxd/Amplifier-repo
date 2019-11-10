@@ -25,8 +25,12 @@ date_default_timezone_set('Asia/Hong_Kong');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/Amplifier-repo/';
-
+if($_SERVER['SERVER_NAME']=='localhost')
+{
+    $config['base_url'] = 'http://localhost/Amplifier-repo/';
+}else{
+    $config['base_url'] = 'http://hirokos.net/amplifier';    
+}
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -67,9 +67,9 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                            if($fetch_data_history->num_rows()>0)
+                            if($query_data_event_history->num_rows()>0)
                             {
-                               foreach($fetch_data_history->result() as $row)
+                               foreach($query_data_event_history->result() as $row)
                                 { 
                         ?>
                                     <tr>

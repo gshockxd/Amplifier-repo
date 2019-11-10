@@ -21,6 +21,7 @@
 			$this->load->view('inc/footer');
 		}
 		public function booking_attempt(){
+	
 			$id = $this->uri->segment(2);			
 			$this->db->where('package_id', $id);
 			$this->db->join('users', 'users.user_id = packages.owner');

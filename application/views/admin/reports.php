@@ -24,7 +24,7 @@
                 <div class="col-md-2 col-lg-6 mx-auto">
                     <div class="card shadow mb-4">
                         <div class="card-body center">
-                            <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('welcome/search_results_report')?>">
+                            <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('search_results_report')?>">
                             <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
                             <option selected disabled>Select Reports that include:</option>
                             <?php

@@ -143,21 +143,37 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Sample Outputs:</label>
-                                        <div class="col-8">
-                                            <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="image"
-                                                class="h-100 w-25 border border-primary rounded"></a>
-                                            <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="image"
-                                                class="h-100 w-25 border border-primary rounded"></a>
-                                            <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="image"
-                                                class="h-100 w-25 border border-primary rounded"></a>
-                                        </div>
-                                    </div>
-                                    <?php } ?>
-
+                                   <?php 
+                                if($fetch_data_user_galleries->num_rows()>0)
+                                {
+                                foreach($fetch_data_user_galleries->result() as $vid)
+                                {
+                                    ?>
+                                    <center>
+                                     <label for="videos">Band Photo:</label><br>
+                                    <img src="<?php echo base_url(); ?><?php echo $vid->band_photo; ?>"
+                                        class="mx-auto m-3 img-thumbnail rounded-circle" style="height:170px;width:200px"
+                                        data-toggle="modal" data-target="#viewfull2" /></center>
+                                    <hr>
+                                    <label for="videos">Sample Outputs:</label><br>
+                                    <center>
+                                    <video class="video-fluid z-depth-1" autoplay loop controls muted>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_1; ?>" type="video/mp4" style="width:100%; height:auto;"/>
+                                    </video>
+                                    <video class="video-fluid z-depth-1" autoplay loop controls muted>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_2; ?>" type="video/mp4" style="width:100%; height:auto;"/>
+                                    </video>
+                                    <video class="video-fluid z-depth-1" autoplay loop controls muted>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_3; ?>" type="video/mp4" style="width:100%; height:auto;"/>
+                                    </video>
+                                    </center>
                                     
-                                  
+                                   
+                                <?php }}
+                                 } ?>
+
+
+
 
                                 </div>
                             </div>
@@ -220,6 +236,27 @@
             </div>
             <div class="modal-body">
                 <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" class="m-3 rounded"
+                    style="height:500px; width:735px">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal image -->
+<div class="modal fade" id="viewfull2" tabindex="-1" role="dialog" aria-labelledby="fullview2" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-basic">
+                <h5 class="modal-title" id="fullview">FULL VIEW</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="<?php echo base_url(); ?><?php echo $vid->band_photo; ?>" class="m-3 rounded"
                     style="height:500px; width:735px">
 
             </div>

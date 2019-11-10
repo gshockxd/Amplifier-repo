@@ -28,9 +28,9 @@
                             <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
                             <option selected disabled>Select Reports that include:</option>
                             <?php
-                                if($fetch_data_perf->num_rows()>0)
+                                if($fetch_data_user->num_rows()>0)
                                     {
-                                    foreach($fetch_data_perf->result() as $row)
+                                    foreach($fetch_data_user->result() as $row)
                                         { 
                         
                             ?>
