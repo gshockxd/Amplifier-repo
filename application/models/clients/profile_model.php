@@ -2,7 +2,7 @@
     class Profile_Model extends CI_Model {
         public function index (){
 			$templates['title'] = 'AMPLIFIER';
-			$data['package'] = $this->profile_model->get_three_packages();
+			$data['package'] = $this->Profile_model->get_three_packages();
 
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/profile', $data);
@@ -36,7 +36,7 @@
 				$this->load->view('client/profile_password_edit_page');
 				$this->load->view('inc/footer');
 			}else{
-				$check = $this->profile_model->profile_update_password($data);
+				$check = $this->Profile_model->profile_update_password($data);
 				if($check === FALSE){
 					$this->session->set_flashdata('danger_message', 'Current Password Not Matched');
 					redirect('profile_password_edit_page');
@@ -70,10 +70,10 @@
 			$templates['title'] = 'Edit Profile';
 
 			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
-			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required' => 'Please Input First Name', 'alpha'=>'First Name not valid, letters only'));
-			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required' => 'Please input Last Name', 'alpha'=>'Last Name not valid, letters only'));
-			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
-			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number'));
+			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required' => 'Please Input First Name'));
+			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required' => 'Please input Last Name'));
+			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[9]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
+			$this->form_validation->set_rules('number2', 'Contact Number', 'numeric|exact_length[9]', array('numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check_update');
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
 
@@ -143,9 +143,9 @@
 					}
 				}
 
-				$this->profile_model->profile_update($client_image);
-				$session_user = $this->profile_model->user_select($this->session->userdata('email'));	
-				$this->session_model->session_user($session_user);
+				$this->Profile_model->profile_update($client_image);
+				$session_user = $this->Profile_model->user_select($this->session->userdata('email'));	
+				$this->Session_model->session_user($session_user);
 				$this->session->set_flashdata('success_message', 'Profile has been updated!');		
 	
 				redirect('profile_info'); 

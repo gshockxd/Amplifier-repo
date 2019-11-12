@@ -2,190 +2,190 @@
 
 	class Clients extends CI_Controller {	
 		public function logout (){
-			$this->session_model->unset_user();
+			$this->Session_model->unset_user();
 			redirect('profile');
 		}
 		public function login_attempt(){
-			$this->session_model->session_index_page ();
-			$this->login_model->login_attempt();
+			$this->Session_model->session_index_page ();
+			$this->Login_model->login_attempt();
 		}
 		public function login(){
-			$this->session_model->session_index_page ();
-			$this->login_model->index();
+			$this->Session_model->session_index_page ();
+			$this->Login_model->index();
 		}
 		public function register (){
-			$this->session_model->session_index_page ();
-			$this->register_model->index();
+			$this->Session_model->session_index_page ();
+			$this->Register_model->index();
 		}
 		public function register_user(){
-			$this->session_model->session_index_page ();
-			$this->register_model->register_user();
+			$this->Session_model->session_index_page ();
+			$this->Register_model->register_user();
 		}
 		public function profile(){
-			// $this->session_model->session_index_page ();
-			$this->profile_model->index();			
+			// $this->Session_model->session_index_page ();
+			$this->Profile_model->index();			
 		}
 		public function gallery(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_client();
 
-			$this->c_gallery_model->index();
+			$this->C_gallery_model->index();
 		}
 		public function history(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_client();
 			
-			$this->history_model->index();
+			$this->History_model->index();
 		}
 		public function history_info(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_client();
 			
-			$this->history_model->history_info();
+			$this->History_model->history_info();
 		}
 		public function rate_event(){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 			
-			$this->c_rate_model->index();
+			$this->C_rate_model->index();
 		}
 		public function rate_attempt(){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->c_rate_model->rate_attempt();
+			$this->C_rate_model->rate_attempt();
 		}
 		public function delete_event(){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->event_model->delete_event();
+			$this->Event_model->delete_event();
 		}
 		public function events (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->event_model->index();
+			$this->Event_model->index();
 		}
 		public function event_created (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->event_model->event_created();			
+			$this->Event_model->event_created();			
 		}
 		public function event_info (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->event_model->event_info();
+			$this->Event_model->event_info();
 		}
 		public function event_add (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->event_model->event_add();
+			$this->Event_model->event_add();
 		}
 		public function event_add_attempt (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->event_model->event_add_attempt();
+			$this->Event_model->event_add_attempt();
 		}
 		public function print_pdf(){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->event_model->print_pdf();
+			$this->Event_model->print_pdf();
 		}
 		public function booking(){
-			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			$this->Session_model->user_type_check_client();
 			
-			$this->booking_model->index();
+			$this->Booking_model->index();
 		}
 		public function booking_book_event(){
-			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			$this->Session_model->user_type_check_client();
 			
-			$this->booking_model->booking_book_event();
+			$this->Booking_model->booking_book_event();
 		}
 		public function booking_attempt(){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->booking_model->booking_attempt();
+			$this->Booking_model->booking_attempt();
 		}
 		public function performer_profile_info (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->profile_model->performer_profile_info();
+			$this->Profile_model->performer_profile_info();
 		}
 		public function performer_gallery (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
 
-			$this->c_gallery_model->performer_gallery();
+			$this->C_gallery_model->performer_gallery();
 		}
 		public function calendar(){
-			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			$this->Session_model->user_type_check_client();
 			
-			$this->calendar_model->index();
+			$this->Calendar_model->index();
 		}
 		public function package(){
-			$this->session_model->session_check();			
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			$this->Session_model->user_type_check_client();
 			
-			$this->package_model->index();
+			$this->Package_model->index();
 		}
 		public function chat(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_client();
 
-			$this->c_chat_model->index();
+			$this->C_chat_model->index();
 		}
 		public function chat_message(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_client();
 
-			$this->c_chat_model->chat_message();
+			$this->C_chat_model->chat_message();
 		}
 		public function send_search_message (){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_client();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_client();
 
-			$this->c_chat_model->send_search_message();			
+			$this->C_chat_model->send_search_message();			
 		}
 		public function profile_info(){
-			$this->session_model->session_check();			
-			// $this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			// $this->Session_model->user_type_check_client();
 			
-			$this->profile_model->profile_info();
+			$this->Profile_model->profile_info();
 		}
 		public function profile_edit_page(){
-			$this->session_model->session_check();			
-			// $this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			// $this->Session_model->user_type_check_client();
 			
-			$this->profile_model->profile_edit_page();
+			$this->Profile_model->profile_edit_page();
 		}
 		public function profile_edit_info(){
-			$this->session_model->session_check();			
-			// $this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			// $this->Session_model->user_type_check_client();
 			
-			$this->profile_model->profile_edit_info();
+			$this->Profile_model->profile_edit_info();
 		}
 		public function profile_password_edit_page(){
-			$this->session_model->session_check();			
-			// $this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			// $this->Session_model->user_type_check_client();
 			
-			$this->profile_model->profile_password_edit_page();
+			$this->Profile_model->profile_password_edit_page();
 		}
 		public function profile_password_update(){
-			$this->session_model->session_check();			
-			// $this->session_model->user_type_check_client();
+			$this->Session_model->session_check();			
+			// $this->Session_model->user_type_check_client();
 			
-			$this->profile_model->profile_password_update();
+			$this->Profile_model->profile_password_update();
 		}
 		public function file_check(){
 			
@@ -234,4 +234,27 @@
 				return true;
 			}
 		}	
+		function alpha_dash_space($str){
+			if(!preg_match("/^([-a-z_. ])+$/i", $str)){
+				$this->form_validation->set_message('alpha_dash_space', 'First name only accept letters');
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		} 
+		public function check_to_time(){
+			$time_to = $this->input->post('event_time');
+			$time_from = $this->input->post('duration');
+			$event_time = date('H:i', strtotime('+1 hour', strtotime($time_from)));
+			if($this->input->post('event_date') <= date('Y-m-d')){
+				if($event_time > $time_to){
+					$this->form_validation->set_message('check_to_time', 'The minimum event duration is atleast 1 hour long');
+					return FALSE;
+				}else{
+					return TRUE;
+				}
+			}else{
+				
+			}
+		}
 	} 

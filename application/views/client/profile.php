@@ -2,8 +2,8 @@
 
 <div class="container my-3">
 
-	<?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '';  ?>
-	<?php $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '';  ?>
+	<?php $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '';  ?>
+	<?php $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '';  ?>
 	
 	<?php if(array_key_exists(0, $package)): ?>
 		<div class="row">

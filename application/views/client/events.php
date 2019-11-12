@@ -1,6 +1,6 @@
 <div class="container my-3">
-<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
-<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+<?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
 <!-- <?php// echo '<pre>'; print_r($bookings[0]); echo '</pre>' ?> -->
     <?php if($bookings): ?>        
         <p class="h4 text-center red-brown">Booked Events</p>

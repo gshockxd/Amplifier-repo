@@ -23,7 +23,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Users</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Filter Results</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                             data-toggle="modal" data-target="#adduser">
                             <i class="fas fa-user-plus fa-sm text-white-50"></i> Add Users</a>
@@ -42,30 +42,24 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
 
                                     <div class="container-fluid">
-                                        <form method="post" action="<?php echo base_url()?>welcome/search_results">
-                                            <select name="usertype" class="btn btn-outline-info dropdown-toggle">
-                                            <option selected disabled>Usertype</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="performer">Performer</option>
-                                                <option value="client">Client</option>
+                                        <form method="get" action="<?php echo base_url('users')?>">
+                                            <select name="user_type" class="btn btn-outline-info dropdown-toggle">
+                                            <option value="">Select Usertype</option>
+                                                <option value="admin" <?php echo (isset($where['user_type']) && $where['user_type'] == 'admin') ? "selected" : ""; ?>>Admin</option>
+                                                <option value="performer" <?php echo (isset($where['user_type']) && $where['user_type'] == 'performer') ? "selected" : ""; ?>>Performer</option>
+                                                <option value="client" <?php echo (isset($where['user_type']) && $where['user_type'] == 'client') ? "selected" : ""; ?>>Client</option>
                                             </select>
 
 
                                             <select name="status" class="btn btn-outline-info dropdown-toggle">
-                                            <option selected disabled>Status</option>
-                                                <option value="pending">Pending</option>
-                                                <option value="verified">Verified</option>
-                                                <option value="block">Blocked</option>
-                                                <option value="banned">Banned</option>
+                                            <option value="">Select Status</option>
+                                                <option value="verified" <?php echo (isset($where['status']) && $where['status'] == 'verified') ? "selected" : ""; ?>>Verified</option>
+                                                <option value="block" <?php echo (isset($where['status']) && $where['status'] == 'block') ? "selected" : ""; ?>>Blocked</option>
+                                                <option value="banned" <?php echo (isset($where['status']) && $where['status'] == 'banned') ? "selected" : ""; ?>>Banned</option>
 
                                             </select>
 
-                                            <a href="#" class="btn btn-outline-success btn-icon-split">
-                                                <span class="icon">
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </span>
-                                                <button class="btn btn-outline-success" type="submit">Sort</button>
-                                            </a>
+                                            <button class="btn btn-outline-success" type="submit"><i class="fas fa-arrow-right"></i>Sort</button>
 
                                         </form>
                                     </div>
@@ -75,9 +69,9 @@
                     </div>
 
                     <?php 
-        if($fetch_data_user->num_rows()>0)
+        if($query_results_user->num_rows()>0)
         {
-          foreach($fetch_data_user->result() as $row)
+          foreach($query_results_user->result() as $row)
           {
         ?>
                     <!--User Dropdown Card-->
@@ -95,7 +89,7 @@
                                     dby="dropdownMenuLink">
                                     <div class="dropdown-header">Action:</div>
                                     <a class="dropdown-item fas fa-eye fa-fw"
-                                        href="profile/<?php echo $row->user_id; ?>">&nbsp View</a>
+                                        href="<?php echo base_url('profile/'); echo $row->user_id; ?>">&nbsp View</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#"
                                         data-toggle="modal" data-target="#addoff<?php echo $row->user_id; ?>">&nbsp Add
@@ -145,8 +139,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- del user modal -->
-                    <div class="modal fade" id="deluser<?php echo $row->user_id; ?>" tabindex="-1" role="dialog"
+                        <!-- del user modal -->
+                        <div class="modal fade" id="deluser<?php echo $row->user_id; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="deluser" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -161,7 +155,7 @@
                                         <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>?</H5>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="delete_user/<?php echo $row->user_id; ?>" type="button"> <button
+                                    <a href="<?php echo base_url('delete_user/'); echo $row->user_id; ?>" type="button"> <button
                                             class="btn btn-danger">YES</button></a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                                 </div>
@@ -174,7 +168,7 @@
                         aria-hidden="true" style="width:1000px">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form method="post" action="add_offense/<?php echo $row->user_id; ?>">
+                                <form method="post" action="<?php echo base_url('add_offense/'); echo $row->user_id; ?>">
 
                                     <div class="modal-header">
                                         <H5>SELECT OFFENSE </H5>
@@ -202,7 +196,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <a href="add_offense/<?php echo $row->user_id; ?>" type="button"> <button
+                                        <a href="<?php echo base_url('add_offense/'); echo $row->user_id; ?>" type="button"> <button
                                                 class="btn btn-danger">YES</button></a>
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">CANCEL</button>
@@ -229,7 +223,7 @@
                                         <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>?</H5>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="ban/<?php echo $row->user_id; ?>" type="button"> <button
+                                    <a href="<?php echo base_url('ban/'); echo $row->user_id; ?>" type="button"> <button
                                             class="btn btn-danger">YES</button></a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                                 </div>
@@ -241,6 +235,12 @@
             }
             ?>
                     <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <?php echo $pagination; ?>
+                        </div>
+                    </div>
+
+                    <div class="row" style="display: none;">
                         <div class="col-sm-12 col-md-5">
                             <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1
                                 to 5 of 57 entries</div>
@@ -274,27 +274,9 @@
             </div>
 
         </div>
-        <script>
-	    // For dataTable
-		$(document).ready(function() {
-		    $('#datatable').DataTable( {     
-		        // ajax: 'https://api.myjson.com/bins/qgcu',
-		        // drawCallback: function(settings){
-		        //     var api = this.api();
-		            
-		        //     /* Add some tooltips for demonstration purposes */
-		        //     $('td', api.table().container()).each(function () {
-		        //        $(this).attr('title', $(this).text());
-		        //     });
-
-		        //     /* Apply the tooltips */
-		        //     $('td', api.table().container()).tooltip({
-		        //        container: 'body'
-		        //     });          
-		        // }  
-		    });
-		} );
-	</script>
+      
+        </div>
+        
 
         <?php
           }

@@ -1,7 +1,7 @@
 <div class="container my-3" <?php if($packages): ?> style="background-image: url('<?php echo base_url() ?>assets/img/website/card_postal.svg');" <?php endif; ?>>
 
-<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
-<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+<?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
 <?php // echo '<pre>'; print_r($packages); echo '</pre>'; ?>
 
 <?php if($packages): ?>

@@ -133,29 +133,28 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
-    'admin/a_chat_model',
 
-    'client_model', 
-    'session_model', 
-    'clients/profile_model',
-    'clients/history_model',
-    'clients/booking_model',
-    'clients/calendar_model',
-    'clients/package_model',
-    'clients/register_model',
-    'clients/login_model',
-    'clients/event_model',
-    'clients/c_chat_model',
-    'clients/c_gallery_model',
-    'clients/c_rate_model',
+    'admin/A_chat_model',
+    'Session_model', 
+    'clients/Profile_model',
+    'clients/History_model',
+    'clients/Booking_model',
+    'clients/Calendar_model',
+    'clients/Package_model',
+    'clients/Register_model',
+    'clients/Login_model',
+    'clients/Event_model',
+    'clients/C_chat_model',
+    'clients/C_gallery_model',
+    'clients/C_rate_model',
 
-    'performers/p_register_model',
-    'performers/p_booking_model',
-    'performers/p_pricing_model',
-    'performers/p_package_model',
-    'performers/p_chat_model',
-    'performers/p_gallery_model',
+    'performers/P_register_model',
+    'performers/P_booking_model',
+    'performers/P_pricing_model',
+    'performers/P_package_model',
+    'performers/P_chat_model',
+    'performers/P_gallery_model',
 
-    'message_model',
-    'notification_model'
+    'Message_model',
+    'Notification_model'
 );

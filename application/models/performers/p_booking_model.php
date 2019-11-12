@@ -3,7 +3,7 @@
         public function index (){            
             $templates['title'] = 'History';
             
-            $data['bookings'] = $this->p_booking_model->get_user_bookings();
+            $data['bookings'] = $this->P_booking_model->get_user_bookings();
 
 			$this->load->view('inc/header-performer', $templates);
 			$this->load->view('performer/bookings', $data);

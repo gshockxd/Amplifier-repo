@@ -1,7 +1,7 @@
 <?php
     class Event_Model extends CI_Model {
         public function index (){
-            $data['bookings'] = $this->event_model->get_bookings();
+            $data['bookings'] = $this->Event_model->get_bookings();
             $templates['title'] = 'Events';
 
             $this->load->view('inc/header-client', $templates);
@@ -9,7 +9,7 @@
             $this->load->view('inc/footer');
         }
         public function event_created(){
-            $data['events'] = $this->event_model->get_events();
+            $data['events'] = $this->Event_model->get_events();
             $templates['title'] = 'Created Events';
             
             $this->load->view('inc/header-client', $templates);
@@ -18,7 +18,7 @@
         }
         public function event_info(){
             $id = $this->uri->segment(2);
-            $data['event'] = $this->event_model->get_event($id);
+            $data['event'] = $this->Event_model->get_event($id);
 
             if($data['event']){                
                 $templates['title'] = 'Event '.$data['event']['event_name'];
@@ -31,7 +31,7 @@
             }
         }
         public function print_pdf(){
-            $event = $this->event_model->get_event($this->uri->segment(2));
+            $event = $this->Event_model->get_event($this->uri->segment(2));
 
             if($event){
                 $mpdf = new \Mpdf\Mpdf([
@@ -74,6 +74,8 @@
 
         }
         public function get_event($id){
+            $this->db->select('bookings.*, price');
+            $this->db->join('packages', 'packages.package_id = bookings.package_id');
             $query = $this->db->get_where('bookings', array('booking_id'=> $id, 'client_id'=>$this->session->userdata('user_id')));
             $data = $query->row_array();
             if($data){
@@ -112,7 +114,7 @@
                 $this->load->view('client/event_add', $data);
                 $this->load->view('inc/footer');
             }else{
-                $id = $this->event_model->event_insert();
+                $id = $this->Event_model->event_insert();
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' successfully added');
                 redirect('booking');
             }

@@ -30,15 +30,21 @@
 							<?php echo form_error('lname'); ?>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="">Contact Number 1</label>
+					<label class="" for="inlineFormInputGroupUsername">Contact Number 1</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">09</div>
+						</div>
 						<input type="number1" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" value="<?php echo isset($number1) ? $number1 : '' ?>" name="number1" >
 						<div class="invalid-feedback">
 							<?php echo form_error('number1'); ?>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="">Contact Number 2</label>
+					<label class="" for="inlineFormInputGroupUsername">Contact Number 2 <span><small>(Optional)</small></span></label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">09</div>
+						</div>
 						<input type="number2" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" value="<?php echo isset($number2) ? $number2 : '' ?>" name="number2" >
 						<div class="invalid-feedback">
 							<?php echo form_error('number2'); ?>

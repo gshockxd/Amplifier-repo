@@ -35,7 +35,7 @@
     </li>
     <!-- History  -->
     <li class="nav-item">
-        <a class="nav-link" href="history">
+        <a class="nav-link" href="<?php echo base_url('history') ?>">
             <i class="fa fa-flag"></i>
             <span>History</span></a>
     </li>

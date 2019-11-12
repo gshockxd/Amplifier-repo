@@ -69,20 +69,32 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Phone Number 1</div>
-                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($number1) ? $number1 : $this->session->userdata('telephone_1'); ?>" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" name="number1">
-                                    <div class="invalid-feedback">
-                                        <?php echo form_error('number1'); ?>
-                                    </div>
+                                <div class="col font-weight-bold">                                
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">09</div>
+                                        </div>
+                                        <input type="text" value="<?php echo isset($number1) ? $number1 : $this->session->userdata('telephone_1'); ?>" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" name="number1">
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('number1'); ?>
+                                        </div>
+                                    </div>                                
                                 </div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col">Phone Number 2</div>
-                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($number2) ? $number2 : $this->session->userdata('telephone_2'); ?>" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" name="number2">
-                                    <div class="invalid-feedback">
-                                        <?php echo form_error('number2'); ?>
-                                    </div>
+                                <div class="col">Phone Number 2 <small>(Optional)</small></div>
+                                <div class="col font-weight-bold">                                
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">09</div>
+                                        </div>
+                                        <input type="text" value="<?php echo isset($number2) ? $number2 : $this->session->userdata('telephone_2'); ?>" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" name="number2">
+                                        <div class="invalid-feedback">
+                                            <?php echo form_error('number2'); ?>
+                                        </div>
+                                    </div>                                
                                 </div>
                             </div>
                         </li>

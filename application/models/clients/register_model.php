@@ -14,10 +14,10 @@
 			$templates['title'] = 'Client Registration';
 			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
 
-			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required' => 'Please Input First Name', 'alpha'=>'First Name not valid, letters only'));
-			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required' => 'Please input Last Name', 'alpha'=>'Last Name not valid, letters only'));
-			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[11]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Contact Number should be exactly 11 digits'));
-			$this->form_validation->set_rules('number2', 'Contact Number', 'required|numeric|exact_length[11]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Contact Number should be exactly 11 digits'));
+			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required' => 'Please Input First Name'));
+			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required' => 'Please input Last Name'));
+			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[9]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
+			$this->form_validation->set_rules('number2', 'Contact Number', 'numeric|exact_length[9]', array('numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
 			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid', 'is_unique'=>'Email Address is already taken'));
 			$this->form_validation->set_rules('pass', 'Password', 'required', array('required' => 'Please input Password'));
 			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]', array('matches'=>'Password not matched'));
@@ -61,13 +61,13 @@
 					$client_image = 'assets/img/client/'.$timestamp.'.'.$ext;
 				}
 
-				$this->register_model->user_insert($client_image);
-				$session_user = $this->register_model->user_select($this->input->post('email'));
-				$this->session_model->session_user($session_user);
+				$this->Register_model->user_insert($client_image);
+				$session_user = $this->Register_model->user_select($this->input->post('email'));
+				$this->Session_model->session_user($session_user);
 
 				$notif['message'] = 'Welcome '.$this->session->userdata('fname').' '.$this->session->userdata('lname').', now you can view or change your user information in profile page.';
 				$notif['links'] = base_url().'profile_info';
-				$this->notification_model->index($notif);
+				$this->Notification_model->index($notif);
 
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
 				
@@ -95,12 +95,20 @@
                 'telephone_1'=> $this->input->post('number1'),
                 'telephone_2'=> $this->input->post('number2'),
                 'offense' => 0,
-                'report_count' => 0,
-                'media_fk' => null,
+				'report_count' => 0,
+				'block_end' => '0000-00-00',
+				'media_fk' => null,
                 'created_at' => $date,
 				'updated_at' => $date
 			);
 
-            return $this->db->insert('users', $data);
-        }
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			return $this->db->insert('users', $data);
+			echo $this->db->last_query();
+			die;
+		}
+		
+		// INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `status`, `fname`, `lname`, `email`, `address`, `rate`, `photo`, `telephone_1`, `telephone_2`, `offense`, `report_count`, `media_fk`, `created_at`, `updated_at`) VALUES (NULL, 'client', 'NikeMarti', '41fd220f05ed0d8c56e3b83af87d45d7', 'verified', 'Nike', 'Cueva', 'alice1@gmail.com', 'asdfasdfasdf', 0, 'assets/img/client/2019_11_11_17_57_15.jpg', '09365264573', '09124567890', 0, 0, NULL, '2019-11-11 17:57:15', '2019-11-11 17:57:15')
     }

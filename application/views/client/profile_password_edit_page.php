@@ -1,10 +1,11 @@
 <?php echo form_open('profile_password_update'); ?>
 
-    <div class="container mt-3">
-        <?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '';  ?>
-        
+    <div class="container mt-3">        
         <div class="row">
             <div class="col-md-6 bg-white">
+                <?php $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '';  ?>
+                <?php $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '';  ?>
+                
                 <p class="h2">Change Password</p>     
                 <input type="hidden" value="<?php echo $this->session->userdata('password'); ?>" name="passOld1">       
                 <div class="form-group pt-2">

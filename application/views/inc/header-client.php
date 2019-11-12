@@ -1,7 +1,8 @@
 <?php if($this->session->userdata('user_type') == 'client' || $this->session->userdata('user_type') == null): ?>
 
 <?php
-	$notif_badge = $this->notification_model->notification_badge();
+	$notif_badge = $this->Notification_model->notification_badge();
+
 	// session_start();
 	if(!isset($_SESSION['theme'])){
 		$theme = $_SESSION['theme'] = 'flatly';
@@ -112,8 +113,8 @@
 								</li>
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
-								<li class="nav-item <?php echo $this->uri->segment(1) == 'notifications' ? 'active' : '' ?>">
-									<a href="<?php echo base_url() ?>notifications" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Notifications"><span class="badge badge-pill badge-light mr-1"><?php echo $notif_badge ?></span><i class="far fa-bell fa-lg"></i></a>
+								<li class="nav-item <?php echo $this->uri->segment(1) == 'user_notifications' ? 'active' : '' ?>">
+									<a href="<?php echo base_url() ?>notifications/index" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Notifications"><?php if($notif_badge > 0): ?><span class="badge badge-pill badge-light mr-1"><?php echo $notif_badge ?></span><?php endif; ?><i class="far fa-bell fa-lg"></i></a>
 								</li>
 								<li class="nav-item <?php echo $this->uri->segment(1) == 'c_chat' ? 'active' : '' ?>">
 									<a href="<?php echo base_url()?>c_chat" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="far fa-envelope fa-lg"></i></a>
@@ -159,4 +160,5 @@
 
 <?php elseif($this->session->userdata('user_type') == 'performer'): ?>
 	<?php $this->load->view('inc/header-performer'); ?>
-<?php endif; ?>
+<?php endif;?>
+

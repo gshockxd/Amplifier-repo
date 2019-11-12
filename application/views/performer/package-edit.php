@@ -48,9 +48,8 @@
                             Action:
                         </div>
                         <div class="col-md-9 d-flex justify-content-end">
-                            <a href="<?php echo base_url() ?>p_package" class="btn btn-secondary mr-3">Cancel</a>
-                            <a data-toggle="modal" data-target="#alertDelete"  class="btn btn-danger text-white mr-3" data-toggle="tooltip" data-placement="top" title="Delete Package"><i class="fas fa-trash"></i></a>
-                            <button class="btn btn-primary" type="submit">Update</button>
+                            <a href="<?php echo base_url() ?>p_package_info_page/<?php echo $this->uri->segment(2) ?>" class="btn btn-secondary mr-3">Cancel</a>
+                            <a data-toggle="modal" data-target="#alertUpdate"  class="btn btn-primary text-white mr-3" data-toggle="tooltip" data-placement="top" title="Update Package">Submit</a>
                         </div>
                     </div>
                 </li>
@@ -60,22 +59,22 @@
 <?php form_close(); ?>
 
 <!-- Modal -->
-<div class="modal fade" id="alertDelete" tabindex="-1" role="dialog" aria-labelledby="deleteAlert" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade" id="alertUpdate" tabindex="-1" role="dialog" aria-labelledby="updateAlert" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteAlert">Are you sure?</h5>
+        <h5 class="modal-title" id="updateAlert">Update ?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body d-flex justify-content-around">
-			<div class="row">
-				<div class="col-md-6">                
-					<a href="<?php echo base_url();?>p_package_delete/<?php echo $this->uri->segment(2) ?>" class="btn btn-danger">Yes</a>
+      <div class="modal-body ">
+			<div class="row col-md-12">
+				<div class="col-md-6 col-6 text-center">                
+                    <button type="submit" class="btn btn-success ">Hmm, Yes</button>
 				</div>
-				<div class="col-md-6">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+				<div class="col-md-6 col-6 text-center">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Not Now</button>
 				</div>
 			</div>
       </div>

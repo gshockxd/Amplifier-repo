@@ -1,6 +1,6 @@
 <div class="container">
-	<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
-	<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+	<?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
+	<?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
 	<?php if($bookings): ?>	
 		<p class="h3 yellow-brown py-3 text-center">Booked Package</p>	
 		<table id="datatable" class="table table-hover" style="width:100%">

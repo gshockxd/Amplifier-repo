@@ -8,13 +8,13 @@
 			$this->load->view('inc/footer');
         }
         public function register(){
-			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha', array('required'=> 'Please Input First Name', 'alpha' => 'Please input letters only'));
-			$this->form_validation->set_rules('uname', 'Username', 'required', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only'));
-			$this->form_validation->set_rules('lname', 'Last Name', 'required|alpha', array('required'=> 'Please Input Last Name', 'alpha' => 'Please input letters only'));
+			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input First Name', 'alpha' => 'Please input letters only'));
+			$this->form_validation->set_rules('uname', 'Username', 'required|alpha_numeric', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only', 'alpha_numeric'=> 'Username contain no spaces'));
+			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input Last Name', 'alpha' => 'Please input letters only'));
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=> 'Please Input Address'));
             $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required'=> 'Please Input Emaill Address', 'valid_email'=> 'Please Input a Valid Email Address', 'is_unique'=>'Email Address is already registered'));
-			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[11]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contact Number contains 11 numbers')); 
-			$this->form_validation->set_rules('number2', 'Contact Number 2', 'required|numeric|exact_length[11]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contact Number contains 11 numbers')); 
+			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[9]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
+			$this->form_validation->set_rules('number2', 'Contact Number 2', 'required|numeric|exact_length[9]|callback_contact_number_duplicate_verification', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
 			$this->form_validation->set_rules('pass', 'Password', 'required', array('required'=>'Password is required'));
 			$this->form_validation->set_rules('con_pass', 'Confirm Password', 'matches[pass]', array('matches'=>'Password not matched'));
 			$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'No Service Selected'));
@@ -36,6 +36,9 @@
 			$data['desc'] = $this->input->post('desc');
 
             if($this->form_validation->run() === FALSE){
+				if($data['number2'] == $data['number1']){
+
+				}
                 $templates['title'] = 'Performer Registration';
 
                 $this->load->view('inc/header-no-navbar', $templates);
@@ -93,13 +96,13 @@
 				// print_r($files['files']);
 				// echo '</pre>';
 				// die;
-				$user_id = $this->p_register_model->user_insert($files);
-				$session_user = $this->p_register_model->user_select($this->input->post('email'));
-				$this->session_model->session_user($session_user);
+				$user_id = $this->P_register_model->user_insert($files);
+				$session_user = $this->P_register_model->user_select($this->input->post('email'));
+				$this->Session_model->session_user($session_user);
 				
 				$notif['message'] = 'Welcome '.$this->session->userdata('fname').' '.$this->session->userdata('lname').', now you can view, update password and update your user information in profile page';
 				$notif['links'] = base_url().'profile_info';
-				$this->notification_model->index($notif);
+				$this->Notification_model->index($notif);
 
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
 				redirect('p_bookings');

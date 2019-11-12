@@ -25,18 +25,18 @@
 				$this->load->view('inc/footer');
 			}else{
 				$hash_pass = md5($data['pass']);
-				$query = $this->login_model->user_login($data['email'], $hash_pass);
+				$query = $this->Login_model->user_login($data['email'], $hash_pass);
 				
 				if(!$query){
 					$this->session->set_flashdata('danger_message', 'Invalid Email address or Password');
 					$this->session->set_flashdata('email', $this->input->post('email'));
 					redirect('login');
 				}else{
-					$this->session_model->session_user($query);
+					$this->Session_model->session_user($query);
 					$this->session->set_flashdata('success_message', 'Welcome back '.$this->session->userdata('fname').' '.$this->session->userdata('lname').'!');
 
-					$this->session_model->session_check();
-					$this->session_model->user_type_check();
+					$this->Session_model->session_check();
+					$this->Session_model->user_type_check();
 				}
 			}
 		}
