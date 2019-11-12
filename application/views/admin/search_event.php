@@ -35,7 +35,7 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
 
                                     <div class="container-fluid">
-                                        <form method="post" action="<?php echo base_url('welcome/search_results_events')?>">
+                                        <form method="post" action="<?php echo base_url('search_results_events')?>">
                                             <label for="date">Date of event
                                             <input class="form-control mr-sm-2" type="date" name="date"
                                                     placeholder="Search by Date"></label>

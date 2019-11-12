@@ -24,10 +24,10 @@
 
                 <form class="form-inline">
                     <input class="form-control-plaintext" type="text"
-                        placeholder="<?php echo $date_today = date("F d, Y"); ?>"
+                        placeholder="Notification Date:<?php echo $date_today = date("F d, Y"); ?>"
                         readonly="<?php echo $date_today = date("F d, Y"); ?>" style="margin-left:15px">
-                    <input class="form-control mr-sm-2" type="date" placeholder="Search" style="margin-left:15px">
-                    <button class="btn btn-success my-2 my-sm-0 fa fa-search" type="submit"></button>
+                    <!-- <input class="form-control mr-sm-2" type="date" placeholder="Search" style="margin-left:15px">
+                    <button class="btn btn-success my-2 my-sm-0 fa fa-search" type="submit"></button> -->
                 </form>
                 <br>
 

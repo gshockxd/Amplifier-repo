@@ -81,7 +81,7 @@
 				'payment_status'=> 'dp',
 				'date_booked'=> $timestamps,
 				'event_name'=> $this->input->post('event_name'),
-				'artist_type'=> $package['artist_type']
+			
 			);
 
 			$this->db->insert('bookings', $data);

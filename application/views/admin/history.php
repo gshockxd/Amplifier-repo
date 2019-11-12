@@ -112,14 +112,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-4">
+                <!-- <div class="row mb-4">
                     <div class="col-sm-12 col-md-12 offset-5">
                         <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 3
                             of 57 entries</div>
                     </div>
 
 
-                </div>
+                </div> -->
                 <?php
          
         }
