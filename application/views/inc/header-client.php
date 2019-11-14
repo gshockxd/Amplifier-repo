@@ -3,6 +3,7 @@
 <?php
 	$notif_badge = $this->Notification_model->notification_badge();
 	$reminder = $this->Profile_model->check_event_reminder();
+	// hello world
 
 	// session_start();
 	if(!isset($_SESSION['theme'])){
