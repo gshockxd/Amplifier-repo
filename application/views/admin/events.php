@@ -152,7 +152,7 @@
                 </div>
 
 
-                <div class="row mb-4">
+                <!-- <div class="row mb-4">
 
                     <div class="col-sm-12 col-md-12 offset-4">
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
@@ -167,7 +167,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <?php
          

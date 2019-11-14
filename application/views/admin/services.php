@@ -126,7 +126,7 @@
                     <div class="row">
 
 
-
+<!-- 
                         <div class="col-sm-12 col-md-12 offset-5">
                             <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1
                                 to 3 of 57 entries</div>
@@ -155,7 +155,7 @@
                                             class="page-link">Next</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <br>
                     <?php

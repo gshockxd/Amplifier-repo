@@ -39,7 +39,7 @@ class Welcome extends CI_Controller
             "notif_type" => "user",
             "notif_status" => $status,
             "status" => "notified",
-            "notif_name" => $status,
+            "notif_name" => "User account has been",
 
         );
         $this->model->insert_data_notifications($notif_insert);
@@ -61,19 +61,19 @@ class Welcome extends CI_Controller
         echo '<script> window.location.replace("login")</script>';
 
     }
-    public function ban($id)
+    public function recover($id)
     {
         $this->load->model('model');
         $this->load->library('upload');
-        $status = "banned";
-        $ban = array("status" => $status);
-        $this->model->update_ban_user($ban);
+        $status = "verified";
+        $recover = array("status" => $status);
+        $this->model->update_recover_user($recover);
         $notif_insert = array(
             "user_id" => $id,
             "notif_type" => "user",
             "notif_status" => $status,
             "status" => "notified",
-            "notif_name" => $status,
+            "notif_name" => "User account has been recovered",
 
         );
         $this->model->insert_data_notifications($notif_insert);
@@ -91,7 +91,7 @@ class Welcome extends CI_Controller
             "notif_type" => "user",
             "notif_status" => "removed",
             "status" => "notified",
-            "notif_name" => "Removed User",
+            "notif_name" => "User account has been",
 
         );
 
@@ -168,18 +168,17 @@ class Welcome extends CI_Controller
     {
         $this->load->library('form_validation');
         $this->load->library('upload');
-        $this->form_validation->set_rules("fname", "first name", 'required');
-        $this->form_validation->set_rules("lname", "last name", 'required');
-        $this->form_validation->set_rules("password", "password", 'required|min_length[6]');
-        $this->form_validation->set_rules("username", "username", 'required|min_length[6]');
-        $this->form_validation->set_rules("contact_number", "contact number", 'required|integer|max_length[13]');
-        $this->form_validation->set_rules("contact_number1", "contact number 2", 'integer|max_length[13]');
-        $this->form_validation->set_rules("email", "email", 'required|valid_email');
+        $this->load->model('model');
+        $this->form_validation->set_rules("fname", "first name", 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules("address", "address", 'required');
+        $this->form_validation->set_rules("lname", "last name", 'required|alpha_numeric_spaces');
+        $this->form_validation->set_rules("password", "password", 'required|min_length[5]');
+        $this->form_validation->set_rules("username", "username", 'required|min_length[5]');
+        $this->form_validation->set_rules("contact_number", "contact number", 'required|integer|max_length[13]|greater_than_equal_to[0]');
+        $this->form_validation->set_rules("contact_number1", "contact number 2", 'integer|max_length[13]|greater_than_equal_to[0]');
+        $this->form_validation->set_rules("email", "email", 'required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules("usertype", "usertype", 'required');
 
-        // if($_FILES['userfile']){
-        //     $this->form_validation->set_rules('userfile', 'userfile', 'callback_file_check');
-        // }
 
         $password = md5($this->input->post("password"));
 
@@ -240,7 +239,7 @@ class Welcome extends CI_Controller
                     "notif_type" => "user",
                     "notif_status" => "created",
                     "status" => "notified",
-                    "notif_name" => $this->input->post("fname"),
+                    "notif_name" => "A new user account has been",
 
                 );
                 $this->model->insert_data_notifications($notif_insert);
@@ -250,25 +249,26 @@ class Welcome extends CI_Controller
         } else {
             echo '<script> alert("invalid inputs, Try again");</script>';
             $this->load->model('model');
-            $data["fetch_data_user"] = $this->model->fetch_data_user();
-            $this->load->view('/admin/users', $data);
+            $this->search_results();
+            
+            
         }
     }
 
 // report add
     public function form_validation_report()
     {
-        $this->load->library('form_validation');
-        $this->load->library('upload');
-
-        // if($_FILES['userfile']){
-        //     $this->form_validation->set_rules('userfile', 'userfile', 'callback_file_check');
-        // }
-        if ($this->form_validation->run()) {
+            $this->load->library('form_validation');
+            $this->load->library('upload');
+            
+            // if($_FILES['userfile']){
+            //     $this->form_validation->set_rules('userfile', 'userfile', 'callback_file_check');
+            // }
+           
             $timestamp = date('Y_m_d_H_i_s');
             $array = explode('.', $_FILES['userfile']['name']);
             $ext = end($array);
-
+     
             // Upload Image
             $config['file_name'] = $timestamp . '.' . $ext;
             $config['upload_path'] = './assets/img/report/';
@@ -279,53 +279,35 @@ class Welcome extends CI_Controller
 
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
-
+         
             if (!$this->upload->do_upload()) {
                 $errors = $this->upload->display_errors();
                 $report_image = 'assets/img/report/no_image.jpg';
             } else {
                 $data = array('upload_data' => $this->upload->data());
                 $report_image = 'assets/img/report/' . $timestamp . '.' . $ext;
-
-                echo '<pre>';
-                print_r($_FILES);
-                echo $report_image;
-                echo $errors;
-                echo $config['upload_path'];
-                echo '</pre>';
-                die;
             }
-
             $this->load->model("model");
-            $data_insert = array(
-                "booking_id" => $this->input->post("booking_id"),
-                "report_from" => $this->input->post("report_from"),
-                "report_to" => $this->input->post("violator"),
-                "report_photo" => $report_image,
-                "report_details" => $this->input->post("report_info"),
-
+            $notif_insert = array(
+                "user_id"         => $this->input->post("report_from"),
+                "notif_type"     => "report",
+                "notif_status"     => "reporter",
+                "status"         => "notified",
+                "notif_name"     => "New report has been added",
+                "report_id"        => $this->db->insert_id()
             );
-
-        }
-        // $notif_insert = array(
-        //     "user_id"         => $this->input->post("report_from"),
-        //     "notif_type"     => "report",
-        //     "notif_status"     => "reporter",
-        //     "status"         => "notified",
-        //     "notif_name"     => "New report has been added",
-        //     "report_id"        => $this->db->insert_id()
-        // );
-        // $notif_insert2 = array(
-        //     "user_id"         => $this->input->post("violator"),
-        //     "notif_type"     => "report",
-        //     "notif_status"     => "reported",
-        //     "status"         => "notified",
-        //     "notif_name"     => "Account Reported",
-        //     "report_id"        => $this->db->insert_id()
-        // );
-        //
-        // $this->model->insert_data_notifications2($notif_insert2);
-        redirect(base_url() . "reports");
+            $this->model->insert_data_notifications2($notif_insert);
+            $notif_insert2 = array(
+                "user_id"         => $this->input->post("violator"),
+                "notif_type"     => "report",
+                "notif_status"     => "reported",
+                "status"         => "notified",
+                "notif_name"     => "Account Reported",
+                "report_id"        => $this->db->insert_id()
+            );
+            $this->model->insert_data_notifications2($notif_insert2);
+            redirect('reports');
+        
 
     }
 
@@ -373,19 +355,12 @@ class Welcome extends CI_Controller
 
             $this->load->view('admin/addevent', $data);
         } else {
-            echo $data['date_error'] = $this->booking_model->check_date($data);
-            echo '<br>';
-            echo $data['time_error'] = $this->booking_model->check_time($data);
-
-            if ($data['date_error'] || $data['time_error']) {
-                $this->load->view('admin/addevent', $data);
-            } else {
                 $book_id = $this->booking_model->event_insert($data['package']);
                 $this->session->set_flashdata('success_message', 'Event ' . $data['event_name'] . ' has been successfully booked!');
-                redirect('booking');
+                redirect('events');
             }
         }
-    }
+  
     public function event_insert($package)
     {
         $timestamps = date('Y-m-d');
@@ -498,7 +473,7 @@ class Welcome extends CI_Controller
         $total_rows = $this->model->count_results_user($where);
         // echo $total_rows;exit();
 		
-		$rpg = 2;
+		$rpg = 10;
 
 		$config['base_url'] = site_url('users');
 		$config['total_rows'] = $total_rows;
@@ -513,7 +488,8 @@ class Welcome extends CI_Controller
 		// $page = 1;
 
 		$data["query_results_user"] = $this->model->query_results_user($where, $rpg, $page);
-		$data['where'] = $where;
+        $data['where'] = $where;
+        
         $this->load->view('/admin/users', $data);
     }
 

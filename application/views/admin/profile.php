@@ -118,6 +118,7 @@
                                             </p>
                                         </div>
                                     </div>
+                                    
                                     <hr>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Last Updated:</label>
@@ -128,14 +129,18 @@
                                     </div>
                                     <hr>
 
-                                    <?php if($row->user_type=="performer"){ ?>
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Artist type:</label>
-                                        <div class="col-8">
-                                            <p class="lead"><?php echo $row->artist_type; ?></p>
-                                        </div>
-                                    </div>
-                                    <hr>
+                                    <?php if($row->user_type=="performer"){ 
+                                        if($row->artist_type!=''){ ?>
+                                        <div class="form-group row">
+                                            <label for="text" class="col-4 col-form-label">Artist type:</label>
+                                            <div class="col-8">
+                                                <p class="lead"><?php echo $row->artist_type; ?></p>
+                                            </div>
+                                            </div>
+                                            <hr>
+                                        <?php } ?>
+                                   
+                                    <?php if($row->artist_desc!=''){ ?>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Artist description:</label>
                                         <div class="col-8">
@@ -143,11 +148,13 @@
                                         </div>
                                     </div>
                                     <hr>
+                                    <?php } ?>
                                    <?php 
                                 if($fetch_data_user_galleries->num_rows()>0)
                                 {
                                 foreach($fetch_data_user_galleries->result() as $vid)
                                 {
+                                    if($vid->band_photo!=''){
                                     ?>
                                     <center>
                                      <label for="videos">Band Photo:</label><br>
@@ -155,21 +162,47 @@
                                         class="mx-auto m-3 img-thumbnail rounded-circle" style="height:170px;width:200px"
                                         data-toggle="modal" data-target="#viewfull2" /></center>
                                     <hr>
+                                    <?php }else{ ?>
+                                        <div class="form-group row">
+                                        <label for="text" class="col-4 col-form-label">Band Photo:</label>
+                                        <div class="col-8">
+                                            <p class="lead">No band photos uploaded</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <?php } ?>
+
                                     <label for="videos">Sample Outputs:</label><br>
                                     <center>
-                                    <video class="video-fluid z-depth-1" autoplay loop controls muted>
-                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_1; ?>" type="video/mp4" style="width:100%; height:auto;"/>
+                                    <?php
+                                    if($vid->video_1!=''){ ?>
+                                    <video width="320" height="240" controls>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_1; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
                                     </video>
-                                    <video class="video-fluid z-depth-1" autoplay loop controls muted>
-                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_2; ?>" type="video/mp4" style="width:100%; height:auto;"/>
+                                    <?php }if($vid->video_2!=''){ ?>
+                                    <video width="320" height="240" controls>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_2; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
                                     </video>
-                                    <video class="video-fluid z-depth-1" autoplay loop controls muted>
-                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_3; ?>" type="video/mp4" style="width:100%; height:auto;"/>
+                                    <?php }if($vid->video_3!=''){ ?>
+                                    <video width="320" height="240" controls>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_3; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
                                     </video>
                                     </center>
+                                    <?php }else{ ?>
+                                        <div class="form-group row">
+                                        <div class="col-10">
+                                            <p class="lead">No medias uploaded</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <?php } ?>
                                     
                                    
-                                <?php }}
+                                <?php }
+                                }
                                  } ?>
 
 

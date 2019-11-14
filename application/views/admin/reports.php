@@ -368,7 +368,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?php echo base_url()?>welcome/form_validation_report">
+                <form method="post" action="<?php echo base_url()?>welcome/form_validation_report" enctype="multipart/form-data">
                     <div class="form-group row">
                         <label for="report_from" class="col-4 col-form-label">Reporter's Name:</label>
                         <select id="report_from" name="report_from" class="form-control m-3">
@@ -428,7 +428,7 @@
                         <label for="comment">Additional Info:</label>
                         <input type="text" name="report_info" class="form-control lg" id="comment" \>
                     </div>
-                    <label for="userfile">Add Profile Picture</label>
+                    <label for="userfile">Add Report photo</label>
                         <div class="custom-file">
                             <input type="file"
                                 class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"

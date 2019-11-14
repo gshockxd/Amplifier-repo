@@ -68,19 +68,18 @@ class model extends CI_Model
     function update_offense_user1($offense)
     {
        $id = $this->session->userdata('user_id');
-       echo $id;
        $this->db->select("status");
        $this->db->from("users");
        $this->db->where("user_id",$id);
        $this->db->update("users", $offense);
     }
-    function update_ban_user($ban)
+    function update_recover_user($recover)
     {
        $id = $this->uri->segment(2);
        $this->db->select("status");
        $this->db->from("users");
        $this->db->where("user_id",$id);
-       $this->db->update("users", $ban);
+       $this->db->update("users", $recover);
     }
 // offense update end
 // views/choices start
@@ -178,11 +177,13 @@ class model extends CI_Model
       } 
       */    
    
-      // $this->db->where("status!=","hide");
+      $where["user_type!="] = "admin";
       $where["status!="] = "hide";
       $this->db->where($where);
+      $this->db->order_by('user_id DESC, fname ASC');
       $this->db->limit($rpg, $page);
-       $query = $this->db->get();
+      $query = $this->db->get();
+    
       //  echo $this->db->last_query();
       //  exit();
        return $query;
@@ -201,7 +202,7 @@ class model extends CI_Model
       }      
       */
       // $this->db->where("status!=","hide");
-      $where["status!="] = "hide";
+      $where["user_type!="] = "admin";
       $this->db->where($where);
       $t = $this->db->count_all_results();
       //  $query = $this->db->get();
@@ -301,6 +302,7 @@ class model extends CI_Model
        $this->db->select("*");
        $this->db->from("users");
        $this->db->where("status!=","hide");
+       $this->db->where("user_type!=","admin");
        $query = $this->db->get();
        return $query;
     }

@@ -82,7 +82,7 @@
             return $this->session->unset_userdata($data);
         }
         public function user_type_check (){
-            if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned")
+            if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned"||$this->session->userdata('status')=="hide")
             {
                     $data = array( 
                         'user_type' ,

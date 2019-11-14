@@ -1,4 +1,4 @@
-<?php if($this->session->userdata('status') == 'block' || $this->session->userdata('status') == 'banned'){
+<?php if($this->session->userdata('status') == 'block' || $this->session->userdata('status') == 'banned'|| $this->session->userdata('status') == 'hide'){
     
     }else{
        echo '<script> history.go(-1); </script>';
@@ -102,8 +102,14 @@
 <body>
     <img src="<?php echo base_url(); ?>assets/img/block.png" alt="image"
         class="h-25 w-10 mt-5 rounded mx-auto d-block"></a>
-    <?php if($this->session->userdata('status')=="banned"){ ?>
+    <?php 
+        if($this->session->userdata('status')=="banned"){ 
+    ?>
     <h3 class="text-center text-dark font-weight-bold" style="font-family:helvetica">Your account has been terminated</h3>
+    <?php }
+        else if($this->session->userdata('status')=="hide"){ 
+    ?>
+    <h3 class="text-center text-dark font-weight-bold" style="font-family:helvetica">Your account has been deleted</h3>
         <?php }else{ ?>
         <br>
         <br>
