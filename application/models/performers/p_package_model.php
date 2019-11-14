@@ -3,11 +3,28 @@
         public function index (){
             $templates['title'] = 'Package';
             
-            $data['packages'] = $this->p_package_model->select_packages();
+            $data['packages'] = $this->P_package_model->select_packages();
 
 			$this->load->view('inc/header-performer', $templates);
 			$this->load->view('performer/package', $data);
             $this->load->view('inc/footer');
+        }
+        public function package_info_page(){            
+            $id = $this->uri->segment(2);
+            $query = $this->db->get_where('packages', array('package_id' => $id));
+            $data = $query->row_array();
+
+            if($data){
+                $templates['title'] = 'Package Info';
+        
+                $this->load->view('inc/header-performer', $templates);
+                $this->load->view('performer/package-info', $data);
+                $this->load->view('inc/footer');
+            }else{
+                $this->session->set_flashdata('danger_message', 'The page your trying to view is not found!');
+                redirect('p_package');
+            }
+            
         }
         public function select_packages(){
             $this->db->order_by('updated_at', 'DESC');
@@ -60,11 +77,14 @@
                 $this->db->set($data);
                 $this->db->where(array('owner'=> $this->session->userdata('user_id'), 'package_id'=>$id));
                 $this->db->update('packages');
-                // echo $this->db->last_query();
-                // die();
+                
+                $notif['message'] = 'Package: '.$data['package_name']. ' has been updated!';
+                $notif['links'] = base_url().'p_package_info_page/'.$id;
+                $notif['target_user_id'] = null;
+                $this->Notification_model->index($notif);
 
-				$this->session->set_flashdata('success_message', 'Package Name: '.$data['package_name'].' has been updated!');
-				redirect('p_package');
+                $this->session->set_flashdata('success_message', 'Package Name: '.$data['package_name'].' has been updated!');
+				redirect('p_package_info_page/'.$id);
             }
         }
         public function p_package_delete(){
@@ -79,6 +99,9 @@
             }else{
                 $this->db->where(array('package_id'=>$id, 'owner'=>$this->session->userdata('user_id')));
                 $this->db->delete('packages');
+                $notif['message'] = 'Package Name: '.$data['package_name'].' has been deleted!';
+                $notif['links'] = '#';
+                $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Package has been successfully Deleted!');
                 redirect('p_package');
@@ -87,11 +110,18 @@
         public function get_event_info (){
             $templates['title'] = 'Event Info';
 
+            $this->db->select('bookings.*, price');
+            $this->db->join('packages', 'packages.package_id = bookings.package_id');
             $query = $this->db->get_where('bookings', array('booking_id'=> $this->uri->segment(2)));
             $data['event'] = $query->row_array();
 
-            $this->load->view('inc/header-performer', $templates);
-            $this->load->view('performer/event_info', $data);
-            $this->load->view('inc/footer');
+            if($data['event']){
+                $this->load->view('inc/header-performer', $templates);
+                $this->load->view('performer/event_info', $data);
+                $this->load->view('inc/footer');
+            }else{  
+                $this->session->set_flashdata('danger_message', 'The page your trying to access is not found!');
+                redirect('p_bookings');
+            }
         }
     }

@@ -6,8 +6,8 @@
         <img class="" src="<?php echo base_url(); ?>assets/img/website/logo.png" alt="" width="72" height="72">
     </div>
 
-    <?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '';  ?>
-    <?php $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '';  ?>
+    <?php $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '';  ?>
+    <?php $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '';  ?>
 
       <div class="form-label-group">
         <input type="email" id="inputEmail" value="<?php echo $this->session->flashdata('email') ? $this->session->flashdata('email') : '' ?>" name="email" value="<?php echo isset($email) ? $email : '' ?>" class="form-control <?php echo form_error('email') ? 'is-invalid' : '' ?>" placeholder="Email address" autofocus>

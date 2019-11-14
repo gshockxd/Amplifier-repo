@@ -118,6 +118,7 @@
                                             </p>
                                         </div>
                                     </div>
+                                    
                                     <hr>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Last Updated:</label>
@@ -128,14 +129,18 @@
                                     </div>
                                     <hr>
 
-                                    <?php if($row->user_type=="performer"){ ?>
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Artist type:</label>
-                                        <div class="col-8">
-                                            <p class="lead"><?php echo $row->artist_type; ?></p>
-                                        </div>
-                                    </div>
-                                    <hr>
+                                    <?php if($row->user_type=="performer"){ 
+                                        if($row->artist_type!=''){ ?>
+                                        <div class="form-group row">
+                                            <label for="text" class="col-4 col-form-label">Artist type:</label>
+                                            <div class="col-8">
+                                                <p class="lead"><?php echo $row->artist_type; ?></p>
+                                            </div>
+                                            </div>
+                                            <hr>
+                                        <?php } ?>
+                                   
+                                    <?php if($row->artist_desc!=''){ ?>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Artist description:</label>
                                         <div class="col-8">
@@ -143,21 +148,65 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Sample Outputs:</label>
+                                    <?php } ?>
+                                   <?php 
+                                if($fetch_data_user_galleries->num_rows()>0)
+                                {
+                                foreach($fetch_data_user_galleries->result() as $vid)
+                                {
+                                    if($vid->band_photo!=''){
+                                    ?>
+                                    <center>
+                                     <label for="videos">Band Photo:</label><br>
+                                    <img src="<?php echo base_url(); ?><?php echo $vid->band_photo; ?>"
+                                        class="mx-auto m-3 img-thumbnail rounded-circle" style="height:170px;width:200px"
+                                        data-toggle="modal" data-target="#viewfull2" /></center>
+                                    <hr>
+                                    <?php }else{ ?>
+                                        <div class="form-group row">
+                                        <label for="text" class="col-4 col-form-label">Band Photo:</label>
                                         <div class="col-8">
-                                            <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="image"
-                                                class="h-100 w-25 border border-primary rounded"></a>
-                                            <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="image"
-                                                class="h-100 w-25 border border-primary rounded"></a>
-                                            <img src="<?php echo base_url(); ?>assets/img/1.jpg" alt="image"
-                                                class="h-100 w-25 border border-primary rounded"></a>
+                                            <p class="lead">No band photos uploaded</p>
                                         </div>
                                     </div>
+                                    <hr>
                                     <?php } ?>
 
+                                    <label for="videos">Sample Outputs:</label><br>
+                                    <center>
+                                    <?php
+                                    if($vid->video_1!=''){ ?>
+                                    <video width="320" height="240" controls>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_1; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <?php }if($vid->video_2!=''){ ?>
+                                    <video width="320" height="240" controls>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_2; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <?php }if($vid->video_3!=''){ ?>
+                                    <video width="320" height="240" controls>
+                                        <source src="<?php echo base_url(); ?><?php echo $vid->video_3; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    </center>
+                                    <?php }else{ ?>
+                                        <div class="form-group row">
+                                        <div class="col-10">
+                                            <p class="lead">No medias uploaded</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <?php } ?>
                                     
-                                  
+                                   
+                                <?php }
+                                }
+                                 } ?>
+
+
+
 
                                 </div>
                             </div>
@@ -220,6 +269,27 @@
             </div>
             <div class="modal-body">
                 <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" class="m-3 rounded"
+                    style="height:500px; width:735px">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal image -->
+<div class="modal fade" id="viewfull2" tabindex="-1" role="dialog" aria-labelledby="fullview2" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-basic">
+                <h5 class="modal-title" id="fullview">FULL VIEW</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="<?php echo base_url(); ?><?php echo $vid->band_photo; ?>" class="m-3 rounded"
                     style="height:500px; width:735px">
 
             </div>

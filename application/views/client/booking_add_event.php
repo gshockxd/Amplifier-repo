@@ -16,7 +16,7 @@
                         <label for="">Event Date</label>
                         <input type="date" name="event_date" class="form-control <?php echo form_error('event_date') || isset($date_error) ? 'is-invalid' : '' ?>" value="<?php echo isset($event_date) ? $event_date : '' ?>" >
                         <div class="invalid-feedback">
-                            <?php echo form_error('event_date'); echo $date_error ?>
+                            <?php echo form_error('event_date'); echo isset($date_error) ? $date_error : '' ?>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <label for="">From</label>
                         <input type="time" name="duration" class="form-control <?php echo form_error('duration') || isset($time_error) ? 'is-invalid' : '' ?>" value="<?php echo isset($duration) ? $duration : '' ?>" >
                         <div class="invalid-feedback">
-                            <?php echo form_error('duration'); echo $time_error ?>
+                            <?php echo form_error('duration'); echo isset($time_error) ? $time_error : '' ?>
                         </div>
                     </div>
                 </div>
@@ -47,29 +47,9 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-md-6">
-                       <div class="form-group">
-                        <label for="">Expected Payment/Full Payment</label>
-                        <input type="number" name="full_payment" class="form-control <?php echo form_error('full_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($full_payment) ? $full_payment : '' ?>" >
-                        <div class="invalid-feedback">
-                            <?php echo form_error('full_payment') ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="">Partial Payment/Downpayment</label>
-                        <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" >
-                        <div class="invalid-feedback">
-                            <?php echo form_error('down_payment') ?>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="form-group">
                 <label for="">First Payment</label>
-                <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" >
+                <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" max="<?php echo $package['price'] ?>" >
                 <div class="invalid-feedback">
                     <?php echo form_error('down_payment') ?>
                 </div>

@@ -1,7 +1,7 @@
 <?php echo form_open_multipart('p_pricing_validate');?>
 	<div class="container">
-		<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
-		<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+		<?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
+		<?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
 		<div class="py-3">
 			<p class="h4 yellow-brown text-center">Add Package</p>
 			<div class="row">

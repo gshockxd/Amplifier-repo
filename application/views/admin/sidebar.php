@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="users">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('users') ?>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa fa-compact-disc"></i>
         </div>
@@ -35,7 +35,7 @@
     </li>
     <!-- History  -->
     <li class="nav-item">
-        <a class="nav-link" href="history">
+        <a class="nav-link" href="<?php echo base_url('history') ?>">
             <i class="fa fa-flag"></i>
             <span>History</span></a>
     </li>

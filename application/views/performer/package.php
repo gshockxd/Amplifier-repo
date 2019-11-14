@@ -1,14 +1,14 @@
 <div class="container" <?php if($packages): ?> style="background-image: url('<?php echo base_url(); ?>assets/img/website/card_postal.svg');" <?php endif; ?> >
 
-<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
-<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+<?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
 
 
 <?php if($packages): ?>
 	<p class="h3 pt-2 yellow-brown text-center">Your Packages</p>
 	<div class="card-columns">
 		<?php foreach($packages as $p): ?>
-		<div class="card">
+		<div class="card border-primary-3">
 			<div class="card-header bg-primary">
 				<p class="h5 text-center text-white"><?php echo $p['package_name'] ?></p>
 			</div>
@@ -23,8 +23,7 @@
 						</div>
 						<?php if($p['booked'] == 0): ?>							
 							<div class="col-md-4 ">
-								<a href="<?php if($p['booked'] == 0): echo base_url();?>p_package_edit_page/<?php echo $p['package_id'] ?><?php else: ?>#<?php endif; ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="<?php echo $p['booked'] == 0 ? 'Edit Package' : 'This package is currently in booked' ?>"><i class="fas fa-pen"></i></a>
-								<a href="<?php if($p['booked'] == 0): echo base_url();?>p_package_delete/<?php echo $p['package_id'] ?><?php else: ?>#<?php endif; ?>" class="btn btn-danger text-white" data-toggle="tooltip" data-placement="top" title="<?php echo $p['booked'] == 0 ? 'Delete Package' : 'This package is currently in booked' ?>"><i class="fas fa-trash"></i></a>
+								<a href="<?php echo base_url();?>p_package_info_page/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Edit Package"><i class="fas fa-pen"></i></a>
 							</div>
 						<?php else: ?>
 							<div class="col-md-4">
@@ -44,5 +43,4 @@
 	</div>
 
 <?php endif; ?>
-
 </div>

@@ -36,37 +36,45 @@
                 </div>
                 
             </div>
-            <div class="col-md">
-                <div class="form-group col-md-12">
-                    <label for="exampleInputEmail1">Address</label>
-                    <textarea class="form-control <?php echo form_error('address') ? 'is-invalid' : '' ?>" name="address" id="" rows="1"><?php echo isset($address) ? $address : '' ?></textarea>
-                    <div class="invalid-feedback">
-                        <?php echo form_error('address') ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">                            
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Contact Number 1</label>
-                            <input type="number" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" value="<?php echo isset($number1) ? $number1 : '' ?>" name="number1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                            <div class="invalid-feedback">
-                                <?php echo form_error('number1') ?>
-                            </div>
-                        </div>                            
-                    </div>
-                    <div class="col-md-6">                            
-                        <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Contact Number 2</label>
-                            <input type="number" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" value="<?php echo isset($number2) ? $number2 : '' ?>" name="number2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
-                            <div class="invalid-feedback">
-                                <?php echo form_error('number2') ?>
-                            </div>
+            <div class="col-md-6">
+                <div class="row">                     
+                    <div class="form-group col-md-12">
+                        <label for="exampleInputEmail1">Address</label>
+                        <textarea class="form-control <?php echo form_error('address') ? 'is-invalid' : '' ?>" name="address" id="" rows="1"><?php echo isset($address) ? $address : '' ?></textarea>
+                        <div class="invalid-feedback">
+                            <?php echo form_error('address') ?>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-6">      
+                        <label for="exampleInputEmail1">Contact Number 1</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">09</span>
+                            </div>
+                            <input type="number" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" value="<?php echo isset($number1) ? $number1 : '' ?>" name="number1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                            <div class="invalid-feedback">
+                                <?php echo form_error('number1') ?>
+                            </div>
+                        </div>                                          
+                    </div>
+                    <div class="col-md-6">      
+                            <label for="exampleInputEmail1">Contact Number 2 <small>(Optional)</small></label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">09</span>
+                            </div>
+                            <input type="number" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" value="<?php echo isset($number2) ? $number2 : '' ?>" name="number2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                            <div class="invalid-feedback">
+                                <?php echo form_error('number2') ?>
+                            </div>
+                        </div>                                          
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group col-md-12">
+                        <div class="form-group">
                             <label for="">Type of Service</label>
                             <select class="form-control <?php echo form_error('service') ? 'is-invalid' : ''; ?>" name="service">
                                 <option  selected hidden disabled> PLease Select Type of Service</option>
@@ -82,8 +90,8 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class=" form-group col-md-12">
-                            <label for="">Add Profile Picture</label>                            
+                        <div class=" form-group">
+                            <label for="">Add Profile Picture <small>(Less than 2mb size)</small></label>                            
                             <div class="custom-file">
                                 <input type="file" name="userfile" class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : '' ?>" id="customFile">
                                 <label  class="custom-file-label" for="customFile">Choose Photo</label>
@@ -96,7 +104,7 @@
                 </div> 
                 <div class="row">
                     <div class="col-md-6">                            
-                        <div class="form-group col-md-12">
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Password</label>
                             <input type="password" class="form-control <?php echo form_error('pass') ? 'is-invalid' : '' ?>" value="<?php echo isset($pass) ? $pass : '' ?>" name="pass" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                             <div class="invalid-feedback">
@@ -105,7 +113,7 @@
                         </div>                            
                     </div>
                     <div class="col-md-6">                            
-                        <div class="form-group col-md-12">
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Confirm Password</label>
                             <input type="password" class="form-control <?php echo form_error('con_pass') ? 'is-invalid' : '' ?>" value="<?php echo isset($con_pass) ? $con_pass : '' ?>" name="con_pass" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                             <div class="invalid-feedback">
@@ -122,7 +130,7 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="card bg-light" style="max-width: 100%;">
-                    <div class="card-header font-weight-bold">Add Group Video</div>
+                    <div class="card-header">Add Group Video <small>(All group video are required, must be mp4 file and the file size is less than 200mb)</small></div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">                                

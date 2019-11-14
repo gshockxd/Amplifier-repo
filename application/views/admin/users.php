@@ -23,7 +23,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Users</h1>
+                        <h1 class="h3 mb-0 text-gray-800">USERS</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                             data-toggle="modal" data-target="#adduser">
                             <i class="fas fa-user-plus fa-sm text-white-50"></i> Add Users</a>
@@ -42,30 +42,24 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
 
                                     <div class="container-fluid">
-                                        <form method="post" action="<?php echo base_url()?>welcome/search_results">
-                                            <select name="usertype" class="btn btn-outline-info dropdown-toggle">
-                                            <option selected disabled>Usertype</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="performer">Performer</option>
-                                                <option value="client">Client</option>
+                                        <form method="get" action="<?php echo base_url('users')?>">
+                                            <select name="user_type" class="btn btn-outline-info dropdown-toggle">
+                                            <option value="">All Usertype</option>
+                                                <option value="performer" <?php echo (isset($where['user_type']) && $where['user_type'] == 'performer') ? "selected" : ""; ?>>Performer</option>
+                                                <option value="client" <?php echo (isset($where['user_type']) && $where['user_type'] == 'client') ? "selected" : ""; ?>>Client</option>
                                             </select>
 
 
                                             <select name="status" class="btn btn-outline-info dropdown-toggle">
-                                            <option selected disabled>Status</option>
-                                                <option value="pending">Pending</option>
-                                                <option value="verified">Verified</option>
-                                                <option value="block">Blocked</option>
-                                                <option value="banned">Banned</option>
+                                            <option value="">All Status</option>
+                                                <option value="verified" <?php echo (isset($where['status']) && $where['status'] == 'verified') ? "selected" : ""; ?>>Verified</option>
+                                                <option value="block" <?php echo (isset($where['status']) && $where['status'] == 'block') ? "selected" : ""; ?>>Blocked</option>
+                                                <option value="banned" <?php echo (isset($where['status']) && $where['status'] == 'banned') ? "selected" : ""; ?>>Banned</option>
+                                                <!-- <option value="hide" <?php echo (isset($where['status']) && $where['status'] == 'hide') ? "selected" : ""; ?>>Deleted</option>  -->
 
                                             </select>
 
-                                            <a href="#" class="btn btn-outline-success btn-icon-split">
-                                                <span class="icon">
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </span>
-                                                <button class="btn btn-outline-success" type="submit">Sort</button>
-                                            </a>
+                                            <button class="btn btn-outline-success" type="submit"><i class="fas fa-arrow-right"></i>Sort</button>
 
                                         </form>
                                     </div>
@@ -75,9 +69,9 @@
                     </div>
 
                     <?php 
-        if($fetch_data_user->num_rows()>0)
+        if($query_results_user->num_rows()>0)
         {
-          foreach($fetch_data_user->result() as $row)
+          foreach($query_results_user->result() as $row)
           {
         ?>
                     <!--User Dropdown Card-->
@@ -95,7 +89,7 @@
                                     dby="dropdownMenuLink">
                                     <div class="dropdown-header">Action:</div>
                                     <a class="dropdown-item fas fa-eye fa-fw"
-                                        href="profile/<?php echo $row->user_id; ?>">&nbsp View</a>
+                                        href="<?php echo base_url('profile/'); echo $row->user_id; ?>">&nbsp View</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#"
                                         data-toggle="modal" data-target="#addoff<?php echo $row->user_id; ?>">&nbsp Add
@@ -103,7 +97,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fas fa-exclamation-circle fa-fw" href="#"
                                         data-toggle="modal" data-target="#blckuser<?php echo $row->user_id; ?>">&nbsp
-                                        Block</a>
+                                        Recover</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fas fa-trash-alt fa-fw" href="#" data-toggle="modal"
                                         data-target="#deluser<?php echo $row->user_id; ?>">&nbsp Delete</a>
@@ -134,7 +128,12 @@
                                                 <?php echo $row->username; ?> <br>
                                                 <?php echo $row->user_type; ?> <br>
                                                 <?php echo $row->offense; ?> <br>
-                                                <?php echo $row->status; ?> <br>
+                                                <?php
+                                                if($row->status=="hide"){
+                                                    echo "Deleted";
+                                                }else{
+                                                ?>
+                                                <?php echo $row->status; } ?> <br>
                                                 <?php echo  date('F d, Y', strtotime($row->created_at)); ?> <br>
                                                 <?php echo  date('F d, Y', strtotime($row->updated_at)); ?> <br>
 
@@ -145,8 +144,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- del user modal -->
-                    <div class="modal fade" id="deluser<?php echo $row->user_id; ?>" tabindex="-1" role="dialog"
+                        <!-- del user modal -->
+                        <div class="modal fade" id="deluser<?php echo $row->user_id; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="deluser" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -161,7 +160,7 @@
                                         <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>?</H5>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="delete_user/<?php echo $row->user_id; ?>" type="button"> <button
+                                    <a href="<?php echo base_url('delete_user/'); echo $row->user_id; ?>" type="button"> <button
                                             class="btn btn-danger">YES</button></a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                                 </div>
@@ -174,7 +173,7 @@
                         aria-hidden="true" style="width:1000px">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form method="post" action="add_offense/<?php echo $row->user_id; ?>">
+                                <form method="post" action="<?php echo base_url('add_offense/'); echo $row->user_id; ?>">
 
                                     <div class="modal-header">
                                         <H5>SELECT OFFENSE </H5>
@@ -202,7 +201,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <a href="add_offense/<?php echo $row->user_id; ?>" type="button"> <button
+                                        <a href="<?php echo base_url('add_offense/'); echo $row->user_id; ?>" type="button"> <button
                                                 class="btn btn-danger">YES</button></a>
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">CANCEL</button>
@@ -219,17 +218,17 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    BLOCK USER
+                                    RECOVER USER
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <H5>Are you sure you want to Permanently block
+                                    <H5>Are you sure you want to recover account:
                                         <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>?</H5>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="ban/<?php echo $row->user_id; ?>" type="button"> <button
+                                    <a href="<?php echo base_url('recover/'); echo $row->user_id; ?>" type="button"> <button
                                             class="btn btn-danger">YES</button></a>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                                 </div>
@@ -241,67 +240,26 @@
             }
             ?>
                     <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1
-                                to 5 of 57 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                                        <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-                                            class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                    <li class="paginate_button page-item next" id="dataTable_next"><a href="#"
-                                            aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-                                            class="page-link">Next</a></li>
-                                </ul>
-                            </div>
+                        <div class="col-sm-12 col-md-12">
+                            <?php echo $pagination; ?>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <script>
-	    // For dataTable
-		$(document).ready(function() {
-		    $('#datatable').DataTable( {     
-		        // ajax: 'https://api.myjson.com/bins/qgcu',
-		        // drawCallback: function(settings){
-		        //     var api = this.api();
-		            
-		        //     /* Add some tooltips for demonstration purposes */
-		        //     $('td', api.table().container()).each(function () {
-		        //        $(this).attr('title', $(this).text());
-		        //     });
-
-		        //     /* Apply the tooltips */
-		        //     $('td', api.table().container()).tooltip({
-		        //        container: 'body'
-		        //     });          
-		        // }  
-		    });
-		} );
-	</script>
+      
+        </div>
+        
 
         <?php
           }
           else
           {
           ?>
-        <h1 align="center">No Data Found</h1>
+          <center>
+        <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png"
+                            class="m-3 w-50 h-50"/></center>
         <?php
           }
           ?>
@@ -342,70 +300,73 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?php echo base_url()?>welcome/form_validation" enctype="multipart/form-data">
+                <form method="post" name= "registration" action="<?php echo base_url()?>welcome/form_validation" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label for="First Name">First Name:</label>
-                        <input type="text" name="fname" class="form-control" id="fname">
+                        <label for="First Name">First Name</label><label class="text-danger">&nbsp *</label>
+                        <input type="text" name="fname" class="form-control" placeholder="Enter your first name (required)" id="fname" required>
                         <span class="text-danger"><?php echo form_error("fname"); ?></span>
+                        
                     </div>
                     <div>
-                        <label for="Last Name">Last Name:</label>
-                        <input type="text" name="lname" class="form-control" id="lname">
+                        <label for="Last Name">Last Name</label><label class="text-danger">&nbsp *</label>
+                        <input type="text" name="lname" class="form-control" placeholder="Enter your first name (required)" id="lname" required>
+                        <small class="form-text text muted">username must be minimum of 5 characters long</small> 
                         <span class="text-danger"><?php echo form_error("lname"); ?></span>
                     </div>
+                    <br>
                     <div class="form-group">
-                        <label for="pwd">Password:</label>
-                        <input type="password" name="password" class="form-control" id="Password">
+                        <label for="pwd">Password</label><label class="text-danger">&nbsp *</label>
+                        <input type="password" name="password" placeholder="Enter Account Password (required)" class="form-control" id="Password" required>
+                        <small class="form-text text muted">password must be minimum of 5 characters long</small>
                         <span class="text-danger"><?php echo form_error("password"); ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" name="username" class="form-control" id="username">
+                        <label for="username">Username</label><label class="text-danger">&nbsp *</label>
+                        <input type="text" name="username" placeholder="Enter your username (required)" class="form-control" id="username" required>
                         <span class="text-danger"><?php echo form_error("username"); ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="Contact_number1">Contact Numer (1):</label>
-                        <input type="number" name="contact_number" class="form-control" id="contact_number">
+                        <label for="Contact_number1">Contact Number</label><label class="text-danger">&nbsp *</label>
+                        <input type="number" name="contact_number" class="form-control" placeholder="Enter phone number (required)" id="contact_number" required>
                         <span class="text-danger"><?php echo form_error("contact_number"); ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="Contact_number1">Optional Contact Numer (2):</label>
-                        <input type="number" name="contact_number1" class="form-control" id="contact_number1">
+                        <label for="Contact_number1">Optional Contact Number</label>
+                        <input type="number" name="contact_number1" placeholder="Enter optional phone number" class="form-control" id="contact_number1">
                         <span class="text-danger"><?php echo form_error("contact_number1"); ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="Contact_number1">Address:</label>
-                        <input type="text" name="address" class="form-control" id="address">
+                        <label for="Contact_number1">Address</label><label class="text-danger">&nbsp *</label>
+                        <input type="text" name="address" placeholder="E.g Talamban, Cebu city" class="form-control" id="address" required>
                         <span class="text-danger"><?php echo form_error("address"); ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" class="form-control" id="email">
+                        <label for="email">Email</label><label class="text-danger">&nbsp *</label>
+                        <input type="email" name="email" placeholder="E.g Amplifier@gmail.com" class="form-control" id="email" required>
                         <span class="text-danger"><?php echo form_error("email"); ?></span>
                     </div>
-                   
-                        <label for="">Add Profile Picture</label>
-                        <div class="custom-file">
-                            <input type="file"
-                                class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
-                                name="userfile" id="customFile">
-                            <label class="custom-file-label" for="customFile"></label>
-                            <div class="invalid-feedback">
-                                 <div class="form-group"><?php echo form_error('userfile'); ?>
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label for="Usertype">Usertype:</label><br>
-                        <select class="form-control" name="usertype" id="usertype" style="max-width:200px;">
-                            <option value=""> </option>
+                        <label for="Usertype">Usertype</label><label class="text-danger">&nbsp *</label><br>
+                        <select class="form-control" name="usertype" id="usertype" style="max-width:200px;" required>
+                            <option value="" selected disabled>Select type of User </option>
                             <option value="admin">Admin</option>
                             <option value="client">Client</option>
                             <option value="performer">Performer</option>
                         </select>
                         <span class="text-danger"><?php echo form_error("usertype"); ?></span>
                     </div>
+                        <label for="">Add Profile Picture</label>
+                        <div class="custom-file">
+                            <input type="file"
+                                class="form-control-file <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
+                                name="userfile" id="customFile">
+                            <div class="invalid-feedback">
+                                 <div class="form-group"><?php echo form_error('userfile'); ?>
+                            </div>
+                        </div>
+                    </div>
+                  
                    
 
                     <div class="modal-footer">

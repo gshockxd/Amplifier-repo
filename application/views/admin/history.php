@@ -32,20 +32,18 @@
                             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                                 data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
+
                                     <div class="container-fluid">
-                                        <span class=" mb-0 pl-3 text-gray-800">Date</span>
-                                        <form class="form-inline ml-4 mb-1 ">
-                                            <input class="form-control mr-sm-2" type="date"
-                                                placeholder="Search by Date">
-                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><label
-                                                    class="fa fa-search"></label></button>
-                                        </form>
-                                        <span class=" mb-0 pl-3 text-gray-800">Name</span>
-                                        <form class="form-inline ml-4 mb-1 ">
-                                            <input class="form-control mr-sm-2" type="text"
-                                                placeholder="Search by name">
-                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><label
-                                                    class="fa fa-search"></label></button>
+                                        <form method="post" action="<?php echo base_url('search_results_history')?>">
+                                            <label for="date">Date of event
+                                            <input class="form-control mr-sm-2" type="date" name="date"
+                                                    placeholder="Search by Date"></label>
+                                                    <br>
+                                            <label for="date">Name
+                                            <input class="form-control w-100" type="text" name="name"
+                                                   ></label>
+                                                   <br>
+                                                <button class="btn btn-outline-info" type="submit"><i class="fas fa-search"></i>&nbsp Search</button>
                                         </form>
                                     </div>
                                 </div>
@@ -114,33 +112,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-4">
+                <!-- <div class="row mb-4">
                     <div class="col-sm-12 col-md-12 offset-5">
                         <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 3
                             of 57 entries</div>
                     </div>
 
-                    < <script>
-            $(document).ready(function () {
-            $('#dtMaterialDesignExample').DataTable();
-            $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
-                $(this).parent().append($(this).children());
-            });
-            $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
-                const $this = $(this);
-                $this.attr("placeholder", "Search");
-                $this.removeClass('form-control-sm');
-            });
-            $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
-            $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
-            $('#dtMaterialDesignExample_wrapper select').removeClass(
-            'custom-select custom-select-sm form-control form-control-sm');
-            $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
-            $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
-            $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
-            });
-            </script>
-                </div>
+
+                </div> -->
                 <?php
          
         }

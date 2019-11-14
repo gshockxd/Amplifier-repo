@@ -24,12 +24,25 @@
                 <div class="col-md-2 col-lg-6 mx-auto">
                     <div class="card shadow mb-4">
                         <div class="card-body center">
-                            <form class="form-inline md-form form-sm mt-0">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                                <input class="form-control form-control-sm ml-3 w-75" type="text"
-                                    placeholder="Search Packages" aria-label="Search">
+                            <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('search_results_report')?>">
+                            <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
+                            <option selected disabled>Select Reports that include:</option>
+                            <?php
+                                if($fetch_data_user->num_rows()>0)
+                                    {
+                                    foreach($fetch_data_user->result() as $row)
+                                        { 
+                        
+                            ?>
+                            <option value="<?php echo $row->user_id; ?>"> <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
+                            <?php }
+                                }
+                                ?>
+                            </select>
+                            <button class="btn btn-outline-success btn-sm" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
+                                
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"
                             data-toggle="modal" data-target="#addrep">
                             <i class="fas fa-envelope fa-sm text-white-50"></i> Create Report</a>
@@ -355,7 +368,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?php echo base_url()?>welcome/form_validation_report">
+                <form method="post" action="<?php echo base_url()?>welcome/form_validation_report" enctype="multipart/form-data">
                     <div class="form-group row">
                         <label for="report_from" class="col-4 col-form-label">Reporter's Name:</label>
                         <select id="report_from" name="report_from" class="form-control m-3">
@@ -415,7 +428,7 @@
                         <label for="comment">Additional Info:</label>
                         <input type="text" name="report_info" class="form-control lg" id="comment" \>
                     </div>
-                    <label for="userfile">Add Profile Picture</label>
+                    <label for="userfile">Add Report photo</label>
                         <div class="custom-file">
                             <input type="file"
                                 class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"

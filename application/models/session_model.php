@@ -17,6 +17,7 @@
                 // $this->db->where("status",$notified);
                 // $this->db->where("user_id",$user_id);
                 // $query2 = $this->db->count_all_results();   
+                $query2 = null;
             }          
             if($this->session->userdata('user_type') == 'performer'){
                 $artist_type = $this->session->userdata('artist_type');
@@ -81,7 +82,7 @@
             return $this->session->unset_userdata($data);
         }
         public function user_type_check (){
-            if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned")
+            if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned"||$this->session->userdata('status')=="hide")
             {
                     $data = array( 
                         'user_type' ,
@@ -106,7 +107,7 @@
         }
         public function session_index_page(){
             if($this->session->userdata('user_id')){
-                $this->session_model->user_type_check();
+                $this->Session_model->user_type_check();
             }
         }
         public function session_check(){
@@ -151,5 +152,4 @@
                     break;
             }
         }
-        
     }

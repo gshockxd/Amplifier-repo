@@ -1,4 +1,5 @@
 <?php
+	$notif_badge = $this->Notification_model->notification_badge();
 	// session_start();
 	if(!isset($_SESSION['theme'])){
 		$theme = $_SESSION['theme'] = 'flatly';
@@ -97,8 +98,8 @@
 								</li>
 							<?php endif; ?>
 							<?php if($this->session->userdata('user_id')): ?>
-								<li class="nav-item <?php echo $this->uri->segment(1) == '#' ? 'active' : '' ?>">
-									<a href="#" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="No new notifications"><i class="far fa-bell fa-lg"></i></a>
+								<li class="nav-item <?php echo $this->uri->segment(1) == 'user_notifications' ? 'active' : '' ?>" > 
+									<a href="<?php echo base_url() ?>notifications/index" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Notifications"><?php if($notif_badge > 0): ?><span class="badge badge-pill badge-light mr-1"><?php echo $notif_badge ?></span><?php endif; ?><i class="far fa-bell fa-lg"></i></a> 
 								</li>
 								<li class="nav-item <?php echo $this->uri->segment(1) == 'p_chat' ? 'active' : '' ?>">
 									<a href="<?php echo base_url() ?>p_chat" class="nav-link" data-toggle="tooltip" data-placement="bottom" title="Messages"><i class="far fa-envelope fa-lg"></i></a>
@@ -113,8 +114,5 @@
 			        	</ul>
 			        </form>
 		        </div>
-
-
 		    </div>
 		  </nav>
-

@@ -47,9 +47,9 @@
                         <div class="col-md-3">
                             Action:
                         </div>
-                        <div class="col-md-9 d-flex justify-content-between">
-                            <a href="<?php echo base_url() ?>p_package" class="btn btn-danger">Cancel</a>
-                            <button class="btn btn-primary" type="submit">Update</button>
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <a href="<?php echo base_url() ?>p_package_info_page/<?php echo $this->uri->segment(2) ?>" class="btn btn-secondary mr-3">Cancel</a>
+                            <a data-toggle="modal" data-target="#alertUpdate"  class="btn btn-primary text-white mr-3" data-toggle="tooltip" data-placement="top" title="Update Package">Submit</a>
                         </div>
                     </div>
                 </li>
@@ -57,3 +57,27 @@
         </div>
     </div>
 <?php form_close(); ?>
+
+<!-- Modal -->
+<div class="modal fade" id="alertUpdate" tabindex="-1" role="dialog" aria-labelledby="updateAlert" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateAlert">Update ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+			<div class="row col-md-12">
+				<div class="col-md-6 col-6 text-center">                
+                    <button type="submit" class="btn btn-success ">Hmm, Yes</button>
+				</div>
+				<div class="col-md-6 col-6 text-center">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Not Now</button>
+				</div>
+			</div>
+      </div>
+    </div>
+  </div>
+</div>

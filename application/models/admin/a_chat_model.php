@@ -3,21 +3,21 @@
         public function chat_message(){
             $id = $this->uri->segment(2);
             if($id != $this->session->userdata('user_id')){
-                $data['chats'] = $this->a_chat_model->chat_conversation($id);
-                $data['users'] = $this->a_chat_model->get_only_name_from_users();
-                $data['user_info'] = $this->a_chat_model->get_user_info($id);   
+                $data['chats'] = $this->A_chat_model->chat_conversation($id);
+                $data['users'] = $this->A_chat_model->get_only_name_from_users();
+                $data['user_info'] = $this->A_chat_model->get_user_info($id);   
 
                 $templates['title'] = 'Chat';
                 $this->load->view('admin/chat', $data);
             }else{
-                $data['users'] = $this->a_chat_model->get_only_name_from_users();
+                $data['users'] = $this->A_chat_model->get_only_name_from_users();
                 $templates['title'] = 'Chat';
                 $this->load->view('admin/chat', $data);
             }    
             
         }
         public function index (){
-            $data['latest_user_message'] = $this->a_chat_model->get_latest_user_message();
+            $data['latest_user_message'] = $this->A_chat_model->get_latest_user_message();
             
             if($data['latest_user_message']){
                 redirect('a_chat/'.$data['latest_user_message']['user_id']);
@@ -41,7 +41,7 @@
             $query = $this->db->get('chats');
             $data['incoming_message'] = $query->result_array();
 
-            $data['left_panel'] = $this->a_chat_model->chat_left_panel();
+            $data['left_panel'] = $this->A_chat_model->chat_left_panel();
 
             // echo '<pre>';
             // print_r($data['left_panel']);
@@ -133,7 +133,7 @@
             $id = $this->uri->segment(2);
             $timestamps = date('Y-m-d H:i:s');
             if($this->input->post('search') == 'search'){
-                $this->a_chat_model->search_user();
+                $this->A_chat_model->search_user();
                 // 
             }else if ($this->input->post('send_message') == 'send_message'){
                 $this->form_validation->set_rules('message', 'Message', 'required', array('required'=>'Please Input Message'));
@@ -141,9 +141,9 @@
                 $data['message'] = $this->input->post('message');
 
                 if($this->form_validation->run() == FALSE){
-                    $data['chats'] = $this->a_chat_model->chat_conversation($id);
-                    $data['users'] = $this->a_chat_model->get_only_name_from_users();
-                    $data['user_info'] = $this->a_chat_model->get_user_info($id); 
+                    $data['chats'] = $this->A_chat_model->chat_conversation($id);
+                    $data['users'] = $this->A_chat_model->get_only_name_from_users();
+                    $data['user_info'] = $this->A_chat_model->get_user_info($id); 
                     
                     $templates['title'] = 'Chat';
                     $this->load->view('admin/chat', $data);
@@ -164,9 +164,9 @@
                     $this->db->insert('chats', $temp);
                     $this->session->set_userdata('last_message', $this->input->post('message'));
                     
-                    $data['chats'] = $this->a_chat_model->chat_conversation($id);
-                    $data['users'] = $this->a_chat_model->get_only_name_from_users();
-                    $data['user_info'] = $this->a_chat_model->get_user_info($id); 
+                    $data['chats'] = $this->A_chat_model->chat_conversation($id);
+                    $data['users'] = $this->A_chat_model->get_only_name_from_users();
+                    $data['user_info'] = $this->A_chat_model->get_user_info($id); 
         
                     $templates['title'] = 'Chat';
                     $this->load->view('admin/chat', $data);
@@ -175,7 +175,7 @@
         }
         public function search_user(){
             $id = $this->uri->segment(2);
-            $data['users'] = $this->a_chat_model->get_only_name_from_users();
+            $data['users'] = $this->A_chat_model->get_only_name_from_users();
             $templates['title'] = 'Chat';
 
             $this->form_validation->set_rules('userID', 'User ID', 'required|numeric', array('required'=> 'User not found', 'numeric'=>'ID contains invalid data'));
@@ -183,8 +183,8 @@
             $this->form_validation->set_error_delimiters('', '');
 
             if($this->form_validation->run() === FALSE){
-                $data['chats'] = $this->a_chat_model->chat_conversation($id);
-                $data['user_info'] = $this->a_chat_model->get_user_info($id); 
+                $data['chats'] = $this->A_chat_model->chat_conversation($id);
+                $data['user_info'] = $this->A_chat_model->get_user_info($id); 
                 
                 $this->load->view('admin/chat', $data);
             }else{

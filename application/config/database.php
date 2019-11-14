@@ -70,8 +70,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$active_group = 'default';
+if($_SERVER['SERVER_NAME']=='localhost')
+{
+	$active_group = 'default';
+	
+}else{
+// $active_group = 'amplifier';
+$active_group = 'nike';
+}
 $query_builder = TRUE;
+
 
 $db['default'] = array(
 	'dsn'	=> '',
@@ -91,6 +99,51 @@ $db['default'] = array(
 	'encrypt' => FALSE,
 	'compress' => FALSE,
 	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+
+$db['ampifier'] = array(
+	'dsn'	=> '',
+	'hostname' => 'mysql1402b.xserver.jp',
+	'username' => 'cebupotsang_amp',
+	'password' => 'pGdVCA6PhVfDCRN',
+	'database' => 'cebupotsang_amp',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['nike'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => 'id11528148_amplifier',
+	'password' => 'id11528148_amplifier',
+	'database' => 'id11528148_amplifier',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => TRUE,
 	'failover' => array(),
 	'save_queries' => TRUE
 );

@@ -3,7 +3,7 @@
         public function index (){
 			$templates['title'] = 'History';
 
-			$data['history'] = $this->history_model->get_bookings_user();
+			$data['history'] = $this->History_model->get_bookings_user();
 
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/history', $data);
@@ -30,14 +30,16 @@
 		}
 		public function history_info(){
 			$templates['title'] = 'History Event Info';
-			$data['history'] = $this->history_model->get_event();
+			$data['history'] = $this->History_model->get_event();
 
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/history_info', $data);
 			$this->load->view('inc/footer');
 		}
 		public function get_event(){
-			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
+			$this->db->select('bookings.*, price');
+			$this->db->join('packages', 'packages.package_id = bookings.package_id');
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2), 'status'=>'approve'));
 			$data = $query->row_array();
 
 			if($data){

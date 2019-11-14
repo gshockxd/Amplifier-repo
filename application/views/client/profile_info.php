@@ -1,10 +1,11 @@
 <div class="container py-3">
-    <?php $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
     <div class="row">
         <div class="col-md-4">
             <img src="<?php echo base_url(); echo $this->session->userdata('photo'); ?>" class="img-thumbnail" alt="">
         </div>
         <div class="col-md-8">
+        <?php $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
+        <?php $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
             <?php if($this->session->flashdata('user_updated')): ?>
                 <div class="alert alert-success alert-block">
                     <?php echo $this->session->flashdata('user_updated'); ?>
@@ -44,15 +45,17 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Phone Number 1</div>
-                                <div class="col font-weight-bold"><?php echo $this->session->userdata('telephone_1'); ?></div>
+                                <div class="col font-weight-bold">09<?php echo $this->session->userdata('telephone_1'); ?></div>
                             </div>
                         </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col">Phone Number 2</div>
-                                <div class="col font-weight-bold"><?php echo $this->session->userdata('telephone_2'); ?></div>
-                            </div>
-                        </li>
+                        <?php if($this->session->userdata('telephone_2')): ?>                        
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Phone Number 2</div>
+                                    <div class="col font-weight-bold">09<?php echo $this->session->userdata('telephone_2'); ?></div>
+                                </div>
+                            </li>
+                        <?php endif; ?>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Address</div>

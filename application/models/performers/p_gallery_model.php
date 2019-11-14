@@ -2,7 +2,7 @@
     class P_Gallery_Model extends CI_Model {
         public function index (){
             $templates['title'] = 'Galleries';
-            $data['galleries'] = $this->p_gallery_model->get_galleries();
+            $data['galleries'] = $this->P_gallery_model->get_galleries();
 
             $this->load->view('inc/header-performer', $templates);
             $this->load->view('performer/gallery', $data);

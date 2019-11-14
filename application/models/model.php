@@ -68,19 +68,18 @@ class model extends CI_Model
     function update_offense_user1($offense)
     {
        $id = $this->session->userdata('user_id');
-       echo $id;
        $this->db->select("status");
        $this->db->from("users");
        $this->db->where("user_id",$id);
        $this->db->update("users", $offense);
     }
-    function update_ban_user($ban)
+    function update_recover_user($recover)
     {
        $id = $this->uri->segment(2);
        $this->db->select("status");
        $this->db->from("users");
        $this->db->where("user_id",$id);
-       $this->db->update("users", $ban);
+       $this->db->update("users", $recover);
     }
 // offense update end
 // views/choices start
@@ -163,11 +162,156 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+//search start
+    function query_results_user($where, $rpg, $page)
+    {
+       $this->db->select("*");
+       $this->db->from("users");
+      
+      /*
+       if($this->input->get("user_type")!="*"){
+         $where["user_type"] = $this->input->get("user_type");
+      }
+      if($this->input->get("status")!="*"){
+         $where["status"] = $this->input->get("status");
+      } 
+      */    
+   
+      $where["user_type!="] = "admin";
+      $where["status!="] = "hide";
+      $this->db->where($where);
+      $this->db->order_by('user_id DESC, fname ASC');
+      $this->db->limit($rpg, $page);
+      $query = $this->db->get();
+    
+      //  echo $this->db->last_query();
+      //  exit();
+       return $query;
+    }
+    function count_results_user($where)
+    {
+      //  $this->db->select("*");
+       $this->db->from("users");
+       /*
+       if($usertype!="*"){
+       $this->db->where("user_type=",$usertype);
+      }
+      if($status!="*")
+      {
+       $this->db->where("status=",$status);
+      }      
+      */
+      // $this->db->where("status!=","hide");
+      $where["user_type!="] = "admin";
+      $this->db->where($where);
+      $t = $this->db->count_all_results();
+      //  $query = $this->db->get();
+      //  echo $this->db->last_query();
+      //  exit();
+       return $t;
+      //  return $this->db->count_all_results();
+      //  return $query;
+    }
+    function query_results_package($where)
+    {
+     
+       $this->db->select("*");
+       $this->db->from("packages");
+      // if($user_id!="*")
+      // {
+      //  $this->db->where("owner",$user_id);
+      // }      
+      // $this->db->where("package_status!=","hide");
+      $where["package_status!="] = "hide";
+      $this->db->where($where);
+      $this->db->join("users",'packages.owner=users.user_id');
+       $query = $this->db->get();
+       return $query;
+    }
+    function query_results_report($user_id)
+    {
+     
+      $this->db->select("reports.*,bookings.*,users.fname as report_from_fname,u2.fname AS report_to_fname,users.lname as report_from_lname,u2.lname AS report_to_lname, u2.photo AS report_from_photo,users.photo as report_to_photo");
+      $this->db->from("reports");
+      $this->db->where("reports_status!=","hide");
+      if($user_id!="*"){
+         $this->db->where("report_from=",$user_id);
+         $this->db->or_where("report_to=",$user_id);
+        }
+      $this->db->join("users",'reports.report_from=users.user_id');
+      $this->db->join("users as u2",'reports.report_to=u2.user_id');
+      $this->db->join("bookings",'reports.booking_id=bookings.booking_id');
+      $query = $this->db->get();
+      return $query;
+    }
+    function query_data_event($date_event,$name)
+    {
+     
+      $status = "hide";
+      $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+      $this->db->from("bookings");
+      $this->db->where("bookings.status!=",$status);
+
+      if($date_event != "*"){
+         $this->db->where("bookings.event_date",$date_event);
+      }
+   
+      if($name != "*"){
+         $this->db->like("event_name",$name,'both');
+         $this->db->or_like("users.fname",$name,'both');
+         $this->db->or_like("users.lname",$name,'both');
+         $this->db->or_like("u2.fname",$name,'both');
+         $this->db->or_like("u2.lname",$name,'both');
+      }
+
+      $this->db->join("users",'bookings.client_id=users.user_id');
+      $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+
+      $query = $this->db->get();
+      return $query;
+    }
+    function query_data_event_history($date_event,$name)
+    {
+       $date = date('y-m-d');
+       $status = "pending";
+       $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+       $this->db->from("bookings");
+       $this->db->join("users",'bookings.client_id=users.user_id');
+       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+       $this->db->where("event_date <",$date);
+       $this->db->where("bookings.status !=", $status);
+       
+       if($date_event != "*"){
+         $this->db->like("bookings.event_date",$date_event,'both');
+      }
+   
+      if($name != "*"){
+         $this->db->like("event_name",$name,'both');
+         $this->db->or_like("users.fname",$name,'both');
+         $this->db->or_like("users.lname",$name,'both');
+         $this->db->or_like("u2.fname",$name,'both');
+         $this->db->or_like("u2.lname",$name,'both');
+      }
+    
+       $query = $this->db->get();
+       return $query;
+    }
+//search end
     function fetch_data_user()
     {
        $this->db->select("*");
        $this->db->from("users");
-      $this->db->where("status!=","hide");
+       $this->db->where("status!=","hide");
+       $this->db->where("user_type!=","admin");
+       $query = $this->db->get();
+       return $query;
+    }
+     function fetch_data_user_galleries()
+    {
+       $this->db->select("*");
+       $id = $this->uri->segment(2);
+       $this->db->from("band_galleries");
+       $this->db->where("user_id",$id);
        $query = $this->db->get();
        return $query;
     }
@@ -192,6 +336,7 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+ 
 //  views/choices end
 //  notifications start
     function fetch_data_notifications()

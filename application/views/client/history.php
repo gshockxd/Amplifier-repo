@@ -1,6 +1,6 @@
 <div class="container">
-<?php echo $this->session->flashdata('success_message') ? $this->message_model->success_message() : '' ?>
-<?php echo $this->session->flashdata('danger_message') ? $this->message_model->danger_message() : '' ?>
+<?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
 	<?php if($history): ?>
 		<p class="h3 red-brown py-3 text-center">Event History</p>
 			
@@ -41,7 +41,11 @@
 						<p class="text-capitalize"><?php echo $b['artist_type'] ?></p>
 					</td>
 					<td>
-						<a href="<?php base_url(); ?>history_client/<?php echo $b['booking_id'] ?>" target="_blank" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More Details"><i class="fas fa-external-link-alt "></i></a>
+						<?php if($b['status'] == 'approve'): ?>
+							<a href="<?php base_url(); ?>history_client/<?php echo $b['booking_id'] ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More Details"><i class="fas fa-external-link-alt "></i></a>
+						<?php else: ?>
+							
+						<?php endif; ?>
 					</td>
 				</tr>
 				

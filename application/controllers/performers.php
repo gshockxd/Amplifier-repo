@@ -1,16 +1,16 @@
 <?php
 	class Performers extends CI_Controller {
 		public function register (){
-			$this->session_model->session_index_page();
-			$this->p_register_model->index();
+			$this->Session_model->session_index_page();
+			$this->P_register_model->index();
 		}
 		public function register_attempt(){
-			$this->session_model->session_index_page();
-			$this->p_register_model->register();
+			$this->Session_model->session_index_page();
+			$this->P_register_model->register();
 		}
 		public function profile(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 			$templates['title'] = 'Profile';
 
 			$this->load->view('inc/header-performer', $templates);
@@ -18,88 +18,94 @@
 			$this->load->view('inc/footer');
 		}
 		public function bookings(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_booking_model->index();
+			$this->P_booking_model->index();
 		}
 		public function event_info (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
 			
-			$this->p_package_model->get_event_info();
+			$this->P_package_model->get_event_info();
 		}
 		public function event_status_approve (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
 			
-			$this->event_model->event_status_approve();
+			$this->Event_model->event_status_approve();
 		}
 		public function event_status_decline (){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
 			
-			$this->event_model->event_status_decline();
+			$this->Event_model->event_status_decline();
 		}
 		public function pricing(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 			
-			$this->p_pricing_model->index();
+			$this->P_pricing_model->index();
 		}
 		public function pricing_validate(){
-			$this->session_model->session_check();
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_pricing_model->pricing_validate();
+			$this->P_pricing_model->pricing_validate();
 		}
 		public function package(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_package_model->index();
+			$this->P_package_model->index();
 		}
 		public function package_edit_page(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_package_model->package_edit_page();
+			$this->P_package_model->package_edit_page();
 		}
 		public function package_update(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_package_model->package_update();
+			$this->P_package_model->package_update();
 		}
 		public function p_package_delete(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_package_model->p_package_delete();
+			$this->P_package_model->p_package_delete();
+		}
+		public function package_info_page(){
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
+
+			$this->P_package_model->package_info_page();
 		}
 		public function gallery(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_gallery_model->index();
+			$this->P_gallery_model->index();
 		}
 		public function chat(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_chat_model->index();
+			$this->P_chat_model->index();
 		}
 		public function chat_message(){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_chat_model->chat_message();
+			$this->P_chat_model->chat_message();
 		}
 		public function send_search_message (){
-			$this->session_model->session_check();		
-			$this->session_model->user_type_check_performer();
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
 
-			$this->p_chat_model->send_search_message();			
+			$this->P_chat_model->send_search_message();			
 		}
 		public function file_check(){
 			$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
@@ -219,4 +225,20 @@
 				return false;
 			}
 		}	
+		function alpha_dash_space($str){
+			if(!preg_match("/^([-a-z_. ])+$/i", $str)){
+				$this->form_validation->set_message('alpha_dash_space', 'First name only accept letters');
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		} 
+		public function contact_number_duplicate_verification (){
+			if($this->input->post('number2') == $this->input->post('number1')){
+				$this->form_validation->set_message('contact_number_duplicate_verification', 'Duplicated Contact Number');
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		}
 	}

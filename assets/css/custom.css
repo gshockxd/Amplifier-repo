@@ -169,4 +169,13 @@
    border-width: 3px !important;
    border-radius: 7px !important;
 }
+
+.no-underline {
+  text-decoration: none !important;
+  color: black;
+  padding: 0px;
+  background: none;
+  border: none;
+}
+a.no-underline:hover { color: black !important; }
 /**/

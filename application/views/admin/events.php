@@ -23,30 +23,33 @@
                 <!-- Begin Page Content -->
                 <div class="container">
 
-                    <a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                         aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-fw fa-sort"></i>
-                        <span>Search by:</span>
+                        <span>Filter</span>
                     </a>
                     <div class="card" style="width:50%; margin:10px;">
                         <div class="card-block">
                             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                                 data-parent="#accordionSidebar">
                                 <div class="bg-white py-2 collapse-inner rounded">
+
                                     <div class="container-fluid">
-                                        <span class=" mb-0 pl-3 text-gray-800">Date</span>
-                                        <form class="form-inline ml-4 mb-1 ">
-                                            <input class="form-control mr-sm-2" type="date"
-                                                placeholder="Search by Date">
-                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><label
-                                                    class="fa fa-search"></label></button>
-                                        </form>
-                                        <span class=" mb-0 pl-3 text-gray-800">Name</span>
-                                        <form class="form-inline ml-4 mb-1 ">
-                                            <input class="form-control mr-sm-2" type="text"
-                                                placeholder="Search by name">
-                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><label
-                                                    class="fa fa-search"></label></button>
+                                        <form method="post" action="<?php echo base_url('welcome/search_results_events')?>">
+                                            <label for="date">Date of event
+                                            <input class="form-control mr-sm-2" type="date" name="date"
+                                                    placeholder="Search by Date"></label>
+                                                    <br>
+                                            <label for="date">Name
+                                            <input class="form-control w-100" type="text" name="name"
+                                                   ></label>
+                                                   <br>
+                                                <button class="btn btn-outline-info" type="submit"><i class="fas fa-search"></i>&nbsp Search</button>
+                                                    
+                                              
+                                               
+                                            </a>
+
                                         </form>
                                     </div>
                                 </div>
@@ -149,11 +152,7 @@
                 </div>
 
 
-                <div class="row mb-4">
-                    <div class="col-sm-12 col-md-12 offset-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to
-                            10 of 57 entries</div>
-                    </div>
+                <!-- <div class="row mb-4">
 
                     <div class="col-sm-12 col-md-12 offset-4">
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
@@ -161,25 +160,14 @@
                                 <li class="paginate_button page-item previous disabled" id="dataTable_previous">
                                     <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
                                         class="page-link">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                        data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
+                                        <?php echo $this->pagination->create_links(); ?>
                                 <li class="paginate_button page-item next" id="dataTable_next"><a href="#"
                                         aria-controls="dataTable" data-dt-idx="7" tabindex="0"
                                         class="page-link">Next</a></li>
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <?php
          
