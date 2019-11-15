@@ -26,7 +26,7 @@
             }else{
                 $id = $this->P_pricing_model->pricing_insert();
                 $notif['message'] = 'Package Name: '.$this->input->post('name').' has been successfully added! Click here to view.';
-                $notif['links'] = base_url().'p_package_edit_page/'.$id;
+                $notif['links'] = base_url().'p_package_info_page/'.$id;
                 $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Package Name: '.$this->input->post('name').' has been successfully added!');

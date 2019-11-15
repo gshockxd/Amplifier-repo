@@ -43,8 +43,10 @@
                             </div>
                             <div class="col-md-7 d-flex justify-content-end">
                                 <a href="<?php echo base_url() ?>p_package" class="btn btn-secondary mr-3">Cancel</a>
-                                <a data-toggle="modal" data-target="#alertDelete"  class="btn btn-danger text-white mr-3" data-toggle="tooltip" data-placement="top" title="Delete Package"><i class="fas fa-trash"></i></a>
-                                <a href="<?php echo base_url(); ?>p_package_edit_page/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Update</a>                                
+                                <?php if($booked == 0): ?>
+                                    <a data-toggle="modal" data-target="#alertDelete"  class="btn btn-danger text-white mr-3" data-toggle="tooltip" data-placement="top" title="Delete Package"><i class="fas fa-trash"></i></a>
+                                    <a href="<?php echo base_url(); ?>p_package_edit_page/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Update</a>                                
+                                <?php endif; ?>                                
                             </div>
                         </div>
                     </li>

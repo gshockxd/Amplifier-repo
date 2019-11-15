@@ -123,15 +123,18 @@
             $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
             $data = $query->row_array();
 
-            if($data){            
+            if($data){         
                 $this->db->delete('bookings', array('booking_id'=>$this->uri->segment(2)));                
                 $this->db->set('booked', 0);
-                $this->db->where(array('package_id' => $data['package_id'], 'client_id'=>$this->session->userdata('user_id')));
+                $this->db->where(array('package_id' => $data['package_id']));
                 $this->db->update('packages');
+
+                $notif['message'] = 'You have been deleted the event: '.$data['event_name'];
+                $notif['links'] = '#';
+                $this->Notification_model->index($notif);
     
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully deleted!');    
                 redirect('c_events');
-                return;
             }else{
                 $this->session->set_flashdata('danger_message', 'The page your trying to delete is not found');
                 redirect('c_events');
@@ -171,10 +174,12 @@
                 $this->db->where('booking_id', $this->uri->segment(2));
                 $this->db->update('bookings');
                 
-                $notif['message'] = 'Your Event '.$data['event_name'].' has been approved by the artist';
-                $notif['links'] = base_url().'events/'.$data['booking_id'];
+                $notif['message'] = 'You been approved the event: '.$data['event_name'];
+                $notif['links'] = base_url().'p_bookings';
                 $notif['target_user_id'] = $data['client_id'];
-                $this->notification_model->index($notif);
+                $notif['target_message'] = 'Your '.$data['event_name'].' status has been changed to approved!';
+                $notif['target_links'] = base_url().'events/'.$data['booking_id'];
+                $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Approved!');
                 redirect('p_bookings');
@@ -195,6 +200,13 @@
                 $this->db->set(array('booked'=>0));
                 $this->db->where(array('package_id'=>$data['package_id']));
                 $this->db->update('packages');
+
+                $notif['message'] = 'You been declined the event: '.$data['event_name'];
+                $notif['links'] = base_url().'p_bookings';
+                $notif['target_user_id'] = $data['client_id'];
+                $notif['target_message'] = 'Your '.$data['event_name'].' status has been changed to decline!';
+                $notif['target_links'] = base_url().'events/'.$data['booking_id'];
+                $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Decline!');
                 redirect('p_bookings');

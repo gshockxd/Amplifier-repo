@@ -4,17 +4,23 @@
             <p class="h4 text-center">Notifications</p>
             <table class="table table-bordered table-hover">
                 <?php if($notifications):?>
-                    <?php foreach($notifications as $n): ?>      
-                        <tr class="clickable-row <?php echo $n['status'] == 'notified'? 'bg-light' : '' ?>" data-toggle="tooltip" data-placement="" title="<?php echo date('m/d/y h:i a', strtotime($n['created_at'])) ?>" data-href="<?php echo $n['links'] ?>">
+                    <?php foreach($notifications as $n): ?>
+                    <?php
+                        $user_id = $this->session->userdata('user_id');
+                        if($user_id == $n['user_id']){
+                            $message = $n['notif_name'];
+                            $links = $n['links'];
+                        }else if($user_id == $n['target_user_id']){
+                            $message = $n['target_notif_name'];
+                            $links = $n['target_links'];
+                        }else{
+                            $message = '';
+                            $links = '';
+                        }
+                    ?>     
+                        <tr class="clickable-row <?php echo $n['status'] == 'notified'? 'bg-light' : '' ?>" data-toggle="tooltip" data-placement="right" title="<?php echo date('m/d/y h:i a', strtotime($n['created_at'])) ?>" data-href="<?php echo $links?>">
                             <td class="">
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <p class="text-justify"><?php echo $n['notif_name'] ?></p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <?php echo date('m/d/y h:s a', strtotime($n['created_at'])) ?>
-                                    </div>
-                                </div>
+                                <p class="text-justify"><?php echo $message ?></p>
                             </td>
                         </tr>              
                     <?php endforeach; ?>

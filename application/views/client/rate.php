@@ -72,6 +72,7 @@
                     </li>
                 </ul>
                 <div class="card-footer d-flex justify-content-end">
+                    <a href="<?php echo base_url() ?>history_client/<?php echo $this->uri->segment(2) ?>" class="btn btn-secondary mr-2">Cancel</a>
                     <button type="submit" class="btn btn-primary" name="submit">Submit Rate</button>
                 </div>
             </div>

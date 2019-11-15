@@ -37,7 +37,9 @@
 			$this->load->view('inc/footer');
 		}
 		public function get_event(){
-			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
+			$this->db->select('bookings.*, price');
+			$this->db->join('packages', 'packages.package_id = bookings.package_id');
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2), 'status'=>'approve'));
 			$data = $query->row_array();
 
 			if($data){

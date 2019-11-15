@@ -33,6 +33,7 @@
 			$this->db->select('packages.*, users.*');
 			$temp = $this->db->get('packages');
 			$data['package'] = $temp->row_array();
+			$limit_price = $data['package']['price'];
 
 			// echo '<pre>';
 			// print_r($data['package']);
@@ -40,9 +41,9 @@
 			// die;
 
 			$this->form_validation->set_rules('event_name', '', 'required', array('required'=>'Please Input Event Name'));
-			$this->form_validation->set_rules('event_date', '', 'required', array('required'=>'No Date Selected'));
+			$this->form_validation->set_rules('event_date', '', 'required|callback_check_date', array('required'=>'No Date Selected'));
 			$this->form_validation->set_rules('duration', '', 'required', array('required'=>'No Time Selected'));
-			$this->form_validation->set_rules('event_time', '', 'required|callback_check_to_time', array('required'=>'No Time Selected'));
+			$this->form_validation->set_rules('event_time', '', 'callback_check_to_time', array('required'=>'No Time Selected'));
 			// $this->form_validation->set_rules('full_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
 			$this->form_validation->set_rules('down_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
 			$this->form_validation->set_rules('location', '', 'required', array('required'=>'Location is required'));
@@ -56,6 +57,8 @@
 			$data['down_payment'] = $this->input->post('down_payment');
 			$data['location'] = $this->input->post('location');
 			$data['notes'] = $this->input->post('notes');
+
+			// die($data['event_time']);
 
 			if($this->form_validation->run() === FALSE){
 
@@ -71,14 +74,17 @@
 					$this->load->view('client/booking_add_event', $data);
 					$this->load->view('inc/footer');				
 				}else{	
-					echo '<pre>';
-					print_r($data);
-					echo '</pre>';		
-					die;
 					$book_id = $this->Booking_model->event_insert($data['package']);
+					// echo '<pre>';
+					// print_r($data['package']);
+					// echo '</pre>';
+					// die;
 					$notif['message'] = 'Event: '.$data['event_name'].' successfully book! Click here to view.';
 					$notif['links'] = base_url().'events/'.$book_id;
-					$this->Notification_model->index($notif);
+					$notif['target_user_id'] = $data['package']['user_id'];
+					$notif['target_message'] = 'Someone has been booked to your package! Check it out!';
+					$notif['target_links'] = base_url().'p_bookings';
+					$this->Notification_model->index($notif);					
 
 					$this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully booked!');
 					// $this->session->set_flashdata('warning_message', 'Note: Your payment has been changed to '.);

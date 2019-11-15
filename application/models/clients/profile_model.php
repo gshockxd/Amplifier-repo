@@ -235,4 +235,62 @@
 				redirect('c_events');
 			}
 		}
+		public function check_event_reminder(){
+			$query = $this->db->get_where('bookings', array('client_id'=>$this->session->userdata('user_id'), 'status' => 'approve'));
+			$data = $query->result_array();
+			// print_r($data);
+			$system_date = date('Y-m-d'); 
+			$system_time = date('H:i:s');
+			$event_date = date('F d, y');
+			foreach($data as $d){
+				$event_time = date('h:i a', strtotime($d['event_from']));
+				$system_time_minus_1hour = date('H:i', strtotime('-1 hour', strtotime($d['event_from'])));
+				$system_time_minus_15mins = date('H:i', strtotime('-15 minutes', strtotime($d['event_to'])));
+				if($system_date >= $d['event_date']){
+					
+					$notif['message'] = "Reminder! Today event ".$d['event_name']. ' will start at '.$event_time;
+					$reminder_date_is_done = $this->Notification_model->check_event_reminder_trigger($notif['message']);					
+					if(!$reminder_date_is_done){
+						$notif['links'] = '#';
+						$this->Notification_model->index($notif);
+					}
+
+					$notif['message'] = 'Reminder! Event '.$d['event_name'].' will start around '.$event_time;
+					$reminder_time_is_done = $this->Notification_model->check_event_reminder_trigger($notif['message']);
+					if($system_time_minus_1hour <= $d['event_from'] ){
+						if(!$reminder_time_is_done){
+							$notif['links'] = '#';
+							$this->Notification_model->index($notif);
+						}
+					}
+
+					$notif['message'] = 'Reminder! Event '.$d['event_name'].' is starting!';
+					$reminder_time_is_done = $this->Notification_model->check_event_reminder_trigger($notif['message']);					
+					if($system_time >= $d['event_from'] ){
+						if(!$reminder_time_is_done){
+							$notif['links'] = '#';
+							$this->Notification_model->index($notif);
+						}
+					}
+
+					$notif['message'] = 'Reminder! Event '.$d['event_name'].' is about to end!';
+					$reminder_time_is_done = $this->Notification_model->check_event_reminder_trigger($notif['message']);					
+					if($system_time >= $system_time_minus_15mins ){
+						if(!$reminder_time_is_done){
+							$notif['links'] = '#';
+							$this->Notification_model->index($notif);
+						}
+					}
+					
+					$notif['message'] = 'Reminder! Event '.$d['event_name'].' is ended!';
+					$reminder_time_is_done = $this->Notification_model->check_event_reminder_trigger($notif['message']);					
+					if($system_time >= $d['event_to'] ){
+						if(!$reminder_time_is_done){
+							$notif['links'] = '#';
+							$this->Notification_model->index($notif);
+						}
+					}
+				}
+			}
+		}
     }

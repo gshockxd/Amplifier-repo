@@ -99,8 +99,8 @@
             }else{
                 $this->db->where(array('package_id'=>$id, 'owner'=>$this->session->userdata('user_id')));
                 $this->db->delete('packages');
-                $notif['message'] = 'Package Name: '.$data['package_name'].' has been successfully deleted!';
-                $notif['links'] = base_url().'user_notifications/#';
+                $notif['message'] = 'Package Name: '.$data['package_name'].' has been deleted!';
+                $notif['links'] = '#';
                 $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Package has been successfully Deleted!');
@@ -110,6 +110,8 @@
         public function get_event_info (){
             $templates['title'] = 'Event Info';
 
+            $this->db->select('bookings.*, price');
+            $this->db->join('packages', 'packages.package_id = bookings.package_id');
             $query = $this->db->get_where('bookings', array('booking_id'=> $this->uri->segment(2)));
             $data['event'] = $query->row_array();
 

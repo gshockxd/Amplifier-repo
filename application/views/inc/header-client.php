@@ -2,6 +2,7 @@
 
 <?php
 	$notif_badge = $this->Notification_model->notification_badge();
+	$reminder = $this->Profile_model->check_event_reminder();
 
 	// session_start();
 	if(!isset($_SESSION['theme'])){
@@ -17,12 +18,9 @@
 			$theme = $_SESSION['theme'];
 		}
 	}
-
 	$f = $theme == 'flatly' ? '1' : '0';
-
 	// $page = 'localhost'.$_SERVER['REQUEST_URI'].'?f='.$f;
 	$page = pathinfo($_SERVER['PHP_SELF'], PATHINFO_BASENAME).'?f='.$f;
-
 	// echo '<br><br>';
 	// print(pathinfo($_SERVER['PHP_SELF'], PATHINFO_BASENAME));
 ?>

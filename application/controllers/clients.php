@@ -243,18 +243,30 @@
 			}
 		} 
 		public function check_to_time(){
-			$time_to = $this->input->post('event_time');
+		
 			$time_from = $this->input->post('duration');
+			$time_to = $this->input->post('event_time');
 			$event_time = date('H:i', strtotime('+1 hour', strtotime($time_from)));
-			if($this->input->post('event_date') <= date('Y-m-d')){
-				if($event_time > $time_to){
-					$this->form_validation->set_message('check_to_time', 'The minimum event duration is atleast 1 hour long');
+			// echo $this->input->post('event_date') >= date('Y-m-d');
+			// die;
+			if($this->input->post('event_date') >= date('Y-m-d')){
+				if(!$time_to){
+					$this->form_validation->set_message('check_to_time', 'No Time is Selected');
 					return FALSE;
 				}else{
-					return TRUE;
-				}
-			}else{
-				
+					if($event_time > $time_to){
+						$this->form_validation->set_message('check_to_time', 'The minimum event duration is atleast 1 hour long');
+						return FALSE;
+					}
+				}					
+			}
+		}
+		public function check_date(){
+			if($this->input->post('event_date') < date('Y-m-d')){
+				$this->form_validation->set_message('check_date', 'Date selected is invalid');
+				return FALSE;
+			}else{			
+				return TRUE;
 			}
 		}
 	} 
