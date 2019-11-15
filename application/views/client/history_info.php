@@ -1,4 +1,5 @@
 <!-- <?php// echo '<pre>'; print_r($history); echo '</pre>'; ?> -->
+<!-- <?php// echo '<pre>'; print_r($this->session->userdata()); echo '</pre>'; ?> -->
 <div class="container my-3">
 <?php $this->session->set_userdata('history_client_id', $this->uri->segment(2)) ?>
     <div class="col-md-8 offset-md-2">
