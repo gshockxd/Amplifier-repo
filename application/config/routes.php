@@ -7,14 +7,16 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['users']                                 = 'welcome/search_results';
 $route['users/(:num)']                          = 'welcome/search_results/$1';
+$route['events']                                = 'welcome/search_results_events';
+$route['events_page']                           = 'welcome/search_results_events';
+$route['events_page/(:num)']                    = 'welcome/search_results_events/$1';
 $route['profile/(:num)']                        = 'welcome/profile/$1';
+$route['services']                              = 'welcome/search_results_package';
+$route['services/(:num)']                       = 'welcome/search_results_package/$1';
 $route['search_results_history']                = 'welcome/search_results_history';
 $route['search_results_package']                = 'welcome/search_results_package/';
-$route['search_results']                        = 'welcome/search_results';
-$route['search_results/(:num)']                 = 'welcome/search_results/$1';
-$route['search_results_events']                 = 'welcome/search_results_events';
 $route['search_results_report']                 = 'welcome/search_results_report';
-$route['events']                                = 'welcome/events';
+
 $route['addevent']                              = 'welcome/addevent';
 $route['history']                               = 'welcome/history';
 $route['reports']                               = 'welcome/reports';
@@ -26,7 +28,7 @@ $route['delete_report/(:num)']                  = 'welcome/delete_report/$1';
 $route['delete_event/(:num)']                   = 'welcome/delete_event/$1';
 $route['delete_package/(:num)']                 = 'welcome/delete_package/$1';
 $route['add_offense/(:num)']                    = 'welcome/offense_count/$1';
-$route['services']                              = 'welcome/services';
+
 $route['block_page']                            = 'welcome/block_page';
 $route['changeoff']                             = 'welcome/changeoff';
 $route['logout']                                = 'welcome/logout';

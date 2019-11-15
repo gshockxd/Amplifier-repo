@@ -121,7 +121,7 @@ class Welcome extends CI_Controller
     public function delete_event($id)
     {
         $this->load->model('model');
-        $offense = array("status" => "hide");
+        $offense = array("status" => "cancel");
 
         $this->model->update_hide_event($offense);
 
@@ -130,7 +130,7 @@ class Welcome extends CI_Controller
             "notif_type" => "event",
             "notif_status" => "cancel",
             "status" => "notified",
-            "notif_name" => "Cancelled Event",
+            "notif_name" => "Event Cancelled",
 
         );
         $this->model->insert_data_notifications($notif_insert);
@@ -318,6 +318,7 @@ class Welcome extends CI_Controller
         $this->db->where('package_id', $id);
         $temp = $this->db->get('packages');
         $data['package'] = $temp->row_array();
+        $data["fetch_data_client"] = $this->model->fetch_data_client();
         $this->load->view('admin/addevent', $data);
 
     }
@@ -330,15 +331,17 @@ class Welcome extends CI_Controller
         $temp = $this->db->get('packages');
         $data['package'] = $temp->row_array();
 
+        $this->form_validation->set_rules('client', '', 'required', array('required' => 'Please Select a client'));
         $this->form_validation->set_rules('event_name', '', 'required', array('required' => 'Please Input Event Name'));
         $this->form_validation->set_rules('event_date', '', 'required', array('required' => 'No Date Selected'));
         $this->form_validation->set_rules('event_time', '', 'required', array('required' => 'No Time Selected'));
         $this->form_validation->set_rules('duration', '', 'required', array('required' => 'No Time Selected'));
         // $this->form_validation->set_rules('full_payment', '', 'required|numeric', array('required'=>'Please Input Payment', 'numeric'=> 'Please Input a valid amount'));
-        $this->form_validation->set_rules('down_payment', '', 'required|numeric', array('required' => 'Please Input Payment', 'numeric' => 'Please Input a valid amount'));
+        $this->form_validation->set_rules('down_payment', '', 'numeric|greater_than[0]', array('required' => 'Please Input Payment', 'numeric' => 'Please Input a valid amount'));
         $this->form_validation->set_rules('location', '', 'required', array('required' => 'Location is required'));
-        $this->form_validation->set_rules('notes', '', 'required', array('required' => 'Notes is required'));
+     
 
+        $data['client_id'] = $this->input->post('client');
         $data['event_name'] = $this->input->post('event_name');
         $data['event_date'] = $this->input->post('event_date');
         $data['event_time'] = $this->input->post('event_time');
@@ -350,15 +353,26 @@ class Welcome extends CI_Controller
 // print_r($data);
 // echo '</pre>';
 //         die;
-
+        $date=date('y-m-d');
+        $book_date = date_create($date);
+        date_add($book_date, date_interval_create_from_date_string("3 days"));
+        if(date_format($book_date,"Y-m-d")>$this->input->post('event_date')){
+            echo '<script> alert("Booking date must be on or after '.date_format($book_date,"M d,Y").'. Please try again");</script>';
+            $this->load->model('model');
+            $data["fetch_data_client"] = $this->model->fetch_data_client();
+            $this->load->view('admin/addevent', $data);
+        }else{
         if ($this->form_validation->run() === false) {
-
+            echo '<script> alert("Booking failed, Try again");</script>';
+            $this->load->model('model');
+            $data["fetch_data_client"] = $this->model->fetch_data_client();
             $this->load->view('admin/addevent', $data);
         } else {
-                $book_id = $this->booking_model->event_insert($data['package']);
+                $book_id = $this->event_insert($data['package']);
                 $this->session->set_flashdata('success_message', 'Event ' . $data['event_name'] . ' has been successfully booked!');
                 redirect('events');
             }
+        }
         }
   
     public function event_insert($package)
@@ -375,32 +389,32 @@ class Welcome extends CI_Controller
         // print_r($this->input->post());
         // echo '</pre>';
         // die;
-
+        
         $data = array(
-            'client_id' => $this->session->userdata('user_id'),
-            'performer_id' => $package['owner'],
-            'package_id' => $package['package_id'],
-            'venue_name' => $this->input->post('location'),
-            'event_date' => $this->input->post('event_date'),
-            'event_from' => $this->input->post('duration'),
-            'event_to' => $this->input->post('event_time'),
-            'notes' => $this->input->post('notes'),
-            'full_amount' => $package['price'],
-            'down_payment' => $this->input->post('down_payment'),
-            'payment_status' => $payment_status,
-            'date_booked' => $timestamps,
-            'event_name' => $this->input->post('event_name'),
-            'artist_type' => $package['artist_type'],
+            'client_id'         => $this->input->post('client'),
+            'performer_id'      => $package['owner'],
+            'full_amount'       => $package['price'],
+            'package_id'        => $package['package_id'],
+            'venue_name'        => $this->input->post('location'),
+            'event_date'        => $this->input->post('event_date'),
+            'event_from'        => $this->input->post('duration'),
+            'event_to'          => $this->input->post('event_time'),
+            'notes'             => $this->input->post('notes'),
+            'full_amount'       => $package['price'],
+            'down_payment'      => $this->input->post('down_payment'),
+            'payment_status'    => $payment_status,
+            'date_booked'       => $timestamps,
+            'event_name'        => $this->input->post('event_name'),
+            'artist_type'       => $package['artist_type'],
         );
+        echo "<pre>";
+        echo print_r($data);
+        echo "</pre>";
 
         $this->db->insert('bookings', $data);
         $id = $this->db->insert_id();
         // echo $this->db->last_query();
         // die();
-
-        $this->db->set('booked', 1);
-        $this->db->where('package_id', $package['package_id']);
-        $this->db->update('packages');
         return $id;
     }
     public function get_packages()
@@ -435,27 +449,6 @@ class Welcome extends CI_Controller
     {
         $this->load->model('model');
 
-		/*
-        if ($this->input->post('usertype') == 'admin') {
-            $usertype = "admin";
-        } else if ($this->input->post('usertype') == 'client') {
-            $usertype = "client";
-        } else if ($this->input->post('usertype') == 'performer') {
-            $usertype = "performer";
-        } else {
-            $usertype = "*";
-        }
-        if ($this->input->post('status') == 'verified') {
-            $status = "verified";
-        } else if ($this->input->post('status') == 'block') {
-            $status = "block";
-        } else if ($this->input->post('status') == 'banned') {
-            $status = "banned";
-        } else {
-            $status = "*";
-		}
-		*/
-
 		$where = array();
 		if ($this->input->get('user_type') != '') {
 			$where['user_type'] = $this->input->get('user_type'); 
@@ -464,16 +457,11 @@ class Welcome extends CI_Controller
             $where['status'] = $this->input->get('status'); 
             
         }
-        
-     
-		// $this->model->query_results_user($usertype, $status);
-		// $this->model->query_results_user($where);
-		// $data["query_results_user"] = $this->model->query_results_user($usertype, $status);
 
         $total_rows = $this->model->count_results_user($where);
-        // echo $total_rows;exit();
+ 
 		
-		$rpg = 10;
+        $rpg = 5;
 
 		$config['base_url'] = site_url('users');
 		$config['total_rows'] = $total_rows;
@@ -489,10 +477,65 @@ class Welcome extends CI_Controller
 
 		$data["query_results_user"] = $this->model->query_results_user($where, $rpg, $page);
         $data['where'] = $where;
-        
+        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
         $this->load->view('/admin/users', $data);
     }
 
+    public function search_results_events($page = 0)
+    {
+        $this->load->model('model');
+
+        $date='*';
+        $name='*';
+		if ($this->input->get('date') != '') {
+			$date = $this->input->get('date'); 
+		}
+		if ($this->input->get('name') != '') {
+           $name = $this->input->get('name'); 
+        }
+
+        $total_rows = $this->model->count_results_events($date, $name);		
+		$rpg = 10;
+
+		$config['base_url'] = base_url('events_page');
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $rpg;
+		$config['reuse_query_string'] = true;
+		$config['uri_segment'] = 2;
+		
+		$this->pagination->initialize($config);
+
+		$data['pagination'] = $this->pagination->create_links();
+		$data["query_data_event"] = $this->model->query_data_event($date, $name, $rpg, $page);
+        // $data['where'] = $date;
+        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->view('/admin/events', $data);
+    }
+    public function search_results_package($page = 0)
+    {
+		$this->load->model('model');
+        $where=array();
+		if ($this->input->get("user_id")) {
+			$where['owner'] = $this->input->get("user_id");
+        }
+        
+        $total_rows = $this->model->count_results_package($where);		
+		$rpg = 3;
+
+		$config['base_url'] = base_url('services');
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $rpg;
+		$config['reuse_query_string'] = true;
+		$config['uri_segment'] = 2;
+		
+		$this->pagination->initialize($config);
+
+		$data['pagination'] = $this->pagination->create_links();
+		$data["query_results_package"] = $this->model->query_results_package($where, $rpg, $page);
+        $data["fetch_data_perf"] = $this->model->fetch_data_perf();
+        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->view('/admin/services', $data);
+    }
     public function search_results_report()
     {
         $this->load->model('model');
@@ -508,49 +551,7 @@ class Welcome extends CI_Controller
         $this->load->view('/admin/search_report', $data);
     }
 
-    public function search_results_package()
-    {
-		$this->load->model('model');
-		/*
-        if ($this->input->post('user_id') == '') {
-            $user_id = "*";
-        } else {
-            $user_id = $this->input->post('user_id');
-		}
-		*/
-		$where = array();
-		if ($this->input->get("user_id")) {
-			$where['owner'] = $this->input->get("user_id");
-		}
-        // $this->model->query_results_package($where);
-        $data["query_results_package"] = $this->model->query_results_package($where);
-        $data["fetch_data_perf"] = $this->model->fetch_data_perf();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
-        $this->load->view('/admin/search_package', $data);
-    }
-
-    public function search_results_events()
-    {
-        $this->load->model('model');
-
-        if ($this->input->post('date') == '') {
-            $date_event = "*";
-
-        } else {
-            $date_event = $this->input->post('date');
-        }
-
-        if ($this->input->post('name') == '') {
-            $name = "*";
-        } else {
-            $name = $this->input->post('name');
-        }
-
-        $this->model->query_data_event($date_event, $name);
-        $data["query_data_event"] = $this->model->query_data_event($date_event, $name);
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
-        $this->load->view('/admin/search_event', $data);
-    }
+   
     public function search_results_history()
     {
         $this->load->model('model');

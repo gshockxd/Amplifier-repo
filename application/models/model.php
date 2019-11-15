@@ -168,15 +168,6 @@ class model extends CI_Model
        $this->db->select("*");
        $this->db->from("users");
       
-      /*
-       if($this->input->get("user_type")!="*"){
-         $where["user_type"] = $this->input->get("user_type");
-      }
-      if($this->input->get("status")!="*"){
-         $where["status"] = $this->input->get("status");
-      } 
-      */    
-   
       $where["user_type!="] = "admin";
       $where["status!="] = "hide";
       $this->db->where($where);
@@ -184,35 +175,32 @@ class model extends CI_Model
       $this->db->limit($rpg, $page);
       $query = $this->db->get();
     
-      //  echo $this->db->last_query();
-      //  exit();
        return $query;
     }
     function count_results_user($where)
     {
-      //  $this->db->select("*");
+     
        $this->db->from("users");
-       /*
-       if($usertype!="*"){
-       $this->db->where("user_type=",$usertype);
-      }
-      if($status!="*")
-      {
-       $this->db->where("status=",$status);
-      }      
-      */
-      // $this->db->where("status!=","hide");
+      
       $where["user_type!="] = "admin";
+      $where["status!="] = "hide";
       $this->db->where($where);
       $t = $this->db->count_all_results();
-      //  $query = $this->db->get();
-      //  echo $this->db->last_query();
-      //  exit();
        return $t;
-      //  return $this->db->count_all_results();
-      //  return $query;
+     
     }
-    function query_results_package($where)
+    function count_results_package($where)
+    {
+     
+       $this->db->from("packages");
+      
+      $where["package_status!="] = "hide";
+      $this->db->where($where);
+      $t = $this->db->count_all_results();
+       return $t;
+     
+    }
+    function query_results_package($where,$rpg, $page)
     {
      
        $this->db->select("*");
@@ -225,6 +213,8 @@ class model extends CI_Model
       $where["package_status!="] = "hide";
       $this->db->where($where);
       $this->db->join("users",'packages.owner=users.user_id');
+      $this->db->order_by('booked');
+      $this->db->limit($rpg, $page);
        $query = $this->db->get();
        return $query;
     }
@@ -244,7 +234,7 @@ class model extends CI_Model
       $query = $this->db->get();
       return $query;
     }
-    function query_data_event($date_event,$name)
+    function query_data_event($date,$name,$rpg,$page)
     {
      
       $status = "hide";
@@ -252,8 +242,36 @@ class model extends CI_Model
       $this->db->from("bookings");
       $this->db->where("bookings.status!=",$status);
 
-      if($date_event != "*"){
-         $this->db->where("bookings.event_date",$date_event);
+      if($date != "*"){
+         $this->db->where("bookings.event_date",$date);
+      }
+   
+      if($name != "*"){
+         $this->db->like("event_name",$name,'both');
+         $this->db->or_like("users.fname",$name,'both');
+         $this->db->or_like("users.lname",$name,'both');
+         $this->db->or_like("u2.fname",$name,'both');
+         $this->db->or_like("u2.lname",$name,'both');
+      }
+
+      $this->db->join("users",'bookings.client_id=users.user_id');
+      $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+      $this->db->order_by('event_date DESC','event_from DESC');
+      $this->db->limit($rpg, $page);
+
+      $query = $this->db->get();
+      return $query;
+    }
+    function count_results_events($date, $name)
+    {
+     
+      $status = "hide";
+      $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+      $this->db->from("bookings");
+      $this->db->where("bookings.status!=",$status);
+
+      if($date != "*"){
+         $this->db->where("bookings.event_date",$date);
       }
    
       if($name != "*"){
@@ -267,8 +285,9 @@ class model extends CI_Model
       $this->db->join("users",'bookings.client_id=users.user_id');
       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
 
-      $query = $this->db->get();
-      return $query;
+      $t = $this->db->count_all_results();
+       return $t;
+     
     }
     function query_data_event_history($date_event,$name)
     {

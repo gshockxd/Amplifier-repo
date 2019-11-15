@@ -1,8 +1,8 @@
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('users') ?>">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fa fa-compact-disc"></i>
+        <div class="sidebar-brand-icon">
+        <img class="img-profile rounded-circle" style="height:50px; weight:30px;" src="<?php echo base_url(); ?>/assets/img/logo.png">
         </div>
         <div class="sidebar-brand-text mx-3">AMPLIFIER</div>
     </a>
