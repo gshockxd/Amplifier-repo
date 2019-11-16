@@ -3,7 +3,6 @@
 <?php
 	$notif_badge = $this->Notification_model->notification_badge();
 	$reminder = $this->Profile_model->check_event_reminder();
-	// hello world
 
 	// session_start();
 	if(!isset($_SESSION['theme'])){
@@ -88,7 +87,7 @@
 								<a class="nav-link" href="<?php echo base_url()?>booking">Package</a>
 							</li>
 							<li class="nav-item <?php echo $this->uri->segment(1) == 'calendar' ? 'active' : '' ?>">
-								<a class="nav-link" href="<?php echo base_url()?>calendar">Calendar</a>
+								<a class="nav-link" href="<?php echo base_url()?>clients/calendar">Calendar</a>
 							</li>
 							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'package' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>

@@ -133,6 +133,7 @@
 					'media_fk' => null,
 					'created_at' => $date,
 					'updated_at' => $date,
+					'block_end' => '0000-00-00',
 					'artist_type' => $this->input->post('service'),
 					'artist_desc' => $this->input->post('desc')
 				);				

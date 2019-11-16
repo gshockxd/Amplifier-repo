@@ -133,6 +133,12 @@
 			
 			$this->Calendar_model->index();
 		}
+		public function calendar_info(){
+			$this->Session_model->session_check();			
+			$this->Session_model->user_type_check_client();
+			
+			$this->Calendar_model->calendar_info();
+		}
 		public function package(){
 			$this->Session_model->session_check();			
 			$this->Session_model->user_type_check_client();
