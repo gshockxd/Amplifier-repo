@@ -9,7 +9,7 @@
     $date_block =date("F d, Y",strtotime($this->session->userdata('block_end')));
     $date_today = date("F d, Y");
 
-       if($date_block == $date_today){
+       if($date_block <= $date_today){
         redirect('changeoff');
         }
 
@@ -122,7 +122,10 @@
         <center> <a href="login" class=" btn btn-outline-secondary btn-lg active" role="button" aria-pressed="true"><i
                     class="fas fa-sign-in-alt fa-lg"></i> LOGOUT</a></center>
 </body>
-
+<br>
+    <br>
+    <br>
+        <br>
 
 <?php include('logout_modal.php'); ?>
 </nav>
@@ -140,10 +143,15 @@
 <script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/popper.js"></script>
 
 <!-- Footer -->
-
-<footer id="sticky-footer" class=" fixed-bottom sticky-bottom bg-dark text-white-50  ">
+<br>
+    <br>
+    <br>
+        <br>
+   
+    
+<footer class="bg-dark text-white-50  ">
     <div class="container text-center">
-
+    <br>
         <br>
         <div class="form-group ">
             <h5>CONTACT US</h5>
@@ -155,6 +163,8 @@
             <small class="text-center">Copyright &copy; AMPLIFIER 2019</small>
         </div>
     </div>
+    <br>
+        <br>
 
 
 

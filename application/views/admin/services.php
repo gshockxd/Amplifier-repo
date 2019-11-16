@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<div lang="en">
 
 
 <?php include('head.php'); ?>
@@ -26,9 +26,9 @@
                     <div class="col-md-2 col-lg-6 mx-auto">
                         <div class="card shadow mb-4">
                             <div class="card-body center">
-                                <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('search_results_package')?>">
+                                <form class="form-inline md-form form-sm mt-0" method="get" action="<?php echo base_url('services')?>">
                                 <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
-                                <option selected disabled>Select Packages from:</option>
+                                <option selected value=''>Select All Packages</option>
                                 <?php
                                     if($fetch_data_perf->num_rows()>0)
                                         {
@@ -52,9 +52,9 @@
                         <div class="row mx-auto">
 
                             <?php 
-                    if($fetch_data_packages->num_rows()>0)
+                    if($query_results_package->num_rows()>0)
                     {
-                        foreach($fetch_data_packages->result() as $row)
+                        foreach($query_results_package->result() as $row)
                         {
                     ?>
                             <div class="col-sm-4 mb-3 col-md-4">
@@ -63,8 +63,8 @@
                                         <h3 class="card-title">
                                             <img src="<?php echo base_url(); ?><?php echo $row->photo; ?>" alt="none"
                                                 style="width:50px;height:50px; border-radius:30px">
-                                            <a href="profile/<?php echo $row->user_id; ?>" class="text-secondary">
-                                                <h3 class="text-center"><?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></h3></a>
+                                            <a href="<?php echo base_url('profile/'); echo $row->user_id; ?>" class="text-secondary text-center">
+                                                <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></a>
                                         </h3>
                                         <hr>
                                         <p class="lead text-center">
@@ -75,11 +75,21 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="text-center ">
-                                            <a href="#" class="btn fa fas-trash btn-danger" data-toggle="modal"
-                                                data-target="#delpack<?php echo $row->package_id; ?>"><span
-                                                    class="fa fa-trash"></span></a>
-                                         <a href="<?php echo base_url('addevents/'); echo $row->package_id ?>" class="btn btn-primary text-white"><i class="fas fa-book"></i></a>
-                                        </div>
+                                            <a href="#" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#delpack<?php echo $row->package_id; ?>">
+                                                <i class="fa fa-trash"></i></a>
+                                        <?php if($row->booked=="1"){ ?>
+                                            <a class="btn btn-secondary text-white disabled" disabled>
+                                            <i class="fas fa-window-close" disabled></i></a>
+                                            </div>
+                                        
+                                        <?php }else{ ?>
+                                         <a href="<?php echo base_url('addevents/'); echo $row->package_id ?>" class="btn btn-primary text-white">
+                                            <i class="fas fa-book"></i></a>
+                                            </div>
+                                        <?php } ?>
+                                       
+                                        
                                         <div class="text-center font-weight-light font-italic">Date Created:
                                             <?php echo  date('F d, Y', strtotime($row->date_created)); ?><br></div>
                                     </div>
@@ -105,7 +115,7 @@
                                             </H4>
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="delete_package/<?php echo $row->package_id; ?>" type="button">
+                                            <a href="<?php echo base_url('delete_package/'); echo $row->package_id; ?>" type="button">
                                                 <button class="btn btn-danger">YES</button>
                                             </a>
                                             <button type="button" class="btn btn-secondary"
@@ -118,44 +128,20 @@
                             <?php
                     }
                 ?>
+                           
                         </div>
+                        <div class="row"> 
+                                <div class="col-sm-12 col-md-12 offset-5">
+                                    <ul class="pagination">
+                                    <?php echo $pagination; ?></ul>
+                                </div>
+                            </div>
                     </div>
 
                     <br>
                     <!-- pagination Start -->
                     <div class="row">
 
-
-<!-- 
-                        <div class="col-sm-12 col-md-12 offset-5">
-                            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1
-                                to 3 of 57 entries</div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-12 offset-4">
-                            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                                        <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-                                            class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="dataTable"
-                                            data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                    <li class="paginate_button page-item next" id="dataTable_next"><a href="#"
-                                            aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-                                            class="page-link">Next</a></li>
-                                </ul>
-                            </div>
-                        </div> -->
                     </div>
                     <br>
                     <?php
@@ -163,7 +149,9 @@
             else
             {
             ?>
-                    <h1 align="center">No Data Found</h1>
+                    <center>
+                        <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png"class="m-3 w-75 h-100"/>
+                    </center>
                     <?php
             }
             ?>
@@ -188,4 +176,4 @@
 
 </body>
 
-</html>
+</div>
