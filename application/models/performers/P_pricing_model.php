@@ -42,6 +42,7 @@
                 'details' => $this->input->post('desc'),
                 'owner' => $this->session->userdata('user_id'),
                 'booked' => 0,
+                'date_created' => '0000-00-00',
                 'created_at' => $timestamp,
                 'updated_at' => $timestamp
             );

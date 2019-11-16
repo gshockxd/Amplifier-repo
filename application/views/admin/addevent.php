@@ -35,21 +35,46 @@
 
                 <?php echo form_open('booking_attempt_admin/'.$this->uri->segment(2)) ?>
 <div class="container my-3">
-    <p class="h3 text-center">Book an Event</p>
+    <p class="h3 text-center">EVENT BOOKING</p>
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="">Event Name</label>
-                <input type="text" class="form-control <?php echo form_error('event_name') ? 'is-invalid' : '' ?>" name="event_name" value="<?php echo isset($event_name) ? $event_name : '' ?>">
-                <div class="invalid-feedback">
-                    <?php echo form_error('event_name') ?>
-                </div>
-            </div>
+        <div class="form-group">
+                <label for="">Client Name <label class='text-danger'>*</label></label>
+                        <select id="client" name="client" class="form-control">
+                        <option value="<?php echo $this->session->userdata('user_id'); ?>">
+                        Current User</option>
+                            <?php
+                                            if($fetch_data_client->num_rows()>0)
+                                            {
+                                            foreach($fetch_data_client->result() as $row)
+                                                { 
+                                            ?>
+                            <option value="<?php echo $row->user_id; ?>">
+                                <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
+                            <?php
+                                            }
+                                            }
+                                            ?>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?php echo form_error('client') ?>
+                        </div>
+                    </div>   
+                    <div class="form-group">
+                <label for="event_name">Event Name <label class='text-danger'>*</label></label>
+                        <input id="event_name" type="text" name="event_name" placeholder="E.g USC FEST" value="<?php echo isset($event_name) ? $event_name : '' ?>" class="form-control">
+                       
+                        </input>
+                        <div class="invalid-feedback">
+                            <?php echo form_error('event_name') ?>
+                        </div>
+                    </div>            
             <div class="row">
                 <div class="col-md-6">
                        <div class="form-group">
-                        <label for="">Event Date</label>
+                        <label for="">Event Date <label class='text-danger'>*</label></label>
                         <input type="date" name="event_date" class="form-control <?php echo form_error('event_date') ? 'is-invalid' : '' ?>" value="<?php echo isset($event_date) ? $event_date : '' ?>" >
+                        <small class='font-italic'>*Event date must be 3 days before the event </small>
                         <div class="invalid-feedback">
                             <?php echo form_error('event_date') ?>
                         </div>
@@ -65,7 +90,7 @@
             <div class="row">
                 <div class="col-md-6">
                        <div class="form-group">
-                        <label for="">From</label>
+                        <label for="">From <label class='text-danger'>*</label></label>
                         <input type="time" name="duration" class="form-control <?php echo form_error('duration') ? 'is-invalid' : '' ?>" value="<?php echo isset($duration) ? $duration : '' ?>" >
                         <div class="invalid-feedback">
                             <?php echo form_error('duration') ?>
@@ -74,7 +99,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">To</label>
+                        <label for="">To <label class='text-danger'>*</label></label>
                         <input type="time" name="event_time" class="form-control <?php echo form_error('event_time') ? 'is-invalid' : '' ?>" value="<?php echo isset($event_time) ? $event_time : '' ?>" >
                         <div class="invalid-feedback">
                             <?php echo form_error('event_time') ?>
@@ -103,22 +128,22 @@
                 </div>
             </div> -->
             <div class="form-group">
-                <label for="">Payment</label>
-                <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" >
+                <label for="">First Payment <label class='text-danger'>*</label></label>
+                <input type="number" name="down_payment" placeholder="0"class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" >
                 <div class="invalid-feedback">
                     <?php echo form_error('down_payment') ?>
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Venue Location</label>
-                <input type="text" class="form-control <?php echo form_error('location') ? 'is-invalid' : '' ?>" name="location" value="<?php echo isset($localtion) ? $location : '' ?>">
+                <label for="">Venue Location <label class='text-danger'>*</label></label>
+                <input type="text" class="form-control" placeholder="E.g Talamban, Cebu City" <?php echo form_error('location') ? 'is-invalid' : '' ?>" name="location" value="<?php echo isset($location) ? $location : '' ?>">
                 <div class="invalid-feedback">
                     <?php echo form_error('location') ?>
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Notes</label>
-                <textarea name="notes" id="ckeditor" class="form-control <?php echo form_error('notes') ? 'is-invalid' : '' ?>"><?php echo isset($notes) ? $notes : '' ?></textarea>
+                <label for="">Notes <label class='font-italic'>(Optional)</label></label>
+                <textarea name="notes" placeholder="Notes to performer" id="ckeditor" class="form-control <?php echo form_error('notes') ? 'is-invalid' : '' ?>"><?php echo isset($notes) ? $notes : '' ?></textarea>
                 <div class="invalid-feedback">
                     <?php echo form_error('notes') ?>
                 </div>

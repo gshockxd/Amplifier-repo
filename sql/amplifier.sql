@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2019 at 04:46 PM
+-- Generation Time: Nov 16, 2019 at 05:05 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -67,13 +67,6 @@ CREATE TABLE `band_galleries` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `band_galleries`
---
-
-INSERT INTO `band_galleries` (`id`, `user_id`, `band_photo`, `video_1`, `video_2`, `video_3`, `created_at`, `updated_at`) VALUES
-(14, 85, 'assets/img/performer/2019_11_12_15_36_131.jpg', 'assets/video/performer/2019_11_12_15_36_13.mp4', 'assets/video/performer/2019_11_12_15_36_131.mp4', 'assets/video/performer/2019_11_12_15_36_132.mp4', '2019-11-12 07:36:13', '2019-11-12 07:36:13');
-
 -- --------------------------------------------------------
 
 --
@@ -101,14 +94,6 @@ CREATE TABLE `bookings` (
   `performer_rating` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `bookings`
---
-
-INSERT INTO `bookings` (`booking_id`, `client_id`, `performer_id`, `package_id`, `venue_name`, `event_date`, `event_from`, `event_to`, `full_amount`, `payment_status`, `date_booked`, `down_payment`, `notes`, `status`, `event_name`, `artist_type`, `client_rating`, `performer_rating`) VALUES
-(64, 80, 85, 30, 'Banilad Cebu City', '2019-11-13', '23:00:00', '23:30:00', 0.00, 'dp', '2019-11-13', '200.00', '<p>asdfasdfasdfasf</p>', 'approve', 'Night Sight', 'photographer', NULL, NULL),
-(65, 80, 85, 30, 'Banilad Cebu City', '2019-11-14', '09:00:00', '10:00:00', 0.00, 'dp', '2019-11-13', '200.00', '<p>asdfasdfasdfasf</p>', 'cancel', 'Night Sight', 'photographer', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -123,15 +108,6 @@ CREATE TABLE `chats` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `chats`
---
-
-INSERT INTO `chats` (`id`, `incoming_id`, `outgoing_id`, `message`, `created_at`, `updated_at`) VALUES
-(97, 85, 80, 'hello kyle', '2019-11-13 13:42:31', '2019-11-13 13:42:31'),
-(98, 80, 85, 'oh hi nike', '2019-11-13 13:42:40', '2019-11-13 13:42:40'),
-(99, 80, 85, ' yes you know', '2019-11-13 13:42:47', '2019-11-13 13:42:47');
 
 -- --------------------------------------------------------
 
@@ -275,18 +251,6 @@ CREATE TABLE `notifications` (
   `target_links` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `notifications`
---
-
-INSERT INTO `notifications` (`id`, `user_id`, `target_user_id`, `notif_type`, `notif_status`, `status`, `target_status`, `created_at`, `booking_id`, `package_id`, `report_id`, `notif_name`, `target_notif_name`, `links`, `target_links`) VALUES
-(219, 80, NULL, 'user', 'created', 'seen', NULL, '2019-11-13 15:02:22', NULL, NULL, NULL, 'Reminder! November 13, 19 Event Night Sight will start at 11:00 pm', NULL, '#', NULL),
-(220, 80, NULL, 'user', 'created', 'seen', NULL, '2019-11-13 15:02:27', NULL, NULL, NULL, 'Reminder! Event Night Sight will start around 11:00 pm', NULL, '#', NULL),
-(221, 80, NULL, 'user', 'created', 'seen', NULL, '2019-11-13 15:11:28', NULL, NULL, NULL, 'Reminder! Event Night Sight is starting!', NULL, '#', NULL),
-(222, 80, NULL, 'user', 'created', 'seen', NULL, '2019-11-13 15:15:06', NULL, NULL, NULL, 'Reminder! Event Night Sight is about to end!', NULL, '#', NULL),
-(223, 80, NULL, 'user', 'created', 'seen', NULL, '2019-11-13 15:32:11', NULL, NULL, NULL, 'Reminder! Event Night Sight is ended!', NULL, '#', NULL),
-(224, 80, NULL, 'user', 'created', 'seen', NULL, '2019-11-13 15:30:43', NULL, NULL, NULL, 'Reminder! Today event Night Sight will start at 11:00 pm', NULL, '#', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -305,13 +269,6 @@ CREATE TABLE `packages` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `package_status` enum('hide','show','','') COLLATE utf8mb4_unicode_ci DEFAULT 'show'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `packages`
---
-
-INSERT INTO `packages` (`package_id`, `package_name`, `price`, `details`, `owner`, `booked`, `date_created`, `created_at`, `updated_at`, `package_status`) VALUES
-(30, 'AstroPhotography version4', '2000.00', '<p>hello world yeahhh!!</p>', 85, 0, '0000-00-00', '2019-11-12 09:34:54', '2019-11-12 15:22:03', 'show');
 
 -- --------------------------------------------------------
 
@@ -360,14 +317,6 @@ CREATE TABLE `users` (
   `artist_type` enum('photographer','videographer','host','restaurant gig','graduation ball') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `artist_desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `status`, `fname`, `email`, `address`, `rate`, `photo`, `telephone_1`, `telephone_2`, `created_at`, `offense`, `report_count`, `media_fk`, `lname`, `block_end`, `notif_count`, `updated_at`, `artist_type`, `artist_desc`) VALUES
-(80, 'client', 'ShiroViper', '41fd220f05ed0d8c56e3b83af87d45d7', 'verified', 'Nike Marti ', 'white.viper.29@gmail.com', 'Banild Cebu City', '0.00', 'assets/img/client/2019_11_12_13_11_59.jpg', '365468580', '111111111', '2019-11-12 05:11:59', '', 0, NULL, 'Caballes Jr.', '0000-00-00', NULL, '2019-11-12 05:21:35', NULL, NULL),
-(85, 'performer', 'XxKurumixX', '41fd220f05ed0d8c56e3b83af87d45d7', 'verified', 'Kyle Christian', 'kurumi@gmail.com', 'Liloan Cebu City', '0.00', 'assets/img/performer/2019_11_12_15_36_13.jpg', '365468580', '365264573', '2019-11-12 07:36:13', '', 0, NULL, 'Arches Jr.', '0000-00-00', NULL, '2019-11-12 07:36:13', 'photographer', '<p>Hello world</p>');
 
 -- --------------------------------------------------------
 
@@ -525,13 +474,13 @@ ALTER TABLE `artist_types`
 -- AUTO_INCREMENT for table `band_galleries`
 --
 ALTER TABLE `band_galleries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `booking_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `chats`
@@ -579,13 +528,13 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `package_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `reports`
@@ -597,7 +546,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `venues`

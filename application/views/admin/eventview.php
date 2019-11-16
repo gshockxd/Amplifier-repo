@@ -56,7 +56,9 @@
                                             <p class="lead"><img
                                                     src="<?php echo base_url(); ?><?php echo $row->client_photo; ?>"
                                                     alt="none" style="width:50px;height:50px; border-radius:30px">&nbsp
+                                            <a class="text-secondary" href="<?php echo base_url('profile/'); echo $row->client_id; ?>">
                                                 <?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?>
+                                            </a>
                                             </p>
                                         </div>
                                     </div>
@@ -67,7 +69,9 @@
                                             <p class="lead"><img
                                                     src="<?php echo base_url(); ?><?php echo $row->performer_photo; ?>"
                                                     alt="none" style="width:50px;height:50px; border-radius:30px">
-                                                &nbsp<?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?>
+                                                &nbsp <a class="text-secondary" href="<?php echo base_url('profile/'); echo $row->performer_id; ?>">
+                                                        <?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?>
+                                                       </a>
                                             </p>
                                         </div>
                                     </div>
@@ -87,28 +91,25 @@
                                     </div>
                                     <hr>
                                     <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Partial Payment:</label>
+                                        <label for="text" class="col-4 col-form-label">First Payment:</label>
                                         <div class="col-8">
-                                            <p class="lead"><?php echo $row->down_payment; ?></p>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Total Payment:</label>
-                                        <div class="col-8">
-                                            <p class="lead"><?php echo $row->full_amount; ?></p>
+                                            <p class="lead">₱ <?php echo $row->down_payment; ?></p>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Payments Made:</label>
                                         <div class="col-8">
-                                            <p class="lead"><?php echo $row->payment_status; ?></p>
+                                            <?php if ($row->payment_status=="dp"){ ?>
+                                                <p class="lead text-uppercase">Down Payment</p>
+                                            <?php }else{ ?>
+                                            <p class="lead text-uppercase"><?php echo $row->payment_status; ?></p>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Date</label>
+                                        <label for="text" class="col-4 col-form-label">Date of event:</label>
                                         <div class="col-8">
                                             <p class="lead"><?php echo  date('F d, Y', strtotime($row->event_date)); ?>
                                             </p>
@@ -116,13 +117,13 @@
                                     </div>
                                     <hr>
                                     <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Duration:</label>
+                                        <label for="text" class="col-4 col-form-label">Scheduled time:</label>
                                         <div class="col-8">
-                                            <p class="lead"><?php echo $row->event_to; ?>&nbsp (HH:MM:SS)</p>
+                                            <p class="lead"><?php echo date("h:i A",strtotime($row->event_from));?> - <?php echo date("h:i A",strtotime($row->event_to));?></p>
                                         </div>
                                     </div>
                                     <hr>
-
+                                <?php if($row->client_rating!=''){ ?>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Client ratings to
                                             performer:</label>
@@ -144,7 +145,8 @@
                                         </div>
                                     </div>
                                     <hr>
-
+                                <?php } ?>
+                                <?php if($row->performer_rating!=''){ ?>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Performer ratings to
                                             Client:</label>
@@ -165,10 +167,11 @@
                                             <p class="lead"><?php echo $row->notes; ?></p>
                                         </div>
                                     </div>
+                                  
                                     <hr>
-
+                                    <?php } ?>
                                     <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Date Booked</label>
+                                        <label for="text" class="col-4 col-form-label">Date Booked:</label>
                                         <div class="col-8">
                                             <p class="lead"><?php echo  date('F d, Y', strtotime($row->date_booked)); ?>
                                             </p>
@@ -178,6 +181,7 @@
                               }
                           }
                         ?>
+                       
 
                                 </div>
                             </div>
