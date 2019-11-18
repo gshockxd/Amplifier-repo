@@ -55,14 +55,14 @@
     <!-- Messages -->
     <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('a_chat');?>">
-            <i class="fa fa-envelope-o"></i>
+            <i class="fa fa-envelope"></i>
             <span>Messages</span></a>
     </li>
 
     <!-- Logout -->
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
-            <i class="fa fa-share-square-o"></i>
+            <i class="fa fa-share-square"></i>
             <span>Logout</span></a>
     </li>
 

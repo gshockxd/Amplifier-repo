@@ -34,14 +34,13 @@
                                 <div class="bg-white py-2 collapse-inner rounded">
 
                                     <div class="container-fluid">
-                                        <form method="post" action="<?php echo base_url('search_results_history')?>">
+                                        <form method="GET" action="<?php echo base_url('history')?>">
                                             <label for="date">Date of event
-                                            <input class="form-control mr-sm-2" type="date" name="date"
+                                            <input class="form-control mr-sm-2" style="width:300px" type="date" name="date"  value="<?php echo (isset($where['date'])); ?>"
                                                     placeholder="Search by Date"></label>
                                                     <br>
                                             <label for="date">Name
-                                            <input class="form-control w-100" type="text" name="name"
-                                                   ></label>
+                                            <input class="form-control" style="width:300px" type="text" name="name" placeholder="E.g event name, client/performer name" value="<?php echo (isset($where['name'])); ?>"></label>
                                                    <br>
                                                 <button class="btn btn-outline-info" type="submit"><i class="fas fa-search"></i>&nbsp Search</button>
                                         </form>
@@ -54,7 +53,6 @@
                     <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th class="th-sm">ID</th>
                                         <th class="th-sm">VENUE</th>
                                         <th class="th-sm">CLIENT NAME</th>
                                         <th class="th-sm">PERFORMER NAME</th>
@@ -67,13 +65,12 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                            if($fetch_data_history->num_rows()>0)
+                            if($query_data_event_history->num_rows()>0)
                             {
-                               foreach($fetch_data_history->result() as $row)
+                               foreach($query_data_event_history->result() as $row)
                                 { 
                         ?>
                                     <tr>
-                                        <th scope="row"><?php echo $row->booking_id; ?></th>
                                         <th><?php echo $row->venue_name; ?></th>
                                         <td><?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?></td>
                                         <td><?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?>
@@ -81,50 +78,70 @@
                                         <td><?php echo  date('F d, Y', strtotime($row->event_date)); ?></td>
                                         <td>
                                             <?php
+                                if($row->client_rating==''){ ?>
+                                       No ratings yet </td>
+                                <?php
+                                }else{
                                 for($i=0;$i<$row->client_rating; $i++)
                                 { 
                                 ?>
                                             <div class="fa fa-star"></div>
                                             <?php
                                 }
+                            }
                                 ?>
                                         </td>
                                         <td>
-                                            <?php
+                                <?php
+                                if($row->performer_rating==''){ ?>
+                                 No ratings yet </td>
+                                <?php }else{
                                 for($i=0;$i<$row->performer_rating; $i++)
                                 { 
                                 ?>
                                             <div class="fa fa-star"></div>
                                             <?php
                                 }
+                            }
                                 ?>
                                         <th><?php echo $row->status; ?></th>
                                         <td>
-                                            <a href="eventview/<?php echo $row->booking_id; ?>"><button
+                                            <a href="<?php echo base_url('eventview/'); echo $row->booking_id; ?>"><button
                                                     class="btn btn-outline-info fa fa-eye"></button></a>
                                         </td>
                                     </tr>
                                     <?php
                                 }
+                            
                         ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row mb-4">
-                    <div class="col-sm-12 col-md-12 offset-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 3
-                            of 57 entries</div>
+               
+                <div class="row"> 
+                        <div class="col-sm-12 col-md-12 offset-5">
+                                <ul class="pagination">
+                            <?php echo $pagination; ?></ul>
+                     
+                        </div>
                     </div>
+                    
 
 
-                </div> -->
+                </div>
                 <?php
          
-        }
+        }else{
       
         ?>
+          <center>
+            <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png"
+                                class="m-3 w-50 h-50"/></center>
+            <?php
+              }
+              ?>
             </div>
             <!-- End of Main Content -->
            
