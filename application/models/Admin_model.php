@@ -1,6 +1,6 @@
 <?php 
 
-class model extends CI_Model
+class Admin_model extends CI_Model
 {
 //  delete start
     function update_hide_package($offense)
@@ -60,10 +60,17 @@ class model extends CI_Model
     function update_offense_user($offense)
     {
        $id = $this->uri->segment(2);
+       $status = array("status" => "cancel");
        $this->db->select("report_count");
        $this->db->from("users");
        $this->db->where("user_id",$id);
        $this->db->update("users", $offense);
+
+       $this->db->select("*");
+       $this->db->from("bookings");
+       $this->db->where("client_id",$id);
+       $this->db->or_where("performer_id",$id);
+       $this->db->update("bookings", $status);
     }
     function update_offense_user1($offense)
     {
@@ -130,12 +137,14 @@ class model extends CI_Model
     {
        $date = date('y-m-d');
        $status = "pending";
+       $status1 = "hide";
        $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
        $this->db->from("bookings");
        $this->db->join("users",'bookings.client_id=users.user_id');
        $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
        $this->db->where("event_date <",$date);
        $this->db->where("bookings.status !=", $status);
+       $this->db->where("bookings.status !=", $status1);
        $query = $this->db->get();
        return $query;
     }
@@ -218,10 +227,22 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
-    function query_results_report($user_id)
+   //  function query_results_package_check()
+   //  {
+   //    $date1 = date('y-m-d');
+   //    $count = array("booked"=>"1");
+   //    $this->db->select("*");
+   //    $this->db->from("bookings");
+   //    $this->db->where("event_date <",$date1);
+   //    $this->db->join("bookings",'packages.package_id=bookings.package_id');
+   //    $this->db->update("packages",$count);
+   //    $query = $this->db->get();
+   //    return $query;
+   //  }
+    function query_results_report($user_id, $rpg, $page)
     {
      
-      $this->db->select("reports.*,bookings.*,users.fname as report_from_fname,u2.fname AS report_to_fname,users.lname as report_from_lname,u2.lname AS report_to_lname, u2.photo AS report_from_photo,users.photo as report_to_photo");
+      $this->db->select("reports.*,bookings.*,users.fname as report_from_fname,u2.user_type as report_to_usertype,users.user_type as report_from_usertype,u2.fname AS report_to_fname,users.lname as report_from_lname,u2.lname AS report_to_lname, u2.photo AS report_from_photo,users.photo as report_to_photo");
       $this->db->from("reports");
       $this->db->where("reports_status!=","hide");
       if($user_id!="*"){
@@ -231,8 +252,29 @@ class model extends CI_Model
       $this->db->join("users",'reports.report_from=users.user_id');
       $this->db->join("users as u2",'reports.report_to=u2.user_id');
       $this->db->join("bookings",'reports.booking_id=bookings.booking_id');
+      $this->db->order_by('date_reported DESC');
+      $this->db->limit($rpg, $page);
       $query = $this->db->get();
       return $query;
+    }
+    function count_results_report($user_id)
+    {
+     
+      $this->db->select("reports.*,bookings.*,users.fname as report_from_fname,u2.user_type as report_to_usertype,users.user_type as report_from_usertype,u2.fname AS report_to_fname,users.lname as report_from_lname,u2.lname AS report_to_lname, u2.photo AS report_from_photo,users.photo as report_to_photo");
+      $this->db->from("reports");
+      $this->db->where("reports_status!=","hide");
+      if($user_id!="*"){
+         $this->db->where("report_from=",$user_id);
+         $this->db->or_where("report_to=",$user_id);
+        }
+      $this->db->join("users",'reports.report_from=users.user_id');
+      $this->db->join("users as u2",'reports.report_to=u2.user_id');
+      $this->db->join("bookings",'reports.booking_id=bookings.booking_id');
+      $this->db->order_by('date_reported DESC');
+
+      $t = $this->db->count_all_results();
+       return $t;
+     
     }
     function query_data_event($date,$name,$rpg,$page)
     {
@@ -289,19 +331,21 @@ class model extends CI_Model
        return $t;
      
     }
-    function query_data_event_history($date_event,$name)
+    function query_data_event_history($date,$name,$rpg,$page)
     {
-       $date = date('y-m-d');
+       $date1 = date('y-m-d');
        $status = "pending";
        $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
        $this->db->from("bookings");
        $this->db->join("users",'bookings.client_id=users.user_id');
        $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
-       $this->db->where("event_date <",$date);
+       $this->db->where("event_date <",$date1);
        $this->db->where("bookings.status !=", $status);
+       $this->db->order_by('event_date DESC','event_from DESC');
+       $this->db->limit($rpg, $page);
        
-       if($date_event != "*"){
-         $this->db->like("bookings.event_date",$date_event,'both');
+       if($date != "*"){
+         $this->db->like("bookings.event_date",$date,'both');
       }
    
       if($name != "*"){
@@ -315,6 +359,36 @@ class model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+    function count_results_history($date, $name)
+    {
+     
+      $status = "hide";
+      $date1 = date('y-m-d');
+      $status1 = "pending";
+      $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+      $this->db->from("bookings");
+      if($date != "*"){
+         $this->db->where("bookings.event_date",$date);
+      }
+   
+      if($name != "*"){
+         $this->db->like("event_name",$name,'both');
+         $this->db->or_like("users.fname",$name,'both');
+         $this->db->or_like("users.lname",$name,'both');
+         $this->db->or_like("u2.fname",$name,'both');
+         $this->db->or_like("u2.lname",$name,'both');
+      }
+      $this->db->where("bookings.status!=",$status1);
+      $this->db->where("event_date <",$date1);
+      $this->db->where("bookings.status !=", $status);
+
+      $this->db->join("users",'bookings.client_id=users.user_id');
+      $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+
+      $t = $this->db->count_all_results();
+       return $t;
+     
+    }
 //search end
     function fetch_data_user()
     {
@@ -322,6 +396,14 @@ class model extends CI_Model
        $this->db->from("users");
        $this->db->where("status!=","hide");
        $this->db->where("user_type!=","admin");
+       $query = $this->db->get();
+       return $query;
+    }
+    function fetch_data_user_report()
+    {
+       $this->db->select("*");
+       $this->db->from("users");
+       $this->db->where("status!=","hide");
        $query = $this->db->get();
        return $query;
     }
@@ -358,13 +440,17 @@ class model extends CI_Model
  
 //  views/choices end
 //  notifications start
-    function fetch_data_notifications()
+    function fetch_data_notifications($date)
     {
+      if($date=="*"){
       $date = date('Y-m-d');
+      }
       $this->db->select("*");
       $this->db->from("notifications");
-      $this->db->where("created_at",$date);
-      $query = $this->db->get();    
+      $this->db->where("date(`created_at`)",$date);
+      $this->db->order_by('admin_view ASC, created_at DESC');
+
+      $query = $this->db->get(); 
       return $query;
     }
     function fetch_data_notifications_count()
@@ -373,8 +459,8 @@ class model extends CI_Model
       $this->db->select("*");
       $this->db->from("notifications");
       $notified = "notified";
-      $this->db->where("status",$notified);
-      $this->db->where("created_at",$date);
+      $this->db->where("admin_view",$notified);
+      $this->db->where("date(`created_at`)",$date);
       $query2 = $this->db->count_all_results();
       $newdata = array(
           'notif_count' => $query2 

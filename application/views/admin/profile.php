@@ -112,6 +112,13 @@
                                     </div>
                                     <hr>
                                     <div class="form-group row">
+                                        <label for="email" class="col-4 col-form-label">User type:</label>
+                                        <div class="col-8">
+                                            <p class="lead"><?php echo $row->user_type; ?></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Date Registered:</label>
                                         <div class="col-8">
                                             <p class="lead"><?php echo  date('F d, Y', strtotime($row->created_at)); ?>

@@ -14,13 +14,13 @@ $route['events_page/(:num)']                    = 'welcome/search_results_events
 $route['profile/(:num)']                        = 'welcome/profile/$1';
 $route['services']                              = 'welcome/search_results_package';
 $route['services/(:num)']                       = 'welcome/search_results_package/$1';
+$route['history']                               = 'welcome/search_results_history';
+$route['history/(:num)']                        = 'welcome/search_results_history/$1';
+$route['reports']                               = 'welcome/search_results_report';
+$route['reports/(:num)']                        = 'welcome/search_results_report/$1';
 $route['search_results_history']                = 'welcome/search_results_history';
 $route['search_results_package']                = 'welcome/search_results_package/';
 $route['search_results_report']                 = 'welcome/search_results_report';
-
-$route['addevent']                              = 'welcome/addevent';
-$route['history']                               = 'welcome/history';
-$route['reports']                               = 'welcome/reports';
 $route['notifications']                         = 'welcome/notifications';
 $route['delete_user/(:num)']                    = 'welcome/delete_user/$1  ';
 $route['eventview/(:num)']                      = 'welcome/eventview/$1';
@@ -155,3 +155,8 @@ $route['notifications/index']                 =  'notifications/index';
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
+
+
+
+

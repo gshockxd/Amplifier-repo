@@ -22,14 +22,18 @@
 
                 <!-- Begin Page Content -->
 
-                <form class="form-inline">
-                    <input class="form-control-plaintext" type="text"
-                        placeholder="Notification Date:<?php echo $date_today = date("F d, Y"); ?>"
-                        readonly="<?php echo $date_today = date("F d, Y"); ?>" style="margin-left:15px">
-                    <!-- <input class="form-control mr-sm-2" type="date" placeholder="Search" style="margin-left:15px">
-                    <button class="btn btn-success my-2 my-sm-0 fa fa-search" type="submit"></button> -->
-                </form>
-                <br>
+                <div class="card" style="width:50%; margin:10px;">
+                        <div class="card-block">
+                            <div class="container-fluid">
+                                <form method="GET" action="<?php echo base_url('notifications')?>">
+                                    <label for="date">Select Date
+                                    <input class="form-control mr-sm-2" style="width:300px" type="date" name="date"  value="<?php echo (isset($data['date'])); ?>"
+                                            placeholder="Search by Date"></label>  
+                                        <button class="btn btn-outline-info" type="submit"><i class="fas fa-search"></i></button>
+                                        </form>
+                                    </div>
+                    </div>
+</div>
 
 
                 <?php 
@@ -41,7 +45,7 @@
                     {
         ?>
                 <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                 <div href="#"
@@ -54,20 +58,19 @@
                         <?php 
                     } ?>
                         <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-2 text-uppercase">
-                                <?php echo $row->notif_status; echo " "; echo $row->notif_type; ?> Account</h5>
-
-                            <br>
+                          
+                        <br>
                             <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center"
-                            onclick="<?php $seen= array("status" => "seen");
+                            onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('profile/');echo $row->user_id;  ?>"></a></a>
 
                         </div>
-                        <p class="mb-1"><?php echo $row->notif_name; ?> <?php echo $row->notif_status; ?> with user ID number:
+                        <p class="mb-1"><?php echo $row->notif_name; ?> with user ID number:
                             <?php echo  $row->user_id ?>. Click to view more details</p>
-                        <small class="text-muted"></small>
+                            <br>
+                            <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                     </div>
                     <?php } ?>
                     <?php
@@ -75,7 +78,7 @@
                     {
                 ?>
                     <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                     <div href="#"
@@ -88,10 +91,10 @@
                             <?php 
                     } ?>
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-2 text-uppercase">Account <?php echo $row->notif_status; ?> </h5>
+                                <h5 class="mb-2 text-uppercase"></h5>
 
                                 <br>
-                                <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("status" => "seen");
+                                <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('reports'); ?>"></a>
@@ -99,7 +102,8 @@
                             </div>
                             <p class="mb-1"><?php echo $row->notif_name; ?>. Report id number:
                                 <?php echo  $row->report_id ?>. Click to view more details</p>
-                            <small class="text-muted"><?php echo date('F j, Y',strtotime($row->created_at)); ?></small>
+                                <br>
+                                    <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                         </div>
                         <?php } ?>
                         <?php
@@ -107,7 +111,7 @@
                     {
                 ?>
                         <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                         <div href="#"
@@ -120,11 +124,11 @@
                                 <?php 
                     } ?>
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-2 text-uppercase"><?php echo $row->notif_type; ?>
-                                        <?php echo $row->notif_status; ?></h5>
+                                    <h5 class="mb-2 text-uppercase">
+                                      </h5>
 
                                     <br>
-                                    <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("status" => "seen");
+                                    <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('eventview/');echo $row->booking_id;  ?>"></a>
@@ -132,8 +136,8 @@
                                 </div>
                                 <p class="mb-1"><?php echo $row->notif_name; ?>, Booking Reference
                                     number <?php echo  $row->booking_id ?>. Click to view more details</p>
-                                <small
-                                    class="text-muted"><?php echo date('F j, Y',strtotime($row->created_at)); ?></small>
+                                    <br>
+                                    <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                             </div>
                             <?php } ?>
 
@@ -142,7 +146,7 @@
                     {
                 ?>
                             <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                             <div href="#"
@@ -155,28 +159,30 @@
                                     <?php 
                     } ?>
                                     <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-2 text-uppercase"><?php echo $row->notif_type; ?>
-                                            <?php echo $row->notif_status; ?></h5>
+                                        <h5 class="mb-2 text-uppercase"></h5>
 
                                         <br>
-                                        <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("status" => "seen");
+                                        <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('services'); $row->package_id;  ?>"></a></a>
 
                                     </div>
                                     <p class="mb-1"><?php echo $row->notif_name; ?>.
-                                        Package Reference number: <?php echo  $row->package_id ?>. Click to view more details</p>
-                                    <small
-                                        class="text-muted"><?php echo date('F j, Y',strtotime($row->created_at)); ?></small>
+                                        Package Reference number: <?php echo  $row->package_id ?>.</p>
+                                    <br>
+                                    <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                                 </div>
                                 <?php } ?>
                                 <?php
             }
-                }
+                }else{
         ?>
-
-
+             <center>
+                <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png"class="m-1 w-50 h-50"/>
+            </center>
+                    
+            <?php } ?>
 
                                 <!-- End of Main Content -->
 
