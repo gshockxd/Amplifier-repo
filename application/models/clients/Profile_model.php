@@ -3,7 +3,6 @@
         public function index (){
 			$templates['title'] = 'AMPLIFIER';
 			$data['package'] = $this->Profile_model->get_three_packages();
-
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/profile', $data);
 			$this->load->view('inc/footer');            

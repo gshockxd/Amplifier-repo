@@ -119,7 +119,7 @@
             <?php echo date("F d, Y",strtotime($this->session->userdata('block_end'))); ?></h4>
         <?php } ?>
         <br>
-        <center> <a href="login" class=" btn btn-outline-secondary btn-lg active" role="button" aria-pressed="true"><i
+        <center> <a href="<?php echo base_url()?>logout_user" class=" btn btn-outline-secondary btn-lg active" role="button" aria-pressed="true"><i
                     class="fas fa-sign-in-alt fa-lg"></i> LOGOUT</a></center>
 </body>
 <br>
