@@ -41,7 +41,7 @@
                     {
         ?>
                 <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                 <div href="#"
@@ -59,7 +59,7 @@
 
                             <br>
                             <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center"
-                            onclick="<?php $seen= array("status" => "seen");
+                            onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('profile/');echo $row->user_id;  ?>"></a></a>
@@ -67,7 +67,8 @@
                         </div>
                         <p class="mb-1"><?php echo $row->notif_name; ?> <?php echo $row->notif_status; ?> with user ID number:
                             <?php echo  $row->user_id ?>. Click to view more details</p>
-                        <small class="text-muted"></small>
+                            <br>
+                            <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                     </div>
                     <?php } ?>
                     <?php
@@ -75,7 +76,7 @@
                     {
                 ?>
                     <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                     <div href="#"
@@ -91,7 +92,7 @@
                                 <h5 class="mb-2 text-uppercase">Account <?php echo $row->notif_status; ?> </h5>
 
                                 <br>
-                                <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("status" => "seen");
+                                <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('reports'); ?>"></a>
@@ -99,7 +100,8 @@
                             </div>
                             <p class="mb-1"><?php echo $row->notif_name; ?>. Report id number:
                                 <?php echo  $row->report_id ?>. Click to view more details</p>
-                            <small class="text-muted"><?php echo date('F j, Y',strtotime($row->created_at)); ?></small>
+                                <br>
+                                    <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                         </div>
                         <?php } ?>
                         <?php
@@ -107,7 +109,7 @@
                     {
                 ?>
                         <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                         <div href="#"
@@ -120,11 +122,11 @@
                                 <?php 
                     } ?>
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-2 text-uppercase"><?php echo $row->notif_type; ?>
-                                        <?php echo $row->notif_status; ?></h5>
+                                    <h5 class="mb-2 text-uppercase"><?php echo $row->notif_name; ?>
+                                      </h5>
 
                                     <br>
-                                    <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("status" => "seen");
+                                    <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('eventview/');echo $row->booking_id;  ?>"></a>
@@ -132,8 +134,8 @@
                                 </div>
                                 <p class="mb-1"><?php echo $row->notif_name; ?>, Booking Reference
                                     number <?php echo  $row->booking_id ?>. Click to view more details</p>
-                                <small
-                                    class="text-muted"><?php echo date('F j, Y',strtotime($row->created_at)); ?></small>
+                                    <br>
+                                    <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                             </div>
                             <?php } ?>
 
@@ -142,7 +144,7 @@
                     {
                 ?>
                             <?php 
-                        if($row->status=="notified")
+                        if($row->admin_view=="notified")
                         {  
                         ?>
                             <div href="#"
@@ -159,16 +161,16 @@
                                             <?php echo $row->notif_status; ?></h5>
 
                                         <br>
-                                        <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("status" => "seen");
+                                        <a class="btn btn-link btn-outline-info fa fa-eye justify-content-center" onclick="<?php $seen= array("admin_view" => "seen");
                                               $this->db->where("id",$row->id);
                                               $this->db->update("notifications",$seen);
                                               ?>" href="<?php echo base_url('services'); $row->package_id;  ?>"></a></a>
 
                                     </div>
                                     <p class="mb-1"><?php echo $row->notif_name; ?>.
-                                        Package Reference number: <?php echo  $row->package_id ?>. Click to view more details</p>
-                                    <small
-                                        class="text-muted"><?php echo date('F j, Y',strtotime($row->created_at)); ?></small>
+                                        Package Reference number: <?php echo  $row->package_id ?>.</p>
+                                    <br>
+                                    <small class="text-muted"><?php echo date('F j, Y h:i A',strtotime($row->created_at)); ?></small>
                                 </div>
                                 <?php } ?>
                                 <?php

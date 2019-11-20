@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="<?php echo base_url('history');?>"><button type="button" class="btn fas fa-arrow-left"></button></a>
+                                    <!-- <a href="<?php echo base_url('history');?>"><button type="button" class="btn fas fa-arrow-left"></button></a> -->
                                     <h4 align="center">EVENT DETAILS</h4>
                                     <hr>
                                 </div>
@@ -98,7 +98,7 @@
                                     </div>
                                     <hr>
                                     <div class="form-group row">
-                                        <label for="text" class="col-4 col-form-label">Payments Made:</label>
+                                        <label for="text" class="col-4 col-form-label">Payments Offered:</label>
                                         <div class="col-8">
                                             <?php if ($row->payment_status=="dp"){ ?>
                                                 <p class="lead text-uppercase">Down Payment</p>

@@ -6,7 +6,7 @@ class Welcome extends CI_Controller
 
     public function offense_count($id)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $this->load->library('upload');
         if ($this->input->post("offenseNo") == "1") {
             $date = date('y-m-d');
@@ -32,8 +32,7 @@ class Welcome extends CI_Controller
             "block_end" => date_format($block_date, "y-m-d"),
             "status" => $status,
         );
-
-        $this->model->update_offense_user($offense);
+        $this->Admin_model->update_offense_user($offense);
         $notif_insert = array(
             "user_id" => $id,
             "notif_type" => "user",
@@ -42,12 +41,12 @@ class Welcome extends CI_Controller
             "notif_name" => "User account has been",
 
         );
-        $this->model->insert_data_notifications($notif_insert);
+        $this->Admin_model->insert_data_notifications($notif_insert);
         redirect(base_url() . "users");
     }
     public function changeoff()
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $this->load->library('upload');
         $block_date = date_create("0000-00-00");
 
@@ -56,18 +55,18 @@ class Welcome extends CI_Controller
             "status" => "verified",
         );
 
-        $this->model->update_offense_user1($offense);
+        $this->Admin_model->update_offense_user1($offense);
         echo '<script> alert("Account can now be used please login again");</script>';
         echo '<script> window.location.replace("login")</script>';
 
     }
     public function recover($id)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $this->load->library('upload');
         $status = "verified";
         $recover = array("status" => $status);
-        $this->model->update_recover_user($recover);
+        $this->Admin_model->update_recover_user($recover);
         $notif_insert = array(
             "user_id" => $id,
             "notif_type" => "user",
@@ -76,16 +75,16 @@ class Welcome extends CI_Controller
             "notif_name" => "User account has been recovered",
 
         );
-        $this->model->insert_data_notifications($notif_insert);
+        $this->Admin_model->insert_data_notifications($notif_insert);
         redirect(base_url() . "users");
     }
 // delete start
     public function delete_user($id)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $offense = array("status" => "hide");
 
-        $this->model->update_hide_user($offense);
+        $this->Admin_model->update_hide_user($offense);
         $notif_insert = array(
             "user_id" => $id,
             "notif_type" => "user",
@@ -95,15 +94,15 @@ class Welcome extends CI_Controller
 
         );
 
-        $this->model->insert_data_notifications($notif_insert);
+        $this->Admin_model->insert_data_notifications($notif_insert);
         redirect(base_url() . "users");
     }
     public function delete_report($id)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $offense = array("reports_status" => "hide");
 
-        $this->model->update_hide_report($offense);
+        $this->Admin_model->update_hide_report($offense);
 
         $notif_insert = array(
             "report_id" => $id,
@@ -114,16 +113,16 @@ class Welcome extends CI_Controller
 
         );
 
-        $this->model->insert_data_notifications($notif_insert);
+        $this->Admin_model->insert_data_notifications($notif_insert);
         redirect(base_url() . "reports");
 
     }
     public function delete_event($id)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $offense = array("status" => "cancel");
 
-        $this->model->update_hide_event($offense);
+        $this->Admin_model->update_hide_event($offense);
 
         $notif_insert = array(
             "booking_id" => $id,
@@ -133,16 +132,16 @@ class Welcome extends CI_Controller
             "notif_name" => "Event Cancelled",
 
         );
-        $this->model->insert_data_notifications($notif_insert);
+        $this->Admin_model->insert_data_notifications($notif_insert);
         redirect(base_url() . "events");
     }
 
     public function delete_package($id)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $offense = array("package_status" => "hide");
 
-        $this->model->update_hide_package($offense);
+        $this->Admin_model->update_hide_package($offense);
 
         $notif_insert = array(
             "package_id" => $id,
@@ -152,7 +151,7 @@ class Welcome extends CI_Controller
             "notif_name" => "Removed package",
 
         );
-        $this->model->insert_data_notifications($notif_insert);
+        $this->Admin_model->insert_data_notifications($notif_insert);
         redirect(base_url() . "services");
 
     }
@@ -168,7 +167,7 @@ class Welcome extends CI_Controller
     {
         $this->load->library('form_validation');
         $this->load->library('upload');
-        $this->load->model('model');
+        $this->load->model("Admin_model");
         $this->form_validation->set_rules("fname", "first name", 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules("address", "address", 'required');
         $this->form_validation->set_rules("lname", "last name", 'required|alpha_numeric_spaces');
@@ -214,7 +213,7 @@ class Welcome extends CI_Controller
             // echo '</pre>';
             // die;
 
-            $this->load->model("model");
+            $this->load->model("Admin_model");
             $status = "verified";
             $data_insert = array(
                 "fname" => $this->input->post("fname"),
@@ -231,7 +230,7 @@ class Welcome extends CI_Controller
                 "photo" => $client_image,
             );
 
-            $this->model->insert_data_users($data_insert);
+            $this->Admin_model->insert_data_users($data_insert);
             if ($status == "verified") {
                 $details = "has Created a new account";
                 $notif_insert = array(
@@ -242,14 +241,13 @@ class Welcome extends CI_Controller
                     "notif_name" => "A new user account has been",
 
                 );
-                $this->model->insert_data_notifications($notif_insert);
+                $this->Admin_model->insert_data_notifications($notif_insert);
             }
 
             redirect(base_url() . "users");
         } else {
             echo '<script> alert("invalid inputs, Try again");</script>';
-            $this->load->model('model');
-            $this->search_results();
+            echo '<script> history.go(-1);</script>';
             
             
         }
@@ -258,67 +256,111 @@ class Welcome extends CI_Controller
 // report add
     public function form_validation_report()
     {
-            $this->load->library('form_validation');
-            $this->load->library('upload');
-            
-            // if($_FILES['userfile']){
-            //     $this->form_validation->set_rules('userfile', 'userfile', 'callback_file_check');
-            // }
-           
-            $timestamp = date('Y_m_d_H_i_s');
-            $array = explode('.', $_FILES['userfile']['name']);
-            $ext = end($array);
-     
-            // Upload Image
-            $config['file_name'] = $timestamp . '.' . $ext;
-            $config['upload_path'] = './assets/img/report/';
-            $config['allowed_types'] = 'mp4|mkv|jpg|png';
-            $config['max_size'] = '10048';
-            $config['max_width'] = '50000';
-            $config['max_height'] = '50000';
-
-            $this->load->library('upload', $config);
-            $this->upload->initialize($config);
-         
-            if (!$this->upload->do_upload()) {
-                $errors = $this->upload->display_errors();
-                $report_image = 'assets/img/report/no_image.jpg';
-            } else {
-                $data = array('upload_data' => $this->upload->data());
-                $report_image = 'assets/img/report/' . $timestamp . '.' . $ext;
+        $id = $this->input->post('booking_id');
+        $this->db->select('*');
+        $this->db->from('bookings');
+        $this->db->where('booking_id', $id);
+        $temp = $this->db->get();
+        $data['bookings'] = $temp->row_array();
+        // echo '<pre>';
+        // print_r($this->input->post('report_to'));
+        // echo '</pre>';
+        // die;
+        // $video_check=$this->file_check_video();
+        // if($video_check=='true'){
+        $data['booking_id'] = $this->input->post('booking_id');
+        $data['report_info'] = $this->input->post('report_info');
+        if ($this->input->post("report_to")==''){
+            echo '<script> alert("PLease select who to report");</script>';
+            echo '<script> history.go(-1);</script>';
+        }else if ($this->input->post("report_info")==''){
+            echo '<script> alert("Please provide details of the report");</script>';
+            echo '<script> history.go(-1);</script>';
+        }else{
+                $book_id = $this->report_insert($data['bookings']);
+                $this->session->set_flashdata('success_message', 'Event ' . $data['event_name'] . ' has been successfully booked!');
+                redirect('reports');
             }
-            $this->load->model("model");
-            $notif_insert = array(
-                "user_id"         => $this->input->post("report_from"),
-                "notif_type"     => "report",
-                "notif_status"     => "reporter",
-                "status"         => "notified",
-                "notif_name"     => "New report has been added",
-                "report_id"        => $this->db->insert_id()
-            );
-            $this->model->insert_data_notifications2($notif_insert);
-            $notif_insert2 = array(
-                "user_id"         => $this->input->post("violator"),
-                "notif_type"     => "report",
-                "notif_status"     => "reported",
-                "status"         => "notified",
-                "notif_name"     => "Account Reported",
-                "report_id"        => $this->db->insert_id()
-            );
-            $this->model->insert_data_notifications2($notif_insert2);
-            redirect('reports');
+        }
+    // }
+
+    public function report_insert($booking)
+    {
+        $this->load->library('upload');
+        $this->load->model("Admin_model");
+        if($this->input->post("report_to")=='client'){
+            $reported = $booking['client_id'];
+        }else{
+            $reported = $booking['performer_id'];
+        }
+        $timestamp = date('Y_m_d_H_i_s');
+        $array = explode('.', $_FILES['userfile']['name']);
+        $ext = end($array);
+        $config['file_name'] = $timestamp . '.' . $ext;
+        $config['upload_path'] = './assets/img/report/';
+        $config['allowed_types'] = 'video|mp4|mkv';
+        $config['max_size'] = '200000';
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload()) {
+            $errors = $this->upload->display_errors();
+            $report_video   = 'assets/img/report/no_image.jpg';
+        } else {
+            $data           = array('upload_data' => $this->upload->data());
+            $report_video   = 'assets/img/report/' . $timestamp . '.' . $ext;
+        }
+        echo '<pre>';
+    
+        // print_r($this->input->post('userfile'));
+        // echo '</pre>';
+        // die;
         
+        $data_insert = array(
+            "booking_id" => $this->input->post("booking_id"),
+            "report_from" => $this->session->userdata('user_id'),
+            "report_to" => $reported,
+            "report_photo" => $report_video,
+            "report_details" =>$this->input->post("report_info"),
+            "reports_status" => "show"
 
+         );
+         $this->Admin_model->insert_data_report($data_insert);
+         $notif_insert = array(
+             "user_id"          => $reported,
+             "notif_type"       => "report",
+             "notif_status"     => "reporter",
+             "status"           => "notified",
+             "notif_name"       => "Account has been reported by admin.",
+             "report_id"        => $this->db->insert_id()
+         );
+         $this->Admin_model->insert_data_notifications($notif_insert);
+
+        //  $notif_insert2 = array(
+        //      "user_id"          => $reported,
+        //      "notif_type"       => "report",
+        //      "notif_status"     => "reported",
+        //      "status"           => "notified",
+        //      "notif_name"       => "Account Reported",
+        //      "report_id"        => $this->db->insert_id()
+        //  );
+        //  $this->Admin_model->insert_data_notifications2($notif_insert2);
+         redirect('reports');
+
+        $id = $this->db->insert_id();
+        // echo $this->db->last_query();
+        // die();
+        return $id;
     }
-
     public function form_validation_event()
     {
         $id = $this->uri->segment(2);
-        $this->load->model("model");
+        $this->load->model("Admin_model");
         $this->db->where('package_id', $id);
         $temp = $this->db->get('packages');
         $data['package'] = $temp->row_array();
-        $data["fetch_data_client"] = $this->model->fetch_data_client();
+        $data["fetch_data_client"] = $this->Admin_model->fetch_data_client();
         $this->load->view('admin/addevent', $data);
 
     }
@@ -358,14 +400,14 @@ class Welcome extends CI_Controller
         date_add($book_date, date_interval_create_from_date_string("3 days"));
         if(date_format($book_date,"Y-m-d")>$this->input->post('event_date')){
             echo '<script> alert("Booking date must be on or after '.date_format($book_date,"M d,Y").'. Please try again");</script>';
-            $this->load->model('model');
-            $data["fetch_data_client"] = $this->model->fetch_data_client();
+            $this->load->model("Admin_model");
+            $data["fetch_data_client"] = $this->Admin_model->fetch_data_client();
             $this->load->view('admin/addevent', $data);
         }else{
         if ($this->form_validation->run() === false) {
             echo '<script> alert("Booking failed, Try again");</script>';
-            $this->load->model('model');
-            $data["fetch_data_client"] = $this->model->fetch_data_client();
+            $this->load->model("Admin_model");
+            $data["fetch_data_client"] = $this->Admin_model->fetch_data_client();
             $this->load->view('admin/addevent', $data);
         } else {
                 $book_id = $this->event_insert($data['package']);
@@ -407,10 +449,7 @@ class Welcome extends CI_Controller
             'event_name'        => $this->input->post('event_name'),
             'artist_type'       => $package['artist_type'],
         );
-        echo "<pre>";
-        echo print_r($data);
-        echo "</pre>";
-
+      
         $this->db->insert('bookings', $data);
         $id = $this->db->insert_id();
         // echo $this->db->last_query();
@@ -447,8 +486,7 @@ class Welcome extends CI_Controller
 // search start
     public function search_results($page = 0)
     {
-        $this->load->model('model');
-
+        $this->load->model("Admin_model");
 		$where = array();
 		if ($this->input->get('user_type') != '') {
 			$where['user_type'] = $this->input->get('user_type'); 
@@ -458,11 +496,8 @@ class Welcome extends CI_Controller
             
         }
 
-        $total_rows = $this->model->count_results_user($where);
- 
-		
+        $total_rows = $this->Admin_model->count_results_user($where);
         $rpg = 5;
-
 		$config['base_url'] = site_url('users');
 		$config['total_rows'] = $total_rows;
 		$config['per_page'] = $rpg;
@@ -472,18 +507,15 @@ class Welcome extends CI_Controller
 		$this->pagination->initialize($config);
 
 		$data['pagination'] = $this->pagination->create_links();
-
-		// $page = 1;
-
-		$data["query_results_user"] = $this->model->query_results_user($where, $rpg, $page);
+		$data["query_results_user"] = $this->Admin_model->query_results_user($where, $rpg, $page);
         $data['where'] = $where;
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/users', $data);
     }
 
     public function search_results_events($page = 0)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
 
         $date='*';
         $name='*';
@@ -494,7 +526,7 @@ class Welcome extends CI_Controller
            $name = $this->input->get('name'); 
         }
 
-        $total_rows = $this->model->count_results_events($date, $name);		
+        $total_rows = $this->Admin_model->count_results_events($date, $name);		
 		$rpg = 10;
 
 		$config['base_url'] = base_url('events_page');
@@ -506,20 +538,20 @@ class Welcome extends CI_Controller
 		$this->pagination->initialize($config);
 
 		$data['pagination'] = $this->pagination->create_links();
-		$data["query_data_event"] = $this->model->query_data_event($date, $name, $rpg, $page);
+		$data["query_data_event"] = $this->Admin_model->query_data_event($date, $name, $rpg, $page);
         // $data['where'] = $date;
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/events', $data);
     }
     public function search_results_package($page = 0)
     {
-		$this->load->model('model');
+		$this->load->model("Admin_model");
         $where=array();
 		if ($this->input->get("user_id")) {
 			$where['owner'] = $this->input->get("user_id");
         }
         
-        $total_rows = $this->model->count_results_package($where);		
+        $total_rows = $this->Admin_model->count_results_package($where);		
 		$rpg = 3;
 
 		$config['base_url'] = base_url('services');
@@ -531,52 +563,73 @@ class Welcome extends CI_Controller
 		$this->pagination->initialize($config);
 
 		$data['pagination'] = $this->pagination->create_links();
-		$data["query_results_package"] = $this->model->query_results_package($where, $rpg, $page);
-        $data["fetch_data_perf"] = $this->model->fetch_data_perf();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+		$data["query_results_package"] = $this->Admin_model->query_results_package($where, $rpg, $page);
+        $data["fetch_data_perf"] = $this->Admin_model->fetch_data_perf();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/services', $data);
     }
-    public function search_results_report()
+    public function search_results_history($page = 0)
     {
-        $this->load->model('model');
+        $this->load->model("Admin_model");
+
+        $date='*';
+        $name='*';
+		if ($this->input->get('date') != '') {
+			$date = $this->input->get('date'); 
+		}
+		if ($this->input->get('name') != '') {
+           $name = $this->input->get('name'); 
+        }
+
+        $total_rows = $this->Admin_model->count_results_history($date, $name);		
+		$rpg = 10;
+
+		$config['base_url'] = base_url('history');
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $rpg;
+		$config['reuse_query_string'] = true;
+		$config['uri_segment'] = 2;
+		
+		$this->pagination->initialize($config);
+
+		$data['pagination'] = $this->pagination->create_links();
+        $data["query_data_event_history"] = $this->Admin_model->query_data_event_history($date, $name, $rpg, $page);
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
+        $this->load->view('/admin/history', $data);
+    }
+    public function search_results_report($page = 0)
+    {
+        $this->load->model("Admin_model");
         if ($this->input->post('user_id') == '') {
             $user_id = "*";
         } else {
             $user_id = $this->input->post('user_id');
         }
-        $this->model->query_results_report($user_id);
-        $data["query_results_report"] = $this->model->query_results_report($user_id);
-        $data["fetch_data_user"] = $this->model->fetch_data_user();
-        $data["fetch_data_event"] = $this->model->fetch_data_event();
-        $this->load->view('/admin/search_report', $data);
+
+        $total_rows = $this->Admin_model->count_results_report($user_id);		
+		$rpg = 3;
+
+		$config['base_url'] = base_url('reports');
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $rpg;
+		$config['reuse_query_string'] = true;
+		$config['uri_segment'] = 2;
+		
+        $this->pagination->initialize($config);
+        $data['pagination'] = $this->pagination->create_links();
+        $data["query_results_report"] = $this->Admin_model->query_results_report($user_id, $rpg, $page);
+        $data["fetch_data_user_report"] = $this->Admin_model->fetch_data_user_report();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
+        $data["fetch_data_history"] = $this->Admin_model->fetch_data_history();
+        $this->load->view('/admin/reports', $data);
     }
 
    
-    public function search_results_history()
-    {
-        $this->load->model('model');
-
-        if ($this->input->post('date') == '') {
-            $date_event = "*";
-
-        } else {
-            $date_event = $this->input->post('date');
-        }
-
-        if ($this->input->post('name') == '') {
-            $name = "*";
-        } else {
-            $name = $this->input->post('name');
-        }
-        $this->model->query_data_event_history($date_event, $name);
-        $data["query_data_event_history"] = $this->model->query_data_event_history($date_event, $name);
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
-        $this->load->view('/admin/search_event_history', $data);
-    }
+   
 // search_end
     public function services()
     {
-		$this->load->model('model');
+		$this->load->model("Admin_model");
 		$this->load->library('pagination');
 
 		$config['base_url']=site_url('services');
@@ -586,70 +639,70 @@ class Welcome extends CI_Controller
 		$config['reuse_query_string']='true';
 		$this->pagination->initialize($config);
 		// $data['pagination']=$this->pagination->create_links();
-        $data["fetch_data_packages"] = $this->model->fetch_data_packages();
-        $data["fetch_data_perf"] = $this->model->fetch_data_perf();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $data["fetch_data_packages"] = $this->Admin_model->fetch_data_packages();
+        $data["fetch_data_perf"] = $this->Admin_model->fetch_data_perf();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/services', $data);
     }
     public function history()
     {
-        $this->load->model('model');
-        $data["fetch_data_history"] = $this->model->fetch_data_history();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->model("Admin_model");
+        $data["fetch_data_history"] = $this->Admin_model->fetch_data_history();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/history', $data);
     }
     public function histview($id)
     {
-        $this->load->model('model');
-        $data["fetch_data_histview"] = $this->model->fetch_data_histview();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->model("Admin_model");
+        $data["fetch_data_histview"] = $this->Admin_model->fetch_data_histview();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/histview', $data);
     }
     public function reports()
     {
-        $this->load->model('model');
-        $data["fetch_data_user"] = $this->model->fetch_data_user();
-        $data["fetch_data_event"] = $this->model->fetch_data_event();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
-        $data["fetch_data_report"] = $this->model->fetch_data_report();
+        $this->load->model("Admin_model");
+        $data["fetch_data_user"] = $this->Admin_model->fetch_data_user();
+        $data["fetch_data_event"] = $this->Admin_model->fetch_data_event();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
+        $data["fetch_data_report"] = $this->Admin_model->fetch_data_report();
         $this->load->view('/admin/reports', $data);
     }
     public function notifications()
     {
-        $this->load->model('model');
-        $data["fetch_data_notifications"] = $this->model->fetch_data_notifications();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->model("Admin_model");
+        $data["fetch_data_notifications"] = $this->Admin_model->fetch_data_notifications();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/notifications', $data);
     }
     public function profile($id)
     {
-        $this->load->model('model');
-		$data["fetch_data_profile"] = $this->model->fetch_data_profile();
-		$data["fetch_data_user_galleries"] = $this->model->fetch_data_user_galleries();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->model("Admin_model");
+		$data["fetch_data_profile"] = $this->Admin_model->fetch_data_profile();
+		$data["fetch_data_user_galleries"] = $this->Admin_model->fetch_data_user_galleries();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/profile', $data);
     }
     public function eventview($id)
     {
-        $this->load->model('model');
-        $data["fetch_data_event_detail"] = $this->model->fetch_data_event_detail();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->model("Admin_model");
+        $data["fetch_data_event_detail"] = $this->Admin_model->fetch_data_event_detail();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/eventview', $data);
     }
 
     public function events()
     {
-        $this->load->model('model');
-        $data["fetch_data_event"] = $this->model->fetch_data_event();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $this->load->model("Admin_model");
+        $data["fetch_data_event"] = $this->Admin_model->fetch_data_event();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/events', $data);
     }
     public function users()
     {
-		$this->load->model('model');
+		$this->load->model("Admin_model");
 		
-        $data["fetch_data_user"] = $this->model->fetch_data_user();
-        $data["fetch_data_notifications_count"] = $this->model->fetch_data_notifications_count();
+        $data["fetch_data_user"] = $this->Admin_model->fetch_data_user();
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/users', $data);
     }
     public function logout()
@@ -659,7 +712,6 @@ class Welcome extends CI_Controller
 
     public function file_check()
     {
-
         $allowed_mime_type_arr = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/x-png');
         $mime = get_mime_by_extension($_FILES['userfile']['name']);
         if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] != "") {
@@ -682,5 +734,36 @@ class Welcome extends CI_Controller
             return false;
         }
     }
+    public function file_check_video(){
+        $allowed_mime_type_arr = array('video/mp4');
+        // echo '<pre>';
+        // print_r($this->input->post('userfile'));
+        // echo '</pre>';
+        // die;
+        $mime = get_mime_by_extension($_FILES['userfile']['name']);
+        if(isset($_FILES['userfile']['name']) && $_FILES['userfile']['name']!=""){
+            if($_FILES['userfile']['error'] != 0){
+                echo '<script>alert("Error Video is Corrupted, try again");</script>';
+                echo '<script> history.go(-1);</script>';
+                return false;
+
+            }
+            if(in_array($mime, $allowed_mime_type_arr)){
+                if($_FILES['video1']['size'] <= 200000000){
+                    return true;
+                }else{
+                    echo '<script>alert("Video exceeds 200mb, Please try again");</script>';
+                    echo '<script> history.go(-1);</script>';
+                    return false;
+                }
+            }else{
+                echo '<script>alert("Mp4 file are only acceptable");</script>';
+                echo '<script> history.go(-1);</script>';
+                return false;
+            }
+        }else{
+            return true;
+        }
+    }	
 
 }

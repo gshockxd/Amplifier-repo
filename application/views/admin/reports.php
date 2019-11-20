@@ -24,17 +24,17 @@
                 <div class="col-md-2 col-lg-6 mx-auto">
                     <div class="card shadow mb-4">
                         <div class="card-body center">
-                            <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('search_results_report')?>">
+                            <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('reports')?>">
                             <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
                             <option selected disabled>Select Reports that include:</option>
                             <?php
-                                if($fetch_data_user->num_rows()>0)
+                                if($fetch_data_user_report->num_rows()>0)
                                     {
-                                    foreach($fetch_data_user->result() as $row)
+                                    foreach($fetch_data_user_report->result() as $row)
                                         { 
                         
                             ?>
-                            <option value="<?php echo $row->user_id; ?>"> <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
+                            <option class="text-uppercase" value="<?php echo $row->user_id; ?>"> <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?>&nbsp <Label class="font-bold font-italic">(<?php echo $row->user_type; ?>)</Label></option>
                             <?php }
                                 }
                                 ?>
@@ -52,29 +52,40 @@
 
 
                 <!-- end -->
+                <div class="row"> 
+                        <div class="col-sm-12 col-md-12 offset-5">
+                                <ul class="pagination">
+                            <?php echo $pagination; ?></ul>
+                     
+                        </div>
+                    </div>       
                 <div class="container">
                     <div class="row">
                         <?php 
-                            if($fetch_data_report->num_rows()>0)
+                            if($query_results_report->num_rows()>0)
                             {
-                               foreach($fetch_data_report->result() as $row)
+                               foreach($query_results_report->result() as $row)
                                 { 
                         ?>
                         <div class=" m-4 col-md-12">
-
                             <div class="card col-md-12 w-75 mx-auto" style="">
-                                <img src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>"
-                                    class="card-img-top" alt="...">
+                                <video width="800" height="400" controls>
+                                        <source src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
                                 <div class="card-body">
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p class="card-text"> Report from:
+                                                    <p class="card-text"> Report from: <br>
+                                                        <label class="text-uppercase">
                                                         <?php echo $row->report_from_fname; ?>
-                                                        <?php echo $row->report_from_lname; ?></p>
+                                                        <?php echo $row->report_from_lname; ?>
+                                                        <label class="font-italic font-weight-bold">&nbsp (<?php echo $row->report_from_usertype; ?>)</label></label></p>
                                                 </div>
+                                                <?php if($row->report_from_usertype!='admin'){ ?>
                                                 <div class="col-md-6">
                                                     <button class="btn fa fa-list-ul dropdown-toggle" type="button"
                                                         id="dropdownMenuButton" data-toggle="dropdown"
@@ -89,18 +100,16 @@
                                                             href="#" data-toggle="modal"
                                                             data-target="#addoff<?php echo $row->report_from; ?>">&nbsp
                                                             Select offense</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw"
-                                                            href="#" data-toggle="modal"
-                                                            data-target="#blckuser<?php echo $row->report_from; ?>">&nbsp
-                                                            Block</a>
                                                     </div>
                                                 </div>
+                                                <?php } ?>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <p>Report to:
+                                                    <p>Report to: <br>
+                                                        <label class="text-uppercase">
                                                         <?php echo $row->report_to_fname; ?>&nbsp<?php echo $row->report_to_lname; ?>
+                                                        <label class="font-italic font-weight-bold">&nbsp (<?php echo $row->report_to_usertype; ?>)</label></label>
                                                     </p>
                                                 </div>
                                                 <div class="col-md-6">
@@ -117,16 +126,10 @@
                                                             href="#" data-toggle="modal"
                                                             data-target="#addoff<?php echo $row->report_to; ?>">&nbsp
                                                             Select offense</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item fas fa-exclamation-circle fa-fw"
-                                                            href="#" data-toggle="modal"
-                                                            data-target="#blckuser<?php echo $row->report_to; ?>">&nbsp
-                                                            Block</a>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- <h6 class="card-subtitle mb-2 text-muted">Report ID: <?php echo $row->report_id; ?></h6> -->
-                                            <a href="eventview/<?php echo $row->booking_id; ?>"> Event ID:
+                                            <a href="<?php echo base_url('eventview/'); echo $row->booking_id; ?>"> Event ID:
                                                 <?php echo $row->booking_id; ?></a>
                                         </li>
 
@@ -219,33 +222,6 @@
                             </div>
                         </div>
                         <!-- end -->
-                        <!-- block violator modal -->
-                        <div class="modal fade" id="blckuser<?php echo $row->report_to; ?>" tabindex="-1" role="dialog"
-                            aria-labelledby="blckuser" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        BLOCK USER
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <H5>Are you sure you want to permanently block
-                                            <?php echo $row->report_to_fname; ?>&nbsp<?php echo $row->report_to_lname; ?>?
-                                        </H5>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="ban/<?php echo $row->report_to; ?>" type="button">
-                                            <button class="btn btn-danger">YES</button>
-                                        </a>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">CANCEL</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end -->
                         <!-- Add reporter Penalty Modal -->
                         <div class="modal fade" id="addoff<?php echo $row->report_from; ?>" aria-labelledby="addoff"
                             aria-hidden="true" style="width:1000px">
@@ -316,7 +292,7 @@
                         </div>
                         <!-- end -->
 
-
+                                             
 
                         <?php
                          }
@@ -324,10 +300,13 @@
                         else
                         {
                         ?>
-                        <h1 align="center">No Data Found</h1>
+                         <center>
+                            <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png" class="m-3 w-50 h-75"/>
+                         </center>
                         <?php
                         }
                     ?>
+                      
 
 
 
@@ -368,52 +347,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?php echo base_url()?>welcome/form_validation_report" enctype="multipart/form-data">
+                <form method="post" action="<?php echo base_url('welcome/form_validation_report')?>" enctype="multipart/form-data">
                     <div class="form-group row">
-                        <label for="report_from" class="col-4 col-form-label">Reporter's Name:</label>
-                        <select id="report_from" name="report_from" class="form-control m-3">
+                        <label for="booking_id" class="col-4 col-form-label">Event Name <label class="text-danger">
+                                *</label></label>
+                        <select id="booking_id" name="booking_id" class="form-control ml-3 mr-3">
                             <?php
-                                            if($fetch_data_user->num_rows()>0)
+                                            if($fetch_data_history->num_rows()>0)
                                             {
-                                            foreach($fetch_data_user->result() as $row)
-                                                { 
-                                            ?>
-                            <option value="<?php echo $row->user_id; ?>">
-                                <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
-                            <?php
-                                            }
-                                            }
-                                            ?>
-                        </select>
-                        <?php echo form_error("report_from"); ?>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="violator" class="col-4 col-form-label">Violator:</label>
-                        <select id="violator" name="violator" class="form-control m-3">
-                            <?php
-                                            if($fetch_data_user->num_rows()>0)
-                                            {
-                                            foreach($fetch_data_user->result() as $row)
-                                                { 
-                                            ?>
-                            <option value="<?php echo $row->user_id; ?>">
-                                <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
-                            <?php
-                                            }
-                                            }
-                                            ?>
-                        </select>
-                        <?php echo form_error("report_to"); ?>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="booking_id" class="col-4 col-form-label">Event Name:</label>
-                        <select id="booking_id" name="booking_id" class="form-control m-3">
-                            <?php
-                                            if($fetch_data_event->num_rows()>0)
-                                            {
-                                            foreach($fetch_data_event->result() as $row)
+                                            foreach($fetch_data_history->result() as $row)
                                                 { 
                                             ?>
                             <option value="<?php echo $row->booking_id; ?>"><?php echo $row->event_name; ?></option>
@@ -424,31 +366,46 @@
                         </select>
                         <?php echo form_error("booking_id"); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="comment">Additional Info:</label>
-                        <input type="text" name="report_info" class="form-control lg" id="comment" \>
+
+                    <div class="form-group row">
+                        <label for="report_to" class="col-4 col-form-label">Violator <label class="text-danger">
+                                *</label></label>
+                        <select id="report_to" name="report_to" class="form-control ml-3 mr-3">
+                            <option value="" selected disabled>Select Violator</option>
+                            <option value="client">CLIENT</option>
+                            <option value="performer">PERFORMER</option>
+                        </select>
+                        <?php echo form_error("report_to"); ?>
                     </div>
-                    <label for="userfile">Add Report photo</label>
-                        <div class="custom-file">
-                            <input type="file"
-                                class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
-                                name="userfile" id="customFile">
-                            <label class="custom-file-label" for="customFile"></label>
-                            <div class="invalid-feedback">
-                                < <div class="form-group"><?php echo form_error('userfile'); ?>
+
+                    <div class="form-group">
+                        <label for="comment">Additional Info <label class="text-danger"> *</label></label>
+                        <textarea type="text" name="report_info" class="form-control lg" id="comment" required \></textarea>
+                    </div>
+                    <!-- <label for="">Attach Evidence <label class="font-italic"> (Optional):</label></label>
+                    <div class="custom-file">
+                        <input type="file"
+                            class="form-control-file <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
+                            name="userfile" id="customFile">
+                        <small class="form-text text-muted font-italic">(File size must not exceed 20MB)</small>
+                        <div class="invalid-feedback">
+                            <div class="form-group"><?php echo form_error('userfile'); ?>
                             </div>
                         </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="custom-file">
-                        <input type="submit" name="addreport" class="btn btn-success">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
+                        <br>
 
+
+                    </div> -->
+                    <div class="modal-footer">
+                        <div class="custom-file">
+                            <center>
+                                <input type="submit" name="addreport" class="btn btn-success">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">CANCEL</button>
+                            </center>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>

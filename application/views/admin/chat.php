@@ -6,7 +6,6 @@
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <?php include('sidebar.php'); ?>
 
         <!-- Content Wrapper -->

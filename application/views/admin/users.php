@@ -259,7 +259,8 @@
           ?>
           <center>
         <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png"
-                            class="m-3 w-50 h-50"/></center>
+                            class="m-3 w-50 h-50"/>
+            </center>
         <?php
           }
           ?>
@@ -311,19 +312,19 @@
                     <div>
                         <label for="Last Name">Last Name</label><label class="text-danger">&nbsp *</label>
                         <input type="text" name="lname" class="form-control" placeholder="Enter your first name (required)" id="lname" required>
-                        <small class="form-text text muted">username must be minimum of 5 characters long</small> 
                         <span class="text-danger"><?php echo form_error("lname"); ?></span>
                     </div>
                     <br>
                     <div class="form-group">
                         <label for="pwd">Password</label><label class="text-danger">&nbsp *</label>
                         <input type="password" name="password" placeholder="Enter Account Password (required)" class="form-control" id="Password" required>
-                        <small class="form-text text muted">password must be minimum of 5 characters long</small>
+                        <small class="form-text text-muted font-italic">password must be minimum of 5 characters long</small>
                         <span class="text-danger"><?php echo form_error("password"); ?></span>
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label><label class="text-danger">&nbsp *</label>
                         <input type="text" name="username" placeholder="Enter your username (required)" class="form-control" id="username" required>
+                        <small class="form-text text-muted font-italic">username must be minimum of 5 characters long</small> 
                         <span class="text-danger"><?php echo form_error("username"); ?></span>
                     </div>
                     <div class="form-group">
@@ -357,10 +358,11 @@
                         <span class="text-danger"><?php echo form_error("usertype"); ?></span>
                     </div>
                         <label for="">Add Profile Picture</label>
-                        <div class="custom-file">
+                        <div class="form-group">
                             <input type="file"
                                 class="form-control-file <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>"
                                 name="userfile" id="customFile">
+                                <small class="form-text text-muted font-italic">File size must not exceed 2MB</small>
                             <div class="invalid-feedback">
                                  <div class="form-group"><?php echo form_error('userfile'); ?>
                             </div>

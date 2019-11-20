@@ -91,7 +91,7 @@
                                        
                                         
                                         <div class="text-center font-weight-light font-italic">Date Created:
-                                            <?php echo  date('F d, Y', strtotime($row->date_created)); ?><br></div>
+                                            <?php echo  date('F d, Y h:', strtotime($row->date_created)); ?><br></div>
                                     </div>
                                 </div>
                             </div>
