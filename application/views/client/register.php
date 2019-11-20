@@ -10,32 +10,32 @@
 				<div class="col-md-6">
 					<input value="client" class="sr-only" name="user_type">
 					<div class="form-group">
-						<label for="">Username</label>
-						<input type="text" class="form-control <?php echo form_error('uname') ? 'is-invalid' : '' ?>" value="<?php echo isset($uname) ? $uname : '' ?>" name="uname" >
+						<label for="">Username <span class="font-weight-bold text-danger">*</span></label>
+						<input type="text" class="form-control <?php echo form_error('uname') ? 'is-invalid' : '' ?>" required value="<?php echo isset($uname) ? $uname : '' ?>" name="uname" >
 						<div class="invalid-feedback">
 							<?php echo form_error('uname'); ?>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">First Name</label>
-						<input type="text" class="form-control <?php echo form_error('fname') ? 'is-invalid' : '' ?>" value="<?php echo isset($fname) ? $fname : '' ?>" name="fname" >
+						<label for="">First Name <span class="font-weight-bold text-danger">*</span></label>
+						<input type="text" class="form-control <?php echo form_error('fname') ? 'is-invalid' : '' ?>" required value="<?php echo isset($fname) ? $fname : '' ?>" name="fname" >
 						<div class="invalid-feedback">
 							<?php echo form_error('fname'); ?>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Last Name</label>
-						<input type="text" class="form-control <?php echo form_error('lname') ? 'is-invalid' : '' ?>" value="<?php echo isset($lname) ? $lname : '' ?>" name="lname" >
+						<label for="">Last Name <span class="font-weight-bold text-danger">*</span></label>
+						<input type="text" class="form-control <?php echo form_error('lname') ? 'is-invalid' : '' ?>" required value="<?php echo isset($lname) ? $lname : '' ?>" name="lname" >
 						<div class="invalid-feedback">
 							<?php echo form_error('lname'); ?>
 						</div>
 					</div>
-					<label class="" for="inlineFormInputGroupUsername">Contact Number 1</label>
+					<label class="" for="inlineFormInputGroupUsername">Contact Number 1 <span class="font-weight-bold text-danger">*</span></label>
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<div class="input-group-text">09</div>
 						</div>
-						<input type="number1" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" value="<?php echo isset($number1) ? $number1 : '' ?>" name="number1" >
+						<input type="number" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" required min="0" max="999999999" value="<?php echo isset($number1) ? $number1 : '' ?>" name="number1" >
 						<div class="invalid-feedback">
 							<?php echo form_error('number1'); ?>
 						</div>
@@ -45,14 +45,14 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">09</div>
 						</div>
-						<input type="number2" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" value="<?php echo isset($number2) ? $number2 : '' ?>" name="number2" >
+						<input type="number" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" min="0" max="999999999" value="<?php echo isset($number2) ? $number2 : '' ?>" name="number2" >
 						<div class="invalid-feedback">
 							<?php echo form_error('number2'); ?>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Email Address</label>
-						<input type="email" class="form-control <?php echo form_error('email') ? 'is-invalid' : '' ?>" value="<?php echo isset($email) ? $email : '' ?>" name="email" >
+						<label for="">Email Address <span class="font-weight-bold text-danger">*</span></label>
+						<input type="email" class="form-control <?php echo form_error('email') ? 'is-invalid' : '' ?>" required value="<?php echo isset($email) ? $email : '' ?>" name="email" >
 						<div class="invalid-feedback">
 							<?php echo form_error('email'); ?>
 						</div>
@@ -60,16 +60,16 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="">Adrress</label>
-						<textarea class="form-control <?php echo form_error('address') ? 'is-invalid' : '' ?>" name="address" id="" cols="1" rows="1"><?php echo isset($address) ? $address : '' ?></textarea>
+						<label for="">Adrress <span class="font-weight-bold text-danger">*</span></label>
+						<textarea class="form-control <?php echo form_error('address') ? 'is-invalid' : '' ?>" required name="address" id="" cols="1" rows="1"><?php echo isset($address) ? $address : '' ?></textarea>
 						<div class="invalid-feedback">
 							<?php echo form_error('address'); ?>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Add Profile Picture</label>                            
+						<label for="">Add Profile Picture <span class="font-weight-bold text-danger">*</span> <small>(Limit to 2mb)</small></label>                            
 						<div class="custom-file">
-							<input type="file" class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>" name="userfile" id="customFile">
+							<input type="file" class="custom-file-input <?php echo form_error('userfile') ? 'is-invalid' : ''; ?>" required name="userfile" id="customFile">
 							<label  class="custom-file-label" for="customFile">Choose Photo</label>
 							<div class="invalid-feedback">
 								<?php echo form_error('userfile'); ?>
@@ -77,15 +77,15 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Password</label>
-						<input type="password" class="form-control <?php echo form_error('pass') ? 'is-invalid' : '' ?>"  name="pass" >
+						<label for="">Password <span class="font-weight-bold text-danger">*</span></label>
+						<input type="password" class="form-control <?php echo form_error('pass') ? 'is-invalid' : '' ?>" required  name="pass" >
 						<div class="invalid-feedback">
 							<?php echo form_error('pass'); ?>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="">Confirm Password</label>
-						<input type="password" class="form-control <?php echo form_error('passconf') ? 'is-invalid' : '' ?>"  name="passconf" >
+						<label for="">Confirm Password <span class="font-weight-bold text-danger">*</span></label>
+						<input type="password" class="form-control <?php echo form_error('passconf') ? 'is-invalid' : '' ?>" required  name="passconf" >
 						<div class="invalid-feedback">
 							<?php echo form_error('passconf'); ?>
 						</div>

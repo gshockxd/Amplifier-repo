@@ -24,7 +24,7 @@
 			$templates['title'] = 'Change Password';
 
 			$this->form_validation->set_rules('passOld', 'Old Password', 'required', array('required'=> 'Please Input Old Password'));
-			$this->form_validation->set_rules('pass', 'Password', 'required', array('required'=> 'Please Input Password'));
+			$this->form_validation->set_rules('pass', 'Password', 'required|min_length[8]', array('required'=> 'Please Input Password'));
 			$this->form_validation->set_rules('passConf', 'Confirm Password', 'required|matches[pass]', array('required'=> 'Please Input Confirm Password', 'matches'=>'Password Not Matched'));
 
 			$data['passOld'] = md5($this->input->post('passOld'));
@@ -67,15 +67,15 @@
 		}
 		public function profile_edit_info(){
 			$templates['title'] = 'Edit Profile';
-
-			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
-			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required' => 'Please Input First Name'));
-			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required' => 'Please input Last Name'));
-			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[9]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
-			$this->form_validation->set_rules('number2', 'Contact Number', 'numeric|exact_length[9]', array('numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
-			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check_update');
-			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
-
+			
+			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input First Name', 'alpha' => 'Please input letters only'));
+			$this->form_validation->set_rules('uname', 'Username', 'required|alpha_numeric', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only', 'alpha_numeric'=> 'Username contain no spaces', 'is_unique'=>'Duplicated Username'));
+			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input Last Name', 'alpha' => 'Please input letters only'));
+			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[9]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
+			$this->form_validation->set_rules('number2', 'Contact Number 2', 'numeric|exact_length[9]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
+			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=> 'Please Input Address'));
+			$this->form_validation->set_rules('userfile', 'Profile Picture');
+		   	
 			// if($this->session->userdata('user_type') == 'performer'){				
 			// 	$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'Please Select Service'));
 			// 	$this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));

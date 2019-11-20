@@ -55,6 +55,18 @@
 
 			$this->C_rate_model->rate_attempt();
 		}
+		public function report_event(){
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
+			
+			$this->C_report_model->index();
+		}
+		public function report_attempt(){
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_client();
+
+			$this->C_report_model->report_attempt();
+		}
 		public function delete_event(){
 			$this->Session_model->session_check();
 			$this->Session_model->user_type_check_client();
@@ -194,7 +206,6 @@
 			$this->Profile_model->profile_password_update();
 		}
 		public function file_check(){
-			
 			$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
 			$mime = get_mime_by_extension($_FILES['userfile']['name']);
 			if(isset($_FILES['userfile']['name']) && $_FILES['userfile']['name']!=""){
@@ -240,6 +251,30 @@
 				return true;
 			}
 		}	
+		public function file_check_user_video(){			
+			$allowed_mime_type_arr = array('video/mp4');
+			$mime = get_mime_by_extension($_FILES['uservideo']['name']);
+			if(isset($_FILES['uservideo']['name']) && $_FILES['uservideo']['name']!=""){
+				if($_FILES['uservideo']['error'] != 0){
+					$this->form_validation->set_message('file_check_user_video', 'The video file is corrupted. Cannot proceed');
+					return false;
+				}
+				if(in_array($mime, $allowed_mime_type_arr)){
+					if($_FILES['uservideo']['size'] <= 200000000){
+						return true;
+					}else{
+						$this->form_validation->set_message('file_check_user_video', 'Video file size exceed 200mb, please select another video.');
+						return false;
+					}
+				}else{
+					$this->form_validation->set_message('file_check_user_video', 'Please select only mp4 file.');
+					return false;
+				}
+			}else{
+				$this->form_validation->set_message('file_check_user_video', 'Please choose a video file.');
+				return false;
+			}
+		}	
 		function alpha_dash_space($str){
 			if(!preg_match("/^([-a-z_. ])+$/i", $str)){
 				$this->form_validation->set_message('alpha_dash_space', 'First name only accept letters');
@@ -274,5 +309,54 @@
 			}else{			
 				return TRUE;
 			}
+		}
+		public function dup_flname (){
+			// Check if fname, lname, contact number (1,2) are duplicate
+			$this->db->select('fname, lname');
+			$this->db->where('fname', $this->input->post('fname'));
+			$this->db->or_where('lname', $this->input->post('lname'));
+			// $this->db->or_where('telephone_1', $this->input->post('number1'));
+			// $this->db->or_where('telephone_2', $this->input->post('number2'));
+			$query = $this->db->get('users');
+			$temp = $query->row_array();
+			
+			if($temp['fname'] == $this->input->post('fname') && $temp['lname'] == $this->input->post('lname')){
+				$this->form_validation->set_message('dup_flname', 'Duplicated First Name and Last Name');
+				return FALSE;
+			}else{
+				return TRUE;
+			}			
+		}
+		public function dup_number1 (){
+			// Check if fname, lname, contact number (1,2) are duplicate
+			$this->db->select('telephone_1');
+			$this->db->where('telephone_1', $this->input->post('number1'));
+			$query = $this->db->get('users');
+			$temp = $query->row_array();
+			
+			if($temp['telephone_1'] == $this->input->post('number1')){
+				$this->form_validation->set_message('dup_number1', 'Duplicated Contact Number');
+				return FALSE;
+			}else{
+				return TRUE;
+			}			
+		}
+		public function dup_number2 (){
+			// Check if fname, lname, contact number (1,2) are duplicate
+			$this->db->select('telephone_2');
+			$this->db->where('telephone_2', $this->input->post('number2'));
+			$query = $this->db->get('users');
+			$temp = $query->row_array();
+			
+			if($temp){
+				if($temp['telephone_2'] == $this->input->post('number2')){
+					$this->form_validation->set_message('dup_number2', 'Duplicated Contact Number');
+					return FALSE;
+				}else{
+					return TRUE;
+				}	
+			}else{ 
+				return TRUE;
+			}		
 		}
 	} 

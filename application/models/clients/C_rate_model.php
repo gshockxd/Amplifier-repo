@@ -1,7 +1,9 @@
 <?php 
     class C_Rate_Model extends CI_Model {
         public function index (){
-            $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2), 'client_rating'=>'IS NULL'));
+            $id = $this->uri->segment(2);
+            $user_id = $this->session->userdata('user_id');
+            $query = $this->db->query("SELECT * FROM bookings WHERE booking_id = $id AND client_rating IS NULL AND client_id = $user_id ");
             $data['rate'] = $query->row_array();
             if($data['rate']){
                 $templates['title'] = 'Event Rating';
@@ -16,7 +18,9 @@
         }
         public function rate_attempt(){
             $templates['title'] = 'Event Rating';
-            $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2), 'client_rating'=>'IS NULL'));
+            $id = $this->uri->segment(2);
+            $user_id = $this->session->userdata('user_id');
+            $query = $this->db->query("SELECT * FROM bookings WHERE booking_id = $id AND client_rating IS NULL AND client_id = $user_id ");
             $data['rate'] = $query->row_array();
             $this->form_validation->set_rules('rate1', 'Rate 1', 'required|numeric', array('required'=> 'Rate is required', 'numeric'=>'Something went wrong'));
             $this->form_validation->set_rules('rate2', 'Rate 2', 'required|numeric', array('required'=> 'Rate is required', 'numeric'=>'Something went wrong'));

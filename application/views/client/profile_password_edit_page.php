@@ -9,24 +9,24 @@
                 <p class="h2">Change Password</p>     
                 <input type="hidden" value="<?php echo $this->session->userdata('password'); ?>" name="passOld1">       
                 <div class="form-group pt-2">
-                    <label for="exampleInputPassword1">Old Password</label>
-                    <input type="password" value="<?php echo isset($passOld) ? $passOld : $this->session->userdata('passOld'); ?>" class="form-control <?php echo form_error('passOld') || $this->session->flashdata('pass_old_not_matched') ? 'is-invalid' : '' ?>" name="passOld">
+                    <label for="exampleInputPassword1">Old Password <span class="font-weight-bold text-danger">*</span></label>
+                    <input type="password" value="<?php echo isset($passOld) ? $passOld : $this->session->userdata('passOld'); ?>" required class="form-control <?php echo form_error('passOld') || $this->session->flashdata('pass_old_not_matched') ? 'is-invalid' : '' ?>" name="passOld">
                     <div class="invalid-feedback">
                         <?php echo form_error('passOld'); ?>
                         <?php echo $this->session->flashdata('pass_old_not_matched'); ?>
                     </div>
                 </div>          
                 <div class="form-group pt-2">
-                    <label for="exampleInputPassword1">New Password</label>
-                    <input type="password" value="<?php echo isset($pass) ? $pass : $this->session->userdata('pass'); ?>" class="form-control <?php echo form_error('pass') || $this->session->flashdata('pass_not_matched') ? 'is-invalid' : '' ?>" name="pass">
+                    <label for="exampleInputPassword1">New Password <span class="font-weight-bold text-danger">*</span></label>
+                    <input type="password" value="<?php echo isset($pass) ? $pass : $this->session->userdata('pass'); ?>" minlength="8" required class="form-control <?php echo form_error('pass') || $this->session->flashdata('pass_not_matched') ? 'is-invalid' : '' ?>" name="pass">
                     <div class="invalid-feedback">
                         <?php echo form_error('pass'); ?>
                         <?php echo $this->session->flashdata('pass_not_matched'); ?>
                     </div>
                 </div>          
                 <div class="form-group pt-2">
-                    <label for="exampleInputPassword1">Confirm Password</label>
-                    <input type="password" value="<?php echo isset($passConf) ? $passConf : $this->session->userdata('passConf'); ?>" class="form-control <?php echo form_error('passConf') || $this->session->flashdata('pass_not_matched') ? 'is-invalid' : '' ?>" name="passConf">
+                    <label for="exampleInputPassword1">Confirm Password <span class="font-weight-bold text-danger">*</span></label>
+                    <input type="password" value="<?php echo isset($passConf) ? $passConf : $this->session->userdata('passConf'); ?>" minlength="8" required class="form-control <?php echo form_error('passConf') || $this->session->flashdata('pass_not_matched') ? 'is-invalid' : '' ?>" name="passConf">
                     <div class="invalid-feedback">
                         <?php echo form_error('passConf'); ?>
                         <?php echo $this->session->flashdata('pass_not_matched'); ?>

@@ -74,7 +74,7 @@
 
         }
         public function get_event($id){
-            $this->db->select('bookings.*, price');
+            $this->db->select('bookings.*, price, package_name');
             $this->db->join('packages', 'packages.package_id = bookings.package_id');
             $query = $this->db->get_where('bookings', array('booking_id'=> $id, 'client_id'=>$this->session->userdata('user_id')));
             $data = $query->row_array();
@@ -123,11 +123,21 @@
             $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
             $data = $query->row_array();
 
-            if($data){         
+            if($data){
+                $id = $data['package_id'];
+                // die;
                 $this->db->delete('bookings', array('booking_id'=>$this->uri->segment(2)));                
-                $this->db->set('booked', 0);
-                $this->db->where(array('package_id' => $data['package_id']));
-                $this->db->update('packages');
+                // $this->db->set('booked', 0);
+                // $this->db->where(array('package_id' => $data['package_id']));
+                // $this->db->update('packages');
+
+                $query = $this->db->get_where('bookings', array('package_id'=>$id));
+                $check_same_package = $query->row_array();
+                if(!$check_same_package){
+                    $this->db->set('interested', 0);
+                    $this->db->where(array('package_id'=>$id));
+                    $this->db->update('packages');
+                }
 
                 $notif['message'] = 'You have been deleted the event: '.$data['event_name'];
                 $notif['links'] = '#';
@@ -174,6 +184,14 @@
                 $this->db->where('booking_id', $this->uri->segment(2));
                 $this->db->update('bookings');
                 
+                $this->db->set(array('booked'=>1, 'interested'=>0));
+                $this->db->where(array('package_id'=>$data['package_id']));
+                $this->db->update('packages');
+
+                $this->db->set(array('on_going'=>0, 'status'=>'cancel'));
+                $this->db->where(array('package_id'=>$data['package_id'], 'status'=>'pending'));
+                $this->db->update('bookings');
+                
                 $notif['message'] = 'You been approved the event: '.$data['event_name'];
                 $notif['links'] = base_url().'p_bookings';
                 $notif['target_user_id'] = $data['client_id'];
@@ -197,9 +215,9 @@
                 $this->db->where('booking_id', $this->uri->segment(2));
                 $this->db->update('bookings');
 
-                $this->db->set(array('booked'=>0));
-                $this->db->where(array('package_id'=>$data['package_id']));
-                $this->db->update('packages');
+                // $this->db->set(array('booked'=>0));
+                // $this->db->where(array('package_id'=>$data['package_id']));
+                // $this->db->update('packages');
 
                 $notif['message'] = 'You been declined the event: '.$data['event_name'];
                 $notif['links'] = base_url().'p_bookings';
