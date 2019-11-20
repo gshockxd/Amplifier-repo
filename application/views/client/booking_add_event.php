@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="">Event Name</label>
-                <input type="text" class="form-control <?php echo form_error('event_name') ? 'is-invalid' : '' ?>" name="event_name" value="<?php echo isset($event_name) ? $event_name : '' ?>">
+                <label for="">Event Name <span class="font-weight-bold text-danger">*</span></label>
+                <input type="text" class="form-control <?php echo form_error('event_name') ? 'is-invalid' : '' ?>" required name="event_name" value="<?php echo isset($event_name) ? $event_name : '' ?>">
                 <div class="invalid-feedback">
                     <?php echo form_error('event_name') ?>
                 </div>
@@ -13,8 +13,8 @@
             <div class="row">
                 <div class="col-md-6">
                        <div class="form-group">
-                        <label for="">Event Date</label>
-                        <input type="date" name="event_date" class="form-control <?php echo form_error('event_date') || isset($date_error) ? 'is-invalid' : '' ?>" value="<?php echo isset($event_date) ? $event_date : '' ?>" >
+                        <label for="">Event Date <span class="font-weight-bold text-danger">*</span></label>
+                        <input type="date" name="event_date" class="form-control <?php echo form_error('event_date') || isset($date_error) ? 'is-invalid' : '' ?>" required value="<?php echo isset($event_date) ? $event_date : '' ?>" >
                         <div class="invalid-feedback">
                             <?php echo form_error('event_date'); echo isset($date_error) ? $date_error : '' ?>
                         </div>
@@ -30,8 +30,8 @@
             <div class="row">
                 <div class="col-md-6">
                        <div class="form-group">
-                        <label for="">From</label>
-                        <input type="time" name="duration" class="form-control <?php echo form_error('duration') || isset($time_error) ? 'is-invalid' : '' ?>" value="<?php echo isset($duration) ? $duration : '' ?>" >
+                        <label for="">From <span class="font-weight-bold text-danger">*</span></label>
+                        <input type="time" required name="duration" class="form-control <?php echo form_error('duration') || isset($time_error) ? 'is-invalid' : '' ?>" value="<?php echo isset($duration) ? $duration : '' ?>" >
                         <div class="invalid-feedback">
                             <?php echo form_error('duration'); echo isset($time_error) ? $time_error : '' ?>
                         </div>
@@ -39,8 +39,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">To</label>
-                        <input type="time" name="event_time" class="form-control <?php echo form_error('event_time') ? 'is-invalid' : '' ?>" value="<?php echo isset($event_time) ? $event_time : '' ?>" >
+                        <label for="">To <span class="font-weight-bold text-danger">*</span></label>
+                        <input type="time" required name="event_time" class="form-control <?php echo form_error('event_time') ? 'is-invalid' : '' ?>" value="<?php echo isset($event_time) ? $event_time : '' ?>" >
                         <div class="invalid-feedback">
                             <?php echo form_error('event_time') ?>
                         </div>
@@ -48,22 +48,22 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="">First Payment</label>
-                <input type="number" name="down_payment" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" max="<?php echo $package['price'] ?>" >
+                <label for="">First Payment <span class="font-weight-bold text-danger">*</span></label>
+                <input type="number" required name="down_payment" min="0" class="form-control <?php echo form_error('down_payment') ? 'is-invalid' : '' ?>" value="<?php echo isset($down_payment) ? $down_payment : '' ?>" max="<?php echo $package['price'] ?>" >
                 <div class="invalid-feedback">
                     <?php echo form_error('down_payment') ?>
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Venue Location</label>
-                <input type="text" class="form-control <?php echo form_error('location') ? 'is-invalid' : '' ?>" name="location" value="<?php echo isset($location) ? $location : '' ?>">
+                <label for="">Venue Location <span class="font-weight-bold text-danger">*</span></label>
+                <input type="text" required class="form-control <?php echo form_error('location') ? 'is-invalid' : '' ?>" name="location" value="<?php echo isset($location) ? $location : '' ?>">
                 <div class="invalid-feedback">
                     <?php echo form_error('location') ?>
                 </div>
             </div>
             <div class="form-group">
-                <label for="">Notes</label>
-                <textarea name="notes" id="ckeditor" class="form-control <?php echo form_error('notes') ? 'is-invalid' : '' ?>"><?php echo isset($notes) ? $notes : '' ?></textarea>
+                <label for="">Notes <span class="font-weight-bold text-danger">*</span></label>
+                <textarea name="notes" required id="ckeditor" class="form-control <?php echo form_error('notes') ? 'is-invalid' : '' ?>"><?php echo isset($notes) ? $notes : '' ?></textarea>
                 <div class="invalid-feedback">
                     <?php echo form_error('notes') ?>
                 </div>
@@ -101,10 +101,10 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p class="text-capitalize"><?php echo $package['telephone_1'] ?></p>
+                                        <p class="text-capitalize">09<?php echo $package['telephone_1'] ?></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p class="text-capitalize"><?php echo $package['telephone_2'] ?></p>
+                                        <p class="text-capitalize">09<?php echo $package['telephone_2'] ?></p>
                                     </div>
                                 </div>
                             </div>

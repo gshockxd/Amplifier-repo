@@ -12,15 +12,14 @@
         }
         public function register_user(){    
 			$templates['title'] = 'Client Registration';
-			$this->form_validation->set_rules('uname', 'Username', 'required', array('required' => 'Plese Input Username'));
-
-			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required' => 'Please Input First Name'));
-			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required' => 'Please input Last Name'));
-			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[9]', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
-			$this->form_validation->set_rules('number2', 'Contact Number', 'numeric|exact_length[9]', array('numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
+			$this->form_validation->set_rules('uname', 'Username', 'required|is_unique[users.username]', array('required' => 'Plese Input Username', 'is_unique'=>'Duplicated Username'));
+			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space|callback_dup_flname', array('required' => 'Please Input First Name'));
+			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space|callback_dup_flname', array('required' => 'Please input Last Name'));
+			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[9]|callback_dup_number1', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
+			$this->form_validation->set_rules('number2', 'Contact Number', 'numeric|exact_length[9]|callback_dup_number2', array('numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
 			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid', 'is_unique'=>'Email Address is already taken'));
-			$this->form_validation->set_rules('pass', 'Password', 'required', array('required' => 'Please input Password'));
-			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]', array('matches'=>'Password not matched'));
+			$this->form_validation->set_rules('pass', 'Password', 'required|min_length[8]', array('required' => 'Please input Password', 'min_length'=>'Password must be 8 or more characters'));
+			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]|min_length[8]', array('matches'=>'Password not matched', 'min_length'=>'Password must be 8 or more characters'));
 			$this->form_validation->set_rules('userfile', 'Userfile', 'callback_file_check');
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=>'Please input address'));
 

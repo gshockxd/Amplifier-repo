@@ -9,7 +9,7 @@
         }
         public function pricing_validate(){
             $this->form_validation->set_rules('name', 'Package Name', 'required', array('required'=>'Please Input Package Name'));
-            $this->form_validation->set_rules('price', 'Price Offer', 'required|numeric|greater_than[499]', array('required'=>'Please Input Price', 'numeric'=>'Please input a valid Price', 'greater_than'=>'Minimum Price is set to ₱ 500'));
+            $this->form_validation->set_rules('price', 'Price Offer', 'required|numeric|greater_than[499]|less_than_equal_to[999999999]', array('required'=>'Please Input Price', 'numeric'=>'Please input a valid Price', 'greater_than'=>'Minimum Price is set to ₱ 500', 'less_than_equal_to'=>'Maximum Price is set to ₱ 999,999,999'));
             $this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
             // $this->form_validation->set_rules('userfile', 'Profile Picture', 'callback_file_check');
             

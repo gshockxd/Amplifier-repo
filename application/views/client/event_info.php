@@ -108,11 +108,25 @@
                 </li>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-3">
-                            <p class="font-weight-bold">Client Notes: </p>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="font-weight-bold">Package Name: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-capitalize"><?php echo $event['package_name']; ?></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <p class=""><?php echo $event['notes'] ?></p>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="font-weight-bold">Client Notes: </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class=""><?php echo $event['notes'] ?></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </li>

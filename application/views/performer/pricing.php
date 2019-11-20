@@ -19,14 +19,14 @@
 					</div>
 					<div class="form-group">
 						<label for="">Package Name</label>
-						<input type="text" name="name" value="<?php echo isset($name) ? $name : '' ?>" class="form-control <?php echo form_error('name') ? 'is-invalid' : '' ?>">
+						<input type="text" name="name" value="<?php echo isset($name) ? $name : '' ?>" required class="form-control <?php echo form_error('name') ? 'is-invalid' : '' ?>">
 						<div class="invalid-feedback">
 							<?php echo form_error('name'); ?>
 						</div>				
 					</div>
 					<div class="form-group">
-						<label for="">Price Offer</label>
-						<input type="number" name="price" value="<?php echo isset($price) ? $price : '' ?>" class="form-control <?php echo form_error('price') ? 'is-invalid' : '' ?>">
+						<label for="">Price Offer <small>(Minimum Price is ₱ 500)</small></label>
+						<input type="text" name="price" value="<?php echo isset($price) ? $price : '' ?>" required maxlength="9" class="form-control <?php echo form_error('price') ? 'is-invalid' : '' ?>">
 						<div class="invalid-feedback">
 							<?php echo form_error('price'); ?>
 						</div>

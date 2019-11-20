@@ -8,22 +8,22 @@
 			$this->load->view('inc/footer');
         }
         public function register(){
-			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input First Name', 'alpha' => 'Please input letters only'));
-			$this->form_validation->set_rules('uname', 'Username', 'required|alpha_numeric', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only', 'alpha_numeric'=> 'Username contain no spaces'));
-			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input Last Name', 'alpha' => 'Please input letters only'));
+			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space|callback_dup_flname', array('required'=> 'Please Input First Name', 'alpha' => 'Please input letters only'));
+			$this->form_validation->set_rules('uname', 'Username', 'required|alpha_numeric|is_unique[users.username]', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only', 'alpha_numeric'=> 'Username contain no spaces', 'is_unique'=>'Duplicated Username'));
+			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space|callback_dup_flname', array('required'=> 'Please Input Last Name', 'alpha' => 'Please input letters only'));
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=> 'Please Input Address'));
             $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required'=> 'Please Input Emaill Address', 'valid_email'=> 'Please Input a Valid Email Address', 'is_unique'=>'Email Address is already registered'));
-			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[9]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
-			$this->form_validation->set_rules('number2', 'Contact Number 2', 'required|numeric|exact_length[9]|callback_contact_number_duplicate_verification', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
-			$this->form_validation->set_rules('pass', 'Password', 'required', array('required'=>'Password is required'));
-			$this->form_validation->set_rules('con_pass', 'Confirm Password', 'matches[pass]', array('matches'=>'Password not matched'));
+			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[9]|callback_dup_number1', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
+			$this->form_validation->set_rules('number2', 'Contact Number 2', 'numeric|exact_length[9]|callback_dup_number2', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
+			$this->form_validation->set_rules('pass', 'Password', 'required|min_length[8]', array('required'=>'Password is required', 'min_length'=>'Password must be at least 8 characters long'));
+			$this->form_validation->set_rules('con_pass', 'Confirm Password', 'matches[pass]|min_length[8]', array('matches'=>'Password not matched', 'min_length'=>'Password must be at least 8 characters long'));
 			$this->form_validation->set_rules('service', 'Service', 'required', array('required'=>'No Service Selected'));
             $this->form_validation->set_rules('desc', 'Description', 'required', array('required'=> 'Please Input Description'));
 			$this->form_validation->set_rules('userfile', 'Profile Picture', 'callback_file_check');
 			$this->form_validation->set_rules('group_photo', 'Group Photo', 'callback_file_check_group_photo');
 			$this->form_validation->set_rules('video1', 'Video Sample 1', 'callback_file_check_video_1');
 			$this->form_validation->set_rules('video2', 'Video Sample 2', 'callback_file_check_video_2');
-			$this->form_validation->set_rules('video3', 'Video Sample 3', 'callback_file_check_video_3');
+			$this->form_validation->set_rules('video3', 'Video Sample 3', 'callback_file_check_video_3');			
 
             $data['fname'] = $this->input->post('fname');
             $data['lname'] = $this->input->post('lname');
@@ -71,7 +71,7 @@
 
 						if($this->upload->do_upload('file')){
 							$uploadData = $this->upload->data();
-							$filename = $uploadData['file_name'];		   
+							$filename = $uploadData['file_name'];	
 						}			
 
 					}elseif (in_array($mime, $allowed_mime_videos)){
@@ -87,15 +87,12 @@
 
 						if($this->upload->do_upload('file')){
 							$uploadData = $this->upload->data();
-							$filename = $uploadData['file_name'];		   
+							$filename = $uploadData['file_name'];	
 						}	
 					}			
 					$files[] = $filename;
 				}
-				// echo '<pre>';
-				// print_r($files['files']);
-				// echo '</pre>';
-				// die;
+
 				$user_id = $this->P_register_model->user_insert($files);
 				$session_user = $this->P_register_model->user_select($this->input->post('email'));
 				$this->Session_model->session_user($session_user);

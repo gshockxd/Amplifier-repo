@@ -129,16 +129,56 @@
 			// echo $this->db->last_query();
 			// die();
 
-			$this->db->set('booked', 1);
+			// $this->db->set('interested', $this->session->userdata('user_id'));
+			// $this->db->where('package_id', $package['package_id']);
+			// $this->db->update('packages');
+			// return $id;
+
+			// LOGIC CHANGE! REASON: UNYA RA MA BOOKED = 1 IF ANG PERFORMER NAKA ACCEPT OG PENDING REQUEST
+			$this->db->set('interested', 1);
 			$this->db->where('package_id', $package['package_id']);
 			$this->db->update('packages');
 			return $id;
 		}
 		public function get_packages(){
 			$this->db->join('users', 'user_id = owner');
-			$this->db->select('packages.*, artist_type');
+			$this->db->select('packages.*, users.artist_type');
 			$query = $this->db->get_where('packages', array('booked'=> 0));
-			return $query->result_array();
+			$temp = $query->result_array();			
+
+			foreach($temp as $temp){
+				$query = $this->db->get_where('bookings', array('client_id'=>$this->session->userdata('user_id'), 'on_going'=>1, 'status'=>'pending'));
+				$data[] = $query->result_array();
+			}
+
+			// if(isset($data)){
+			// 	return $data;
+			// }else{
+			// 	return FALSE;
+			// }
+
+			// $query = $this->db->get_where('bookings', array('on_going' => 1, 'client_id'=>$this->session->userdata('user_id')));
+			// $temp2 = $query->result_array();			
+
+			// if($temp && $temp2){
+			// 	foreach($temp as $t){
+			// 		foreach($temp2 as $t2){
+			// 			if($t2['package_id'] != $t['package_id']){
+			// 				$temp3[] = $t;
+			// 			}
+			// 		}
+			// 	}
+			// 	return $temp3;
+			// }else{
+			// 	return $temp;
+			// }
+
+			echo '<pre>';
+			print_r($data);
+			// // print_r($temp2);
+			// print_r($temp3);
+			// echo '</pre>';
+			die;
 		}
 		public function check_date(){
 			if($this->input->post('event_date') < date('Y-m-d')){

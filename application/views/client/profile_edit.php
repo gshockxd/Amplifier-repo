@@ -33,7 +33,7 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Username</div>
-                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($uname) ? $uname : $this->session->userdata('username'); ?>" class="form-control <?php echo form_error('uname') ? 'is-invalid' : '' ?>" name="uname">
+                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($uname) ? $uname : $this->session->userdata('username'); ?>" required class="form-control <?php echo form_error('uname') ? 'is-invalid' : '' ?>" name="uname">
                                     <div class="invalid-feedback">
                                         <?php echo form_error('uname'); ?>
                                     </div>
@@ -43,7 +43,7 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">First Name</div>
-                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($fname) ? $fname : $this->session->userdata('fname'); ?>" class="form-control <?php echo form_error('fname') ? 'is-invalid' : '' ?>" name="fname">
+                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($fname) ? $fname : $this->session->userdata('fname'); ?>" class="form-control <?php echo form_error('fname') ? 'is-invalid' : '' ?>" required name="fname">
                                     <div class="invalid-feedback">
                                         <?php echo form_error('fname'); ?>
                                     </div>
@@ -53,7 +53,7 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Last Name</div>
-                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($lname) ? $lname : $this->session->userdata('lname'); ?>" class="form-control <?php echo form_error('lname') ? 'is-invalid' : '' ?>" name="lname">
+                                <div class="col font-weight-bold"><input type="text" value="<?php echo isset($lname) ? $lname : $this->session->userdata('lname'); ?>" class="form-control <?php echo form_error('lname') ? 'is-invalid' : '' ?>" required name="lname">
                                     <div class="invalid-feedback">
                                         <?php echo form_error('lname'); ?>
                                     </div>
@@ -74,7 +74,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">09</div>
                                         </div>
-                                        <input type="text" value="<?php echo isset($number1) ? $number1 : $this->session->userdata('telephone_1'); ?>" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" name="number1">
+                                        <input type="text" value="<?php echo isset($number1) ? $number1 : $this->session->userdata('telephone_1'); ?>"  class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" required maxlength="9"  name="number1">
                                         <div class="invalid-feedback">
                                             <?php echo form_error('number1'); ?>
                                         </div>
@@ -90,7 +90,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">09</div>
                                         </div>
-                                        <input type="text" value="<?php echo isset($number2) ? $number2 : $this->session->userdata('telephone_2'); ?>" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" name="number2">
+                                        <input type="text" value="<?php echo isset($number2) ? $number2 : $this->session->userdata('telephone_2'); ?>" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" required maxlength="9" name="number2">
                                         <div class="invalid-feedback">
                                             <?php echo form_error('number2'); ?>
                                         </div>
@@ -101,7 +101,7 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Address</div>
-                                <div class="col font-weight-bold"><textarea name="address" id="" value="" class="form-control <?php echo form_error('address') ? 'is-invalid' : '' ?>" rows="1"><?php echo isset($address)  ? $address   : $this->session->userdata('address'); ?></textarea>
+                                <div class="col font-weight-bold"><textarea required name="address" id="" value="" class="form-control <?php echo form_error('address') ? 'is-invalid' : '' ?>" rows="1"><?php echo isset($address)  ? $address   : $this->session->userdata('address'); ?></textarea>
                                     <div class="invalid-feedback">
                                         <?php echo form_error('address'); ?>
                                     </div>
@@ -113,8 +113,8 @@
                                 <div class="row">
                                     <div class="col">Phone Number 2</div>
                                     <div class="col font-weight-bold">
-                                        <select class="form-control <?php echo form_error('service') ? 'is-invalid' : ''; ?>" name="service">
-                                            <option  selected hidden disabled> PLease Select Type of Service</option>
+                                        <select class="form-control <?php echo form_error('service') ? 'is-invalid' : ''; ?>" required name="service">
+                                            <option  selected hidden disabled value=""> PLease Select Type of Service</option>
                                             <option value="photographer" <?php echo isset($service) == 'photographer' ? 'selected' : $this->session->userdata('artist_type') == 'photographer' ? 'selected' : '' ?>>Photographer</option>
                                             <option value="videographer" <?php echo isset($service) == 'videographer' ? 'selected' : $this->session->userdata('artist_type') == 'videographer' ? 'selected' : '' ?>>videographer</option>
                                             <option value="host" <?php echo isset($service) == 'host' ? 'selected' : $this->session->userdata('artist_type') == 'host' ? 'selected' : '' ?>>Host</option>
@@ -130,7 +130,7 @@
                             <li class="list-group-item sr-only">
                                 <div class="row">
                                     <div class="col">Service Description</div>
-                                    <div class="col font-weight-bold"><textarea name="desc" id="ckeditor" value="" class="form-control <?php echo form_error('desc') ? 'is-invalid' : '' ?>" rows="1"><?php echo isset($desc)  ? $desc   : $this->session->userdata('artist_desc'); ?></textarea>
+                                    <div class="col font-weight-bold"><textarea name="desc" id="ckeditor" value="" class="form-control <?php echo form_error('desc') ? 'is-invalid' : '' ?>" required rows="1"><?php echo isset($desc)  ? $desc   : $this->session->userdata('artist_desc'); ?></textarea>
                                         <div class="invalid-feedback">
                                             <?php echo form_error('desc'); ?>
                                         </div>

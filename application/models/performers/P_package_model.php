@@ -28,8 +28,9 @@
         }
         public function select_packages(){
             $this->db->order_by('updated_at', 'DESC');
+            $this->db->select('packages.*');
             $query = $this->db->get_where('packages', array('owner'=>$this->session->userdata('user_id')));
-            return $query->result_array();
+            return $temp = $query->result_array();        
         }
         public function package_edit_page(){
             $id = $this->uri->segment(2);
