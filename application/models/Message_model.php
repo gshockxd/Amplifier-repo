@@ -11,7 +11,7 @@
             echo '</div>';
         }
         public function warning_message(){
-            echo '<div class="my-3 alert alert-danger d-flex justify-content-center alert-block">'; 
+            echo '<div class="my-3 alert alert-warning d-flex justify-content-center alert-block">'; 
             echo $this->session->flashdata('warning_message');
             echo '</div>';
         }

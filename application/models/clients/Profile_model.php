@@ -7,10 +7,7 @@
 			$this->load->view('client/profile', $data);
 			$this->load->view('inc/footer');            
 		}        
-		public function profile_password_edit_page(){			
-			if(!$this->session->userdata('user_id')){
-				redirect('clients/profile');
-			}
+		public function profile_password_edit_page(){		
 			$templates['title'] = 'Change Password';
 
 			$this->load->view('inc/header-client', $templates);
@@ -40,6 +37,10 @@
 					$this->session->set_flashdata('danger_message', 'Current Password Not Matched');
 					redirect('profile_password_edit_page');
 				}else{
+					$notif['message'] = 'Your password has been recently updated!';
+					$notif['links'] = '#';
+					$this->Notification_model->index($notif);
+
 					$this->session->set_flashdata('success_message', 'Your Password Has Been Updated!');
 					redirect('profile_password_edit_page');
 				}
@@ -71,8 +72,8 @@
 			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input First Name', 'alpha' => 'Please input letters only'));
 			$this->form_validation->set_rules('uname', 'Username', 'required|alpha_numeric', array('required'=> 'Please Input Username', 'alpha' => 'Please input letters only', 'alpha_numeric'=> 'Username contain no spaces', 'is_unique'=>'Duplicated Username'));
 			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space', array('required'=> 'Please Input Last Name', 'alpha' => 'Please input letters only'));
-			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[9]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
-			$this->form_validation->set_rules('number2', 'Contact Number 2', 'numeric|exact_length[9]', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
+			$this->form_validation->set_rules('number1', 'Contact Number 1', 'required|numeric|exact_length[9]|callback_dup_profile_number1|callback_dup_both_number1', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
+			$this->form_validation->set_rules('number2', 'Contact Number 2', 'numeric|exact_length[9]|callback_dup_profile_number2|callback_dup_both_number2', array('required'=> 'Please Input Contact Number', 'numeric'=>'Contact Number should be Numbers not Letters', 'exact_length'=>'Contains only 9 digits')); 
 			$this->form_validation->set_rules('address', 'Address', 'required', array('required'=> 'Please Input Address'));
 			$this->form_validation->set_rules('userfile', 'Profile Picture');
 		   	

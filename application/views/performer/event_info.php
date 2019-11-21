@@ -1,6 +1,9 @@
 <!-- <?php// echo '<pre>'; print_r($event); echo '</pre>'; ?> -->
 <div class="container my-3">
     <div class="col-md-8 offset-md-2">
+        <?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : ''; ?>
+        <?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : ''; ?>
+        <?php echo $this->session->flashdata('warning_message') ? $this->Message_model->warning_message() : ''; ?>
         <div class="card">
             <div class="card-header"><p class="h4 text-center"><?php echo $event['event_name'] ?></p></div>
             <ul class="list-group list-group-flush">
@@ -129,9 +132,18 @@
             </div>
         </div>
         <div class=" d-flex justify-content-end mt-2">
-            <!-- <a href="<?php echo base_url(); ?>print_event/<?php echo $this->uri->segment(2) ?>" target="_blank"  class="btn btn-info col-md-1 mr-2" data-toggle="tooltip" data-placement="top" title="Print"><i class="fas fa-print"></i></a> -->
-            <a href="<?php echo base_url(); ?>p_bookings"  class="btn btn-secondary col-md-1" data-toggle="tooltip" data-placement="top" title="Return"><i class="fas fa-arrow-left"></i></a>
-        </div>         
+            <?php if($report): ?>          
+                <a href="#"  class="btn btn-success col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Reported">Reported <i class="fas fa-check"></i></a>  
+            <?php else: ?>      
+                <a href="<?php echo base_url(); ?>p_report_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Report Event">Report <i class="fas fa-exclamation"></i></a>  
+            <?php endif; ?>      
+            <?php if($event['performer_rating']): ?>          
+                <a href="#"  class="btn btn-success col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rated">Rated <i class="fas fa-check"></i></a>  
+            <?php else: ?>      
+                <a href="<?php echo base_url(); ?>p_rate_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rate Event">Rate <i class="fas fa-exclamation"></i></a>  
+            <?php endif; ?>   
+            <a href="<?php echo base_url(); ?>p_bookings"  class="btn btn-secondary col-md-2" data-toggle="tooltip" data-placement="top" title="Return"><i class="fas fa-arrow-left"></i></a>
+        </div>       
     </div>
 </div>
 

@@ -96,13 +96,17 @@ $route['p_pricing_validate']            = 'performers/pricing_validate';
 $route['p_package']                     = 'performers/package';
 $route['p_package_edit_page/(:num)']    = 'performers/package_edit_page/$1'; 
 $route['p_package_delete/(:num)']       = 'performers/p_package_delete/$1';
-$route['p_package_update']              = 'performers/package_update';
+$route['p_package_update/(:num)']              = 'performers/package_update/$1';
 $route['p_package_info_page/(:num)']    = 'performers/package_info_page/$1';
 $route['p_gallery']                     = 'performers/gallery';
 $route['p_chat']                        = 'performers/chat';
 $route['p_chat/(:num)']                 = 'performers/chat_message/$1';
 $route['p_chat_send_search_message/(:num)']    = 'performers/send_search_message/$1';
 $route['p_chat_compose/(:num)']         = 'performers/chat_compose/$1'; 
+$route['p_report_event/(:num)']             = 'performers/report_event/$1';
+$route['p_report_attempt/(:num)']         = 'performers/report_attempt/$1'; 
+$route['p_rate_event/(:num)']             = 'performers/rate_event/$1';
+$route['p_rating_attempt/(:num)']         = 'performers/rate_attempt/$1'; 
 
 $route['notifications/index']                 =  'notifications/index';
 

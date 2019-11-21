@@ -7,27 +7,72 @@
 <?php if($packages): ?>
 	<p class="h3 red-brown text-center">Performer Packages</p>
 	<div class="card-columns">
-		<?php foreach($packages as $p): ?>
-			<?php if($p['booked'] == 0): ?>				
-				<div class="card border-primary-3">
-					<div class="card-header bg-primary">
-						<p class="h5 text-center text-white"><?php echo $p['package_name'] ?></p>
+		<?php foreach($packages as $p): ?>	
+			<?php if($bookings): ?>		
+				<?php if($p['booked'] == 0): ?>				
+					<div class="card border-primary-3">
+						<div class="card-header bg-primary">
+							<p class="h5 text-center text-white"><?php echo $p['package_name'] ?></p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><?php echo $p['details'] ?></li>
+							<li class="list-group-item"><p class="text-capitalize">Service Type: <?php echo $p['artist_type'] ?></p></li>
+							<li class="list-group-item">
+								<div class="row">
+									<div class="col-md-10">
+										<p>₱ <?php echo number_format ($p['price'], 2) ?></p>
+									</div>
+									<div class="col-md-2">									
+										<?php foreach($bookings as $b): ?>	
+											<?php if($b['package_id'] == $p['package_id']): ?>
+												<?php if($b['status'] == 'pending' || $b['status'] == 'approve'): ?>
+													<a href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Booked!"><i class="fas fa-check"></i></a>																										
+												<?php else: ?>
+													<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
+												<?php endif; ?>
+											<?php else: ?>
+												<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</div>
+								</div>	
+							</li>				
+						</ul>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><?php echo $p['details'] ?></li>
-						<li class="list-group-item"><p class="text-capitalize">Service Type: <?php echo $p['artist_type'] ?></p></li>
-						<li class="list-group-item">
-							<div class="row">
-								<div class="col-md-10">
-									<p>₱ <?php echo number_format ($p['price'], 2) ?></p>
-								</div>
-								<div class="col-md-2">
-									<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
-								</div>
-							</div>	
-						</li>				
-					</ul>
-				</div>
+				<?php endif; ?>
+			<?php else: ?>
+			
+				<?php if($p['booked'] == 0): ?>				
+						<div class="card border-primary-3">
+							<div class="card-header bg-primary">
+								<p class="h5 text-center text-white"><?php echo $p['package_name'] ?></p>
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item"><?php echo $p['details'] ?></li>
+								<li class="list-group-item"><p class="text-capitalize">Service Type: <?php echo $p['artist_type'] ?></p></li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-md-10">
+											<p>₱ <?php echo number_format ($p['price'], 2) ?></p>
+										</div>
+										<div class="col-md-2">
+											<?php if($bookings): ?>											
+												<?php foreach($bookings as $b): ?>	
+													<?php  if($b['package_id'] != $p['package_id']): ?>
+														<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
+													<?php else: ?>
+														<a href="#" class="btn btn-success" data-toogle="tooltip" data-placement="top" title="Booked!"><i class="fas fa-check"></i></a>
+													<?php endif; ?>
+												<?php endforeach; ?>
+											<?php else: ?>
+												<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
+											<?php endif; ?>
+										</div>
+									</div>	
+								</li>				
+							</ul>
+						</div>
+					<?php endif; ?>				
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>

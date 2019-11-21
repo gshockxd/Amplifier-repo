@@ -73,7 +73,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if($_SERVER['SERVER_NAME']=='localhost')
 {
 	$active_group = 'default';
-	
+
+}else if ($_SERVER['SERVER_NAME']== '172.16.5.14'){
+	$active_group = 'default';
 }else{
 // $active_group = 'amplifier';
 $active_group = 'nike';

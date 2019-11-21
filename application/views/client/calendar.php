@@ -8,8 +8,8 @@
 <div class="container my-5 text-center">
 	<?php 
 		if(base_url(uri_string()) == base_url().'clients/calendar'){
-			$year = date('2019');
-			$month = date('11');
+			$year = date('Y');
+			$month = date('m');
 			echo $this->calendar->generate($year, $month, $booked_event, $this->uri->segment(3), $this->uri->segment(4)); 	
 		}else{
 			$year = $this->uri->segment(3);
