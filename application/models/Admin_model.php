@@ -404,6 +404,7 @@ class Admin_model extends CI_Model
        $this->db->select("*");
        $this->db->from("users");
        $this->db->where("status!=","hide");
+       $this->db->where("user_type!=","admin");
        $query = $this->db->get();
        return $query;
     }
