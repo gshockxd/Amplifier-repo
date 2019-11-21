@@ -59,14 +59,18 @@
 					$data = array ('upload_data' => $this->upload->data());
 					$client_image = 'assets/img/client/'.$timestamp.'.'.$ext;
 				}
-
+				
 				$this->Register_model->user_insert($client_image);
 				$session_user = $this->Register_model->user_select($this->input->post('email'));
 				$this->Session_model->session_user($session_user);
 
 				$notif['message'] = 'Welcome '.$this->session->userdata('fname').' '.$this->session->userdata('lname').', now you can view or change your user information in profile page.';
 				$notif['links'] = base_url().'profile_info';
+				$notif['notif_type'] = 'user';
+				$notif['notif_status'] = 'created';
+
 				$this->Notification_model->index($notif);
+				// die();
 
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
 				

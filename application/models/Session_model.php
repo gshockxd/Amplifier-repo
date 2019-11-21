@@ -97,6 +97,7 @@
                         redirect('users');
                         break;
                     case 'client':
+                        $this->Session_model->check_event_if_finished();
                         redirect('profile');
                         break;
                     case 'performer':
@@ -129,6 +130,8 @@
             }
         }
         public function user_type_check_client (){
+            $this->Session_model->check_event_if_finished();
+
             if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned"||$this->session->userdata('status')=="hide")
             {
                     $data = array( 
@@ -151,6 +154,8 @@
             }
         }
         public function user_type_check_performer (){
+            $this->Session_model->check_event_if_finished();
+
             if($this->session->userdata('status')=="block"||$this->session->userdata('status')=="banned"||$this->session->userdata('status')=="hide")
             {
                     $data = array( 
@@ -171,5 +176,25 @@
                     redirect('profile');
                     break;
             }
+        }
+        public function check_event_if_finished (){
+            $query = $this->db->get_where('bookings', array('performer_id'=>$this->session->userdata('user_id'), 'status'=>'approve'));
+            $data = $query->row_array();
+            // echo $this->db->last_query();
+            // print_r($data);
+
+            $datetime = $data['event_date'].' '.$data['event_to'];
+            if($datetime < date('Y-m-d H:i:s')){
+                $this->db->set('booked', 0);
+                $this->db->where('package_id', $data['package_id']);
+                $this->db->update('packages');
+
+                $this->db->set('on_going', 0);
+                $this->db->where('package_id', $data['package_id']);
+                $this->db->update('bookings');
+            }
+            return;
+            // print_r($data);
+            // die;
         }
     }

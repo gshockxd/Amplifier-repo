@@ -141,6 +141,9 @@
 
                 $notif['message'] = 'You have been deleted the event: '.$data['event_name'];
                 $notif['links'] = '#';
+                $notif['notif_type'] = 'event';
+                $notif['notif_status'] = 'removed';
+
                 $this->Notification_model->index($notif);
     
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully deleted!');    
@@ -197,6 +200,8 @@
                 $notif['target_user_id'] = $data['client_id'];
                 $notif['target_message'] = 'Your '.$data['event_name'].' status has been changed to approved!';
                 $notif['target_links'] = base_url().'events/'.$data['booking_id'];
+                $notif['notif_status'] = 'booked';
+                $notif['notif_type'] = 'event';
                 $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Approved!');
@@ -224,6 +229,8 @@
                 $notif['target_user_id'] = $data['client_id'];
                 $notif['target_message'] = 'Your '.$data['event_name'].' status has been changed to decline!';
                 $notif['target_links'] = base_url().'events/'.$data['booking_id'];
+                $notif['notif_type'] = 'event';
+                $notif['notif_status']  = 'cancel';
                 $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Decline!');

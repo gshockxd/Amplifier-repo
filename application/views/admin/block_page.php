@@ -6,14 +6,19 @@
     } 
     
       
-    $date_block =date("F d, Y",strtotime($this->session->userdata('block_end')));
-    $date_today = date("F d, Y");
+        $date_block =date("Y-m-d",strtotime($this->session->userdata('block_end')));
+        $date_today = date("Y-m-d");
 
-       if($date_block <= $date_today){
-        redirect('changeoff');
-        }
+        if($this->session->userdata('status') != 'banned' ){
 
-    
+            if($date_block <= $date_today){
+             //    echo $date_block <= $date_today;
+             //     echo $date_block;
+             //    echo $date_today;
+             //    die;
+             redirect('changeoff');
+             }
+        }  
 
    
      ?>

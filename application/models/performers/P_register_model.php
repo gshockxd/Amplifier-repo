@@ -99,6 +99,8 @@
 				
 				$notif['message'] = 'Welcome '.$this->session->userdata('fname').' '.$this->session->userdata('lname').', now you can view, update password and update your user information in profile page';
 				$notif['links'] = base_url().'profile_info';
+				$notif['notif_type'] = 'user';
+				$notif['notif_status'] = 'created';
 				$this->Notification_model->index($notif);
 
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');

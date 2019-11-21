@@ -17,14 +17,24 @@
             }else{
                 $notif_3 = NULL;
             }
+            if(isset($notif['notif_status'])){
+                $notif_status = $notif['notif_status'];
+            }else{
+                $notif_status = NULL;
+            }
+            if(isset($notif['notif_type'])){
+                $notif_type = $notif['notif_type'];
+            }else{
+                $notif_type = NULL;
+            }
 
             $date = date('Y-m-d H:i:s');
             $array = array (
                 'id' => null,
                 'user_id' => $this->session->userdata('user_id'),
                 'target_user_id' => $notif_3,
-                'notif_type' => 'user',
-                'notif_status' => 'created',
+                'notif_type' => $notif_type,
+                'notif_status' => $notif_status,
                 'status' => 'notified',
                 'created_at' => $date,
                 'notif_name' => $notif['message'],

@@ -89,6 +89,8 @@
 					$notif['target_user_id'] = $data['package']['user_id'];
 					$notif['target_message'] = 'Someone has been booked to your package! Check it out!';
 					$notif['target_links'] = base_url().'p_bookings';
+					$notif['notif_status'] = 'created' ;
+					$notif['notif_type'] = 'event' ;
 					$this->Notification_model->index($notif);					
 
 					$this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully booked!');

@@ -1,4 +1,5 @@
 <?php 
+// print_r($this->session->userdata());
 	if(!$this->session->userdata('user_type') && $this->session->userdata('user_id')){
 		redirect('block_page');
 	}
