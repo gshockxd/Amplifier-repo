@@ -31,6 +31,7 @@
 		public function history_info(){
 			$templates['title'] = 'History Event Info';
 			$data['history'] = $this->History_model->get_event();
+			$data['report'] = $this->History_model->get_report();
 
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/history_info', $data);
@@ -48,5 +49,9 @@
 				$this->session->set_flashdata('danger_message', 'The history info your trying to access is not found');
 				redirect('history_client');
 			}
+		}
+		public function get_report(){
+			$query = $this->db->get_where('reports', array('booking_id'=>$this->uri->segment(2), 'report_from'=>$this->session->userdata('user_id')));
+			return $query->row_array();
 		}
     }

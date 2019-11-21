@@ -43,10 +43,10 @@
                             </form>
                         </div>
                                 
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"
                             data-toggle="modal" data-target="#addrep">
                             <i class="fas fa-envelope fa-sm text-white-50"></i> Create Report</a>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -301,7 +301,7 @@
                         {
                         ?>
                          <center>
-                            <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png" class="m-3 w-50 h-75"/>
+                            <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png" class="m-3 w-100 h-100"/>
                          </center>
                         <?php
                         }

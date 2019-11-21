@@ -1,4 +1,4 @@
-<?php echo form_open_multipart('report_attempt/'.$this->uri->segment(2)); ?>
+<?php echo form_open_multipart('p_report_attempt/'.$this->uri->segment(2)); ?>
 <div class="container mt-3 mb-5">
     <div class="row">
         <div class="col-md-7">

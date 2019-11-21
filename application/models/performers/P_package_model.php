@@ -51,7 +51,7 @@
         }
         public function package_update(){
 			$this->form_validation->set_rules('package_name', 'Package Name', 'required' , array('required'=> 'Please Input Package Name'));
-			$this->form_validation->set_rules('price', 'Package Price', 'required|numeric' , array('required'=> 'Please Input Package Price', 'numeric'=> 'Price contains only numbers'));
+			$this->form_validation->set_rules('price', 'Package Price', 'required|numeric|less_than_equal_to[999999999]|greater_than_equal_to[500]' , array('required'=> 'Please Input Package Price', 'numeric'=> 'Price contains only numbers', 'greater_than_equal_to'=>'Price should not below ₱ 500.00', 'less_than_equal_to'=>'Price should not beyond to ₱ 999,999,999.00'));
 			$this->form_validation->set_rules('details', 'Package Description', 'required' , array('required'=> 'Please Input Package Description'));
 
 			$data['package_name'] = $this->input->post('package_name');
@@ -113,8 +113,9 @@
 
             $this->db->select('bookings.*, price');
             $this->db->join('packages', 'packages.package_id = bookings.package_id');
-            $query = $this->db->get_where('bookings', array('booking_id'=> $this->uri->segment(2)));
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2), 'status'=>'approve'));
             $data['event'] = $query->row_array();
+            $data['report'] = $this->P_package_model->get_report();
 
             if($data['event']){
                 $this->load->view('inc/header-performer', $templates);
@@ -124,5 +125,9 @@
                 $this->session->set_flashdata('danger_message', 'The page your trying to access is not found!');
                 redirect('p_bookings');
             }
+        }
+        public function get_report(){
+            $query = $this->db->get_where('reports', array('booking_id'=>$this->uri->segment(2), 'report_from'=>$this->session->userdata('user_id')));
+            return $query->row_array();
         }
     }

@@ -9,27 +9,27 @@ class Welcome extends CI_Controller
         $this->load->model("Admin_model");
         $this->load->library('upload');
         if ($this->input->post("offenseNo") == "1") {
-            $date = date('y-m-d');
+            $date = date('Y-m-d');
             $block_date = date_create($date);
             date_add($block_date, date_interval_create_from_date_string("3 days"));
-            echo date_format($block_date, "y-m-d");
+            $block_date = date_format($block_date, "Y-m-d");
             $status = "block";
         }
         if ($this->input->post("offenseNo") == "2") {
-            $date = date('y-m-d');
+            $date = date('Y-m-d');
             $block_date = date_create($date);
             date_add($block_date, date_interval_create_from_date_string("30 days"));
-            echo date_format($block_date, "y-m-d");
+            $block_date = date_format($block_date, "Y-m-d");
             $status = "block";
         }
         if ($this->input->post("offenseNo") == "3") {
             $status = "banned";
-            $block_date = date_create("0000-00-00");
+            $block_date = "0000-00-00";
         }
         $this->form_validation->set_rules("offenseNo", "offense number", 'numeric');
         $offense = array(
             "offense" => $this->input->post("offenseNo"),
-            "block_end" => date_format($block_date, "y-m-d"),
+            "block_end" => $block_date,
             "status" => $status,
         );
         $this->Admin_model->update_offense_user($offense);
@@ -38,7 +38,11 @@ class Welcome extends CI_Controller
             "notif_type" => "user",
             "notif_status" => $status,
             "status" => "notified",
-            "notif_name" => "User account has been",
+            "notif_name" => "User account has been blocked",
+            "target_user_id" => $id,
+            "target_status" => "notified",
+            "target_notif_name" => "Notice: Your Account has been blocked by admin.",
+
 
         );
         $this->Admin_model->insert_data_notifications($notif_insert);
@@ -48,16 +52,16 @@ class Welcome extends CI_Controller
     {
         $this->load->model("Admin_model");
         $this->load->library('upload');
-        $block_date = date_create("0000-00-00");
+        $block_date = "0000-00-00";
 
         $offense = array(
-            "block_end" => date_format($block_date, "y-m-d"),
+            "block_end" => $block_date,
             "status" => "verified",
         );
 
         $this->Admin_model->update_offense_user1($offense);
         echo '<script> alert("Account can now be used please login again");</script>';
-        echo '<script> window.location.replace("login")</script>';
+        echo '<script> window.location.replace("logout_user")</script>';
 
     }
     public function recover($id)
@@ -70,9 +74,12 @@ class Welcome extends CI_Controller
         $notif_insert = array(
             "user_id" => $id,
             "notif_type" => "user",
-            "notif_status" => $status,
+            "notif_status" => "created",
             "status" => "notified",
-            "notif_name" => "User account has been recovered",
+            "notif_name" => "User account has been recovered.",
+            "target_user_id" => $id,
+            "target_status" => "notified",
+            "target_notif_name" => "Notice: Your Account has been recovered by admin.",
 
         );
         $this->Admin_model->insert_data_notifications($notif_insert);
@@ -90,7 +97,7 @@ class Welcome extends CI_Controller
             "notif_type" => "user",
             "notif_status" => "removed",
             "status" => "notified",
-            "notif_name" => "User account has been",
+            "notif_name" => "User account has been removed.",
 
         );
 
@@ -109,7 +116,7 @@ class Welcome extends CI_Controller
             "notif_type" => "report",
             "notif_status" => "removed",
             "status" => "notified",
-            "notif_name" => "Removed Report",
+            "notif_name" => "A user report has been removed",
 
         );
 
@@ -129,9 +136,9 @@ class Welcome extends CI_Controller
             "notif_type" => "event",
             "notif_status" => "cancel",
             "status" => "notified",
-            "notif_name" => "Event Cancelled",
-
+            "notif_name" => "An event has been cancelled",
         );
+
         $this->Admin_model->insert_data_notifications($notif_insert);
         redirect(base_url() . "events");
     }
@@ -148,7 +155,7 @@ class Welcome extends CI_Controller
             "notif_type" => "package",
             "notif_status" => "removed",
             "status" => "notified",
-            "notif_name" => "Removed package",
+            "notif_name" => "A performers package has been removed.",
 
         );
         $this->Admin_model->insert_data_notifications($notif_insert);
@@ -238,7 +245,7 @@ class Welcome extends CI_Controller
                     "notif_type" => "user",
                     "notif_status" => "created",
                     "status" => "notified",
-                    "notif_name" => "A new user account has been",
+                    "notif_name" => "A new user account has been created. ",
 
                 );
                 $this->Admin_model->insert_data_notifications($notif_insert);
@@ -284,75 +291,75 @@ class Welcome extends CI_Controller
         }
     // }
 
-    public function report_insert($booking)
-    {
-        $this->load->library('upload');
-        $this->load->model("Admin_model");
-        if($this->input->post("report_to")=='client'){
-            $reported = $booking['client_id'];
-        }else{
-            $reported = $booking['performer_id'];
-        }
-        $timestamp = date('Y_m_d_H_i_s');
-        $array = explode('.', $_FILES['userfile']['name']);
-        $ext = end($array);
-        $config['file_name'] = $timestamp . '.' . $ext;
-        $config['upload_path'] = './assets/img/report/';
-        $config['allowed_types'] = 'video|mp4|mkv';
-        $config['max_size'] = '200000';
+    // public function report_insert($booking)
+    // {
+    //     $this->load->library('upload');
+    //     $this->load->model("Admin_model");
+    //     if($this->input->post("report_to")=='client'){
+    //         $reported = $booking['client_id'];
+    //     }else{
+    //         $reported = $booking['performer_id'];
+    //     }
+    //     $timestamp = date('Y_m_d_H_i_s');
+    //     $array = explode('.', $_FILES['userfile']['name']);
+    //     $ext = end($array);
+    //     $config['file_name'] = $timestamp . '.' . $ext;
+    //     $config['upload_path'] = './assets/img/report/';
+    //     $config['allowed_types'] = 'video|mp4|mkv';
+    //     $config['max_size'] = '200000';
 
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+    //     $this->load->library('upload', $config);
+    //     $this->upload->initialize($config);
 
-        if (!$this->upload->do_upload()) {
-            $errors = $this->upload->display_errors();
-            $report_video   = 'assets/img/report/no_image.jpg';
-        } else {
-            $data           = array('upload_data' => $this->upload->data());
-            $report_video   = 'assets/img/report/' . $timestamp . '.' . $ext;
-        }
-        echo '<pre>';
+    //     if (!$this->upload->do_upload()) {
+    //         $errors = $this->upload->display_errors();
+    //         $report_video   = 'assets/img/report/no_image.jpg';
+    //     } else {
+    //         $data           = array('upload_data' => $this->upload->data());
+    //         $report_video   = 'assets/img/report/' . $timestamp . '.' . $ext;
+    //     }
+    //     echo '<pre>';
     
-        // print_r($this->input->post('userfile'));
-        // echo '</pre>';
-        // die;
+    //     // print_r($this->input->post('userfile'));
+    //     // echo '</pre>';
+    //     // die;
         
-        $data_insert = array(
-            "booking_id" => $this->input->post("booking_id"),
-            "report_from" => $this->session->userdata('user_id'),
-            "report_to" => $reported,
-            "report_photo" => $report_video,
-            "report_details" =>$this->input->post("report_info"),
-            "reports_status" => "show"
+    //     $data_insert = array(
+    //         "booking_id" => $this->input->post("booking_id"),
+    //         "report_from" => $this->session->userdata('user_id'),
+    //         "report_to" => $reported,
+    //         "report_photo" => $report_video,
+    //         "report_details" =>$this->input->post("report_info"),
+    //         "reports_status" => "show"
 
-         );
-         $this->Admin_model->insert_data_report($data_insert);
-         $notif_insert = array(
-             "user_id"          => $reported,
-             "notif_type"       => "report",
-             "notif_status"     => "reporter",
-             "status"           => "notified",
-             "notif_name"       => "Account has been reported by admin.",
-             "report_id"        => $this->db->insert_id()
-         );
-         $this->Admin_model->insert_data_notifications($notif_insert);
+    //      );
+    //      $this->Admin_model->insert_data_report($data_insert);
+    //      $notif_insert = array(
+    //          "user_id"          => $reported,
+    //          "notif_type"       => "report",
+    //          "notif_status"     => "reporter",
+    //          "status"           => "notified",
+    //          "notif_name"       => "Account has been reported by admin.",
+    //          "report_id"        => $this->db->insert_id()
+    //      );
+    //      $this->Admin_model->insert_data_notifications($notif_insert);
 
-        //  $notif_insert2 = array(
-        //      "user_id"          => $reported,
-        //      "notif_type"       => "report",
-        //      "notif_status"     => "reported",
-        //      "status"           => "notified",
-        //      "notif_name"       => "Account Reported",
-        //      "report_id"        => $this->db->insert_id()
-        //  );
-        //  $this->Admin_model->insert_data_notifications2($notif_insert2);
-         redirect('reports');
+    //     //  $notif_insert2 = array(
+    //     //      "user_id"          => $reported,
+    //     //      "notif_type"       => "report",
+    //     //      "notif_status"     => "reported",
+    //     //      "status"           => "notified",
+    //     //      "notif_name"       => "Account Reported",
+    //     //      "report_id"        => $this->db->insert_id()
+    //     //  );
+    //     //  $this->Admin_model->insert_data_notifications2($notif_insert2);
+    //      redirect('reports');
 
-        $id = $this->db->insert_id();
-        // echo $this->db->last_query();
-        // die();
-        return $id;
-    }
+    //     $id = $this->db->insert_id();
+    //     // echo $this->db->last_query();
+    //     // die();
+    //     return $id;
+    // }
     public function form_validation_event()
     {
         $id = $this->uri->segment(2);
@@ -562,7 +569,8 @@ class Welcome extends CI_Controller
 		
 		$this->pagination->initialize($config);
 
-		$data['pagination'] = $this->pagination->create_links();
+        $data['pagination'] = $this->pagination->create_links();
+        // $data["query_results_package_check"] = $this->Admin_model->query_results_package_check();
 		$data["query_results_package"] = $this->Admin_model->query_results_package($where, $rpg, $page);
         $data["fetch_data_perf"] = $this->Admin_model->fetch_data_perf();
         $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
@@ -670,7 +678,12 @@ class Welcome extends CI_Controller
     public function notifications()
     {
         $this->load->model("Admin_model");
-        $data["fetch_data_notifications"] = $this->Admin_model->fetch_data_notifications();
+        $date='*';
+    
+		if ($this->input->get('date') != '') {
+			$date = $this->input->get('date'); 
+		}
+        $data["fetch_data_notifications"] = $this->Admin_model->fetch_data_notifications($date);
         $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/notifications', $data);
     }

@@ -105,7 +105,7 @@
                 <div class="row">
                     <div class="col-md-6">                            
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Password <span class="font-weight-bold text-danger">*</span></label>
+                            <label for="exampleInputEmail1">Password <span class="font-weight-bold text-danger">*</span> <small>(At least 8 string long)</small></label>
                             <input type="password" class="form-control <?php echo form_error('pass') ? 'is-invalid' : '' ?>" required minlength="8" value="<?php echo isset($pass) ? $pass : '' ?>" name="pass" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                             <div class="invalid-feedback">
                                 <?php echo form_error('pass') ?>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-md-6">                            
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Confirm Password <span class="font-weight-bold text-danger">*</span></label>
+                            <label for="exampleInputEmail1">Confirm Password <span class="font-weight-bold text-danger">*</span><small>(At least 8 string long)</small></label>
                             <input type="password" class="form-control <?php echo form_error('con_pass') ? 'is-invalid' : '' ?>" required minlength="8" value="<?php echo isset($con_pass) ? $con_pass : '' ?>" name="con_pass" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                             <div class="invalid-feedback">
                                 <?php echo form_error('con_pass') ?>

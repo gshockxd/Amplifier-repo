@@ -41,6 +41,30 @@
 			
 			$this->Event_model->event_status_decline();
 		}
+		public function rate_event(){
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
+			
+			$this->P_rate_model->index();
+		}
+		public function rate_attempt(){
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
+
+			$this->P_rate_model->rate_attempt();
+		}
+		public function report_event(){
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
+
+			$this->P_report_model->index();
+		}
+		public function report_attempt(){
+			$this->Session_model->session_check();
+			$this->Session_model->user_type_check_performer();
+			
+			$this->P_report_model->report_attempt();
+		}
 		public function pricing(){
 			$this->Session_model->session_check();		
 			$this->Session_model->user_type_check_performer();
@@ -289,5 +313,47 @@
 			}else{ 
 				return TRUE;
 			}		
+		}
+		public function optional_image_upload(){
+			if(!$_FILES['userfile']['name']){
+				return true;
+			}else{				
+				$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+				$mime = get_mime_by_extension($_FILES['userfile']['name']);
+				
+				if($_FILES['userfile']['size'] > 2000000){
+					$this->form_validation->set_message('optional_image_upload', 'Please Limit size to 2mb');
+					return false;
+				}
+				if(in_array($mime, $allowed_mime_type_arr)){
+					return true;
+				}else{
+					$this->form_validation->set_message('optional_image_upload', 'Please select only gif/jpg/png file.');
+					return false;
+				}
+			}
+		}	
+		public function optional_video_upload(){			
+			if(!$_FILES['uservideo']['name']){
+				return true;
+			}else{				
+				$allowed_mime_type_arr = array('video/mp4');
+				$mime = get_mime_by_extension($_FILES['uservideo']['name']);
+				if($_FILES['uservideo']['error'] != 0){
+					$this->form_validation->set_message('optional_video_upload', 'The video file is corrupted. Cannot proceed');
+					return false;
+				}
+				if(in_array($mime, $allowed_mime_type_arr)){
+					if($_FILES['uservideo']['size'] <= 200000000){
+						return true;
+					}else{
+						$this->form_validation->set_message('optional_video_upload', 'Video file size exceed 200mb, please select another video.');
+						return false;
+					}
+				}else{
+					$this->form_validation->set_message('optional_video_upload', 'Please select only mp4 file.');
+					return false;
+				}
+			}
 		}
 	}

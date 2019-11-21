@@ -227,6 +227,18 @@ class Admin_model extends CI_Model
        $query = $this->db->get();
        return $query;
     }
+   //  function query_results_package_check()
+   //  {
+   //    $date1 = date('y-m-d');
+   //    $count = array("booked"=>"1");
+   //    $this->db->select("*");
+   //    $this->db->from("bookings");
+   //    $this->db->where("event_date <",$date1);
+   //    $this->db->join("bookings",'packages.package_id=bookings.package_id');
+   //    $this->db->update("packages",$count);
+   //    $query = $this->db->get();
+   //    return $query;
+   //  }
     function query_results_report($user_id, $rpg, $page)
     {
      
@@ -428,9 +440,11 @@ class Admin_model extends CI_Model
  
 //  views/choices end
 //  notifications start
-    function fetch_data_notifications()
+    function fetch_data_notifications($date)
     {
+      if($date=="*"){
       $date = date('Y-m-d');
+      }
       $this->db->select("*");
       $this->db->from("notifications");
       $this->db->where("date(`created_at`)",$date);

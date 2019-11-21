@@ -1,7 +1,12 @@
 <?php
     class Booking_Model extends CI_Model {
         public function index (){
-			$data['packages'] = $this->Booking_model->get_packages();
+			$data = $this->Booking_model->get_packages();
+
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';	
+			// die;
 
 			$templates['title'] = 'Booking';
 			$this->load->view('inc/header-client', $templates);
@@ -144,12 +149,26 @@
 			$this->db->join('users', 'user_id = owner');
 			$this->db->select('packages.*, users.artist_type');
 			$query = $this->db->get_where('packages', array('booked'=> 0));
-			$temp = $query->result_array();			
+			$temp = $query->result_array();		
+			
+			$query = $this->db->get_where('bookings', array('client_id'=>$this->session->userdata('user_id'), 'status !='=> 'cancel'));
+			$temp2 = $query->result_array();
 
-			foreach($temp as $temp){
-				$query = $this->db->get_where('bookings', array('client_id'=>$this->session->userdata('user_id'), 'on_going'=>1, 'status'=>'pending'));
-				$data[] = $query->result_array();
-			}
+			$data['packages'] = $temp;
+			$data['bookings'] = $temp2;
+			
+
+			return $data;
+
+			// echo '<pre>';
+			// print_r($temp);
+			// echo '</pre>';	
+			// die;
+
+			// foreach($temp as $temp){
+			// 	$query = $this->db->get_where('bookings', array('client_id'=>$this->session->userdata('user_id'), 'on_going'=>1, 'status'=>'pending'));
+			// 	$data[] = $query->result_array();
+			// }
 
 			// if(isset($data)){
 			// 	return $data;
@@ -173,12 +192,12 @@
 			// 	return $temp;
 			// }
 
-			echo '<pre>';
-			print_r($data);
+			// echo '<pre>';
+			// print_r($data);
 			// // print_r($temp2);
 			// print_r($temp3);
 			// echo '</pre>';
-			die;
+			// die;
 		}
 		public function check_date(){
 			if($this->input->post('event_date') < date('Y-m-d')){

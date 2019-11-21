@@ -90,7 +90,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">09</div>
                                         </div>
-                                        <input type="text" value="<?php echo isset($number2) ? $number2 : $this->session->userdata('telephone_2'); ?>" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" required maxlength="9" name="number2">
+                                        <input type="text" value="<?php echo isset($number2) ? $number2 : $this->session->userdata('telephone_2'); ?>" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" maxlength="9" name="number2">
                                         <div class="invalid-feedback">
                                             <?php echo form_error('number2'); ?>
                                         </div>

@@ -41,8 +41,6 @@
         <div class="form-group">
                 <label for="">Client Name <label class='text-danger'>*</label></label>
                         <select id="client" name="client" class="form-control">
-                        <option value="<?php echo $this->session->userdata('user_id'); ?>">
-                        Current User</option>
                             <?php
                                             if($fetch_data_client->num_rows()>0)
                                             {

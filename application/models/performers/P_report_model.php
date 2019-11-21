@@ -1,23 +1,23 @@
 <?php 
-    class C_Report_model extends CI_Model {
+    class P_Report_model extends CI_Model {
         public function index(){
             $templates['title'] = 'Report Event';
-            $data['report'] = $this->C_report_model->get_event();
+            $data['report'] = $this->P_report_model->get_event();
             if(!$data['report']){
                 $this->session->set_flashdata('danger_message', 'The event your trying to report is not found!');
-                redirect('history_client');
+                redirect('p_bookings');
             }
 
-            $this->load->view('inc/header-client', $templates);
-            $this->load->view('client/report-event', $data);
+            $this->load->view('inc/header-performer', $templates);
+            $this->load->view('performer/report-event', $data);
             $this->load->view('inc/footer');
         }
         public function report_attempt(){
             $templates['title'] = 'Report Event';
-            $data['report'] = $this->C_report_model->get_event();
+            $data['report'] = $this->P_report_model->get_event();
             if(!$data['report']){
                 $this->session->set_flashdata('danger_message', 'The event your trying to report is not found!');
-                redirect('history_client');
+                redirect('p_bookings');
             }
 
             $this->form_validation->set_rules('desc', 'Description', 'required', array('required'=>'Please Input Description'));
@@ -32,8 +32,8 @@
             // die;
 
             if($this->form_validation->run() === FALSE){
-                $this->load->view('inc/header-client', $templates);
-                $this->load->view('client/report-event', $data);
+                $this->load->view('inc/header-performer', $templates);
+                $this->load->view('performer/report-event', $data);
                 $this->load->view('inc/footer');
             }else{
                 // echo '<pre>';
@@ -100,14 +100,15 @@
                 $this->Notification_model->index($notif);
 
                 $this->session->set_flashdata('warning_message', 'You have been reported the event: '.$data['report']['event_name']);
-                redirect('history_client/'.$data['report']['booking_id']);
+                redirect('p_event_info/'.$data['report']['booking_id']);
             }
         }
         public function get_event(){
             $id = $this->uri->segment(2);
             $user_id = $this->session->userdata('user_id');
-            $query = $this->db->query("SELECT * FROM bookings WHERE booking_id = $id AND client_id = $user_id ");
+            $query = $this->db->query("SELECT * FROM bookings WHERE booking_id = $id AND performer_id = $user_id ");
             return $data = $query->row_array();
+            // echo $this->db->last_query();
             // die;
         }
     }

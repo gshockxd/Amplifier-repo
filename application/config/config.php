@@ -28,6 +28,9 @@ date_default_timezone_set('Asia/Hong_Kong');
 if($_SERVER['SERVER_NAME']=='localhost')
 {
     $config['base_url'] = 'http://localhost/Amplifier-repo/';
+
+}else if ($_SERVER['SERVER_NAME']=='172.16.5.14'){
+    $config['base_url'] = 'http://172.16.5.14/Amplifier-repo/';
 }else{
     // $config['base_url'] = 'http://hirokos.net/amplifier';    
     $config['base_url'] = 'https://amplifier1.000webhostapp.com/'; 

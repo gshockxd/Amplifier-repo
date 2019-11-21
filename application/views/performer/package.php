@@ -23,7 +23,7 @@
 						</div>
 						<?php if($p['interested'] == 0 && $p['booked'] == 0): ?>							
 							<div class="col-md-4 ">
-								<a href="<?php echo base_url();?>p_package_info_page/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Edit Package"><i class="fas fa-pen"></i></a>
+								<a href="<?php echo base_url();?>p_package_info_page/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="View Package"><i class="fas fa-pen"></i></a>
 							</div>
 						<?php elseif ($p['booked'] == 1): ?>
 							<a  class="btn btn-warning text-whitee" data-toggle="tooltip" data-placement="top" title="This package is currently in booked"><i class="fas fa-exclamation-triangle fa-lg"></i></a>

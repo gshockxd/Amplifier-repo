@@ -155,6 +155,8 @@ $autoload['model'] = array(
     'performers/P_package_model',
     'performers/P_chat_model',
     'performers/P_gallery_model',
+    'performers/P_rate_model',
+    'performers/P_report_model',
 
     'Message_model',
     'Notification_model'

@@ -1,3 +1,9 @@
+<?php 
+	if(!$this->session->userdata('user_type') && $this->session->userdata('user_id')){
+		redirect('block_page');
+	}
+?>
+
 <?php if($this->session->userdata('user_type') == 'client' || $this->session->userdata('user_type') == null): ?>
 
 <?php
