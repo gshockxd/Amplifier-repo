@@ -359,4 +359,96 @@
 				return TRUE;
 			}		
 		}
+		public function optional_image_upload(){
+			if(!$_FILES['userfile']['name']){
+				return true;
+			}else{				
+				$allowed_mime_type_arr = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+				$mime = get_mime_by_extension($_FILES['userfile']['name']);
+				
+				if($_FILES['userfile']['size'] > 2000000){
+					$this->form_validation->set_message('optional_image_upload', 'Please Limit size to 2mb');
+					return false;
+				}
+				if(in_array($mime, $allowed_mime_type_arr)){
+					return true;
+				}else{
+					$this->form_validation->set_message('optional_image_upload', 'Please select only gif/jpg/png file.');
+					return false;
+				}
+			}
+		}	
+		public function optional_video_upload(){			
+			if(!$_FILES['uservideo']['name']){
+				return true;
+			}else{				
+				$allowed_mime_type_arr = array('video/mp4');
+				$mime = get_mime_by_extension($_FILES['uservideo']['name']);
+				if($_FILES['uservideo']['error'] != 0){
+					$this->form_validation->set_message('optional_video_upload', 'The video file is corrupted. Cannot proceed');
+					return false;
+				}
+				if(in_array($mime, $allowed_mime_type_arr)){
+					if($_FILES['uservideo']['size'] <= 200000000){
+						return true;
+					}else{
+						$this->form_validation->set_message('optional_video_upload', 'Video file size exceed 200mb, please select another video.');
+						return false;
+					}
+				}else{
+					$this->form_validation->set_message('optional_video_upload', 'Please select only mp4 file.');
+					return false;
+				}
+			}
+		}	
+		public function dup_profile_number1 (){
+			// Check if fname, lname, contact number (1,2) are duplicate
+			$this->db->select('telephone_1');
+			$this->db->where(array('telephone_1' => $this->input->post('number1'), 'telephone_2' => $this->input->post('number1'), 'user_id !='=>$this->session->userdata('user_id')));
+			$query = $this->db->get('users');
+			$temp = $query->row_array();
+			
+			if($temp['telephone_1'] == $this->input->post('number1')){
+				$this->form_validation->set_message('dup_profile_number1', 'Duplicated Contact Number');
+				return FALSE;
+			}else{
+				return TRUE;
+			}			
+		}
+		public function dup_profile_number2 (){
+			// Check if fname, lname, contact number (1,2) are duplicate
+			$this->db->select('telephone_2');
+			$this->db->where(array('telephone_2' => $this->input->post('number2'), 'telephone_1' => $this->input->post('number2'), 'user_id !='=>$this->session->userdata('user_id')));
+			$query = $this->db->get('users');
+			$temp = $query->row_array();
+			
+			if($temp){
+				if($temp['telephone_2'] == $this->input->post('number2')){
+					$this->form_validation->set_message('dup_profile_number2', 'Duplicated Contact Number');
+					return FALSE;
+				}else{
+					return TRUE;
+				}	
+			}else{ 
+				return TRUE;
+			}		
+		}
+		public function dup_both_number1(){
+			if($this->session->userdata('telephone_1') == $this->input->post('number1') && $this->session->userdata('telephone_1') != $this->session->userdata('telephone_1')){
+				$this->form_validation->set_message('dup_both_number1', 'Duplicated Contact Number');
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		}
+		public function dup_both_number2(){
+			// echo $this->session->userdata('telephone_2'); echo '<br>';
+			// echo $this->input->post('number1');
+			if($this->session->userdata('telephone_2') == $this->input->post('number2') && $this->session->userdata('telephone_2') != $this->session->userdata('telephone_2')){
+				$this->form_validation->set_message('dup_both_number2', 'Duplicated Contact Number');
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		}
 	} 

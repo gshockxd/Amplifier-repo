@@ -5,6 +5,7 @@
     <div class="col-md-8 offset-md-2">
         <?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
         <?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
+        <?php echo $this->session->flashdata('warning_message') ? $this->Message_model->warning_message() : '' ?>
                 
         <div class="card">
             <div class="card-header"><p class="h4 text-center"><?php echo $history['event_name'] ?></p></div>
@@ -147,9 +148,8 @@
                 </div>
             </div>
         </div>
-
         <div class=" d-flex justify-content-end mt-2">
-            <?php if($history['client_rating']): ?>          
+            <?php if($report['booking_id'] == $this->uri->segment(2) && $report['report_from'] == $this->session->userdata('user_id')): ?>          
                 <a href="#"  class="btn btn-success col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Reported">Reported <i class="fas fa-check"></i></a>  
             <?php else: ?>      
                 <a href="<?php echo base_url(); ?>report_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Report Event">Report <i class="fas fa-exclamation"></i></a>  

@@ -35,7 +35,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">09</div>
 						</div>
-						<input type="number" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" required min="0" max="999999999" value="<?php echo isset($number1) ? $number1 : '' ?>" name="number1" >
+						<input type="text" class="form-control <?php echo form_error('number1') ? 'is-invalid' : '' ?>" required maxlength="9" value="<?php echo isset($number1) ? $number1 : '' ?>" name="number1" >
 						<div class="invalid-feedback">
 							<?php echo form_error('number1'); ?>
 						</div>
@@ -45,7 +45,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">09</div>
 						</div>
-						<input type="number" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" min="0" max="999999999" value="<?php echo isset($number2) ? $number2 : '' ?>" name="number2" >
+						<input type="text" class="form-control <?php echo form_error('number2') ? 'is-invalid' : '' ?>" required maxlength="9" value="<?php echo isset($number2) ? $number2 : '' ?>" name="number2" >
 						<div class="invalid-feedback">
 							<?php echo form_error('number2'); ?>
 						</div>

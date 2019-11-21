@@ -15,8 +15,8 @@
 			$this->form_validation->set_rules('uname', 'Username', 'required|is_unique[users.username]', array('required' => 'Plese Input Username', 'is_unique'=>'Duplicated Username'));
 			$this->form_validation->set_rules('fname', 'First Name', 'required|callback_alpha_dash_space|callback_dup_flname', array('required' => 'Please Input First Name'));
 			$this->form_validation->set_rules('lname', 'Last Name', 'required|callback_alpha_dash_space|callback_dup_flname', array('required' => 'Please input Last Name'));
-			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[9]|callback_dup_number1', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
-			$this->form_validation->set_rules('number2', 'Contact Number', 'numeric|exact_length[9]|callback_dup_number2', array('numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
+			$this->form_validation->set_rules('number1', 'Contact Number', 'required|numeric|exact_length[9]|callback_dup_number1|callback_dup_both_number1', array('required' => 'Please input contact number', 'numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
+			$this->form_validation->set_rules('number2', 'Contact Number', 'numeric|exact_length[9]|callback_dup_number2|callback_dup_both_number2', array('numeric'=>'Please input a valid Contact Number', 'exact_length'=> 'Please enter 9 digits only'));
 			$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]', array('required' => 'Please input Email Address', 'valid_email'=>'Email Address not valid', 'is_unique'=>'Email Address is already taken'));
 			$this->form_validation->set_rules('pass', 'Password', 'required|min_length[8]', array('required' => 'Please input Password', 'min_length'=>'Password must be 8 or more characters'));
 			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'matches[pass]|min_length[8]', array('matches'=>'Password not matched', 'min_length'=>'Password must be 8 or more characters'));
@@ -33,7 +33,7 @@
 			$data['address'] = $this->input->post('address');
 			$data['pass'] = $this->input->post('pass');
 
-			if($this->form_validation->run() == FALSE){
+			if($this->form_validation->run() === FALSE){
 				$this->load->view('inc/header-no-navbar', $templates);
 				$this->load->view('client/register', $data);
 				$this->load->view('inc/footer');
@@ -59,14 +59,18 @@
 					$data = array ('upload_data' => $this->upload->data());
 					$client_image = 'assets/img/client/'.$timestamp.'.'.$ext;
 				}
-
+				
 				$this->Register_model->user_insert($client_image);
 				$session_user = $this->Register_model->user_select($this->input->post('email'));
 				$this->Session_model->session_user($session_user);
 
 				$notif['message'] = 'Welcome '.$this->session->userdata('fname').' '.$this->session->userdata('lname').', now you can view or change your user information in profile page.';
 				$notif['links'] = base_url().'profile_info';
+				$notif['notif_type'] = 'user';
+				$notif['notif_status'] = 'created';
+
 				$this->Notification_model->index($notif);
+				// die();
 
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
 				

@@ -51,7 +51,7 @@
         }
         public function package_update(){
 			$this->form_validation->set_rules('package_name', 'Package Name', 'required' , array('required'=> 'Please Input Package Name'));
-			$this->form_validation->set_rules('price', 'Package Price', 'required|numeric' , array('required'=> 'Please Input Package Price', 'numeric'=> 'Price contains only numbers'));
+			$this->form_validation->set_rules('price', 'Package Price', 'required|numeric|less_than_equal_to[999999999]|greater_than_equal_to[500]' , array('required'=> 'Please Input Package Price', 'numeric'=> 'Price contains only numbers', 'greater_than_equal_to'=>'Price should not below ₱ 500.00', 'less_than_equal_to'=>'Price should not beyond to ₱ 999,999,999.00'));
 			$this->form_validation->set_rules('details', 'Package Description', 'required' , array('required'=> 'Please Input Package Description'));
 
 			$data['package_name'] = $this->input->post('package_name');
@@ -82,6 +82,8 @@
                 $notif['message'] = 'Package: '.$data['package_name']. ' has been updated!';
                 $notif['links'] = base_url().'p_package_info_page/'.$id;
                 $notif['target_user_id'] = null;
+                $notif['notif_type'] = 'package';
+                $notif['notif_status'] = 'created';
                 $this->Notification_model->index($notif);
 
                 $this->session->set_flashdata('success_message', 'Package Name: '.$data['package_name'].' has been updated!');
@@ -102,6 +104,8 @@
                 $this->db->delete('packages');
                 $notif['message'] = 'Package Name: '.$data['package_name'].' has been deleted!';
                 $notif['links'] = '#';
+                $notif['notif_type'] = 'package';
+                $notif['notif_status'] = 'removed';
                 $this->Notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Package has been successfully Deleted!');
@@ -113,8 +117,15 @@
 
             $this->db->select('bookings.*, price');
             $this->db->join('packages', 'packages.package_id = bookings.package_id');
-            $query = $this->db->get_where('bookings', array('booking_id'=> $this->uri->segment(2)));
+			// $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2), 'status'=>'approve'));
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
             $data['event'] = $query->row_array();
+            $data['report'] = $this->P_package_model->get_report();
+
+            // echo '<pre>';
+            // print_r($data);
+            // echo '</pre>';
+            // die;
 
             if($data['event']){
                 $this->load->view('inc/header-performer', $templates);
@@ -124,5 +135,10 @@
                 $this->session->set_flashdata('danger_message', 'The page your trying to access is not found!');
                 redirect('p_bookings');
             }
+        }
+        public function get_report(){
+            // $query = $this->db->get_where('reports', array('booking_id'=>$this->uri->segment(2), 'report_from'=>$this->session->userdata('user_id')));
+            $query = $this->db->get_where('reports', array('booking_id'=>$this->uri->segment(2), 'report_from'=>$this->session->userdata('user_id')));
+            return $query->row_array();
         }
     }

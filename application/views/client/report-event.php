@@ -20,7 +20,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label for="">Photo: <span class="font-weight-bold text-danger">*</span> <small>(Limit to 2mb)</small></label>    
+                                        <label for="">Photo:  <small>(Limit to 2mb)</small></label>    
                                     </div>
                                     <div class="col-md-12">                                        
                                         <div class="form-group">                        
@@ -38,7 +38,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label for="">Video: <span class="font-weight-bold text-danger">*</span> <small>(Limit to 200mb)</small></label>    
+                                        <label for="">Video:  <small>(Limit to 200mb)</small></label>    
                                     </div>
                                     <div class="col-md-12">                                        
                                         <div class="form-group">                        

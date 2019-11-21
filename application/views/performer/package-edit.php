@@ -1,4 +1,4 @@
-<?php echo form_open('p_package_update'); ?>
+<?php echo form_open('p_package_update/'.$this->uri->segment(2)); ?>
     <div class="container col-md-8 py-3">
         <div class="card mb-5" >
             <div class="card-header">
@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-md-9">
                         <input type="hidden" name="id" value="<?php echo $this->uri->segment(2); ?>">
-                        <input type="text" name="package_name" class="form-control <?php echo form_error('package_name') ? 'is-invalid' : '' ?> " value="<?php echo isset($package_name) ? $package_name : '' ?>">    
+                        <input type="text" name="package_name" class="form-control <?php echo form_error('package_name') ? 'is-invalid' : '' ?> " required value="<?php echo isset($package_name) ? $package_name : '' ?>">    
                         <div class="invalid-feedback">
                             <?php echo form_error('package_name') ?>
                         </div>   
@@ -35,7 +35,7 @@
                             Price:
                         </div>
                         <div class="col-md-9">
-                            <input type="number" name="price" class="form-control <?php echo form_error('price') ? 'is-invalid' : '' ?>" value="<?php echo isset($price) ? $price : '' ?>">
+                            <input type="number" name="price" class="form-control <?php echo form_error('price') ? 'is-invalid' : '' ?>" max="1000000000" min="500" required value="<?php echo isset($price) ? $price : '' ?>">
                             <div class="invalid-feedback">
                                 <?php echo form_error('price') ?>
                             </div>  
