@@ -170,3 +170,189 @@
 	<?php $this->load->view('inc/header-performer'); ?>
 <?php endif;?>
 
+<!-- end header -->
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+                    <!-- Header Start -->
+                    <div class="col-md-2 col-lg-6 mx-auto">
+                        <div class="card shadow mb-4">
+                            <div class="card-body center">
+                                <form class="form-inline md-form form-sm mt-0" method="get" action="<?php echo base_url('c_search')?>">
+                                <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
+                                <option selected value=''>Select All Packages</option>
+                                <?php
+                                    if($fetch_data_perf->num_rows()>0)
+                                        {
+                                        foreach($fetch_data_perf->result() as $row)
+                                            { 
+                            
+                                ?>
+                                <option value="<?php echo $row->user_id; ?>"> <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?></option>
+                                <?php }
+                                    }
+                                    ?>
+                                </select>
+                                <button class="btn btn-outline-success btn-sm" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of header -->
+                    <!-- content Start -->
+                    <div class="container">
+                        <div class="row mx-auto">
+
+                            <?php 
+                    if($query_results_package->num_rows()>0)
+                    {
+                        foreach($query_results_package->result() as $row)
+                        {
+                    ?>
+                            <div class="col-sm-4 mb-3 col-md-4">
+                                <div class="card border-secondary">
+                                    <div class="card-body ">
+                                        <h3 class="card-title">
+                                            
+                                            <a class="text-secondary text-center">
+                                                <?php echo $row->fname; ?>&nbsp<?php echo $row->lname; ?><br></a>
+                                        </h3>
+                                        <hr>
+                                        <p class="lead text-center">
+                                            <b><?php echo $row->package_name; ?></b>
+                                            <br><?php echo $row->price; ?><br><br>
+                                        </p>
+                                        <p class="card-text text-center"><?php echo $row->details; ?><br></p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-center ">
+                                        <?php if($row->booked=="1"){ ?>
+                                            <a class="btn btn-secondary text-white disabled" disabled>
+                                            <i class="fas fa-window-close" disabled></i></a>
+                                            </div>
+                                        
+                                        <?php }else{ ?>
+                                         <a href="<?php echo base_url('booking_book_event/'); echo $row->package_id ?>" class="btn btn-primary text-white">
+                                            <i class="fas fa-book"></i></a>
+                                            </div>
+                                        <?php } ?>
+                                       
+                                        
+                                        <div class="text-center font-weight-light font-italic">Date Created:
+                                            <?php echo  date('F d, Y h:', strtotime($row->date_created)); ?><br></div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <?php
+                    }
+                ?>
+                           
+                        </div>
+                        <div class="row"> 
+                                <div class="col-sm-12 col-md-12 offset-5">
+                                    <ul class="pagination">
+                                    <?php echo $pagination; ?></ul>
+                                </div>
+                            </div>
+                    </div>
+
+                    <br>
+                    <!-- pagination Start -->
+                    <div class="row">
+
+                    </div>
+                    <br>
+                    <?php
+            }
+            else
+            {
+            ?>
+                    <center>
+                        <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png"class="m-3 w-75 h-100"/>
+                    </center>
+                    <?php
+            }
+            ?>
+
+
+
+
+                </div>
+                <!-- End of Content Wrapper -->
+
+            </div>
+            <!-- End of Page Wrapper -->
+
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+
+            <script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery-ui.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/popper.js"></script>
+	<script src="<?php echo base_url(); ?>assets/api/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/api/DataTables/DataTables-1.10.18/js/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/api/DataTables/datatables.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="<?php echo base_url(); ?>assets/js/custom-flatly.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bs-custom-file-input.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/autocomplete.js"></script>
+
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+
+	<script>
+	    // For dataTable
+		$(document).ready(function() {
+		    $('#datatable').DataTable( {     
+		        // ajax: 'https://api.myjson.com/bins/qgcu',
+		        // drawCallback: function(settings){
+		        //     var api = this.api();
+		            
+		        //     /* Add some tooltips for demonstration purposes */
+		        //     $('td', api.table().container()).each(function () {
+		        //        $(this).attr('title', $(this).text());
+		        //     });
+
+		        //     /* Apply the tooltips */
+		        //     $('td', api.table().container()).tooltip({
+		        //        container: 'body'
+		        //     });          
+		        // }  
+		    });
+		} );
+	</script>
+	<script>
+		// File Input
+		// Add the following code if you want the name of the file appear on select
+		$(".custom-file-input").on("change", function() {
+		  var fileName = $(this).val().split("\\").pop();
+		  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+	</script>
+	<script>
+	    // Replace the <textarea id="editor1"> with a CKEditor
+	    // instance, using default configuration.
+	    CKEDITOR.replace( 'ckeditor' );
+	</script>
+	<script>
+		jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+				// var url = $(this).data("href");
+				// window.open(url);
+			});
+		});
+	</script>
+
+</body>
+</html>

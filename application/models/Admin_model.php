@@ -202,7 +202,6 @@ class Admin_model extends CI_Model
     {
      
        $this->db->from("packages");
-      
       $where["package_status!="] = "hide";
       $this->db->where($where);
       $t = $this->db->count_all_results();
@@ -331,6 +330,16 @@ class Admin_model extends CI_Model
        return $t;
      
     }
+    function fetch_data_user_rating ($id)
+    {
+      $this->db->select_avg("client_rating");
+      $this->db->from("bookings");
+      $this->db->where("performer_id",$id);
+
+      $t = $this->db->get();
+      return $t;
+    
+     }
     function query_data_event_history($date,$name,$rpg,$page)
     {
        $date1 = date('y-m-d');
@@ -356,8 +365,7 @@ class Admin_model extends CI_Model
          $this->db->or_like("u2.lname",$name,'both');
       }
     
-       $query = $this->db->get();
-       return $query;
+    
     }
     function count_results_history($date, $name)
     {

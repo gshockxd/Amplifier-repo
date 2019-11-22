@@ -61,6 +61,20 @@
                                         </div>
                                     </div>
                                     <hr>
+                                  <?php  
+                                   if($fetch_data_user_rating->num_rows()>0)
+                                        {
+                                        foreach($fetch_data_user_rating->result() as $rate)
+                                        { 
+                                    ?>
+                                    <div class="form-group row">
+                                        <label for="text" class="col-4 col-form-label">Average Rating:</label>
+                                        <div class="col-8">
+                                            <p class="lead"><?php echo $rate->client_rating; ?></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                        <?php } } ?>
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Status:</label>
                                         <div class="col-8">

@@ -690,7 +690,8 @@ class Welcome extends CI_Controller
     public function profile($id)
     {
         $this->load->model("Admin_model");
-		$data["fetch_data_profile"] = $this->Admin_model->fetch_data_profile();
+        $data["fetch_data_profile"] = $this->Admin_model->fetch_data_profile();
+        $data["fetch_data_user_rating"] = $this->Admin_model->fetch_data_user_rating($id);
 		$data["fetch_data_user_galleries"] = $this->Admin_model->fetch_data_user_galleries();
         $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/profile', $data);

@@ -70,6 +70,7 @@ $route['calendar_info/(:num)/(:num)/(:num)']      = 'clients/calendar_info/$1/$1
 // $route['package']                       = 'clients/package';
 // $route['c_created_events']              = 'clients/event_created';
 $route['register']                      = 'clients/register';
+$route['c_search']                      = 'clients/search';
 $route['register_attempt']              = 'clients/register_user';
 $route['login']                         = 'clients/login';
 $route['login_attempt']                 = 'clients/login_attempt';
