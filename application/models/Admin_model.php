@@ -340,63 +340,64 @@ class Admin_model extends CI_Model
       return $t;
     
      }
-    function query_data_event_history($date,$name,$rpg,$page)
-    {
+     function query_data_event_history($date,$name,$rpg,$page)
+     {
+        $date1 = date('y-m-d');
+        $status = "pending";
+        $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+        $this->db->from("bookings");
+        $this->db->join("users",'bookings.client_id=users.user_id');
+        $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+        $this->db->where("event_date <",$date1);
+        $this->db->where("bookings.status !=", $status);
+        $this->db->order_by('event_date DESC','event_from DESC');
+        $this->db->limit($rpg, $page);
+        
+        if($date != "*"){
+          $this->db->like("bookings.event_date",$date,'both');
+       }
+    
+       if($name != "*"){
+          $this->db->like("event_name",$name,'both');
+          $this->db->or_like("users.fname",$name,'both');
+          $this->db->or_like("users.lname",$name,'both');
+          $this->db->or_like("u2.fname",$name,'both');
+          $this->db->or_like("u2.lname",$name,'both');
+       }
+     
+        $query = $this->db->get();
+        return $query;
+     }
+     function count_results_history($date, $name)
+     {
+      
+       $status = "hide";
        $date1 = date('y-m-d');
-       $status = "pending";
-       $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+       $status1 = "pending";
+       $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
        $this->db->from("bookings");
-       $this->db->join("users",'bookings.client_id=users.user_id');
-       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+       if($date != "*"){
+          $this->db->where("bookings.event_date",$date);
+       }
+    
+       if($name != "*"){
+          $this->db->like("event_name",$name,'both');
+          $this->db->or_like("users.fname",$name,'both');
+          $this->db->or_like("users.lname",$name,'both');
+          $this->db->or_like("u2.fname",$name,'both');
+          $this->db->or_like("u2.lname",$name,'both');
+       }
+       $this->db->where("bookings.status!=",$status1);
        $this->db->where("event_date <",$date1);
        $this->db->where("bookings.status !=", $status);
-       $this->db->order_by('event_date DESC','event_from DESC');
-       $this->db->limit($rpg, $page);
-       
-       if($date != "*"){
-         $this->db->like("bookings.event_date",$date,'both');
-      }
-   
-      if($name != "*"){
-         $this->db->like("event_name",$name,'both');
-         $this->db->or_like("users.fname",$name,'both');
-         $this->db->or_like("users.lname",$name,'both');
-         $this->db->or_like("u2.fname",$name,'both');
-         $this->db->or_like("u2.lname",$name,'both');
-      }
-    
-    
-    }
-    function count_results_history($date, $name)
-    {
-     
-      $status = "hide";
-      $date1 = date('y-m-d');
-      $status1 = "pending";
-      $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
-      $this->db->from("bookings");
-      if($date != "*"){
-         $this->db->where("bookings.event_date",$date);
-      }
-   
-      if($name != "*"){
-         $this->db->like("event_name",$name,'both');
-         $this->db->or_like("users.fname",$name,'both');
-         $this->db->or_like("users.lname",$name,'both');
-         $this->db->or_like("u2.fname",$name,'both');
-         $this->db->or_like("u2.lname",$name,'both');
-      }
-      $this->db->where("bookings.status!=",$status1);
-      $this->db->where("event_date <",$date1);
-      $this->db->where("bookings.status !=", $status);
-
-      $this->db->join("users",'bookings.client_id=users.user_id');
-      $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
-
-      $t = $this->db->count_all_results();
-       return $t;
-     
-    }
+ 
+       $this->db->join("users",'bookings.client_id=users.user_id');
+       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+ 
+       $t = $this->db->count_all_results();
+        return $t;
+      
+     }
 //search end
     function fetch_data_user()
     {

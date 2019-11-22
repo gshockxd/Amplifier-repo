@@ -21,10 +21,7 @@
                 <?php echo form_open('a_chat_send_search_message/'.$this->uri->segment(2)); ?>
 
                 <?php
-                    // echo '<pre>';
-                    // print_r($users);
-                    // echo '</pre>';
-                    // die;
+                        // echo '<pre>'w
                 ?>
 
                 <?php if($this->uri->segment(2) == $this->session->userdata('user_id') ): ?>
@@ -34,21 +31,20 @@
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-8">
-                            <div class="form-group row">
-                                <label for="" class="col-md-1 col-form-label"></label>
-                                <div class="col-md-10">
-                                    <input type="hidden" id="userID" name="userID"
-                                        value="<?php echo isset($userID) ? $userID : '' ?>">
-                                    <input type="text" id="userName" name="userName"
-                                        class="form-control <?php echo form_error('userID') ? 'is-invalid' : '' ?> <?php echo $this->session->flashdata('user_not_found') ? 'is-invalid' : '' ?>"
-                                        placeholder="<?php echo form_error('userID') ? $this->session->flashdata('user_not_found') ? $this->session->flashdata('user_not_found') : form_error('userID') : 'Type a name of a person' ?>   ">
-                                </div>
-                                <button type="submit" name="search" value="search"
-                                    class="col-md-1 col-form-label unstyled-button red-brown "><i
-                                        class="fas fa-search fa-lg"> </i></button>
+                            
+                        <select class="form-control form-control-sm ml-3 w-75" name="userID" id="user_id" >
+                            <option selected disabled>Select Users:</option>
+                            <?php if($fetch_users): ?>
+                                <?php foreach($fetch_users as $row): ?>
+                                    <option value="<?php echo $row['user_id']; ?>"> <?php echo $row['fname']; ?>&nbsp<?php echo $row['lname']; ?></option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
 
-                                <!-- <div class="col-md-1 col-form-label"><a href="" type="submit" class="red-brown"><i class="fas fa-search fa-lg"></i></a></div>\ -->
-                            </div>
+                        <button type="submit" name="search" value="search"
+                            class="col-md-1 col-form-label unstyled-button red-brown "><i
+                                class="fas fa-search fa-lg"> </i></button>
+                            
                         </div>
                     </div>
 
@@ -236,7 +232,6 @@
                 <?php form_close(); ?>
 
                 <?php include ('footer-script.php'); ?>
-
                 <script type='text/javascript'>
                 var tmp = < ? php echo json_encode($users) ? > ;
                 // console.log(tmp);
