@@ -25,6 +25,9 @@
                 $this->load->view('inc/footer');
             }else{
                 $id = $this->p_pricing_model->pricing_insert();
+                $notif['message'] = 'Package Name: '.$this->input->post('name').' has been successfully added! Click here to view.';
+                $notif['links'] = base_url().'p_package_edit_page/'.$id;
+                $this->notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Package Name: '.$this->input->post('name').' has been successfully added!');
                 redirect('p_pricing');

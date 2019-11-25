@@ -41,7 +41,7 @@
 						<p class="text-capitalize"><?php echo $b['artist_type'] ?></p>
 					</td>
 					<td>
-						<a href="<?php base_url(); ?>history_client/<?php echo $b['booking_id'] ?>" target="_blank" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More Details"><i class="fas fa-external-link-alt "></i></a>
+						<a href="<?php base_url(); ?>history_client/<?php echo $b['booking_id'] ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More Details"><i class="fas fa-external-link-alt "></i></a>
 					</td>
 				</tr>
 				

@@ -225,9 +225,14 @@
 			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
 			$data = $query->row_array();
 
-			$templates['title'] = 'Performer Info';
-			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/performer_event_info', $data);
-			$this->load->view('inc/footer');
+			if($data){			
+				$templates['title'] = 'Performer Info';
+				$this->load->view('inc/header-client', $templates);
+				$this->load->view('client/performer_event_info', $data);
+				$this->load->view('inc/footer');
+			}else{
+				$this->session->set_flashdata('danger_message', 'The page your to access is not available!');
+				redirect('c_events');
+			}
 		}
     }

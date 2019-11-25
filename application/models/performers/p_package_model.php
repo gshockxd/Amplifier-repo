@@ -90,8 +90,13 @@
             $query = $this->db->get_where('bookings', array('booking_id'=> $this->uri->segment(2)));
             $data['event'] = $query->row_array();
 
-            $this->load->view('inc/header-performer', $templates);
-            $this->load->view('performer/event_info', $data);
-            $this->load->view('inc/footer');
+            if($data['event']){
+                $this->load->view('inc/header-performer', $templates);
+                $this->load->view('performer/event_info', $data);
+                $this->load->view('inc/footer');
+            }else{  
+                $this->session->set_flashdata('danger_message', 'The page your trying to access is not found!');
+                redirect('p_bookings');
+            }
         }
     }

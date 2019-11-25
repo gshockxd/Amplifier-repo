@@ -59,6 +59,15 @@
 	    // instance, using default configuration.
 	    CKEDITOR.replace( 'ckeditor' );
 	</script>
+	<script>
+		jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+				// var url = $(this).data("href");
+				// window.open(url);
+			});
+		});
+	</script>
 
 </body>
 </html>

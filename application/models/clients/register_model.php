@@ -65,6 +65,10 @@
 				$session_user = $this->register_model->user_select($this->input->post('email'));
 				$this->session_model->session_user($session_user);
 
+				$notif['message'] = 'Welcome '.$this->session->userdata('fname').' '.$this->session->userdata('lname').', now you can view or change your user information in profile page.';
+				$notif['links'] = base_url().'profile_info';
+				$this->notification_model->index($notif);
+
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
 				
 				redirect('profile');

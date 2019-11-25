@@ -50,7 +50,7 @@
 
 			$data['event_name'] = $this->input->post('event_name');
 			$data['event_date'] = $this->input->post('event_date');
-			$data['event_to'] = $this->input->post('event_time');
+			$data['event_time'] = $this->input->post('event_time');
 			$data['duration'] = $this->input->post('duration');
 			$data['full_payment'] = $this->input->post('full_payment');
 			$data['down_payment'] = $this->input->post('down_payment');
@@ -63,8 +63,8 @@
 				$this->load->view('client/booking_add_event', $data);
 				$this->load->view('inc/footer');
 			}else{
-				echo $data['date_error'] = $this->booking_model->check_date($data); echo '<br>';
-				echo $data['time_error'] = $this->booking_model->check_time($data);
+				$data['date_error'] = $this->booking_model->check_date($data); 
+				$data['time_error'] = $this->booking_model->check_time($data);
 
 				if($data['date_error'] || $data['time_error']){
 					$this->load->view('inc/header-client', $templates);
@@ -72,6 +72,10 @@
 					$this->load->view('inc/footer');				
 				}else{			
 					$book_id = $this->booking_model->event_insert($data['package']);
+					$notif['message'] = 'Event: '.$data['event_name'].' successfully book! Click here to view.';
+					$notif['links'] = base_url().'events/'.$book_id;
+					$this->notification_model->index($notif);
+
 					$this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully booked!');
 					redirect('booking');			
 				}		

@@ -33,7 +33,7 @@
 								<a data-toggle="modal" data-target="#alertApprove" class="btn btn-success mr-2 text-white " data-toggle="tooltip" data-placement="top" title="Accept"><i class="fas fa-check "></i></a>
 								<a data-toggle="modal" data-target="#alertDecline" class="btn btn-danger mr-2 text-white " data-toggle="tooltip" data-placement="top" title="Decline"><i class="fas fa-times "></i></a>
 							<?php endif; ?>
-							<a target="_blank" href="<?php echo base_url(); ?>p_event_info/<?php echo $b['booking_id'] ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More details"><i class="fas fa-external-link-alt "></i></a>
+							<a href="<?php echo base_url(); ?>p_event_info/<?php echo $b['booking_id'] ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More details"><i class="fas fa-external-link-alt "></i></a>
 						</td>
 					</tr>
 

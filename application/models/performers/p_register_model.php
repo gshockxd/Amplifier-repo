@@ -96,9 +96,12 @@
 				$user_id = $this->p_register_model->user_insert($files);
 				$session_user = $this->p_register_model->user_select($this->input->post('email'));
 				$this->session_model->session_user($session_user);
+				
+				$notif['message'] = 'Welcome '.$this->session->userdata('fname').' '.$this->session->userdata('lname').', now you can view, update password and update your user information in profile page';
+				$notif['links'] = base_url().'profile_info';
+				$this->notification_model->index($notif);
 
 				$this->session->set_flashdata('success_message', 'Hey '.$this->session->userdata('fname').' '.$this->session->userdata('lname').' welcome to AMPLIFER!');
-
 				redirect('p_bookings');
 			}
 		}
@@ -130,7 +133,6 @@
 					'artist_type' => $this->input->post('service'),
 					'artist_desc' => $this->input->post('desc')
 				);				
-				die('here');
 				$this->db->insert('users', $data);
 				$new_user_id = $this->db->insert_id();
 

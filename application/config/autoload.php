@@ -156,5 +156,6 @@ $autoload['model'] = array(
     'performers/p_chat_model',
     'performers/p_gallery_model',
 
-    'message_model'
+    'message_model',
+    'notification_model'
 );

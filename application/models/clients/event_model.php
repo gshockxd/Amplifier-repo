@@ -20,10 +20,15 @@
             $id = $this->uri->segment(2);
             $data['event'] = $this->event_model->get_event($id);
 
-            $templates['title'] = 'Event '.$data['event']['event_name'];
-            $this->load->view('inc/header-client', $templates);
-            $this->load->view('client/event_info', $data);
-            $this->load->view('inc/footer');
+            if($data['event']){                
+                $templates['title'] = 'Event '.$data['event']['event_name'];
+                $this->load->view('inc/header-client', $templates);
+                $this->load->view('client/event_info', $data);
+                $this->load->view('inc/footer');
+            }else{
+                $this->session->set_flashdata('danger_message', 'The page your trying to access is not found!');
+                redirect('c_events');
+            }
         }
         public function print_pdf(){
             $event = $this->event_model->get_event($this->uri->segment(2));
@@ -46,7 +51,7 @@
                 //$mpdf->Output('test.pdf','D'); // it downloads the file into the user system.
             }else{
                 $this->session->set_flashdata('danger_message', 'The event your trying to print is not found');
-                redirect('events');
+                redirect('c_events');
             }
         }
         public function get_bookings(){
@@ -115,17 +120,20 @@
         public function delete_event(){
             $query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
             $data = $query->row_array();
-            
-            $this->db->delete('bookings', array('booking_id'=>$this->uri->segment(2)));
-            
-            $this->db->set('booked', 0);
-            $this->db->where('package_id', $data['package_id']);
-            $this->db->update('packages');
 
-            $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully deleted!');
-
-            redirect('c_events');
-            return;
+            if($data){            
+                $this->db->delete('bookings', array('booking_id'=>$this->uri->segment(2)));                
+                $this->db->set('booked', 0);
+                $this->db->where(array('package_id' => $data['package_id'], 'client_id'=>$this->session->userdata('user_id')));
+                $this->db->update('packages');
+    
+                $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully deleted!');    
+                redirect('c_events');
+                return;
+            }else{
+                $this->session->set_flashdata('danger_message', 'The page your trying to delete is not found');
+                redirect('c_events');
+            }
         }
         public function event_insert(){
             $date = date('Y-m-d');
@@ -153,13 +161,18 @@
             return $query->result_array();
         }
         public function event_status_approve (){
-            $query = $this->db->get_where('bookings', array('booking_id' => $this->uri->segment(2)));
+            $query = $this->db->get_where('bookings', array('booking_id' => $this->uri->segment(2), 'performer_id'=>$this->session->userdata('user_id')));
             $data = $query->row_array();
 
-            if($data['performer_id'] == $this->session->userdata('user_id')){
+            if($data){
                 $this->db->set(array('status'=>'approve'));
                 $this->db->where('booking_id', $this->uri->segment(2));
                 $this->db->update('bookings');
+                
+                $notif['message'] = 'Your Event '.$data['event_name'].' has been approved by the artist';
+                $notif['links'] = base_url().'events/'.$data['booking_id'];
+                $notif['target_user_id'] = $data['client_id'];
+                $this->notification_model->index($notif);
                 
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Approved!');
                 redirect('p_bookings');
@@ -169,13 +182,17 @@
             }
         }
         public function event_status_decline (){            
-            $query = $this->db->get_where('bookings', array('booking_id' => $this->uri->segment(2)));
+            $query = $this->db->get_where('bookings', array('booking_id' => $this->uri->segment(2), 'performer_id'=>$this->session->userdata('user_id')));
             $data = $query->row_array();
 
-            if($data['performer_id'] == $this->session->userdata('user_id')){
+            if($data){
                 $this->db->set(array('status'=>'cancel'));
                 $this->db->where('booking_id', $this->uri->segment(2));
                 $this->db->update('bookings');
+
+                $this->db->set(array('booked'=>0));
+                $this->db->where(array('package_id'=>$data['package_id']));
+                $this->db->update('packages');
                 
                 $this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' is successfully changed to Decline!');
                 redirect('p_bookings');

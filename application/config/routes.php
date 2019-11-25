@@ -92,6 +92,8 @@ $route['p_chat/(:num)']                 = 'performers/chat_message/$1';
 $route['p_chat_send_search_message/(:num)']    = 'performers/send_search_message/$1';
 $route['p_chat_compose/(:num)']         = 'performers/chat_compose/$1'; 
 
+$route['notifications']                 =  'notifications/index';
+
 
 /*
 | -------------------------------------------------------------------------

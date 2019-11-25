@@ -32,8 +32,13 @@
             $id = $this->uri->segment(2);
             $query = $this->db->get_where('bookings', array('booking_id'=>$id));
             $data = $query->row_array();
-            $query = $this->db->get_where('band_galleries', array('user_id'=>$data['performer_id']));
-            $data = $query->row_array();
-            return $data;
+            if($data){
+                $query = $this->db->get_where('band_galleries', array('user_id'=>$data['performer_id']));
+                $data = $query->row_array();            
+                return $data;
+            }else{
+                $this->session->set_flashdata('danger_message', 'The page your trying to preview is not found!');
+                redirect('c_events');
+            }
         }
     }
