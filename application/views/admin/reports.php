@@ -25,6 +25,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body center">
                             <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('reports')?>">
+                            <input class="form-control form-control-sm ml-3 mb-5 w-75" name="name" id="name" placeholder="Input Event Name or Reporter Name" ></input>
                             <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
                             <option selected disabled>Select Reports that include:</option>
                             <option value="*">All Reports</option>
@@ -135,8 +136,8 @@
                                                 </div>
                                             </div>
                                             <!-- <h6 class="card-subtitle mb-2 text-muted">Report ID: <?php echo $row->report_id; ?></h6> -->
-                                            <a href="<?php echo base_url('eventview/'); echo $row->booking_id; ?>"> Event ID:
-                                                <?php echo $row->booking_id; ?></a>
+                                            <a href="<?php echo base_url('eventview/'); echo $row->booking_id; ?>"> Event Name:
+                                                <?php echo $row->event_name; ?></a>
                                         </li>
 
                                         <li class="list-group-item">

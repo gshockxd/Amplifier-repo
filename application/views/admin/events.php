@@ -41,7 +41,7 @@
                                                     placeholder="Search by Date"></label>
                                                     <br>
                                             <label for="date">Name
-                                            <input class="form-control" style="width:300px" type="text" name="name" placeholder="E.g event name, client/performer name" value="<?php echo (isset($where['name'])); ?>"></label>
+                                            <input class="form-control" type="text" name="name" placeholder="E.g event name, client/performer name" value="<?php echo (isset($where['name'])); ?>"></label>
                                                    <br>
                                                 <button class="btn btn-outline-info" type="submit"><i class="fas fa-search"></i>&nbsp Search</button>
                                         </form>

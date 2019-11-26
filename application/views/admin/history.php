@@ -54,6 +54,7 @@
                                 <thead>
                                     <tr>
                                         <th class="th-sm">VENUE</th>
+                                        <th class="th-sm">EVENT NAME</th>
                                         <th class="th-sm">CLIENT NAME</th>
                                         <th class="th-sm">PERFORMER NAME</th>
                                         <th class="th-sm">DATE</th>
@@ -71,7 +72,8 @@
                                 { 
                         ?>
                                     <tr>
-                                        <th><?php echo $row->venue_name; ?></th>
+                                        <td><?php echo $row->venue_name; ?></td>
+                                        <td><?php echo $row->event_name; ?></td>
                                         <td><?php echo $row->client_fname; ?>&nbsp<?php echo $row->client_lname; ?></td>
                                         <td><?php echo $row->performer_fname; ?>&nbsp<?php echo $row->performer_lname; ?>
                                         </td>

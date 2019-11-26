@@ -98,6 +98,13 @@
                                     </div>
                                     <hr>
                                     <div class="form-group row">
+                                        <label for="text" class="col-4 col-form-label">Total Amount of event:</label>
+                                        <div class="col-8">
+                                            <p class="lead">₱ <?php echo $row->full_amount; ?></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label">Payments Offered:</label>
                                         <div class="col-8">
                                             <?php if ($row->payment_status=="dp"){ ?>
