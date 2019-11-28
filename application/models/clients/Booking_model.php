@@ -30,19 +30,13 @@
 			// echo '</pre>';
 			
 			// testing
-			// $sum = 0;
-			// $i = 0;
-			// foreach($data['rating'] as $r){
-			// 	$sum = $sum + $r['rate'];
-			// 	$i++;
-			// }
-			// $data['average'] = $sum/$i;
-			// testing
-
-			// print_r($data['rating']);
-			// echo '<pre>';
-			// print_r($data['package']);
-			// echo '</pre>';
+			$sum = 0;
+			$i = 0;
+			foreach($data['rating'] as $r){
+				$sum = $sum + $r['rate'];
+				$i++;
+			}
+			$data['average'] = $sum/$i;
 			
 			$templates['title'] = 'Booking';
 			$this->load->view('inc/header-client', $templates);

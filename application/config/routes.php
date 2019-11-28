@@ -65,7 +65,6 @@ $route['c_notifications']               = 'clients/notifications';
 $route['events/(:num)']                 = 'clients/event_info/$1';
 $route['print_event/(:num)']            = 'clients/print_pdf/$1';
 $route['c_delete_event/(:num)']         = 'clients/delete_event';
-$route['clients/calendar']              = 'clients/calendar';
 $route['calendar_info/(:num)/(:num)/(:num)']      = 'clients/calendar_info/$1/$1/$1';
 // $route['package']                       = 'clients/package';
 // $route['c_created_events']              = 'clients/event_created';
@@ -78,6 +77,8 @@ $route['performer_profile_info/(:num)'] = 'clients/performer_profile_info/$1';
 $route['c_performer_gallery/(:num)']    = 'clients/performer_gallery/$1';
 $route['rating/(:num)']                        = 'clients/rating/$1';
 $route['add_rating/(:num)']                    = 'clients/add_rating/$1';
+// $route['clients/calendar']              = 'clients/calendar';
+// $route['clients/calendar(:num)(:num)']              = 'clients/calendar';
 
 $route['c_chat']                        = 'clients/chat';
 $route['c_chat/(:num)']                 = 'clients/chat_message/$1';

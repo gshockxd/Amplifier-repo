@@ -5,7 +5,8 @@
             if($id != $this->session->userdata('user_id')){
                 $data['chats'] = $this->C_chat_model->chat_conversation($id);
                 $data['users'] = $this->C_chat_model->get_only_name_from_users();
-                $data['user_info'] = $this->C_chat_model->get_user_info($id);   
+                $data['user_info'] = $this->C_chat_model->get_user_info($id);  
+                $data['refresh'] = $this->P_chat_model->refresh_chat(); 
 
                 $templates['title'] = 'Chat';
                 $this->load->view('inc/header-client', $templates);
@@ -13,6 +14,7 @@
                 $this->load->view('inc/footer');
             }else{
                 $data['users'] = $this->C_chat_model->get_only_name_from_users();
+                $data['refresh'] = $this->P_chat_model->refresh_chat();
                 $templates['title'] = 'Chat';
                 $this->load->view('inc/header-client', $templates);
                 $this->load->view('client/chat', $data);
@@ -148,6 +150,7 @@
                     $data['chats'] = $this->C_chat_model->chat_conversation($id);
                     $data['users'] = $this->C_chat_model->get_only_name_from_users();
                     $data['user_info'] = $this->C_chat_model->get_user_info($id); 
+                    $data['refresh'] = $this->P_chat_model->refresh_chat();
                     
                     $templates['title'] = 'Chat';
                     $this->load->view('inc/header-client', $templates);
@@ -173,6 +176,7 @@
                     $data['chats'] = $this->C_chat_model->chat_conversation($id);
                     $data['users'] = $this->C_chat_model->get_only_name_from_users();
                     $data['user_info'] = $this->C_chat_model->get_user_info($id); 
+                    $data['refresh'] = $this->P_chat_model->refresh_chat();
         
                     $templates['title'] = 'Chat';
                     $this->load->view('inc/header-client', $templates);
@@ -184,6 +188,7 @@
         public function search_user(){
             $id = $this->uri->segment(2);
             $data['users'] = $this->C_chat_model->get_only_name_from_users();
+            $data['refresh'] = $this->P_chat_model->refresh_chat();
             $templates['title'] = 'Chat';
 
             $this->form_validation->set_rules('userID', 'User ID', 'required|numeric', array('required'=> 'User not found', 'numeric'=>'ID contains invalid data'));
@@ -203,5 +208,12 @@
 
                 redirect('c_chat/'.$temp['user_id']);             
             }
+        }
+        public function refresh_chat(){
+            return $data = '<script language="javascript">
+            setTimeout(function(){
+               window.location.reload(1);
+            }, 10000);
+            </script>';         
         }
     }

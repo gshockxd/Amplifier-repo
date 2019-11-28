@@ -31,11 +31,12 @@
 ?>
 
 <div class="container mt-3">
+    <p class="text-center h4 mb-3"> Package: <span class="font-weight-bold "><?php echo $list_rating[0]['package_name'] ?></span> Rating</p>
     <div class="row">
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-6">
-                    <p>Average Rating: <?php echo $average ?></p>
+                    <p>Average Rating: <?php echo number_format($average, 1) ?></p>
                     <p>Number of users reviewed: <?php echo $count ?></p>
 
                     <p>5 star: <?php echo isset($five) ? $five : 'None' ?> </p>
@@ -46,7 +47,11 @@
 
                     <br>
                     <hr>
-                    <a href="<?php echo base_url() ?>booking_book_event/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Back</a>
+                    <?php if($this->session->userdata('previous_link')): ?>                        
+                        <a href="<?php echo base_url() ?>booking" class="btn btn-primary">Back</a>
+                    <?php else: ?>
+                        <a href="<?php echo base_url() ?>booking_book_event/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Back</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

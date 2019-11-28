@@ -145,6 +145,12 @@
 			
 			$this->Calendar_model->index();
 		}
+		public function check_event(){
+			$this->Session_model->session_check();			
+			$this->Session_model->user_type_check_client();
+			
+			$this->Calendar_model->check_event();
+		}
 		public function calendar_info(){
 			$this->Session_model->session_check();			
 			$this->Session_model->user_type_check_client();

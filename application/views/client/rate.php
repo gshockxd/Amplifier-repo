@@ -37,7 +37,7 @@
                         </div>
                     </li>
                     <li class="list-group-item">               
-                        Write A Review <small>(optional)</small>
+                        Write A Review <small></small>
                         <textarea class="form-group form-control" name="review" id="" row="100%" col="3"><?php echo isset($review) ? $review ? $review : '' : '' ?></textarea>
                     </li>
                 </ul>

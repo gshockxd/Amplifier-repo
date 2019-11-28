@@ -209,11 +209,10 @@
             }
         }
         public function refresh_chat(){
-            // return $data = '<script language="javascript">
-            // setTimeout(function(){
-            //    window.location.reload(1);
-            // }, 5000);
-            // </script>';            
-            return NULL;
+            return $data = '<script language="javascript">
+            setTimeout(function(){
+               window.location.reload(1);
+            }, 10000);
+            </script>';       
         }
     }

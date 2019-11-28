@@ -130,7 +130,7 @@
                             </div>
                         </div>
                     </li>
-                    <!-- <li  class="list-group-item">                        
+                    <li  class="list-group-item">                        
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Average Rating:  </p>
@@ -138,7 +138,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p><?php echo $average ?></p>
+                                        <p class="h4 font-weight-bold"><?php echo number_format($average, 1) ?></p>
                                     </div>
                                     <div class="col-md-6">
                                         <a href="<?php echo base_url() ?>rating/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Show Rate</a>
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li> -->
+                    </li>
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-md-6">
@@ -183,4 +183,4 @@
         </div>
     </div>
 </div>
-<?php form_close() ?>
+<?php form_close(); $this->session->unset_userdata('previous_link'); ?>

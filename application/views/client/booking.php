@@ -20,11 +20,12 @@
 							<li class="list-group-item"><p class="text-capitalize">Service Type: <?php echo $p['artist_type'] ?></p></li>
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-md-10">
+									<div class="col-md-7">
 										<p>₱ <?php echo number_format ($p['price'], 2) ?></p>
 									</div>
-									<div class="col-md-2">		
-									
+									<div class="col-md-5">		
+
+										<a href="rating/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Show Rating"><i class="fas fa-star"></i></a>
 										<?php $data = $this->Booking_model->check_book_package($p['package_id']); if($data): ?>
 											<a href="#" class="btn btn-success" data-toogle="tooltip" data-placement="top" title="Booked!"><i class="fas fa-check"></i></a>
 										<?php else: ?>
@@ -83,6 +84,8 @@
 </div>
 
 <?php 
+	$link = base_url(uri_string());
+	$this->session->set_userdata('previous_link', $link);
 	/*						
 	<?php foreach($bookings as $b): ?>	
 		<?php if($b['package_id'] == $p['package_id']): ?>

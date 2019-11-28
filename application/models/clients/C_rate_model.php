@@ -67,8 +67,10 @@
         }
         public function rating_page(){
             $templates['title'] = 'Client Ratings';
-			$this->db->order_by('created_at', 'DESC');
-            $query = $this->db->get_where('rating', array('package_id'=>$this->uri->segment(2)));
+            $this->db->order_by('created_at', 'DESC');
+            $this->db->join('packages', 'packages.package_id = rating.package_id');
+            $this->db->select('rating.*, package_name');
+            $query = $this->db->get_where('rating', array('rating.package_id'=>$this->uri->segment(2)));
             $data['list_rating'] = $query->result_array();
             
             // print_r($data['list_rating']);
