@@ -13,6 +13,7 @@
 			<div class="col-md-5">
 				<p class="h1 red-brown"><?php echo $package[0]['package_name'] ?></p>
 				<p class=""><?php echo $package[0]['details'] ?></p>
+				<small>Date Added: <?php echo date('m/d/y', strtotime($package[0]['p_created_at'])) ?></small>
 				<p class="text-muted py-3"></p>
 				<a href="<?php echo base_url(); ?>c_gallery/<?php echo $package[0]['package_id'] ?>" class="btn btn-info" data-placement="top" title="" data-toggle="tooltip"><span class="fas fa-photo-video"></span> Preview</a>
 				<a href="<?php echo base_url(); ?>booking_book_event/<?php echo $package[0]['package_id'] ?>" class="btn btn-primary ml-2" data-placement="top" title="Book <?php echo $package[0]['package_name'] ?>" data-toggle="tooltip"><span class="fas fa-book"></span> Book</a>
@@ -30,6 +31,7 @@
 					</div>
 					<div class="col-md-5">
 						<p class="red-brown"><?php echo $package[1]['details'] ?></p>
+						<small>Date Added: <?php echo date('m/d/y', strtotime($package[1]['p_created_at'])) ?></small>
 						<div class="d-flex justify-content-center">
 							<a href="<?php echo base_url(); ?>c_gallery/<?php echo $package[0]['package_id'] ?>" class="btn btn-info mr-2" data-placement="top" title="" data-toggle="tooltip"><span class="fas fa-photo-video"></span> Preview</a>
 							<a href="<?php echo base_url(); ?>booking_book_event/<?php echo $package[1]['package_id'] ?>" class="btn btn-primary" data-placement="top" title="Book <?php echo $package[1]['package_name'] ?>" data-toggle="tooltip"><span class="fas fa-book"></span> Book</a>
@@ -47,6 +49,7 @@
 					</div>
 					<div class="col-md">
 						<p class="red-brown font-weight-bold"><?php echo $package[2]['details'] ?> </p>
+						<small>Date Added: <?php echo date('m/d/y', strtotime($package[2]['p_created_at'])) ?></small>
 						<div class="d-flex justify-content-center">
 							<a href="<?php echo base_url(); ?>c_gallery/<?php echo $package[0]['package_id'] ?>" class="btn btn-info mr-2" data-placement="top" title="" data-toggle="tooltip"><span class="fas fa-photo-video"></span> Preview</a>
 							<a href="<?php echo base_url(); ?>booking_book_event/<?php echo $package[2]['package_id'] ?>" class="btn btn-primary" data-placement="top" title="Book <?php echo $package[2]['package_name'] ?>" data-toggle="tooltip"><span class="fas fa-book"></span> Book</a>

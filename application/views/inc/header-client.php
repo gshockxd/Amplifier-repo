@@ -96,6 +96,12 @@
 							<li class="nav-item <?php echo $this->uri->segment(1) == 'calendar' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url()?>clients/calendar">Calendar</a>
 							</li>
+							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'rating' ? 'active' : '' ?>">
+								<a class="nav-link" href="<?php echo base_url()?>rating">Rating</a>
+							</li> -->
+							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'add_rating' ? 'active' : '' ?>">
+								<a class="nav-link" href="<?php echo base_url()?>add_rating">Add Rating</a>
+							</li> -->
 							<!-- <li class="nav-item <?php echo $this->uri->segment(1) == 'package' ? 'active' : '' ?>">
 								<a class="nav-link" href="<?php echo base_url()?>package">Package</a>
 							</li> -->

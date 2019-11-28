@@ -34,8 +34,11 @@
 								<a data-toggle="modal" data-target="#alertDecline<?php echo $i ?>" class="btn btn-danger mr-2 text-white " data-toggle="tooltip" data-placement="top" title="Decline"><i class="fas fa-times "></i></a>
 								<a href="<?php echo base_url(); ?>p_event_info/<?php echo $b['booking_id'] ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More details"><i class="fas fa-external-link-alt "></i></a>
 							<?php elseif($b['status'] == 'cancel'): ?>
-						
+								
 							<?php else: ?>
+								<?php if($b['payment_status'] != 'paid'): ?>
+									<a href="<?php echo base_url() ?>p_paid/<?php echo $b['booking_id'] ?>" class="btn btn-primary mr-2">Paid</a>
+								<?php endif; ?>
 								<a href="<?php echo base_url(); ?>p_event_info/<?php echo $b['booking_id'] ?>" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="More details"><i class="fas fa-external-link-alt "></i></a>
 							<?php endif; ?>
 							

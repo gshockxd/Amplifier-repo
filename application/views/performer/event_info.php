@@ -147,12 +147,14 @@
                     <a href="#"  class="btn btn-success col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Reported">Reported <i class="fas fa-check"></i></a>  
                 <?php else: ?>      
                     <a href="<?php echo base_url(); ?>p_report_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Report Event">Report <i class="fas fa-exclamation"></i></a>  
-                <?php endif; ?>      
-                <?php if($event['performer_rating']): ?>          
+                <?php endif; ?>       
+                
+                <?php if($this->History_model->check_performer_rate()): ?>
                     <a href="#"  class="btn btn-success col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rated">Rated <i class="fas fa-check"></i></a>  
-                <?php else: ?>      
+                <?php else: ?>
                     <a href="<?php echo base_url(); ?>p_rate_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rate Event">Rate <i class="fas fa-exclamation"></i></a>  
-                <?php endif; ?>  
+                <?php endif; ?>
+
             <?php endif; ?>
 
             <a href="<?php echo base_url(); ?>p_bookings"  class="btn btn-secondary col-md-2" data-toggle="tooltip" data-placement="top" title="Return"><i class="fas fa-arrow-left"></i></a>

@@ -154,11 +154,13 @@
             <?php else: ?>      
                 <a href="<?php echo base_url(); ?>report_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Report Event">Report <i class="fas fa-exclamation"></i></a>  
             <?php endif; ?>      
-            <?php if($history['client_rating']): ?>          
+            
+            <?php if($this->History_model->check_client_rate()): ?>
                 <a href="#"  class="btn btn-success col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rated">Rated <i class="fas fa-check"></i></a>  
-            <?php else: ?>      
-                <a href="<?php echo base_url(); ?>rate_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rate Event">Rate <i class="fas fa-exclamation"></i></a>  
-            <?php endif; ?>   
+            <?php else: ?>
+                    <a href="<?php echo base_url(); ?>rate_event/<?php echo $this->uri->segment(2) ?>"  class="btn btn-warning col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Rate Event">Rate <i class="fas fa-exclamation"></i></a>  
+            <?php endif; ?>
+
             <a href="<?php echo base_url(); ?>performer_profile_info/<?php echo $this->uri->segment(2) ?>"  class="btn btn-primary col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Performer Info"><i class="fas fa-user"></i></a>
             <a href="<?php echo base_url(); ?>print_event/<?php echo $this->uri->segment(2) ?>" target="_blank"  class="btn btn-info col-md-2 mr-2" data-toggle="tooltip" data-placement="top" title="Print"><i class="fas fa-print"></i></a>
             <a href="<?php echo base_url(); ?>history_client"  class="btn btn-secondary col-md-2" data-toggle="tooltip" data-placement="top" title="Return"><i class="fas fa-arrow-left"></i></a>

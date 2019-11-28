@@ -76,6 +76,8 @@ $route['login_attempt']                 = 'clients/login_attempt';
 $route['logout_user']                   = 'clients/logout';
 $route['performer_profile_info/(:num)'] = 'clients/performer_profile_info/$1';
 $route['c_performer_gallery/(:num)']    = 'clients/performer_gallery/$1';
+$route['rating/(:num)']                        = 'clients/rating/$1';
+$route['add_rating/(:num)']                    = 'clients/add_rating/$1';
 
 $route['c_chat']                        = 'clients/chat';
 $route['c_chat/(:num)']                 = 'clients/chat_message/$1';
@@ -109,6 +111,7 @@ $route['p_rate_event/(:num)']             = 'performers/rate_event/$1';
 $route['p_rating_attempt/(:num)']         = 'performers/rate_attempt/$1'; 
 
 $route['notifications/index']                 =  'notifications/index';
+$route['p_paid/(:num)']                   = 'performers/paid_event/$1';
 
 
 /*

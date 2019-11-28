@@ -76,6 +76,14 @@
                                 </div>
                             </li>
                         <?php endif; ?>
+                        <?php if($this->session->userdata('user_type') == 'performer' && 1==0): ?>                            
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">Average Rating</div>
+                                    <div class="col font-weight-bold"><?php echo $average ; ?></div>
+                                </div>
+                            </li>
+                        <?php endif; ?>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">Offense</div>

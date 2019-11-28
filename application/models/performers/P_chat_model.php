@@ -6,6 +6,7 @@
                 $data['chats'] = $this->P_chat_model->chat_conversation($id);
                 $data['users'] = $this->P_chat_model->get_only_name_from_users();
                 $data['user_info'] = $this->P_chat_model->get_user_info($id);   
+                $data['refresh'] = $this->P_chat_model->refresh_chat();
 
                 $templates['title'] = 'Chat';
                 $this->load->view('inc/header-performer', $templates);
@@ -13,6 +14,7 @@
                 $this->load->view('inc/footer');
             }else{
                 $data['users'] = $this->P_chat_model->get_only_name_from_users();
+                $data['refresh'] = $this->P_chat_model->refresh_chat();
                 $templates['title'] = 'Chat';
                 $this->load->view('inc/header-performer', $templates);
                 $this->load->view('performer/chat', $data);
@@ -148,6 +150,7 @@
                     $data['chats'] = $this->P_chat_model->chat_conversation($id);
                     $data['users'] = $this->P_chat_model->get_only_name_from_users();
                     $data['user_info'] = $this->P_chat_model->get_user_info($id); 
+                    $data['refresh'] = $this->P_chat_model->refresh_chat();
         
                     $templates['title'] = 'Chat';
                     $this->load->view('inc/header-performer', $templates);
@@ -173,6 +176,7 @@
                     $data['chats'] = $this->P_chat_model->chat_conversation($id);
                     $data['users'] = $this->P_chat_model->get_only_name_from_users();
                     $data['user_info'] = $this->P_chat_model->get_user_info($id); 
+                    $data['refresh'] = $this->P_chat_model->refresh_chat();
         
                     $templates['title'] = 'Chat';
                     $this->load->view('inc/header-performer', $templates);
@@ -203,5 +207,13 @@
 
                 redirect('p_chat/'.$temp['user_id']);             
             }
+        }
+        public function refresh_chat(){
+            // return $data = '<script language="javascript">
+            // setTimeout(function(){
+            //    window.location.reload(1);
+            // }, 5000);
+            // </script>';            
+            return NULL;
         }
     }

@@ -113,6 +113,12 @@
 
 			$this->P_gallery_model->index();
 		}
+		public function paid_event(){
+			$this->Session_model->session_check();		
+			$this->Session_model->user_type_check_performer();
+
+			$this->P_paid_model->index();
+		}
 		public function chat(){
 			$this->Session_model->session_check();		
 			$this->Session_model->user_type_check_performer();

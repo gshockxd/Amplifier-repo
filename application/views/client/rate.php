@@ -6,14 +6,11 @@
                 <div class="card-header bg-primary text-white">
                     Rate Event: <span class="font-weight-bold"><?php echo $rate['event_name'] ?></span>
                 </div>
-                <div class="card-header bg-warning font-weight-bold border border-primary">
-                    Instruction: Rate the event from 1 to 5
-                </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item ">1. Does the artist perform better or not?</li>
+                    <li class="list-group-item ">Rate the event from 1 to 5.</li>
                     <?php if(form_error('rate1')): ?>                        
                         <li class="list-group-item">
-                            <div class="text-danger">This number is required rating.</div> 
+                            <div class="text-danger"><?php echo form_error('rate1') ?></div> 
                         </li>
                     <?php endif; ?>
                     <!-- <?php print_r($rate2) ?> -->
@@ -39,9 +36,13 @@
                             <label class="custom-control-label" for="customRadioInline5"></label>
                         </div>
                     </li>
+                    <li class="list-group-item">               
+                        Write A Review <small>(optional)</small>
+                        <textarea class="form-group form-control" name="review" id="" row="100%" col="3"><?php echo isset($review) ? $review ? $review : '' : '' ?></textarea>
+                    </li>
                 </ul>
                 
-                <ul class="list-group list-group-flush">
+                <!-- <ul class="list-group list-group-flush">
                     <li class="list-group-item ">2. Rate your satisfaction of the artist.</li>
                     <?php if(form_error('rate2')): ?>                        
                         <li class="list-group-item">
@@ -70,7 +71,7 @@
                             <label class="custom-control-label" for="customRadioInline10"></label>
                         </div>
                     </li>
-                </ul>
+                </ul> -->
                 <div class="card-footer d-flex justify-content-end">
                     <a href="<?php echo base_url() ?>history_client/<?php echo $this->uri->segment(2) ?>" class="btn btn-secondary mr-2">Cancel</a>
                     <button type="submit" class="btn btn-primary" name="submit">Submit Rate</button>

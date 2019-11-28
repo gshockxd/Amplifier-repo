@@ -69,5 +69,7 @@
 		});
 	</script>
 
+	<?php echo isset($refresh) ? $refresh : '' ?>
+	
 </body>
 </html>

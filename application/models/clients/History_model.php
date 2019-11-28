@@ -54,4 +54,16 @@
 			$query = $this->db->get_where('reports', array('booking_id'=>$this->uri->segment(2), 'report_from'=>$this->session->userdata('user_id')));
 			return $query->row_array();
 		}
+		public function check_client_rate(){
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
+			$data = $query->row_array();
+			$query = $this->db->get_where('rating', array('package_id'=>$data['package_id'], 'user_id'=>$this->session->userdata('user_id')));
+			return $data = $query->row_array();
+		}
+		public function check_performer_rate(){
+			$query = $this->db->get_where('bookings', array('booking_id'=>$this->uri->segment(2)));
+			$data = $query->row_array();
+			$query = $this->db->get_where('rating', array('package_id'=>$data['package_id'], 'user_id'=>$this->session->userdata('user_id')));
+			return $data = $query->row_array();
+		}
     }

@@ -7,7 +7,7 @@
 			// print_r($data);
 			// echo '</pre>';	
 			// die;
-
+			
 			$templates['title'] = 'Booking';
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/booking', $data);
@@ -21,6 +21,25 @@
 			$temp = $this->db->get_where('packages', array('package_id'=>$id));
 			$data['package'] = $temp->row_array();
 
+			$this->db->order_by('created_at', 'ASC');
+			$query = $this->db->get_where('rating', array('package_id'=>$this->uri->segment(2)));
+			$data['rating'] = $query->result_array();
+			
+			// echo '<pre>';
+			// print_r($data['rating']);
+			// echo '</pre>';
+			
+			// testing
+			// $sum = 0;
+			// $i = 0;
+			// foreach($data['rating'] as $r){
+			// 	$sum = $sum + $r['rate'];
+			// 	$i++;
+			// }
+			// $data['average'] = $sum/$i;
+			// testing
+
+			// print_r($data['rating']);
 			// echo '<pre>';
 			// print_r($data['package']);
 			// echo '</pre>';
@@ -218,5 +237,14 @@
 			}else{			
 				return NULL;
 			}			
+		}
+		public function check_book_package($id){
+			$this->db->join('bookings', 'bookings.package_id = packages.package_id');
+			// $query = $this->db->get_where('packages', array('packages.package_id'=>$this->uri->segment(2)));
+			$query = $this->db->get_where('packages', array('packages.package_id'=>$id));
+			return $data = $query->row_array();
+
+			print_r($data);
+			die;
 		}
     }

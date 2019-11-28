@@ -187,6 +187,12 @@
 			
 			$this->Profile_model->profile_edit_page();
 		}
+		public function rating(){
+			$this->C_rate_model->rating_page();
+		}
+		public function add_rating(){
+			$this->C_rate_model->add_rating();
+		}
 		public function profile_edit_info(){
 			$this->Session_model->session_check();			
 			// $this->Session_model->user_type_check_client();
