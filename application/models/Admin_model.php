@@ -3,6 +3,18 @@
 class Admin_model extends CI_Model
 {
 //  delete start
+   function query_data_transaction($id)
+    {
+       $id = $this->uri->segment(2);
+       $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname, u2.photo AS performer_photo,users.photo as client_photo");
+       $this->db->from("bookings");
+       $this->db->join("users",'bookings.client_id=users.user_id');
+       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+       $this->db->where("client_id",$id);
+       $this->db->or_where("performer_id",$id);
+       $query = $this->db->get();
+       return $query;
+    }
     function update_hide_package($offense)
     {
        $status= array("status" 	=> "cancel");
@@ -202,14 +214,13 @@ class Admin_model extends CI_Model
     {
      
        $this->db->from("packages");
-      
       $where["package_status!="] = "hide";
       $this->db->where($where);
       $t = $this->db->count_all_results();
        return $t;
      
     }
-    function query_results_package($where,$rpg, $page)
+    function query_results_package($where,$rpg, $page, $name)
     {
      
        $this->db->select("*");
@@ -220,6 +231,12 @@ class Admin_model extends CI_Model
       // }      
       // $this->db->where("package_status!=","hide");
       $where["package_status!="] = "hide";
+      if($name != "*"){
+         $this->db->like("package_name",$name,'both');
+         $this->db->or_like("details",$name,'both');
+         $this->db->or_like("users.fname",$name,'both');
+         $this->db->or_like("users.lname",$name,'both');
+      }
       $this->db->where($where);
       $this->db->join("users",'packages.owner=users.user_id');
       $this->db->order_by('booked');
@@ -239,7 +256,7 @@ class Admin_model extends CI_Model
    //    $query = $this->db->get();
    //    return $query;
    //  }
-    function query_results_report($user_id, $rpg, $page)
+    function query_results_report($user_id, $rpg, $page, $name)
     {
      
       $this->db->select("reports.*,bookings.*,users.fname as report_from_fname,u2.user_type as report_to_usertype,users.user_type as report_from_usertype,u2.fname AS report_to_fname,users.lname as report_from_lname,u2.lname AS report_to_lname, u2.photo AS report_from_photo,users.photo as report_to_photo");
@@ -252,12 +269,19 @@ class Admin_model extends CI_Model
       $this->db->join("users",'reports.report_from=users.user_id');
       $this->db->join("users as u2",'reports.report_to=u2.user_id');
       $this->db->join("bookings",'reports.booking_id=bookings.booking_id');
+      if($name!="*"){
+         $this->db->like("event_name",$name,'both');
+         $this->db->or_like("users.fname",$name,'both');
+         $this->db->or_like("users.lname",$name,'both');
+         $this->db->or_like("u2.fname",$name,'both');
+         $this->db->or_like("u2.lname",$name,'both');
+        }
       $this->db->order_by('date_reported DESC');
       $this->db->limit($rpg, $page);
       $query = $this->db->get();
       return $query;
     }
-    function count_results_report($user_id)
+    function count_results_report($user_id, $name)
     {
      
       $this->db->select("reports.*,bookings.*,users.fname as report_from_fname,u2.user_type as report_to_usertype,users.user_type as report_from_usertype,u2.fname AS report_to_fname,users.lname as report_from_lname,u2.lname AS report_to_lname, u2.photo AS report_from_photo,users.photo as report_to_photo");
@@ -331,64 +355,74 @@ class Admin_model extends CI_Model
        return $t;
      
     }
-    function query_data_event_history($date,$name,$rpg,$page)
+    function fetch_data_user_rating ($id)
     {
+      $this->db->select_avg("client_rating");
+      $this->db->from("bookings");
+      $this->db->where("performer_id",$id);
+
+      $t = $this->db->get();
+      return $t;
+    
+     }
+     function query_data_event_history($date,$name,$rpg,$page)
+     {
+        $date1 = date('y-m-d');
+        $status = "pending";
+        $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+        $this->db->from("bookings");
+        $this->db->join("users",'bookings.client_id=users.user_id');
+        $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+        $this->db->where("event_date <",$date1);
+        $this->db->where("bookings.status !=", $status);
+        $this->db->order_by('event_date DESC','event_from DESC');
+        $this->db->limit($rpg, $page);
+        
+        if($date != "*"){
+          $this->db->like("bookings.event_date",$date,'both');
+       }
+    
+       if($name != "*"){
+          $this->db->like("event_name",$name,'both');
+          $this->db->or_like("users.fname",$name,'both');
+          $this->db->or_like("users.lname",$name,'both');
+          $this->db->or_like("u2.fname",$name,'both');
+          $this->db->or_like("u2.lname",$name,'both');
+       }
+     
+        $query = $this->db->get();
+        return $query;
+     }
+     function count_results_history($date, $name)
+     {
+      
+       $status = "hide";
        $date1 = date('y-m-d');
-       $status = "pending";
-       $this->db->select("bookings.*, users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
+       $status1 = "pending";
+       $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
        $this->db->from("bookings");
-       $this->db->join("users",'bookings.client_id=users.user_id');
-       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+       if($date != "*"){
+          $this->db->where("bookings.event_date",$date);
+       }
+    
+       if($name != "*"){
+          $this->db->like("event_name",$name,'both');
+          $this->db->or_like("users.fname",$name,'both');
+          $this->db->or_like("users.lname",$name,'both');
+          $this->db->or_like("u2.fname",$name,'both');
+          $this->db->or_like("u2.lname",$name,'both');
+       }
+       $this->db->where("bookings.status!=",$status1);
        $this->db->where("event_date <",$date1);
        $this->db->where("bookings.status !=", $status);
-       $this->db->order_by('event_date DESC','event_from DESC');
-       $this->db->limit($rpg, $page);
-       
-       if($date != "*"){
-         $this->db->like("bookings.event_date",$date,'both');
-      }
-   
-      if($name != "*"){
-         $this->db->like("event_name",$name,'both');
-         $this->db->or_like("users.fname",$name,'both');
-         $this->db->or_like("users.lname",$name,'both');
-         $this->db->or_like("u2.fname",$name,'both');
-         $this->db->or_like("u2.lname",$name,'both');
-      }
-    
-       $query = $this->db->get();
-       return $query;
-    }
-    function count_results_history($date, $name)
-    {
-     
-      $status = "hide";
-      $date1 = date('y-m-d');
-      $status1 = "pending";
-      $this->db->select("bookings.*,users.fname as client_fname,u2.fname AS performer_fname,users.lname as client_lname,u2.lname AS performer_lname");
-      $this->db->from("bookings");
-      if($date != "*"){
-         $this->db->where("bookings.event_date",$date);
-      }
-   
-      if($name != "*"){
-         $this->db->like("event_name",$name,'both');
-         $this->db->or_like("users.fname",$name,'both');
-         $this->db->or_like("users.lname",$name,'both');
-         $this->db->or_like("u2.fname",$name,'both');
-         $this->db->or_like("u2.lname",$name,'both');
-      }
-      $this->db->where("bookings.status!=",$status1);
-      $this->db->where("event_date <",$date1);
-      $this->db->where("bookings.status !=", $status);
-
-      $this->db->join("users",'bookings.client_id=users.user_id');
-      $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
-
-      $t = $this->db->count_all_results();
-       return $t;
-     
-    }
+ 
+       $this->db->join("users",'bookings.client_id=users.user_id');
+       $this->db->join("users as u2",'bookings.performer_id=u2.user_id');
+ 
+       $t = $this->db->count_all_results();
+        return $t;
+      
+     }
 //search end
     function fetch_data_user()
     {
@@ -404,6 +438,7 @@ class Admin_model extends CI_Model
        $this->db->select("*");
        $this->db->from("users");
        $this->db->where("status!=","hide");
+       $this->db->where("user_type!=","admin");
        $query = $this->db->get();
        return $query;
     }

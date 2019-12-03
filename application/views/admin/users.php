@@ -91,6 +91,9 @@
                                     <a class="dropdown-item fas fa-eye fa-fw"
                                         href="<?php echo base_url('profile/'); echo $row->user_id; ?>">&nbsp View</a>
                                     <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item fas fa-eye fa-fw"
+                                        href="<?php echo base_url('transaction/'); echo $row->user_id; ?>">&nbsp View Tansactions</a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item fas fa-exclamation-triangle fa-fw" href="#"
                                         data-toggle="modal" data-target="#addoff<?php echo $row->user_id; ?>">&nbsp Add
                                         offense</a>

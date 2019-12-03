@@ -25,8 +25,10 @@
                     <div class="card shadow mb-4">
                         <div class="card-body center">
                             <form class="form-inline md-form form-sm mt-0" method="post" action="<?php echo base_url('reports')?>">
+                            <input class="form-control form-control-sm ml-3 mb-5 w-75" name="name" id="name" placeholder="Input Event Name or Reporter Name" ></input>
                             <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
                             <option selected disabled>Select Reports that include:</option>
+                            <option value="*">All Reports</option>
                             <?php
                                 if($fetch_data_user_report->num_rows()>0)
                                     {
@@ -43,10 +45,8 @@
                             </form>
                         </div>
                                 
-                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"
-                            data-toggle="modal" data-target="#addrep">
-                            <i class="fas fa-envelope fa-sm text-white-50"></i> Create Report</a>
-                    </div> -->
+                      
+                    </div>
                 </div>
 
 
@@ -69,10 +69,17 @@
                         ?>
                         <div class=" m-4 col-md-12">
                             <div class="card col-md-12 w-75 mx-auto" style="">
-                                <video width="800" height="400" controls>
+                        <?php if($row->report_photo!=''){ ?>
+                                <img width="800" height="400">
+                                        <source src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </img>
+                        <? }else if($row->report_video!=''){ ?>
+                            <video width="800" height="400" controls>
                                         <source src="<?php echo base_url(); ?><?php echo $row->report_photo; ?>" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
+                            <?php } ?>
                                 <div class="card-body">
 
                                     <ul class="list-group list-group-flush">
@@ -129,8 +136,8 @@
                                                 </div>
                                             </div>
                                             <!-- <h6 class="card-subtitle mb-2 text-muted">Report ID: <?php echo $row->report_id; ?></h6> -->
-                                            <a href="<?php echo base_url('eventview/'); echo $row->booking_id; ?>"> Event ID:
-                                                <?php echo $row->booking_id; ?></a>
+                                            <a href="<?php echo base_url('eventview/'); echo $row->booking_id; ?>"> Event Name:
+                                                <?php echo $row->event_name; ?></a>
                                         </li>
 
                                         <li class="list-group-item">
@@ -301,7 +308,7 @@
                         {
                         ?>
                          <center>
-                            <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png" class="m-3 w-100 h-100"/>
+                            <img src="<?php echo base_url(); ?>/assets/img/nodata-found.png" class="m-3 w-50 h-75"/>
                          </center>
                         <?php
                         }

@@ -61,6 +61,32 @@
 			
 			$this->C_report_model->index();
 		}
+		public function search($page = 0)
+		{
+			$this->load->model("Admin_model");
+			$where=array();
+			if ($this->input->get("user_id")) {
+				$where['owner'] = $this->input->get("user_id");
+			}
+			
+			$total_rows = $this->Admin_model->count_results_package($where);		
+			$rpg = 3;
+	
+			$config['base_url'] = base_url('services');
+			$config['total_rows'] = $total_rows;
+			$config['per_page'] = $rpg;
+			$config['reuse_query_string'] = true;
+			$config['uri_segment'] = 2;
+			
+			$this->pagination->initialize($config);
+	
+			$data['pagination'] = $this->pagination->create_links();
+			// $data["query_results_package_check"] = $this->Admin_model->query_results_package_check();
+			$data["query_results_package"] = $this->Admin_model->query_results_package($where, $rpg, $page);
+			$data["fetch_data_perf"] = $this->Admin_model->fetch_data_perf();
+			$data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
+			$this->load->view('/client/search_performer', $data);
+		}
 		public function report_attempt(){
 			$this->Session_model->session_check();
 			$this->Session_model->user_type_check_client();
@@ -145,6 +171,12 @@
 			
 			$this->Calendar_model->index();
 		}
+		public function check_event(){
+			$this->Session_model->session_check();			
+			$this->Session_model->user_type_check_client();
+			
+			$this->Calendar_model->check_event();
+		}
 		public function calendar_info(){
 			$this->Session_model->session_check();			
 			$this->Session_model->user_type_check_client();
@@ -186,6 +218,12 @@
 			// $this->Session_model->user_type_check_client();
 			
 			$this->Profile_model->profile_edit_page();
+		}
+		public function rating(){
+			$this->C_rate_model->rating_page();
+		}
+		public function add_rating(){
+			$this->C_rate_model->add_rating();
 		}
 		public function profile_edit_info(){
 			$this->Session_model->session_check();			

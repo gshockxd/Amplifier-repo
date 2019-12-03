@@ -10,7 +10,7 @@ if($this->session->userdata('user_type') == 'admin'){
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1,autocorrect=off , shrink-to-fit=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1,autocorrect=on , shrink-to-fit=yes">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Admin</title>

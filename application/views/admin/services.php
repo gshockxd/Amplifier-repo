@@ -27,8 +27,12 @@
                     <div class="col-md-2 col-lg-6 mx-auto">
                         <div class="card shadow mb-4">
                             <div class="card-body center">
-                                <form class="form-inline md-form form-sm mt-0" method="get" action="<?php echo base_url('services')?>">
-                                <select class="form-control form-control-sm ml-3 w-75" name="user_id" id="user_id" >
+                                <form method="get" action="<?php echo base_url('services')?>">
+                                <label for="date">Input Name: <br>
+                                            <input class="form-control ml-3" style="width:500px" type="text" name="name" placeholder="E.g Package Name, performer name, package details" value="<?php echo (isset($where['name'])); ?>"></label>
+                               <hr>
+                                <label for="date">Select Performer: <br>         
+                                <select class="form-control ml-3" style="width:500px" name="user_id" id="user_id" >
                                 <option selected value=''>Select All Packages</option>
                                 <?php
                                     if($fetch_data_perf->num_rows()>0)
@@ -41,8 +45,10 @@
                                 <?php }
                                     }
                                     ?>
-                                </select>
-                                <button class="btn btn-outline-success btn-sm" type="submit"><i class="fas fa-search"></i></button>
+                                </select></label>
+                                <hr>
+                                <br>
+                                <button class="btn btn-outline-success btn-sm ml-3" type="submit"><i class="fas fa-search"></i>Search</button>
                             </form>
                             </div>
                         </div>

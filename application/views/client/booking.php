@@ -2,6 +2,7 @@
 
 <?php echo $this->session->flashdata('success_message') ? $this->Message_model->success_message() : '' ?>
 <?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
+<?php echo $this->session->flashdata('danger_message') ? $this->Message_model->danger_message() : '' ?>
 <?php // echo '<pre>'; print_r($packages); echo '</pre>'; ?>
 
 <?php if($packages): ?>
@@ -19,21 +20,18 @@
 							<li class="list-group-item"><p class="text-capitalize">Service Type: <?php echo $p['artist_type'] ?></p></li>
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-md-10">
+									<div class="col-md-7">
 										<p>₱ <?php echo number_format ($p['price'], 2) ?></p>
 									</div>
-									<div class="col-md-2">									
-										<?php foreach($bookings as $b): ?>	
-											<?php if($b['package_id'] == $p['package_id']): ?>
-												<?php if($b['status'] == 'pending' || $b['status'] == 'approve'): ?>
-													<a href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Booked!"><i class="fas fa-check"></i></a>																										
-												<?php else: ?>
-													<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
-												<?php endif; ?>
-											<?php else: ?>
-												<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
-											<?php endif; ?>
-										<?php endforeach; ?>
+									<div class="col-md-5">		
+
+										<a href="rating/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Show Rating"><i class="fas fa-star"></i></a>
+										<?php $data = $this->Booking_model->check_book_package($p['package_id']); if($data): ?>
+											<a href="#" class="btn btn-success" data-toogle="tooltip" data-placement="top" title="Booked!"><i class="fas fa-check"></i></a>
+										<?php else: ?>
+											<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
+										<?php endif; ?>		
+											
 									</div>
 								</div>	
 							</li>				
@@ -84,3 +82,21 @@
 <?php endif; ?>
 
 </div>
+
+<?php 
+	$link = base_url(uri_string());
+	$this->session->set_userdata('previous_link', $link);
+	/*						
+	<?php foreach($bookings as $b): ?>	
+		<?php if($b['package_id'] == $p['package_id']): ?>
+			<?php if($b['status'] == 'pending' || $b['status'] == 'approve'): ?>
+				<a href="#" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Booked!"><i class="fas fa-check"></i></a>																										
+			<?php else: ?>
+				<!-- <a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a> -->
+			<?php endif; ?>
+		<?php else: ?>												
+		<?php endif; ?>
+		<a href="booking_book_event/<?php echo $p['package_id'] ?>" class="btn btn-primary text-white" data-toggle="tooltip" data-placement="top" title="Book <?php echo $p['package_name']?>"><i class="fas fa-book"></i></a>
+	<?php endforeach; ?> */
+
+?>

@@ -29,6 +29,7 @@ $route['delete_report/(:num)']                  = 'welcome/delete_report/$1';
 $route['delete_event/(:num)']                   = 'welcome/delete_event/$1';
 $route['delete_package/(:num)']                 = 'welcome/delete_package/$1';
 $route['add_offense/(:num)']                    = 'welcome/offense_count/$1';
+$route['transaction/(:num)']                    = 'welcome/transaction/$1';
 
 $route['block_page']                            = 'welcome/block_page';
 $route['changeoff']                             = 'welcome/changeoff';
@@ -65,17 +66,21 @@ $route['c_notifications']               = 'clients/notifications';
 $route['events/(:num)']                 = 'clients/event_info/$1';
 $route['print_event/(:num)']            = 'clients/print_pdf/$1';
 $route['c_delete_event/(:num)']         = 'clients/delete_event';
-$route['clients/calendar']              = 'clients/calendar';
 $route['calendar_info/(:num)/(:num)/(:num)']      = 'clients/calendar_info/$1/$1/$1';
 // $route['package']                       = 'clients/package';
 // $route['c_created_events']              = 'clients/event_created';
 $route['register']                      = 'clients/register';
+$route['c_search']                      = 'clients/search';
 $route['register_attempt']              = 'clients/register_user';
 $route['login']                         = 'clients/login';
 $route['login_attempt']                 = 'clients/login_attempt';
 $route['logout_user']                   = 'clients/logout';
 $route['performer_profile_info/(:num)'] = 'clients/performer_profile_info/$1';
 $route['c_performer_gallery/(:num)']    = 'clients/performer_gallery/$1';
+$route['rating/(:num)']                        = 'clients/rating/$1';
+$route['add_rating/(:num)']                    = 'clients/add_rating/$1';
+// $route['clients/calendar']              = 'clients/calendar';
+// $route['clients/calendar(:num)(:num)']              = 'clients/calendar';
 
 $route['c_chat']                        = 'clients/chat';
 $route['c_chat/(:num)']                 = 'clients/chat_message/$1';
@@ -109,6 +114,7 @@ $route['p_rate_event/(:num)']             = 'performers/rate_event/$1';
 $route['p_rating_attempt/(:num)']         = 'performers/rate_attempt/$1'; 
 
 $route['notifications/index']                 =  'notifications/index';
+$route['p_paid/(:num)']                   = 'performers/paid_event/$1';
 
 
 /*

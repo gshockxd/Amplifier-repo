@@ -39,7 +39,7 @@
 				}else{
 					$notif['message'] = 'Your password has been recently updated!';
 					$notif['links'] = '#';
-					$this->Notification_model->index($notif);
+ 					$this->Notification_model->index($notif);
 
 					$this->session->set_flashdata('success_message', 'Your Password Has Been Updated!');
 					redirect('profile_password_edit_page');
@@ -62,8 +62,25 @@
         public function profile_info (){        
 			$templates['title'] = 'Profile Information';
 
+			// echo $this->session->userdata('user_id');
+			$query = $this->db->get_where('bookings', array('performer_id'=>$this->session->userdata('user_id')));
+			$data = $query->result_array();
+
+			if($this->session->userdata('user_type') == 'performer' && 1==0){				
+				$i = 0;
+				$sum = 0;
+				foreach($data as $d){
+					$sum = $sum + $d['performer_rating'];
+					
+					// echo '<br>';
+					$i++;
+				}
+				// echo $i; echo '<br>';
+				$data['average'] = $sum/$i;
+			}
+
 			$this->load->view('inc/header-client', $templates);
-			$this->load->view('client/profile_info');
+			$this->load->view('client/profile_info', $data);
 			$this->load->view('inc/footer');
 		}
 		public function profile_edit_info(){
@@ -212,12 +229,16 @@
 		}
 		public function get_three_packages(){
 			$this->db->limit(3);
-			$this->db->group_by('owner');
-			$this->db->order_by('RAND()');
+			// $this->db->group_by('owner');
+			$this->db->order_by('packages.created_at', 'DESC');
 			$this->db->join('band_galleries', 'user_id = owner');
-			$this->db->select('packages.*, band_galleries.*, band_galleries.created_at as g_created_at, band_galleries.updated_at as g_updated_at');
+			$this->db->select('packages.*, band_galleries.*, band_galleries.created_at as g_created_at, band_galleries.updated_at as g_updated_at, packages.created_at as p_created_at, packages.updated_at as p_updated_at');
 			$query = $this->db->get_where('packages', array('booked'=>0));
 			return $data = $query->result_array();
+			 echo '<pre>';
+			print_r($data);
+			echo '</pre>';
+			die;
 		}
 		public function performer_profile_info (){
 			$this->db->select('bookings.*, users.*');

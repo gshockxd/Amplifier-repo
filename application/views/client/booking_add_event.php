@@ -130,6 +130,33 @@
                             </div>
                         </div>
                     </li>
+                    <li  class="list-group-item">                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Average Rating:  </p>
+                            </div>
+                            <?php if(isset($average)): ?>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="h4 font-weight-bold"><?php echo number_format($average, 1) ?></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="<?php echo base_url() ?>rating/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Show Rate</a>
+                                        </div> 
+                                    </div>
+                                </div>                            
+                            <?php else: ?>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class=" font-weight-bold">No rating yet</p>
+                                        </div>
+                                    </div>
+                                </div>   
+                            <?php endif; ?>
+                        </div>
+                    </li>
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-md-6">
@@ -152,6 +179,9 @@
                     </li>
                 </ul>
             </div>
+                <div class="col-md-3">
+                    <!-- <a href="<?php echo base_url() ?>add_rating/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary btn-block">Add Rate</a> -->
+                </div>
             <div class="row my-3 d-flex justify-content-center">
                 <div class="col-md-3">
                     <a href="<?php echo base_url() ?>booking" class="btn btn-danger btn-block">Cancel</a>
@@ -163,4 +193,4 @@
         </div>
     </div>
 </div>
-<?php form_close() ?>
+<?php form_close(); $this->session->unset_userdata('previous_link'); ?>

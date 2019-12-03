@@ -12,6 +12,8 @@
             }else{
                 $data['users'] = $this->A_chat_model->get_only_name_from_users();
                 $templates['title'] = 'Chat';
+                $data["fetch_users"] = $this->A_chat_model->fetch_users();
+
                 $this->load->view('admin/chat', $data);
             }    
             
@@ -132,6 +134,9 @@
         public function send_search_message(){
             $id = $this->uri->segment(2);
             $timestamps = date('Y-m-d H:i:s');
+            $data["fetch_users"] = $this->A_chat_model->fetch_users();
+            // print_r($data);
+            // die;
             if($this->input->post('search') == 'search'){
                 $this->A_chat_model->search_user();
                 // 
@@ -193,5 +198,13 @@
 
                 redirect('a_chat/'.$temp['user_id']);             
             }
+        }
+        public function fetch_users(){
+        $this->db->select("*");
+        $this->db->from("users");
+        $this->db->where("status!=","hide");
+        $this->db->where("user_id !=",$this->session->userdata('user_id'));
+        $query = $this->db->get();
+        return $query->result_array();
         }
     }

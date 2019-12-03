@@ -7,7 +7,7 @@
 			// print_r($data);
 			// echo '</pre>';	
 			// die;
-
+			
 			$templates['title'] = 'Booking';
 			$this->load->view('inc/header-client', $templates);
 			$this->load->view('client/booking', $data);
@@ -21,9 +21,25 @@
 			$temp = $this->db->get_where('packages', array('package_id'=>$id));
 			$data['package'] = $temp->row_array();
 
+			$this->db->order_by('created_at', 'ASC');
+			$query = $this->db->get_where('rating', array('package_id'=>$this->uri->segment(2)));
+			$data['rating'] = $query->result_array();
+			
 			// echo '<pre>';
-			// print_r($data['package']);
+			// print_r($data['rating']);
 			// echo '</pre>';
+			
+			// testing
+			$sum = 0;
+			$i = 0;
+			foreach($data['rating'] as $r){
+				$sum = $sum + $r['rate'];
+				$i++;
+			}
+			if($sum != 0){
+				$data['average'] = $sum/$i;
+			}
+
 			
 			$templates['title'] = 'Booking';
 			$this->load->view('inc/header-client', $templates);
@@ -89,6 +105,8 @@
 					$notif['target_user_id'] = $data['package']['user_id'];
 					$notif['target_message'] = 'Someone has been booked to your package! Check it out!';
 					$notif['target_links'] = base_url().'p_bookings';
+					$notif['notif_status'] = 'created' ;
+					$notif['notif_type'] = 'event' ;
 					$this->Notification_model->index($notif);					
 
 					$this->session->set_flashdata('success_message', 'Event '.$data['event_name'].' has been successfully booked!');
@@ -216,5 +234,14 @@
 			}else{			
 				return NULL;
 			}			
+		}
+		public function check_book_package($id){
+			$this->db->join('bookings', 'bookings.package_id = packages.package_id');
+			// $query = $this->db->get_where('packages', array('packages.package_id'=>$this->uri->segment(2)));
+			$query = $this->db->get_where('packages', array('packages.package_id'=>$id));
+			return $data = $query->row_array();
+
+			print_r($data);
+			die;
 		}
     }

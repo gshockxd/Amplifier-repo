@@ -2,6 +2,24 @@
     class Calendar_Model extends CI_Model {
         public function index (){
 			$data['calendar'] = $this->Calendar_model->get_bookings();
+			$data['event_name'] = null;
+			
+			if($data['calendar']){
+				foreach($data['calendar'] as $d){
+					$event_date = date('j', strtotime($d['event_date']));
+					$event_month = date('m', strtotime($d['event_date']));
+					$event_year = date('Y', strtotime($d['event_date']));
+					$temp[$event_date] = base_url().'calendar_info/'.$event_year.'/'.$event_month.'/'.$event_date;
+					// echo '<pre>';
+					// print_r($d);
+					// echo '</pre>';
+					// $data['event_name'][$event_date] = $d['event_name'];
+					$data['event_name'][$event_date] = $this->Calendar_model->get_event_name($event_date, $event_month, $event_year);
+				}
+				$data['booked_event'] = $temp;
+			}else{
+				$data['booked_event'] = null;
+			}
 			$calendar_template = '
 				{table_open}<div class="col-md-10 offset-md-1"> <table class="table table-bordered">{/table_open}
 					{heading_row_start}<tr>{/heading_row_start}
@@ -19,8 +37,8 @@
 
 					{cal_row_start}<tr>{/cal_row_start}
 						{cal_cell_start}<td class="bg-light h6">{/cal_cell_start}
-							{cal_cell_content}<a href="{content}" class="unstyled-link" data-toggle="tooltip" data-placement="top" title="Some event takes place"><p class="h5 font-weight-bold text-danger">{day}</p></a>{/cal_cell_content}
-							{cal_cell_content_today}<a href="{content}" class="unstyled-link"><p class="h5 font-weight-bold text-warning">{day}</p></a>{/cal_cell_content_today}
+							{cal_cell_content}<a href="{content}" id="{day}" class="unstyled-link" data-toggle="tooltip" data-placement="top" title="hi"><p class="h5 font-weight-bold text-danger">{day}</p></a>{/cal_cell_content}
+							{cal_cell_content_today}<a href="{content}" id="{day}" class="unstyled-link" data-toggle="tooltip" data-placement="top" title="hello"><p class="h5 font-weight-bold text-warning">{day}</p></a>{/cal_cell_content_today}
 							{cal_cell_no_content}<p class="">{day}</p>{/cal_cell_no_content}
 							{cal_cell_no_content_today}<a href="#" data-toggle="tooltip" data-placement="top" title="Today" class="unstyled-link"><p class="h5 font-weight-bold text-info">{day}</p></a>{/cal_cell_no_content_today}
 							{cal_cell_blank}&nbsp;{/cal_cell_blank}
@@ -37,18 +55,6 @@
 				'next_prev_url'   	=> base_url().'clients/calendar/',
 				'show_other_days'	=> TRUE,				
 			);
-
-			if($data['calendar']){
-				foreach($data['calendar'] as $d){
-					$event_date = date('j', strtotime($d['event_date']));
-					$event_month = date('m', strtotime($d['event_date']));
-					$event_year = date('Y', strtotime($d['event_date']));
-					$temp[$event_date] = base_url().'calendar_info/'.$event_year.'/'.$event_month.'/'.$event_date;
-				}
-				$data['booked_event'] = $temp;
-			}else{
-				$data['booked_event'] = null;
-			}
 
 			$templates['title'] = 'Calendar';
 			$this->calendar->initialize($prefs);
@@ -87,5 +93,23 @@
 			$date = $this->uri->segment(2).'-'.$this->uri->segment(3).'-'.$this->uri->segment(4);
 			$query = $this->db->get_where('bookings', array('event_date'=>$date));
 			return $query->result_array();
+		}
+		public function get_event_name($day, $month, $year){
+			$date = $year.'-'.$month.'-'.$day;
+			$query = $this->db->get_where('bookings', array('event_date'=>$date));
+			$data = $query->result_array();
+			
+			// echo '<pre>';
+			// print_r($data[0]['event_name']);
+			// echo '</pre>';
+
+			if(count($data) > 1){
+				foreach($data as $d){
+					$temp[] = $d['event_name'];
+				}
+				return $temp;
+			}else{
+				return $data[0]['event_name'];
+			}
 		}
     }
