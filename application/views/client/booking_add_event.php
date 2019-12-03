@@ -135,16 +135,26 @@
                             <div class="col-md-6">
                                 <p>Average Rating:  </p>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p class="h4 font-weight-bold"><?php echo number_format($average, 1) ?></p>
+                            <?php if(isset($average)): ?>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="h4 font-weight-bold"><?php echo number_format($average, 1) ?></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="<?php echo base_url() ?>rating/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Show Rate</a>
+                                        </div> 
                                     </div>
-                                    <div class="col-md-6">
-                                        <a href="<?php echo base_url() ?>rating/<?php echo $this->uri->segment(2) ?>" class="btn btn-primary">Show Rate</a>
-                                    </div> 
-                                </div>
-                            </div>
+                                </div>                            
+                            <?php else: ?>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class=" font-weight-bold">No rating yet</p>
+                                        </div>
+                                    </div>
+                                </div>   
+                            <?php endif; ?>
                         </div>
                     </li>
                     <li class="list-group-item">

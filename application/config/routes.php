@@ -29,6 +29,7 @@ $route['delete_report/(:num)']                  = 'welcome/delete_report/$1';
 $route['delete_event/(:num)']                   = 'welcome/delete_event/$1';
 $route['delete_package/(:num)']                 = 'welcome/delete_package/$1';
 $route['add_offense/(:num)']                    = 'welcome/offense_count/$1';
+$route['transaction/(:num)']                    = 'welcome/transaction/$1';
 
 $route['block_page']                            = 'welcome/block_page';
 $route['changeoff']                             = 'welcome/changeoff';
@@ -69,6 +70,7 @@ $route['calendar_info/(:num)/(:num)/(:num)']      = 'clients/calendar_info/$1/$1
 // $route['package']                       = 'clients/package';
 // $route['c_created_events']              = 'clients/event_created';
 $route['register']                      = 'clients/register';
+$route['c_search']                      = 'clients/search';
 $route['register_attempt']              = 'clients/register_user';
 $route['login']                         = 'clients/login';
 $route['login_attempt']                 = 'clients/login_attempt';

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2019 at 05:05 AM
+-- Generation Time: Dec 03, 2019 at 10:29 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -21,34 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `amplifier`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `artist_tags`
---
-
-CREATE TABLE `artist_tags` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `artist_id` bigint(20) NOT NULL,
-  `tag_id` bigint(20) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `artist_types`
---
-
-CREATE TABLE `artist_types` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -88,6 +60,7 @@ CREATE TABLE `bookings` (
   `down_payment` decimal(8,2) NOT NULL,
   `notes` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('approve','block','cancel','pending','hide') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `on_going` bigint(20) DEFAULT 1,
   `event_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `artist_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `client_rating` int(11) DEFAULT NULL,
@@ -112,124 +85,6 @@ CREATE TABLE `chats` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `conversations`
---
-
-CREATE TABLE `conversations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_by` bigint(20) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `conversion_members`
---
-
-CREATE TABLE `conversion_members` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `conversation_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `events`
---
-
-CREATE TABLE `events` (
-  `id` bigint(20) NOT NULL,
-  `client_id` bigint(20) NOT NULL,
-  `venue_name` varchar(255) NOT NULL,
-  `event_date` date NOT NULL,
-  `event_from` time NOT NULL,
-  `event_to` time NOT NULL,
-  `down_payment` decimal(8,2) NOT NULL,
-  `notes` text NOT NULL,
-  `status` enum('approve','block','cancel','pending') NOT NULL,
-  `event_name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `feedbacks`
---
-
-CREATE TABLE `feedbacks` (
-  `feedback_id` bigint(20) NOT NULL,
-  `booking_id` bigint(20) NOT NULL,
-  `to_id` smallint(6) NOT NULL,
-  `from_id` smallint(6) NOT NULL,
-  `rating` decimal(2,1) NOT NULL,
-  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `galleries`
---
-
-CREATE TABLE `galleries` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `album_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `sample_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sample_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sample_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `media`
---
-
-CREATE TABLE `media` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `gallery_id` bigint(20) NOT NULL,
-  `media_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `media_file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `media_description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `members`
---
-
-CREATE TABLE `members` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `artist_id` bigint(20) NOT NULL,
-  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `position` smallint(6) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `notifications`
 --
 
@@ -237,8 +92,8 @@ CREATE TABLE `notifications` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `target_user_id` bigint(20) DEFAULT NULL,
-  `notif_type` enum('user','package','event','report') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notif_status` enum('block','pending','booked','created','reported','cancel','reporter','banned','removed') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `notif_type` enum('user','package','event','report') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `notif_status` enum('block','pending','booked','created','reported','cancel','reporter','banned','removed') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('seen','notified','reminder','') COLLATE utf8mb4_unicode_ci NOT NULL,
   `target_status` enum('seen','notified','','') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
@@ -248,7 +103,8 @@ CREATE TABLE `notifications` (
   `notif_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `target_notif_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `links` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `target_links` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `target_links` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_view` enum('notified','seen','','') COLLATE utf8mb4_unicode_ci DEFAULT 'notified'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -264,11 +120,29 @@ CREATE TABLE `packages` (
   `details` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `owner` bigint(20) NOT NULL,
   `booked` int(11) NOT NULL,
+  `interested` bigint(20) DEFAULT 0,
   `date_created` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `package_status` enum('hide','show','','') COLLATE utf8mb4_unicode_ci DEFAULT 'show'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating`
+--
+
+CREATE TABLE `rating` (
+  `id` bigint(20) NOT NULL,
+  `package_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `rate` float(10,2) NOT NULL,
+  `review` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -281,7 +155,8 @@ CREATE TABLE `reports` (
   `booking_id` bigint(20) NOT NULL,
   `report_from` bigint(20) NOT NULL,
   `report_to` bigint(20) NOT NULL,
-  `report_photo` varchar(255) NOT NULL,
+  `report_photo` varchar(255) DEFAULT NULL,
+  `report_video` varchar(255) DEFAULT NULL,
   `report_details` text NOT NULL,
   `date_reported` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `reports_status` enum('show','hide','','') DEFAULT 'show'
@@ -302,7 +177,7 @@ CREATE TABLE `users` (
   `fname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rate` decimal(10,2) NOT NULL,
+  `rate` decimal(10,2) DEFAULT 0.00,
   `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `telephone_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -311,44 +186,16 @@ CREATE TABLE `users` (
   `report_count` int(11) NOT NULL DEFAULT 0,
   `media_fk` bigint(20) UNSIGNED DEFAULT NULL,
   `lname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `block_end` date NOT NULL,
+  `block_end` date DEFAULT NULL,
   `notif_count` bigint(20) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `artist_type` enum('photographer','videographer','host','restaurant gig','graduation ball') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `artist_desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `venues`
---
-
-CREATE TABLE `venues` (
-  `venue_id` bigint(20) NOT NULL,
-  `venue_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rate` decimal(2,1) NOT NULL,
-  `registered_date` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `artist_tags`
---
-ALTER TABLE `artist_tags`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `artist_types`
---
-ALTER TABLE `artist_types`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `band_galleries`
@@ -376,44 +223,6 @@ ALTER TABLE `chats`
   ADD KEY `outgoing_id` (`outgoing_id`);
 
 --
--- Indexes for table `conversations`
---
-ALTER TABLE `conversations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `conversion_members`
---
-ALTER TABLE `conversion_members`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `feedbacks`
---
-ALTER TABLE `feedbacks`
-  ADD PRIMARY KEY (`feedback_id`),
-  ADD KEY `booking_id` (`booking_id`);
-
---
--- Indexes for table `galleries`
---
-ALTER TABLE `galleries`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `media`
---
-ALTER TABLE `media`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `members`
---
-ALTER TABLE `members`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
@@ -430,6 +239,14 @@ ALTER TABLE `notifications`
 ALTER TABLE `packages`
   ADD PRIMARY KEY (`package_id`),
   ADD KEY `owner` (`owner`);
+
+--
+-- Indexes for table `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rating_ibfk_1` (`package_id`),
+  ADD KEY `rating_ibfk_2` (`user_id`);
 
 --
 -- Indexes for table `reports`
@@ -449,26 +266,8 @@ ALTER TABLE `users`
   ADD KEY `media_fk` (`media_fk`);
 
 --
--- Indexes for table `venues`
---
-ALTER TABLE `venues`
-  ADD PRIMARY KEY (`venue_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `artist_tags`
---
-ALTER TABLE `artist_tags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `artist_types`
---
-ALTER TABLE `artist_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `band_galleries`
@@ -480,79 +279,43 @@ ALTER TABLE `band_galleries`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `booking_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
-
---
--- AUTO_INCREMENT for table `conversations`
---
-ALTER TABLE `conversations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `conversion_members`
---
-ALTER TABLE `conversion_members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `feedbacks`
---
-ALTER TABLE `feedbacks`
-  MODIFY `feedback_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `galleries`
---
-ALTER TABLE `galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `media`
---
-ALTER TABLE `media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `members`
---
-ALTER TABLE `members`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `package_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `report_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `report_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
-
---
--- AUTO_INCREMENT for table `venues`
---
-ALTER TABLE `venues`
-  MODIFY `venue_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -580,18 +343,6 @@ ALTER TABLE `chats`
   ADD CONSTRAINT `chats_ibfk_2` FOREIGN KEY (`outgoing_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `feedbacks`
---
-ALTER TABLE `feedbacks`
-  ADD CONSTRAINT `feedbacks_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `galleries`
---
-ALTER TABLE `galleries`
-  ADD CONSTRAINT `galleries_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `notifications`
 --
 ALTER TABLE `notifications`
@@ -599,13 +350,20 @@ ALTER TABLE `notifications`
   ADD CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `notifications_ibfk_3` FOREIGN KEY (`report_id`) REFERENCES `reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `notifications_ibfk_4` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `notifications_ibfk_5` FOREIGN KEY (`target_user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `notifications_ibfk_5` FOREIGN KEY (`target_user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `packages`
 --
 ALTER TABLE `packages`
   ADD CONSTRAINT `packages_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rating`
+--
+ALTER TABLE `rating`
+  ADD CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reports`

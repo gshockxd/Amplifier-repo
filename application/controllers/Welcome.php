@@ -3,7 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Welcome extends CI_Controller
 {
-
+    public function transaction($id)
+    {
+        $this->load->model("Admin_model");
+        $this->load->library('upload');
+    
+        $data["query_data_transaction"] = $this->Admin_model->query_data_transaction($id);
+        $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
+        $this->load->view('/admin/transaction', $data);
+    }
     public function offense_count($id)
     {
         $this->load->model("Admin_model");
@@ -554,9 +562,13 @@ class Welcome extends CI_Controller
     {
 		$this->load->model("Admin_model");
         $where=array();
+        $name='*';
 		if ($this->input->get("user_id")) {
 			$where['owner'] = $this->input->get("user_id");
         }
+        if ($this->input->get('name') != '') {
+            $name = $this->input->get('name'); 
+         }
         
         $total_rows = $this->Admin_model->count_results_package($where);		
 		$rpg = 3;
@@ -571,7 +583,7 @@ class Welcome extends CI_Controller
 
         $data['pagination'] = $this->pagination->create_links();
         // $data["query_results_package_check"] = $this->Admin_model->query_results_package_check();
-		$data["query_results_package"] = $this->Admin_model->query_results_package($where, $rpg, $page);
+		$data["query_results_package"] = $this->Admin_model->query_results_package($where, $rpg, $page, $name);
         $data["fetch_data_perf"] = $this->Admin_model->fetch_data_perf();
         $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/services', $data);
@@ -613,8 +625,13 @@ class Welcome extends CI_Controller
         } else {
             $user_id = $this->input->post('user_id');
         }
+        if ($this->input->post('name') == '') {
+            $name = "*";
+        } else {
+            $name = $this->input->post('name');
+        }
 
-        $total_rows = $this->Admin_model->count_results_report($user_id);		
+        $total_rows = $this->Admin_model->count_results_report($user_id, $name);		
 		$rpg = 3;
 
 		$config['base_url'] = base_url('reports');
@@ -625,7 +642,7 @@ class Welcome extends CI_Controller
 		
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
-        $data["query_results_report"] = $this->Admin_model->query_results_report($user_id, $rpg, $page);
+        $data["query_results_report"] = $this->Admin_model->query_results_report($user_id, $rpg, $page, $name);
         $data["fetch_data_user_report"] = $this->Admin_model->fetch_data_user_report();
         $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $data["fetch_data_history"] = $this->Admin_model->fetch_data_history();
@@ -690,7 +707,8 @@ class Welcome extends CI_Controller
     public function profile($id)
     {
         $this->load->model("Admin_model");
-		$data["fetch_data_profile"] = $this->Admin_model->fetch_data_profile();
+        $data["fetch_data_profile"] = $this->Admin_model->fetch_data_profile();
+        $data["fetch_data_user_rating"] = $this->Admin_model->fetch_data_user_rating($id);
 		$data["fetch_data_user_galleries"] = $this->Admin_model->fetch_data_user_galleries();
         $data["fetch_data_notifications_count"] = $this->Admin_model->fetch_data_notifications_count();
         $this->load->view('/admin/profile', $data);

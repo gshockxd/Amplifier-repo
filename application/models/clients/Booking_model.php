@@ -36,7 +36,10 @@
 				$sum = $sum + $r['rate'];
 				$i++;
 			}
-			$data['average'] = $sum/$i;
+			if($sum != 0){
+				$data['average'] = $sum/$i;
+			}
+
 			
 			$templates['title'] = 'Booking';
 			$this->load->view('inc/header-client', $templates);
