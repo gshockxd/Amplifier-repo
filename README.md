@@ -17,6 +17,12 @@ I. System Requirements
         Composer                ver. 1.8.0
         OS                      Windows
 
+**Default Account**
+
+	Email Address: admin@gmail.com
+
+	Password: password
+
 II. Installation
 
     Step 1. Download and install the latest version of XAMPP on their website
