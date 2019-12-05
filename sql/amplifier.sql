@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2019 at 10:29 AM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Generation Time: Dec 05, 2019 at 07:11 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -107,6 +107,13 @@ CREATE TABLE `notifications` (
   `admin_view` enum('notified','seen','','') COLLATE utf8mb4_unicode_ci DEFAULT 'notified'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `user_id`, `target_user_id`, `notif_type`, `notif_status`, `status`, `target_status`, `created_at`, `booking_id`, `package_id`, `report_id`, `notif_name`, `target_notif_name`, `links`, `target_links`, `admin_view`) VALUES
+(1, 1, NULL, 'user', 'created', 'notified', NULL, '2019-12-05 06:10:40', NULL, NULL, NULL, 'Welcome Admin Admin, now you can view or change your user information in profile page.', NULL, 'http://localhost/nike/Amplifier-repo/profile_info', NULL, 'notified');
+
 -- --------------------------------------------------------
 
 --
@@ -192,6 +199,13 @@ CREATE TABLE `users` (
   `artist_type` enum('photographer','videographer','host','restaurant gig','graduation ball') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `artist_desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_type`, `username`, `password`, `status`, `fname`, `email`, `address`, `rate`, `photo`, `telephone_1`, `telephone_2`, `created_at`, `offense`, `report_count`, `media_fk`, `lname`, `block_end`, `notif_count`, `updated_at`, `artist_type`, `artist_desc`) VALUES
+(1, 'admin', 'Admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'verified', 'Admin', 'admin@gmail.com', 'admin', '0.00', 'assets/img/client/2019_12_05_14_10_40.jpg', '125789765', '345631365', '2019-12-05 06:10:40', '', 0, NULL, 'Admin', '0000-00-00', NULL, '2019-12-05 06:10:40', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -291,7 +305,7 @@ ALTER TABLE `chats`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -315,7 +329,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

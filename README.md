@@ -56,3 +56,8 @@ II. Installation
     
     Step 11. Click "Import", Click "Choose file" and find SQL file name "amplifier.sql" under
         "Amplifier-repo/sql" and scroll on the bottom of the page and hit GO.
+
+    Step 12. Go to application/config.php
+
+    Step 13. Under line 28 - 37, change the $config['base_url'] = 'http://<SERVER_NAME>/<FOLDER>/';
+    
